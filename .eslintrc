@@ -1,0 +1,20 @@
+{
+    "extends": [
+        "react-app",
+        "react-app/jest",
+        "airbnb",
+        "plugin:jsx-a11y/recommended",
+        "airbnb/hooks"
+    ],
+    "rules": {
+        "semi": "warn",
+       // "react/jsx-filename-extension": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+        // "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }]
+    },
+    "plugins": [
+        "jsx-a11y"
+      ]
+}
