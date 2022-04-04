@@ -1,13 +1,17 @@
 import React from 'react';
 import './style.scss';
+import logo from './butler.png';
 
 function Home() {
   return (
-    <div className="Home">
-      <header>
-        ici mon logo
+    <div className="home">
+      <header className="home-header">
+        <div className="home-header_logo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <h1>Hello !</h1>
       </header>
-      <main>
+      <main className="home-main">
         <p>
           Majordome,<br />
           c’est un outil de gestion d’activité ,
@@ -17,9 +21,17 @@ function Home() {
           gérer vos clients, votre activités et vos interventions.
         </p>
       </main>
-      <footer>
-        <div>btn 1</div>
-        <div>btn 2</div>
+      <footer className="home-footer">
+        <div>
+          <button type="button" className="home-footer_login">
+            Connexion
+          </button>
+        </div>
+        <div>
+          <button type="button" className="home-footer_signUp">
+            Inscription
+          </button>
+        </div>
       </footer>
     </div>
   );

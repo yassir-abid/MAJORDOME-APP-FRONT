@@ -2,11 +2,11 @@
 
 //green
 $colorPrimary: #009285;
-$colorPrimaryDark: color.scale($colorPrimary, $lightness: +30%);
-$colorPrimaryLight: color.scale($colorPrimary, $lightness: -30%);
+$colorPrimaryLight: color.scale($colorPrimary, $lightness: +10%);
+$colorPrimaryDark: color.scale($colorPrimary, $lightness: -30%);
  
 //grey
-$colorSecondary: #91A3AE;
-$colorSecondaryDark: color.scale($colorPrimary, $lightness: +30%);
-$colorSecondaryLight: color.scale($colorPrimary, $lightness: -30%);
+$colorSecondary: #B5B7BA;
+$colorSecondaryLight: color.scale($colorPrimary, $lightness: +10%);
+$colorSecondaryDark: color.scale($colorPrimary, $lightness: -30%);
 
