@@ -14,11 +14,11 @@ function Home() {
       <main className="home-main">
         <p>
           Majordome,<br />
-          c’est un outil de gestion d’activité ,
-          un assistant personnel à destination des auto-entrepreneurs ,
-          artisans où toutes personnes travaillant seul de manière itinérante.
+          C’est un outil de gestion d’activité,
+          un assistant personnel à destination des auto-entrepreneurs,
+          artisans où toutes personnes travaillant seules de manière itinérante.
           Majordome va vous aider à organiser votre journée, ranger vos documents,
-          gérer vos clients, votre activités et vos interventions.
+          gérer vos clients, votre activité et vos interventions.
         </p>
       </main>
       <footer className="home-footer">
