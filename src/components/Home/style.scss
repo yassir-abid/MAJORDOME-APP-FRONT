@@ -1,0 +1,68 @@
+@import '../../styles/vars';
+
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $colorSecondary;
+    font-size: 1rem;
+    height: 100vh;
+
+    &-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        margin-bottom: 2rem;
+        h1 {
+            font-size: 3rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+        &_logo {
+            display: flex;
+            justify-content: center;
+            padding-top: 3rem;
+
+            img {
+                width: 10rem;
+                border-radius: 50%;
+                border: 0.5rem solid $colorPrimary;
+                margin-bottom: 0.5rem;
+              }
+        }
+    }
+
+    &-main {
+        height: 100%;
+        border: 3px solid $colorPrimary;
+        border-radius: 20px;
+        margin: 0rem 2rem 2rem 2rem; 
+        padding: 1rem;
+        p {
+            text-align: justify;
+        }
+    }
+
+    &-footer {
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        height:5rem;
+        margin-bottom: 2rem;
+
+        button {
+            background: none;
+            border: 3px solid $colorPrimary;
+            border-radius: 10px;
+            padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+            font-size:1.2rem;
+
+            &:hover {
+                background-color: $colorPrimary;
+            } 
+        }
+    }
+}
+
+
