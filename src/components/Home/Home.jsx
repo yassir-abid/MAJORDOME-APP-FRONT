@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss';
-import logo from './butler.png';
+import logo from '../../butler.png';
 
 function Home() {
   return (
