@@ -1,58 +1,45 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import './style.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeUserLoginField, login } from '../../actions/user';
+import LoginForm from '../LoginForm';
+import './style.scss';
+import { changeUserLoginField, login, logout } from '../../actions/user';
 import logo from '../../assets/butler.png';
 
 function Login() {
-  // To dispatch actions
+  // dispatch actions
   const dispatch = useDispatch();
 
-  // To access to my state
+  // access to my state
   const {
-    email, password, logged,
+    email, password, logged, pseudo,
   } = useSelector((state) => state.user);
 
-  // Controlled field
-  const inputChange = (event, value, name) => {
+  const handleChangeField = (value, name) => {
     dispatch(changeUserLoginField(value, name));
-    console.log(value, name);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleLogin = () => {
     dispatch(login());
-    console.log('je click sur le submit');
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
     <div className="login">
       <div className="login__container">
         <img src={logo} alt="logo" />
-        {!logged && (
-        <form className="login__form" onSubmit={handleSubmit}>
-          <input
-            className="login__input"
-            name="email"
-            type="email"
-            required
-            placeholder="Email"
-            onChange={inputChange}
-            value={email}
-          />
-          <input
-            className="login__input"
-            name="password"
-            type="password"
-            required
-            placeholder="Password"
-            onChange={inputChange}
-            value={password}
-          />
-          <button className="login__submit" type="submit">Se connecter</button>
-        </form>
-        )}
+        <LoginForm
+          email={email}
+          password={password}
+          isLogged={logged}
+          changeField={handleChangeField}
+          handleLogin={handleLogin}
+          loggedMessage={`Bonjour ${pseudo}`}
+          handleLogout={handleLogout}
+        />
       </div>
     </div>
   );
