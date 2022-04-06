@@ -43,28 +43,39 @@ function LoginForm({
         </div>
       )}
       {!isLogged && (
-
-        <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
-          <Field
-            name="email"
-            placeholder="Adresse Email"
-            onChange={changeField}
-            value={email}
-          />
-          <Field
-            name="password"
-            type="password"
-            placeholder="Mot de passe"
-            onChange={changeField}
-            value={password}
-          />
-          <button
-            type="submit"
-            className="login-form-button"
-          >
-            Me connecter
-          </button>
-        </form>
+        <div>
+          <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
+            <Field
+              name="email"
+              placeholder="Adresse Email"
+              onChange={changeField}
+              value={email}
+            />
+            <Field
+              name="password"
+              type="password"
+              placeholder="Mot de passe"
+              onChange={changeField}
+              value={password}
+            />
+            <button
+              type="submit"
+              className="login-form-button"
+            >
+              Me connecter
+            </button>
+          </form>
+          <div className="login-form-signup">
+            <span>Pas encore de compte ? </span>
+            <button
+              type="submit"
+              className="login-form-button"
+            >
+              Inscription
+            </button>
+            <a className="login-form-signup" href="forgotPassword">Mot de passe oublié ?</a>
+          </div>
+        </div>
       )}
     </div>
   );
