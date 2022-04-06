@@ -2,7 +2,7 @@
 import React from 'react';
 import './style.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeUserLoginField } from '../../actions/user';
+import { changeUserLoginField, login } from '../../actions/user';
 import logo from '../../assets/butler.png';
 
 function Login() {
@@ -17,10 +17,12 @@ function Login() {
   // Controlled field
   const inputChange = (event, value, name) => {
     dispatch(changeUserLoginField(value, name));
+    console.log(value, name);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(login());
     console.log('je click sur le submit');
   };
 
