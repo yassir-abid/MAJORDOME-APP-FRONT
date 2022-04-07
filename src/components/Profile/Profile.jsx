@@ -31,8 +31,8 @@ function Profile() {
             <Icon
               icon="uiw:setting-o"
               color="black"
-              width="50"
-              height="50"
+              width="40"
+              height="40"
             />
           </div>
           <div className="profile-params_text">

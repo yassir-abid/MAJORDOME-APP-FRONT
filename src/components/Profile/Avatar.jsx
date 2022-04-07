@@ -9,7 +9,7 @@ export default function ImgAvatar({ avatar = '/static/images/avatar/1.jpg' }) {
       <Avatar
         alt="Your Name" // todo remplacer dynamiquement le nom
         src={avatar}
-        sx={{ width: 56, height: 56 }}
+        sx={{ width: 45, height: 45 }}
       />
     </Stack>
   );
