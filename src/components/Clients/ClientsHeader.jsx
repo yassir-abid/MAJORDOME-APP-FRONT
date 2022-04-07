@@ -1,19 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
-// eslint-disable-next-line import/no-unresolved
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 
-import './homeAppHeader.scss';
+import './clients.scss';
 
-function HomeAppHeader() {
+function ClientsHeader() {
   return (
-    <header className="homeApp-header">
-      <div className="homeApp-header_notify">
+    <header className="clients-header">
+      <div className="clients-header_notify">
         <Link to="Foo">
           <Icon
-            icon="clarity:notification-outline-badged"
+            icon="charm:search"
             color="black"
           // color="red"
             width="30"
@@ -21,10 +19,10 @@ function HomeAppHeader() {
           />
         </Link>
       </div>
-      <div className="homeApp-header_title">
-        <h1>Majordome</h1>
+      <div className="clients-header_title">
+        <h1>Clients</h1>
       </div>
-      <div className="homeApp-header_avatar">
+      <div className="clients-header_avatar">
         <Link to="/Profile">
           <Icon
             icon="carbon:user-avatar-filled-alt"
@@ -38,4 +36,4 @@ function HomeAppHeader() {
   );
 }
 
-export default HomeAppHeader;
+export default ClientsHeader;

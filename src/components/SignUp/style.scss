@@ -10,13 +10,13 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        z-index: 999;
+       // z-index: 999;
         text-align: center;
         padding: 60px 32px;
         width: 370px;
         transform: translate(-50%,-50%);
         background: vars.$colorSecondary;
-        box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+        //box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
         height: 85%;        
     }
 

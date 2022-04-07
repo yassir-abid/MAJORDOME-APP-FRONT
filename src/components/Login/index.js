@@ -1,18 +1,45 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import LoginForm from '../LoginForm';
 import './style.scss';
+import { changeUserLoginField, login, logout } from '../../actions/user';
 import logo from '../../assets/butler.png';
 
 function Login() {
+  // dispatch actions
+  const dispatch = useDispatch();
+
+  // access to my state
+  const {
+    email, password, logged, pseudo,
+  } = useSelector((state) => state.user);
+
+  const handleChangeField = (value, name) => {
+    dispatch(changeUserLoginField(value, name));
+  };
+
+  const handleLogin = () => {
+    dispatch(login());
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="login">
       <div className="login__container">
         <img src={logo} alt="logo" />
-        <form className="login__form">
-          <input className="login__input" type="email" required placeholder="Email" />
-          <input className="login__input" type="password" required placeholder="Password" />
-          <button className="login__submit" type="submit">Se connecter</button>
-        </form>
+        <LoginForm
+          email={email}
+          password={password}
+          isLogged={logged}
+          changeField={handleChangeField}
+          handleLogin={handleLogin}
+          loggedMessage={`Bonjour ${pseudo}`}
+          handleLogout={handleLogout}
+        />
       </div>
     </div>
   );
