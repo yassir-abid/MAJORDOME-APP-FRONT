@@ -1,9 +1,10 @@
 import React from 'react';
-import './style.scss';
+import ClientsHeader from './ClientsHeader';
+import './clients.scss';
 
 function Clients() {
   return (
-    <p>Vous êtes dans la page clients</p>
+    <ClientsHeader />
   );
 }
 

@@ -5,13 +5,14 @@
         display: flex;
         flex-direction: column;
         border: 3px solid $colorPrimary;
-        border-radius: 20px;
+        border-radius: 20px 20px 0 0;
         // padding: 0.5rem;
         // margin: 0.1rem;
         background-color: $colorSecondary;
         position: fixed;
         bottom: 0;
-        width: 100%;
+        height: 100px;
+        width: 100vw;
     
         &_secondary {
             display: flex;
