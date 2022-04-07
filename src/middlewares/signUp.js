@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { SIGNUP, saveUser, CHECK_USER } from '../actions/signUp';
 
-const auth = (store) => (next) => (action) => {
+const signUp = (store) => (next) => (action) => {
   switch (action.type) {
     case SIGNUP: {
       // current state
       const state = store.getState();
 
-      const signUp = async () => {
+      const signup = async () => {
         try {
           const response = await axios.post('http://localhost:3001/signup', {
             lastName: state.signUp.lastName,
@@ -25,7 +25,7 @@ const auth = (store) => (next) => (action) => {
         }
       };
 
-      signUp();
+      signup();
 
       break;
     }
@@ -50,4 +50,4 @@ const auth = (store) => (next) => (action) => {
   }
 };
 
-export default auth;
+export default signUp;

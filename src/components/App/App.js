@@ -4,8 +4,8 @@ import { checkUser } from '../../actions/user';
 // import Home from '../Home/Home';
 // import HomeApp from '../HomeApp/HomeApp';
 // import NavBar from '../NavBar/NavBar';
-// import SignUp from '../SignUp';
-import Login from '../Login';
+import SignUp from '../SignUp';
+// import Login from '../Login';
 import './style.scss';
 
 function App() {
@@ -24,7 +24,8 @@ function App() {
       {/* <Home /> */}
       {/* <HomeApp />
       <NavBar /> */}
-      <Login />
+      {/* <Login /> */}
+      <SignUp />
     </div>
   );
 }
