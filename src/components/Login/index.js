@@ -30,7 +30,7 @@ function Login() {
   return (
     <div className="login">
       <div className="login__container">
-        <img src={logo} alt="logo" />
+        <img className="login__logo" src={logo} alt="logo" />
         <LoginForm
           email={email}
           password={password}

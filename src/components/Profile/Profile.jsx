@@ -5,12 +5,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 import ProfileHeader from './ProfileHeader';
 import Avatar from './Avatar';
-import './style.scss';
+import './profilStyle.scss';
 
 function Profile() {
   const [open, setOpen] = React.useState(false);
@@ -41,11 +41,11 @@ function Profile() {
         </button>
         <div className="profile-deconnexion">
           {/* TODO: modifier la route du lien de déconnexion, pour le moment il renvoie sur "/" */}
-          {/* <Link to="/"> */}
-          <button type="button" className="btn">
-            Déconnexion
-          </button>
-          {/* </Link> */}
+          <Link to="/">
+            <button type="button" className="btn">
+              Déconnexion
+            </button>
+          </Link>
         </div>
         <div>
           <Modal

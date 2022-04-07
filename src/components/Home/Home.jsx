@@ -8,7 +8,7 @@ function Home() {
     <div className="home">
       <header className="home-header">
         <div className="home-header_logo">
-          <img src={logo} alt="Logo" />
+          <img className="home-header_logo-1" src={logo} alt="Logo" />
         </div>
         <h1>Hello !</h1>
       </header>

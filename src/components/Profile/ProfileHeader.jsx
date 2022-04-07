@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 // import { Icon } from '@iconify/react';
 import Avatar from './Avatar';
-// import './profileHeader.scss';
-import './style.scss';
+import './profilStyle.scss';
 
 function HomeAppHeader() {
   const [avatar, setAvatar] = useState('/static/images/avatar/1.jpg');
@@ -17,8 +16,8 @@ function HomeAppHeader() {
   };
 
   return (
-    <header className="homeApp-header">
-      <div className="homeApp-header_avatar">
+    <header className="profile-header">
+      <div className="profile-header_avatar">
         <div>
           <label htmlFor="image_up">
             <input
@@ -36,7 +35,7 @@ function HomeAppHeader() {
           </label>
         </div>
       </div>
-      <div className="homeApp-header_title">
+      <div className="profile-header_title">
         <h1>*Your name*</h1>
       </div>
     </header>

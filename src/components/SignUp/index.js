@@ -30,7 +30,7 @@ function Signup() {
   return (
     <div className="signup">
       <div className="signup__container">
-        <img src={logo} alt="logo" />
+        <img className="signup_logo" src={logo} alt="logo" />
         <SignUpForm
           lastName={lastName}
           firstName={firstName}
