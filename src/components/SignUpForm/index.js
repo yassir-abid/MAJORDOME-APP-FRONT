@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Field from './Field';
 
@@ -82,12 +83,14 @@ function SignUpForm({
           </form>
           <div className="login-form-signup">
             <span>Vous avez déjà un compte ? </span>
-            <button
-              type="submit"
-              className="login-form-button"
-            >
-              Me connecter
-            </button>
+            <Link to="/login">
+              <button
+                type="submit"
+                className="login-form-button"
+              >
+                Me connecter
+              </button>
+            </Link>
           </div>
         </div>
       )}
