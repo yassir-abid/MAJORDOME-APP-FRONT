@@ -1,6 +1,6 @@
 @import '../../styles/vars';
 
-.homeApp-header {
+.projects-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,6 +28,10 @@
         align-self: auto;
         font-size: 2em;
         font-style: italic;
+    }
+
+    &_notifications {
+        margin-bottom: 1.2rem;
     }
 }
 
