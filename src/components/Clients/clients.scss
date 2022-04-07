@@ -1,4 +1,25 @@
 @import '../../styles/vars';
+.clients {
+    background-color: $colorSecondary;
+    overflow: hidden;
+    &-searchBar {
+
+    }
+
+    &-list {
+        height: 100%;
+        padding: 0.9rem;
+        overflow-y: scroll;
+        li {
+            height: 2rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid $colorPrimary;
+            border-radius: 10px;
+        }
+    }
+}
+   
 
 // Header
 .clients-header {
@@ -9,7 +30,7 @@
     align-content: stretch;
     align-items: center;
     height: 55px;
-    margin-bottom: 2rem;
+    margin-bottom: 5px;
     padding:0.6rem;
     background-color: $colorPrimary;
     margin-top: 0rem;
@@ -35,4 +56,9 @@
         font-style: italic;
     }
 
+}
+
+.clients-main {
+    background-color: $colorSecondaryDark;
+    height: calc(100vh - (60px + 100px));
 }

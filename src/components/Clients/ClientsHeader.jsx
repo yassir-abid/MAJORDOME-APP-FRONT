@@ -11,7 +11,7 @@ function ClientsHeader() {
       <div className="clients-header_notify">
         <Link to="Foo">
           <Icon
-            icon="clarity:notification-outline-badged"
+            icon="charm:search"
             color="black"
           // color="red"
             width="30"
