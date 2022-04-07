@@ -7,6 +7,7 @@ import NavBar from '../NavBar/NavBar';
 import { checkUser } from '../../actions/user';
 import SignUp from '../SignUp';
 import Login from '../Login';
+import Profile from '../Profile/Profile';
 import './style.scss';
 import Clients from '../Clients/clients';
 import Interventions from '../Interventions/Intervention';
@@ -36,7 +37,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home-app" element={<HomeApp />} />
-        <Route path="/profile" element={<foo />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/interventions" element={<Interventions />} />
