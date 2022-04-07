@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { React, useState } from 'react';
+import { Icon } from '@iconify/react';
 import TextField from '@mui/material/TextField';
 import ClientsHeader from './ClientsHeader';
 import List from './List';
@@ -26,8 +28,10 @@ function Clients() {
             label="Search"
           />
         </div>
-
         <List input={inputText} />
+        <div className="clients-addClient">
+          <Icon icon="carbon:add-filled" width="30" height="30" />
+        </div>
       </div>
 
     </div>
