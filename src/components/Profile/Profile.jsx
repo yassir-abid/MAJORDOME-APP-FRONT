@@ -62,33 +62,33 @@ function Profile() {
                 className="detailClient"
               >
                 <label>
-                  <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom" type="text" name="firstName" value="toto" />
+                  <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom" type="text" name="firstName" defaultValue="toto" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Prénom" type="text" name="lastName" value="replace *value* for dynamique info" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Prénom" type="text" name="lastName" defaultValue="replace *defaultValue* for dynamique info" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Email" type="email" name="email" value="toto@gmail.com" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Email" type="email" name="email" defaultValue="toto@gmail.com" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Mot de passe" type="password" name="password" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Mot de passe" type="password" name="password" defaultValue="" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Téléphone" type="tel" name="phone" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Téléphone" type="tel" name="phone" defaultValue="" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Numéro" type="text" name="adresse" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Numéro" type="text" name="adresse" defaultValue="" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Rue" type="text" name="adresse" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Rue" type="text" name="adresse" defaultValue="" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Code postal" type="text" name="adresse" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Code postal" type="text" name="adresse" defaultValue="" />
                 </label>
                 <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Ville" type="text" name="adresse" />
+                  <TextField sx={{ mb: 1 }} fullWidth label="Ville" type="text" name="adresse" defaultValue="" />
                 </label>
-                <TextField sx={{ mb: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" value="Envoyer" />
+                <TextField sx={{ mb: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
               </form>
               <Button className="modal-close" onClick={handleClose}>close</Button>
             </Box>
