@@ -47,6 +47,7 @@ function LoginForm({
           <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
             <Field
               name="email"
+              type="email"
               placeholder="Adresse Email"
               onChange={changeField}
               value={email}

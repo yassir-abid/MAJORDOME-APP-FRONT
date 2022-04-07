@@ -62,6 +62,7 @@ function SignUpForm({
             <Field
               name="email"
               placeholder="Adresse Email"
+              type="email"
               onChange={changeField}
               value={email}
             />
