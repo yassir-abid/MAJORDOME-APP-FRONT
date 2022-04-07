@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Home from '../Home/Home';
 import HomeApp from '../HomeApp/HomeApp';
 import NavBar from '../NavBar/NavBar';
-import { useDispatch } from 'react-redux';
 import { checkUser } from '../../actions/user';
 // import Home from '../Home/Home';
 // import HomeApp from '../HomeApp/HomeApp';
