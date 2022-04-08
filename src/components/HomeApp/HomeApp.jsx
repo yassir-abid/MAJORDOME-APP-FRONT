@@ -12,7 +12,7 @@ function HomeApp() {
       <HomeAppHeader />
       <main className="homeApp-main">
         <div className="homeApp-date">
-          <p>
+          <p className="homeApp-date_day">
             {' '}
             {dateState.toLocaleDateString('fr-FR', {
               day: 'numeric',
@@ -20,11 +20,11 @@ function HomeApp() {
               year: 'numeric',
             })}
           </p>
-          <p>
+          <p className="homeApp-date_hour">
             {dateState.toLocaleString('fr-FR', {
               hour: 'numeric',
               minute: 'numeric',
-              hour12: true,
+              hour12: false,
             })}
           </p>
         </div>
