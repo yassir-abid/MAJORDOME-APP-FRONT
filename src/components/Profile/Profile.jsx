@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 import ProfileHeader from './ProfileHeader';
-import Avatar from './Avatar';
+import Avatar from '../Avatar/Avatar';
 import './profilStyle.scss';
 
 function Profile() {
