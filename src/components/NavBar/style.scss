@@ -2,6 +2,7 @@
 .homeApp {
 
     &-nav {
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         border: 3px solid $colorPrimary;

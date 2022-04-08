@@ -30,10 +30,9 @@ function Clients() {
         </div>
         <List input={inputText} />
         <div className="clients-addClient">
-          <Icon icon="carbon:add-filled" width="30" height="30" />
+          <Icon icon="carbon:add-filled" width="40" height="40" />
         </div>
       </div>
-
     </div>
   );
 }
