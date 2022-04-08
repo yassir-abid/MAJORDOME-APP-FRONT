@@ -10,6 +10,7 @@ import Login from '../Login';
 import Profile from '../Profile/Profile';
 import './style.scss';
 import Clients from '../Clients/clients';
+import Client from '../Client/Client';
 import Interventions from '../Interventions/Intervention';
 import Projects from '../Projects/Projects';
 import Schedule from '../Schedule/Schedule';
@@ -39,6 +40,7 @@ function App() {
         <Route path="/home-app" element={<HomeApp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/clients" element={<Clients />} />
+        <Route path="/clients/:id" element={<Client />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/interventions" element={<Interventions />} />
         <Route path="/projects" element={<Projects />} />

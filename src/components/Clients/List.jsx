@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import { React, useState } from 'react';
+import { Link } from 'react-router-dom';
 import data from './ListData.json';
 
 function List(props) {
@@ -17,7 +18,9 @@ function List(props) {
   return (
     <ul className="clients-list">
       {filteredData.map((item) => (
-        <li key={item.id}>{item.text}</li>
+        <Link to={`/clients/${item.id}`}>
+          <li key={item.id}>{item.text}</li>
+        </Link>
       ))}
     </ul>
   );
