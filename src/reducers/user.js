@@ -30,6 +30,8 @@ const reducer = (state = initialState, action = {}) => {
       };
     }
     case LOGOUT: {
+      // clean localStorage to logout
+      localStorage.clear();
       // spread of initialState for logout
       return {
         ...initialState,
