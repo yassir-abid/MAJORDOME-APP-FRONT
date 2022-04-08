@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import Avatar from '../Avatar/Avatar';
 
 import './homeAppHeader.scss';
 
@@ -26,12 +27,7 @@ function HomeAppHeader() {
       </div>
       <div className="homeApp-header_avatar">
         <Link to="/Profile">
-          <Icon
-            icon="carbon:user-avatar-filled-alt"
-            color="black"
-            width="40"
-            height="40"
-          />
+          <Avatar />
         </Link>
       </div>
     </header>
