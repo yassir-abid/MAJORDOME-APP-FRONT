@@ -13,7 +13,6 @@ function SignUpForm({
   password,
   changeField,
   handleLogin,
-  handleLogout,
   isLogged,
   loggedMessage,
 }) {
@@ -29,13 +28,6 @@ function SignUpForm({
           <p className="login-form-message">
             {loggedMessage}
           </p>
-          <button
-            type="button"
-            className="login-form-button"
-            onClick={handleLogout}
-          >
-            Déconnexion
-          </button>
           <button
             type="button"
             className="login-form-button login-form-button--accueil"
@@ -102,7 +94,6 @@ SignUpForm.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
   isLogged: PropTypes.bool,
   loggedMessage: PropTypes.string,
 };
