@@ -11,6 +11,14 @@ import './homeAppHeader.scss';
 function HomeAppHeader() {
   return (
     <header className="homeApp-header">
+      <div className="homeApp-header_avatar">
+        <Link to="/Profile">
+          <Avatar />
+        </Link>
+      </div>
+      <div className="homeApp-header_title">
+        <h1>Majordome</h1>
+      </div>
       <div className="homeApp-header_notify">
         <Link to="Foo">
           <Icon
@@ -20,14 +28,6 @@ function HomeAppHeader() {
             width="30"
             height="30"
           />
-        </Link>
-      </div>
-      <div className="homeApp-header_title">
-        <h1>Majordome</h1>
-      </div>
-      <div className="homeApp-header_avatar">
-        <Link to="/Profile">
-          <Avatar />
         </Link>
       </div>
     </header>
