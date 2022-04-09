@@ -18,9 +18,9 @@ function ClientHeader() {
         <h1>*Name du client*</h1>
       </div>
       <div className="client-header_notify">
-        <Link to="Foo">
-          <Icon icon="gg:more-vertical-o" width="30" height="30" />
-        </Link>
+        {/* lien vers modal */}
+        <Icon icon="gg:more-vertical-o" width="30" height="30" />
+
       </div>
 
     </header>
