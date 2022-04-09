@@ -12,14 +12,14 @@ function List(props) {
       return el;
     }
     // return the item which contains the user input
-
-    return el.text.toLowerCase().includes(props.input);
+    // modifier pour avir une multi recherche sur first et lastName
+    return el.firstName.toLowerCase().includes(props.input);
   });
   return (
     <ul className="clients-list">
       {filteredData.map((item) => (
         <Link to={`/clients/${item.id}`}>
-          <li key={item.id}>{item.text}</li>
+          <li key={item.id}>{item.firstName} {item.lastName}</li>
         </Link>
       ))}
     </ul>
