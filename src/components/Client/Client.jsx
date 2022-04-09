@@ -37,10 +37,10 @@ function Client() {
           {/* <a href="tel:0606060606">clic pour tel</a> //<==rendre le num dynamique ? */}
           <TextField
             className="client-detail_tel"
-            id="outlined-read-only-input"
+            id="phone"
             label="Téléphone"
             placeholder="Numéro"
-            defaultValue="0650567856"
+            // defaultValue=""
             InputProps={{
               readOnly: false,
             }}
@@ -49,25 +49,25 @@ function Client() {
           {/* <a href="mailto:">mailto</a> */}
           <TextField
             className="client-detail_email"
-            id="outlined-read-only-input"
+            id="email"
             label="Email"
             placeholder="Email"
-            defaultValue="dédé@gmail.com"
+            // defaultValue="dédé@gmail.com"
             InputProps={{
-              readOnly: true,
+              readOnly: false,
             }}
           />
           <p className="client-detail_adresse">Adresse</p>
           <div className="client-detail_adresse-div">
             <TextField
               sx={{ width: '10ch' }}
-              id="outlined-read-only-input"
+              id="number"
               label=""
               placeholder="Numéro"
               size=""
             />
             <TextField
-              id="outlined-read-only-input"
+              id="street"
               multiline
               maxRows={4}
               label=""
@@ -75,7 +75,7 @@ function Client() {
             />
             <TextField
               fullWidth
-              id="outlined-multiline-flexible"
+              id="comments"
               placeholder="Complément d'adresse"
               // fullWidth
               multiline
@@ -84,12 +84,12 @@ function Client() {
               onChange={handleChange}
             />
             <TextField
-              id="outlined-read-only-input"
+              id="postal_code"
               label=""
               placeholder="Code postal"
             />
             <TextField
-              id="outlined-read-only-input"
+              id="city"
               label=""
               placeholder="Ville"
             />
@@ -97,8 +97,8 @@ function Client() {
           <p className="client-detail_com">Commentaire</p>
           <TextField
             fullWidth
-            id="outlined-multiline-flexible-2"
-            label="Commentaire"
+            id="comments"
+            label=""
             placeholder="Notes"
             multiline
             maxRows={4}
@@ -106,13 +106,19 @@ function Client() {
             onChange={comHandleChange}
           />
           <div className="client-detail_btn">
-            <ButtonGroup fullWidth size="normal" color="error" variant="outlined" aria-label="small button group">
-              <Button>Documents</Button>
+            {/* TODO: styliser les boutons et les centrer */}
+            <Link to="clients/:id/documents">
+              <Button Link to="clients/:id/documents">Documents</Button>
+            </Link>
+            <Link to="clients/:id/notifications">
               <Button>Notifs</Button>
+            </Link>
+            <Link to="clients/:id/equipements">
               <Button>équipements <br />
                 & besoins
               </Button>
-            </ButtonGroup>
+            </Link>
+
           </div>
         </Box>
 
