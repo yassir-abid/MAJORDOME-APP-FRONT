@@ -5,8 +5,8 @@ import {
 } from '../actions/signUp';
 
 export const initialState = {
-  lastName: '',
-  firstName: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
   logged: false,

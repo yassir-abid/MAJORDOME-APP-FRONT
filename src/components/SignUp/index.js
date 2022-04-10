@@ -12,7 +12,7 @@ function Signup() {
 
   // access to my state
   const {
-    lastName, firstName, email, password, logged, pseudo,
+    lastname, firstname, email, password, logged, pseudo,
   } = useSelector((state) => state.signUp);
 
   const handleChangeField = (value, name) => {
@@ -32,8 +32,8 @@ function Signup() {
       <div className="signup__container">
         <img src={logo} alt="logo" />
         <SignUpForm
-          lastName={lastName}
-          firstName={firstName}
+          lastname={lastname}
+          firstname={firstname}
           email={email}
           password={password}
           isLogged={logged}

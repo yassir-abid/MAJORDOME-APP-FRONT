@@ -7,8 +7,8 @@ import Field from './Field';
 import './style.scss';
 
 function SignUpForm({
-  lastName,
-  firstName,
+  firstname,
+  lastname,
   email,
   password,
   changeField,
@@ -40,16 +40,16 @@ function SignUpForm({
         <div>
           <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
             <Field
-              name="lastName"
-              placeholder="Nom"
-              onChange={changeField}
-              value={lastName}
-            />
-            <Field
-              name="firstName"
+              name="firstname"
               placeholder="Prénom"
               onChange={changeField}
-              value={firstName}
+              value={firstname}
+            />
+            <Field
+              name="lastname"
+              placeholder="Nom"
+              onChange={changeField}
+              value={lastname}
             />
             <Field
               name="email"
@@ -88,8 +88,8 @@ function SignUpForm({
 }
 
 SignUpForm.propTypes = {
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
