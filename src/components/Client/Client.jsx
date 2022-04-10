@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 import ClientHeader from './ClientHeader';
+import ListProjets from './ListProjets';
 import './style.scss';
 
 function Client() {
@@ -106,24 +107,30 @@ function Client() {
             onChange={comHandleChange}
           />
           <div className="client-detail_btn">
-            {/* TODO: styliser les boutons et les centrer */}
-            <Link to="clients/:id/documents">
-              <Button Link to="clients/:id/documents">Documents</Button>
-            </Link>
-            <Link to="clients/:id/notifications">
-              <Button>Notifs</Button>
-            </Link>
-            <Link to="clients/:id/equipements">
-              <Button>équipements <br />
-                & besoins
+            <ButtonGroup variant="text" size="small">
+              {/* TODO: styliser les boutons et les centrer */}
+              {/* créer ou vérifier les liens de chaque boutons */}
+              <Link to="clients/:id/documents">
+                <Button>Documents</Button>
+              </Link>
+              <Link to="clients/:id/notifications">
+                <Button>Notifs</Button>
+              </Link>
+              <Link to="clients/:id/equipements">
+                <Button>équipements <br />
+                  & besoins
+                </Button>
+              </Link>
+              {/* add modal sur btn "ajout projets" */}
+              <Button color="success">Ajout <br />Projets
               </Button>
-            </Link>
-
+            </ButtonGroup>
           </div>
         </Box>
 
-        <div>
-          <p>mettre en place un component list des projet d'intervention</p>
+        <div className="client-list">
+          <p>Listes des projets du client</p>
+          <ListProjets />
         </div>
 
       </div>

@@ -53,7 +53,7 @@ function Clients() {
           className="style"
         >
           <form
-            className="detailclients"
+            className="detailClients"
           >
             <label>
               <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom" type="text" name="firstName" defaultValue="toto" />
@@ -63,9 +63,6 @@ function Clients() {
             </label>
             <label>
               <TextField sx={{ mb: 1 }} fullWidth label="Email" type="email" name="email" defaultValue="toto@gmail.com" />
-            </label>
-            <label>
-              <TextField sx={{ mb: 1 }} fullWidth label="Mot de passe" type="password" name="password" defaultValue="" />
             </label>
             <label>
               <TextField sx={{ mb: 1 }} fullWidth label="Téléphone" type="tel" name="phone" defaultValue="" />
