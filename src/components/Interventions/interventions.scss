@@ -1,0 +1,69 @@
+@import '../../styles/vars';
+
+.interventions {
+    height: 100%;
+    background-color: $colorSecondary;
+    overflow: hidden;
+    &-searchBar {
+
+    }
+
+    &-list {
+        height: 100%;
+        padding: 0.9rem;
+        overflow-y: scroll;
+        li {
+            height: 2rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid $colorPrimary;
+            border-radius: 10px;
+        }
+    }
+
+    &-addIntervention {
+        position: relative;
+        height: 150px;
+    }
+}
+
+// Header
+.interventions-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    height: 55px;
+    margin-bottom: 7px;
+    padding:0.6rem;
+    background-color: $colorPrimary;
+    margin-top: 0rem;
+    border-radius: 0 0 20px 20px;
+
+    &_notify {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+    }
+
+    &_avatar {
+        order: 0;
+        flex: 1 1 flex-end;
+        align-self: auto;
+    }
+
+    &_title {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+        font-size: 2em;
+        font-style: italic;
+    }
+}
+
+interventionsuppliers-main {
+    background-color: $colorSecondaryDark;
+    height: calc(100vh - (62px + 100px));
+}
