@@ -20,7 +20,7 @@ function InterventionsHeader() {
         <h1>Interventions</h1>
       </div>
 
-      <div className="suppliers-header_avatar">
+      <div className="interventions-header_avatar">
         <Icon
           icon="carbon:user-avatar-filled-alt"
           color="black"
