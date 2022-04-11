@@ -12,7 +12,7 @@ function List(props) {
       return el;
     }
     // return the item which contains the user input
-    // modifier pour avir une multi recherche sur first et lastName
+    // modifier pour avoir une multi recherche sur first et lastName
     return (el.firstName.toLowerCase().includes(props.input))
     || (el.lastName.toLowerCase().includes(props.input));
   });
