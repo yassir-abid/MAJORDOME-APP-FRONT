@@ -24,9 +24,9 @@ function Client() {
     setComValue(event.target.value);
   };
 
-  const [checked, setChecked] = React.useState(true);
+  const [editMode, setEditMode] = React.useState(false);
   const switchChange = (event) => {
-    setChecked(event.target.checked);
+    setEditMode(event.target.checked);
   };
 
   return (
@@ -49,13 +49,13 @@ function Client() {
             placeholder="Numéro"
             // defaultValue=""
             InputProps={{
-              readOnly: false,
+              readOnly: !editMode,
             }}
           />
           <FormControlLabel
             control={(
               <Switch
-                checked={checked}
+                checked={editMode}
                 onChange={switchChange}
                 inputProps={{ 'aria-label': 'controlled' }}
               />
@@ -72,7 +72,7 @@ function Client() {
             placeholder="Email"
             // defaultValue="dédé@gmail.com"
             InputProps={{
-              readOnly: false,
+              readOnly: !editMode,
             }}
           />
           <p className="client-detail_adresse">Adresse</p>
@@ -83,6 +83,9 @@ function Client() {
               label=""
               placeholder="Numéro"
               size=""
+              InputProps={{
+                readOnly: !editMode,
+              }}
             />
             <TextField
               id="street"
@@ -90,6 +93,9 @@ function Client() {
               maxRows={4}
               label=""
               placeholder="Rue"
+              InputProps={{
+                readOnly: !editMode,
+              }}
             />
             <TextField
               fullWidth
@@ -100,16 +106,25 @@ function Client() {
               maxRows={4}
               value={value}
               onChange={handleChange}
+              InputProps={{
+                readOnly: !editMode,
+              }}
             />
             <TextField
               id="postal_code"
               label=""
               placeholder="Code postal"
+              InputProps={{
+                readOnly: !editMode,
+              }}
             />
             <TextField
               id="city"
               label=""
               placeholder="Ville"
+              InputProps={{
+                readOnly: !editMode,
+              }}
             />
           </div>
           <p className="client-detail_com">Commentaire</p>
