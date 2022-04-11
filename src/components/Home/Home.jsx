@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './style.scss';
-import logo from '../../butler.png';
+import logo from '../../assets/butler.png';
 
 function Home() {
   return (
     <div className="home">
       <header className="home-header">
         <div className="home-header_logo">
-          <img src={logo} alt="Logo" />
+          <img className="home-header_logo-1" src={logo} alt="Logo" />
         </div>
         <h1>Hello !</h1>
       </header>
@@ -23,14 +24,18 @@ function Home() {
       </main>
       <footer className="home-footer">
         <div>
-          <button type="button" className="home-footer_login">
-            Connexion
-          </button>
+          <Link to="/login">
+            <button type="button" className="home-footer_login">
+              Connexion
+            </button>
+          </Link>
         </div>
         <div>
-          <button type="button" className="home-footer_signUp">
-            Inscription
-          </button>
+          <Link to="/signup">
+            <button type="button" className="home-footer_signUp">
+              Inscription
+            </button>
+          </Link>
         </div>
       </footer>
     </div>
