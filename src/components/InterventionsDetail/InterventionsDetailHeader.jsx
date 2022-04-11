@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import './interventionsDetail.scss';
 
-import './interventions.scss';
-
-function InterventionsHeader() {
+function InterventionsDetailHeader() {
   return (
-    <header className="interventions-header">
-      <div className="interventions-header_notify">
+    <header className="interventionsDetail-header">
+      <div className="interventionDetail-header_notify">
         <Icon
           icon="charm:search"
           color="black"
@@ -17,10 +16,10 @@ function InterventionsHeader() {
         />
       </div>
       <div className="interventions-header_title">
-        <h1>Interventions</h1>
+        <h1>Intervention nom</h1>
       </div>
 
-      <div className="interventions-header_avatar">
+      <div className="interventionsDetail-header_avatar">
         <Icon
           icon="carbon:user-avatar-filled-alt"
           color="black"
@@ -32,4 +31,4 @@ function InterventionsHeader() {
   );
 }
 
-export default InterventionsHeader;
+export default InterventionsDetailHeader;
