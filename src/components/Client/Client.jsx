@@ -127,13 +127,13 @@ function Client() {
             <ButtonGroup variant="text" size="small">
               {/* TODO: styliser les boutons et les centrer */}
               {/* créer ou vérifier les liens de chaque boutons */}
-              <Link to={`/clients/${id}/documents`}>
+              <Link to={`/clients/${id}/documents_list`}>
                 <Button>Documents</Button>
               </Link>
-              <Link to="notifications">
+              <Link to={`/clients/${id}/notifications_list`}>
                 <Button>Notifs</Button>
               </Link>
-              <Link to="/clients/:id/equipments">
+              <Link to={`/clients/${id}/equipments`}>
                 <Button>équipements <br />
                   & besoins
                 </Button>
