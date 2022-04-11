@@ -9,6 +9,7 @@ import './style.scss';
 import Clients from '../Clients/clients';
 import Interventions from '../Interventions/Intervention';
 import Projects from '../Projects/Projects';
+import ProjectDetails from '../Projects/ProjectDetails/ProjectDetails';
 import Schedule from '../Schedule/Schedule';
 import Suppliers from '../Suppliers/Suppliers';
 import Documents from '../Documents/Documents';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/documents" element={<Documents />} />
         <Route path="/interventions" element={<Interventions />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/suppliers" element={<Suppliers />} />
         <Route path="/todolist" element={<Todo />} />

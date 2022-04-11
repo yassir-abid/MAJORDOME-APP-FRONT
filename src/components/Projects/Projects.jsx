@@ -1,6 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState } from 'react';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import { Icon } from '@iconify/react';
 import ProjectsHeader from './ProjectsHeader';
 import List from './List';
 import './style.scss';
@@ -12,6 +17,10 @@ function Projects() {
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
+
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
 
   return (
     <div className="projects">
@@ -27,6 +36,28 @@ function Projects() {
         />
         <List input={inputText} />
       </div>
+      <div className="projects__add">
+        <Icon onClick={handleOpenModal} icon="carbon:add-filled" width="50" height="50" />
+      </div>
+      <Modal
+        className="modal-clients"
+        open={open}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          className="style"
+        >
+          <form className="project__add">
+            <label>
+              <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom du projet" type="text" name="projet" defaultValue="projet" />
+            </label>
+            <TextField sx={{ mb: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+          </form>
+          <Button className="modal-close1" onClick={handleCloseModal}>close</Button>
+        </Box>
+      </Modal>
     </div>
   );
 }
