@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import Loading from './Loading';
 import Home from '../Home/Home';
 import HomeApp from '../HomeApp/HomeApp';
 import NavBar from '../NavBar/NavBar';
@@ -21,6 +22,7 @@ import Error from '../Error/Error';
 
 function App() {
   const dispatch = useDispatch();
+  // const loading = useSelector((state) => state.user.loading);
   useEffect(() => {
     // recup token in localStorage
     const token = localStorage.getItem('token');
@@ -30,6 +32,9 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //   if (loading) {
+  //     return <Loading />;
+  //   }
   return (
     <div className="App">
       <Routes>

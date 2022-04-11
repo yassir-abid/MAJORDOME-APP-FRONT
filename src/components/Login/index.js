@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import LoginForm from '../LoginForm';
 import './style.scss';
 import { changeUserLoginField, login, logout } from '../../actions/user';
@@ -9,6 +10,8 @@ import logo from '../../assets/butler.png';
 function Login() {
   // dispatch actions
   const dispatch = useDispatch();
+  // redirect after login
+  const navigate = useNavigate();
 
   // access to my state
   const {
@@ -21,6 +24,7 @@ function Login() {
 
   const handleLogin = () => {
     dispatch(login());
+    navigate('/home-app');
   };
 
   const handleLogout = () => {
