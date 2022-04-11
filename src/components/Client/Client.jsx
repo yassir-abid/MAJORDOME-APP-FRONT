@@ -1,10 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 import ClientHeader from './ClientHeader';
 import ListProjets from './ListProjets';
@@ -12,15 +14,19 @@ import './style.scss';
 
 function Client() {
   const [value, setValue] = React.useState('');
-
+  const { id } = useParams();
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   const [comValue, setComValue] = React.useState('');
-
   const comHandleChange = (event) => {
     setComValue(event.target.value);
+  };
+
+  const [checked, setChecked] = React.useState(true);
+  const switchChange = (event) => {
+    setChecked(event.target.checked);
   };
 
   return (
@@ -45,6 +51,17 @@ function Client() {
             InputProps={{
               readOnly: false,
             }}
+          />
+          <FormControlLabel
+            control={(
+              <Switch
+                checked={checked}
+                onChange={switchChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
+            )}
+            label="Edit"
+            // labelPlacement="bottom"
           />
 
           {/* <a href="mailto:">mailto</a> */}
@@ -110,13 +127,13 @@ function Client() {
             <ButtonGroup variant="text" size="small">
               {/* TODO: styliser les boutons et les centrer */}
               {/* créer ou vérifier les liens de chaque boutons */}
-              <Link to="clients/:id/documents">
+              <Link to={`/clients/${id}/documents`}>
                 <Button>Documents</Button>
               </Link>
-              <Link to="clients/:id/notifications">
+              <Link to="notifications">
                 <Button>Notifs</Button>
               </Link>
-              <Link to="clients/:id/equipements">
+              <Link to="/clients/:id/equipments">
                 <Button>équipements <br />
                   & besoins
                 </Button>
