@@ -9,6 +9,7 @@ export const initialState = {
   lastname: '',
   email: '',
   password: '',
+  passwordConfirm: '',
   logged: false,
   pseudo: '',
   token: null,

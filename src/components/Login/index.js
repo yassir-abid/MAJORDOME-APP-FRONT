@@ -29,6 +29,7 @@ function Login() {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/');
   };
 
   return (

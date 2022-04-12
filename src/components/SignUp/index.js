@@ -15,7 +15,7 @@ function Signup() {
 
   // access to my state
   const {
-    lastname, firstname, email, password, logged, pseudo,
+    lastname, firstname, email, password, passwordConfirm, logged, pseudo,
   } = useSelector((state) => state.signUp);
 
   const handleChangeField = (value, name) => {
@@ -40,6 +40,7 @@ function Signup() {
           firstname={firstname}
           email={email}
           password={password}
+          passwordConfirm={passwordConfirm}
           isLogged={logged}
           changeField={handleChangeField}
           handleLogin={handleLogin}

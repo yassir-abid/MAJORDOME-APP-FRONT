@@ -14,6 +14,7 @@ const signUp = (store) => (next) => (action) => {
             lastname: state.signUp.lastname,
             email: state.signUp.email,
             password: state.signUp.password,
+            passwordConfirm: state.signUp.passwordConfirm,
           });
 
           // stock token to localStorage

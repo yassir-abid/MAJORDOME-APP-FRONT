@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Field from './Field';
 
@@ -12,14 +12,19 @@ function SignUpForm({
   lastname,
   email,
   password,
+  passwordConfirm,
   changeField,
   handleLogin,
   isLogged,
   loggedMessage,
 }) {
+  // redirect after signup
+  const navigate = useNavigate();
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
+    navigate('/home-app');
   };
 
   return (
@@ -68,6 +73,13 @@ function SignUpForm({
               onChange={changeField}
               value={password}
             />
+            <Field
+              name="passwordConfirm"
+              type="password"
+              placeholder="Confirmation mot de passe"
+              onChange={changeField}
+              value={passwordConfirm}
+            />
             <button
               type="submit"
               className="login-form-button"
@@ -97,6 +109,7 @@ SignUpForm.propTypes = {
   lastname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  passwordConfirm: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
   isLogged: PropTypes.bool,
