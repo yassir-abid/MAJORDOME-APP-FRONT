@@ -8,19 +8,24 @@ import Project from './Project/Project';
 
 function List({ input }) {
   const [data, setData] = useState([]);
-
+  const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects');
-      console.log(response.data);
-      setData(response.data.response);
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log(response);
+      setData(response.data);
     } catch (error) {
-      console.log('Il y a eu une erreur au chargement de l\'API', error);
+      console.log('Erreur de chargement', error);
     }
   };
 
   useEffect(() => {
     loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // create a new array by filtering the original array
