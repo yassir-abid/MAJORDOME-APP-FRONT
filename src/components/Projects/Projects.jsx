@@ -40,22 +40,54 @@ function Projects() {
         <Icon onClick={handleOpenModal} icon="carbon:add-filled" width="50" height="50" />
       </div>
       <Modal
-        className="modal-clients"
+        className=""
         open={open}
         onClose={handleCloseModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box
-          className="style"
+          className="projects-modal"
         >
           <form className="project__add">
             <label>
-              <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom du projet" type="text" name="projet" defaultValue="projet" />
+              <TextField
+                sx={{ m: 1 }}
+                fullWidth
+                label="Nom du projet"
+                type="text"
+                name="projet"
+                // defaultValue="projet"
+                placeholder="Nom du projet"
+              />
             </label>
-            <TextField sx={{ mb: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+            <label>
+              <TextField
+                sx={{ m: 1 }}
+                id="outlined-multiline-static"
+                label="Description"
+                fullWidth
+                multiline
+                rows={4}
+                placeholder="Description"
+                // defaultValue="Description"
+              />
+            </label>
+            <label>
+              <TextField
+                sx={{ m: 1 }}
+                id="outlined-multiline-static"
+                label="Commentaires"
+                fullWidth
+                multiline
+                maxRows={4}
+                placeholder="Commentaires"
+                // defaultValue="Default Value"
+              />
+            </label>
+            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
           </form>
-          <Button className="modal-close1" onClick={handleCloseModal}>close</Button>
+          <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
         </Box>
       </Modal>
     </div>
