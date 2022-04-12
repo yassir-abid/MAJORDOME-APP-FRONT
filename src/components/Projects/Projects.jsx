@@ -1,11 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Icon } from '@iconify/react';
+import { changeValue, addProject } from '../../actions/project';
 import ProjectsHeader from './ProjectsHeader';
 import List from './List';
 import './style.scss';
@@ -21,6 +24,19 @@ function Projects() {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
+
+  const { title, description, comments } = useSelector((state) => state.project);
+
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(changeValue(e.target.value, e.target.name));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addProject());
+  };
 
   return (
     <div className="projects">
@@ -49,16 +65,17 @@ function Projects() {
         <Box
           className="projects-modal"
         >
-          <form className="project__add">
+          <form className="project__add" onSubmit={handleSubmit}>
             <label>
               <TextField
                 sx={{ m: 1 }}
                 fullWidth
                 label="Nom du projet"
                 type="text"
-                name="projet"
-                // defaultValue="projet"
+                name="title"
                 placeholder="Nom du projet"
+                value={title}
+                onChange={handleChange}
               />
             </label>
             <label>
@@ -69,8 +86,10 @@ function Projects() {
                 fullWidth
                 multiline
                 rows={4}
+                name="description"
                 placeholder="Description"
-                // defaultValue="Description"
+                value={description}
+                onChange={handleChange}
               />
             </label>
             <label>
@@ -81,8 +100,10 @@ function Projects() {
                 fullWidth
                 multiline
                 maxRows={4}
+                name="comments"
                 placeholder="Commentaires"
-                // defaultValue="Default Value"
+                value={comments}
+                onChange={handleChange}
               />
             </label>
             <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />

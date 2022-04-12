@@ -35,7 +35,7 @@ function List({ input }) {
     }
     // return the item which contains the user input
 
-    return el.text.toLowerCase().includes(input);
+    return el.title.toLowerCase().includes(input);
   });
   return (
     <ul className="projects-list">

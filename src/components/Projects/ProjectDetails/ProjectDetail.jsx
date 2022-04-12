@@ -1,13 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
 // eslint-disable-next-line react/prop-types
-function Project({ title }) {
+function ProjectDetail({ description }) {
   return (
-
     <div className="project">
-      {title}
+      {description}
     </div>
-
   );
 }
 
-export default Project;
+export default ProjectDetail;
