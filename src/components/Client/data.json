@@ -2,41 +2,41 @@
     "id":1,
     "title": "projet 1",
     "description": "pose chauffe eau",
-    "status": "en cours"
+    "status": "Vide"
 },{
     "id":2,
     "title": "projet neuf",
     "description": "pose arrivée / évacuation vide sanitaire",
-    "status": "à venir"
+    "status": "Clôturé"
 },{
     "id":3,
     "title": "renovation chez michel",
     "description": "pose portail et muret",
-    "status": "en cours"
+    "status": "Ouvert"
 },{
     "id":4,
     "title": "terrasse bois katy",
     "description": "structure + pose ipe",
-    "status": "à venir"
+    "status": "vide"
 },{
     "id":5,
     "title": "cloture à Banon",
     "description": "arracher ancienne cloture bois et poser nouvelle cloture",
-    "status": "passé"
+    "status": "Clôturé"
 },{
     "id":6,
     "title": "piscine chez Pierre",
     "description": "nettoyage pompe et bassin + analyse ",
-    "status": "à venir"
+    "status": "Ouvert"
 },{
     "id":7,
     "title": "Cuisine extérieur Villeneuve",
     "description": "raccorder eau et pose meuble",
-    "status": "à venir"
+    "status": "Ouvert"
 },{
     "id":8,
     "title": "Ganivelle Oraison",
     "description": "pose ganivelles et poteaux",
-    "status": "passé"
+    "status": "Clôturé"
 }
 ]
