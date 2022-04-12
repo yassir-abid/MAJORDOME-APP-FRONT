@@ -35,12 +35,14 @@ function LoginForm({
           >
             Déconnexion
           </button>
-          <button
-            type="button"
-            className="login-form-button login-form-button--accueil"
-          >
-            Mon Accueil
-          </button>
+          <Link to="/home-app">
+            <button
+              type="button"
+              className="login-form-button login-form-button--accueil"
+            >
+              Mon Accueil
+            </button>
+          </Link>
         </div>
       )}
       {!isLogged && (

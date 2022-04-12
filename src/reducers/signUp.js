@@ -5,10 +5,11 @@ import {
 } from '../actions/signUp';
 
 export const initialState = {
-  lastName: '',
-  firstName: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
+  passwordConfirm: '',
   logged: false,
   pseudo: '',
   token: null,

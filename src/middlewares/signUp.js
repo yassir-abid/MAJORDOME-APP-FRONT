@@ -9,11 +9,12 @@ const signUp = (store) => (next) => (action) => {
 
       const signup = async () => {
         try {
-          const response = await axios.post('http://localhost:3001/signup', {
-            lastName: state.signUp.lastName,
-            firstName: state.signUp.firstName,
+          const response = await axios.post('https://majordome-api.herokuapp.com/api/signup', {
+            firstname: state.signUp.firstname,
+            lastname: state.signUp.lastname,
             email: state.signUp.email,
             password: state.signUp.password,
+            passwordConfirm: state.signUp.passwordConfirm,
           });
 
           // stock token to localStorage
@@ -33,7 +34,7 @@ const signUp = (store) => (next) => (action) => {
       const check = async () => {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get('http://localhost:3001/checkUser', {
+        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
           headers: {
             authorization: `Bearer ${token}`,
           },
