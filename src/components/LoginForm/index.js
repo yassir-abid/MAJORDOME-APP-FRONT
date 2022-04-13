@@ -63,6 +63,7 @@ function LoginForm({
               onChange={changeField}
               value={password}
             />
+            {/* error message if login or password invalid */}
             {errorMessage.length > 0 && (<p>{errorMessage}</p>)}
             <button
               type="submit"

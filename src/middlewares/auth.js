@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import axios from 'axios';
 import {
   LOGIN, saveUser, CHECK_USER, userErrorMessage,
@@ -22,7 +21,8 @@ const auth = (store) => (next) => (action) => {
           store.dispatch(saveUser(response.data));
         } catch (error) {
           store.dispatch(userErrorMessage(error.response.data.message || 'connexion impossible'));
-          console.error(error.response.data.message || error.response.data || error.response || error);
+          console.error(error.response.data.message
+             || error.response.data || error.response || error);
         }
       };
 

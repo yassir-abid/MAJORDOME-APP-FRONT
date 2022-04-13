@@ -14,17 +14,18 @@ function SignUpForm({
   password,
   passwordConfirm,
   changeField,
-  handleLogin,
+  handleSignup,
   isLogged,
   loggedMessage,
+  signUperrorMessage,
 }) {
   // redirect after signup
   const navigate = useNavigate();
 
-  const handleSubmit = (evt) => {
+  const handleSignUpSubmit = (evt) => {
     evt.preventDefault();
-    handleLogin();
-    navigate('/home-app');
+    handleSignup();
+    // navigate('/home-app');
   };
 
   return (
@@ -46,7 +47,7 @@ function SignUpForm({
       )}
       {!isLogged && (
         <div>
-          <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
+          <form autoComplete="off" className="login-form-element" onSubmit={handleSignUpSubmit}>
             <Field
               name="firstname"
               placeholder="Prénom"
@@ -80,6 +81,8 @@ function SignUpForm({
               onChange={changeField}
               value={passwordConfirm}
             />
+            {/* error message if input signUp invalid */}
+            {signUperrorMessage.length > 0 && (<p>{signUperrorMessage}</p>)}
             <button
               type="submit"
               className="login-form-button"
@@ -111,9 +114,10 @@ SignUpForm.propTypes = {
   password: PropTypes.string.isRequired,
   passwordConfirm: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
-  handleLogin: PropTypes.func.isRequired,
+  handleSignup: PropTypes.func.isRequired,
   isLogged: PropTypes.bool,
   loggedMessage: PropTypes.string,
+  signUperrorMessage: PropTypes.string.isRequired,
 };
 
 SignUpForm.defaultProps = {

@@ -4,6 +4,7 @@ export const SIGNUP = 'SIGNUP';
 export const LOGOUT = 'LOGOUT';
 export const SAVE_USER = 'SAVE_USER';
 export const CHECK_USER = 'CHECK_USER';
+export const SIGNUP_ERROR_MESSAGE = 'SIGNUP_ERROR_MESSAGE';
 
 // ACTION CREATOR
 export const changeUserLoginField = (value, name) => ({
@@ -27,4 +28,9 @@ export const saveUser = (payload) => ({
 
 export const checkUser = () => ({
   type: CHECK_USER,
+});
+
+export const signUpErrorMessage = (signUperrorMessage) => ({
+  type: SIGNUP_ERROR_MESSAGE,
+  signUperrorMessage,
 });

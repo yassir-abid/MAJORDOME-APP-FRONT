@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { SIGNUP, saveUser, CHECK_USER } from '../actions/signUp';
+import {
+  SIGNUP, saveUser, CHECK_USER, signUpErrorMessage,
+} from '../actions/signUp';
 
 const signUp = (store) => (next) => (action) => {
   switch (action.type) {
@@ -22,7 +24,9 @@ const signUp = (store) => (next) => (action) => {
 
           store.dispatch(saveUser(response.data));
         } catch (error) {
-          console.log(error);
+          store.dispatch(signUpErrorMessage(error.response.data.message || 'connexion impossible'));
+          console.error(error.response.data.message
+             || error.response.data || error.response || error);
         }
       };
 

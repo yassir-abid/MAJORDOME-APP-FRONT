@@ -15,16 +15,16 @@ function Signup() {
 
   // access to my state
   const {
-    lastname, firstname, email, password, passwordConfirm, logged, pseudo,
+    lastname, firstname, email, password, passwordConfirm, logged, pseudo, signUperrorMessage,
   } = useSelector((state) => state.signUp);
 
   const handleChangeField = (value, name) => {
     dispatch(changeUserLoginField(value, name));
   };
 
-  const handleLogin = () => {
+  const handleSignup = () => {
     dispatch(signUp());
-    navigate('/login');
+    // navigate('/signup');
   };
 
   const handleLogout = () => {
@@ -43,9 +43,10 @@ function Signup() {
           passwordConfirm={passwordConfirm}
           isLogged={logged}
           changeField={handleChangeField}
-          handleLogin={handleLogin}
+          handleSignup={handleSignup}
           loggedMessage={`Bonjour ${pseudo}`}
           handleLogout={handleLogout}
+          signUperrorMessage={signUperrorMessage}
         />
       </div>
     </div>
