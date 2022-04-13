@@ -3,7 +3,7 @@
 function ProjectDetail({ description }) {
   return (
     <div className="project">
-      {description}
+      {/* {description} */}
     </div>
   );
 }

@@ -15,7 +15,7 @@ const addProject = (store) => (next) => (action) => {
             title: state.project.title,
             description: state.project.description,
             comments: state.project.comments,
-            client_id: 1,
+            client_id: state.project.client_id,
           }, {
             headers: {
               authorization: `Bearer ${token}`,

@@ -36,4 +36,12 @@
         background: $colorSecondaryDark;
         padding-right: 1rem;
     }
+
+    &__clients {
+        width: 100%;
+        margin-left: 0.5rem; 
+        height: 3rem;
+        border-radius: 4px;
+    }
+    
 }

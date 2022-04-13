@@ -1,10 +1,10 @@
 import { CHANGE_VALUE } from '../actions/project';
 
 const initialState = {
-  title: null,
-  description: null,
-  comments: null,
-  clientId: '',
+  title: '',
+  description: '',
+  comments: '',
+  client_id: '',
 };
 
 const reducer = (state = initialState, action = {}) => {

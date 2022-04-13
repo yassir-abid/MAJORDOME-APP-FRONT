@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -14,6 +15,28 @@ import List from './List';
 import './style.scss';
 
 function Projects() {
+  // request to add clients
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem('token');
+  const loadData = async () => {
+    try {
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log(response);
+      setData(response.data);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [inputText, setInputText] = useState('');
   const inputHandler = (e) => {
     // convert input text to lower case
@@ -26,7 +49,8 @@ function Projects() {
   const handleCloseModal = () => setOpen(false);
 
   const {
-    title, description, comments, clientId,
+    // eslint-disable-next-line camelcase
+    title, description, comments, client_id,
   } = useSelector((state) => state.project);
 
   const dispatch = useDispatch();
@@ -70,6 +94,7 @@ function Projects() {
           <form className="project__add" onSubmit={handleSubmit}>
             <label>
               <TextField
+                required
                 sx={{ m: 1 }}
                 fullWidth
                 label="Nom du projet"
@@ -108,6 +133,22 @@ function Projects() {
                 onChange={handleChange}
               />
             </label>
+            <select
+              required
+              // eslint-disable-next-line camelcase
+              value={client_id}
+              onChange={handleChange}
+              name="client_id"
+              className="projects__clients"
+            >
+              {data.map((client) => (
+                <option
+                  key={client.id}
+                >
+                  {client.id}
+                </option>
+              ))}
+            </select>
             <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
           </form>
           <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
