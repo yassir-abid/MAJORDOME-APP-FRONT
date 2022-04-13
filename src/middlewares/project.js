@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_PROJECT, CHECK_USER, saveProject } from '../actions/project';
+import { ADD_PROJECT, CHECK_USER, saveUser } from '../actions/project';
 
 const addProject = (store) => (next) => (action) => {
   switch (action.type) {
@@ -8,17 +8,24 @@ const addProject = (store) => (next) => (action) => {
       const state = store.getState();
 
       const project = async () => {
+        const token = localStorage.getItem('token');
         try {
           const response = await axios.post('https://majordome-api.herokuapp.com/api/projects', {
+
             title: state.project.title,
             description: state.project.description,
             comments: state.project.comments,
+            client_id: 1,
+          }, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
           });
 
           // stock token to localStorage
-          localStorage.setItem('token', response.data.token);
+          // localStorage.setItem('token', response.data.token);
 
-          store.dispatch(saveProject(response.data));
+          store.dispatch(saveUser(response.data));
         } catch (error) {
           console.log(error);
         }
@@ -38,7 +45,7 @@ const addProject = (store) => (next) => (action) => {
           },
         });
 
-        store.dispatch(saveProject({ ...response.data, token }));
+        store.dispatch(saveUser({ ...response.data, token }));
       };
 
       check();

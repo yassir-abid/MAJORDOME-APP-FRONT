@@ -25,7 +25,9 @@ function Projects() {
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
-  const { title, description, comments } = useSelector((state) => state.project);
+  const {
+    title, description, comments, clientId,
+  } = useSelector((state) => state.project);
 
   const dispatch = useDispatch();
 

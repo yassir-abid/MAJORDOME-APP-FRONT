@@ -1,7 +1,7 @@
 // ACTION TYPES
-export const CHANGE_VALUE = 'CHANGE_INPUT_VALUE';
+export const CHANGE_VALUE = 'CHANGE_VALUE';
 export const ADD_PROJECT = 'ADD_PROJECT';
-export const SAVE_PROJECT = 'SAVE_PROJECT';
+export const SAVE_USER = 'SAVE_USER';
 export const CHECK_USER = 'CHECK_USER';
 
 // ACTION CREATORS
@@ -15,8 +15,8 @@ export const addProject = () => ({
   type: ADD_PROJECT,
 });
 
-export const saveProject = (payload) => ({
-  type: SAVE_PROJECT,
+export const saveUser = (payload) => ({
+  type: SAVE_USER,
   payload,
 });
 
