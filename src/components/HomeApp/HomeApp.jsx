@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HomeAppHeader from './HomeAppHeader';
+
+import ListInterventions from './ListInterventions';
 import './style.scss';
 
 // const interventions = [
@@ -70,73 +72,7 @@ function HomeApp() {
           feuille de route
         </h3>
         <div className="homeApp-container_list">
-          <ul>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-            <li className="homeApp-main_li">
-              <p>nom de lintervention</p>
-              <p>nom du client</p>
-              <p>heure</p>
-            </li>
-          </ul>
+          <ListInterventions />
         </div>
       </main>
     </div>
