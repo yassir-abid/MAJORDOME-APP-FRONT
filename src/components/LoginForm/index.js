@@ -15,6 +15,7 @@ function LoginForm({
   handleLogout,
   isLogged,
   loggedMessage,
+  errorMessage,
 }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -62,6 +63,8 @@ function LoginForm({
               onChange={changeField}
               value={password}
             />
+            {/* error message if login or password invalid */}
+            {errorMessage.length > 0 && (<p>{errorMessage}</p>)}
             <button
               type="submit"
               className="login-form-button"
@@ -95,6 +98,7 @@ LoginForm.propTypes = {
   handleLogout: PropTypes.func.isRequired,
   isLogged: PropTypes.bool,
   loggedMessage: PropTypes.string,
+  errorMessage: PropTypes.string.isRequired,
 };
 
 LoginForm.defaultProps = {

@@ -15,7 +15,7 @@ function Login() {
 
   // access to my state
   const {
-    email, password, logged, pseudo,
+    email, password, logged, pseudo, errorMessage,
   } = useSelector((state) => state.user);
 
   const handleChangeField = (value, name) => {
@@ -24,7 +24,7 @@ function Login() {
 
   const handleLogin = () => {
     dispatch(login());
-    navigate('/home-app');
+    // navigate('/home-app');
   };
 
   const handleLogout = () => {
@@ -44,6 +44,7 @@ function Login() {
           handleLogin={handleLogin}
           loggedMessage={`Bonjour ${pseudo}`}
           handleLogout={handleLogout}
+          errorMessage={errorMessage}
         />
       </div>
     </div>

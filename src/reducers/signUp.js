@@ -2,6 +2,7 @@ import {
   CHANGE_USER_LOGIN_FIELD,
   SAVE_USER,
   LOGOUT,
+  SIGNUP_ERROR_MESSAGE,
 } from '../actions/signUp';
 
 export const initialState = {
@@ -13,6 +14,7 @@ export const initialState = {
   logged: false,
   pseudo: '',
   token: null,
+  signUperrorMessage: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -36,6 +38,12 @@ const reducer = (state = initialState, action = {}) => {
       // spread of initialState for logout
       return {
         ...initialState,
+      };
+    }
+    case SIGNUP_ERROR_MESSAGE: {
+      return {
+        ...state,
+        signUperrorMessage: action.signUperrorMessage,
       };
     }
     default:

@@ -17,6 +17,7 @@ import Interventions from '../Interventions/Intervention';
 import InterventionsDetail from '../InterventionsDetail/InterventionsDetail';
 import InterventionsReport from '../InterventionsReport/InterventionsReport';
 import Projects from '../Projects/Projects';
+import ProjectDetails from '../Projects/ProjectDetails/ProjectDetails';
 import Schedule from '../Schedule/Schedule';
 import Suppliers from '../Suppliers/Suppliers';
 import SuppliersDetail from '../SuppliersDetail/SuppliersDetail';
@@ -60,6 +61,7 @@ function App() {
         <Route path="/interventions/:id" element={<InterventionsDetail />} />
         <Route path="/interventions/:id/report" element={<InterventionsReport />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/suppliers" element={<Suppliers />} />
         <Route path="/suppliers/:id" element={<SuppliersDetail />} />

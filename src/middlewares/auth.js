@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { LOGIN, saveUser, CHECK_USER } from '../actions/user';
+import {
+  LOGIN, saveUser, CHECK_USER, userErrorMessage,
+} from '../actions/user';
 
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
@@ -13,13 +15,14 @@ const auth = (store) => (next) => (action) => {
             email: state.user.email,
             password: state.user.password,
           });
-
           // stock token to localStorage
           localStorage.setItem('token', response.data.token);
 
           store.dispatch(saveUser(response.data));
         } catch (error) {
-          console.log(error);
+          store.dispatch(userErrorMessage(error.response.data.message || 'connexion impossible'));
+          console.error(error.response.data.message
+             || error.response.data || error.response || error);
         }
       };
 
