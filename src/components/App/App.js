@@ -20,6 +20,7 @@ import Documents from '../Documents/Documents';
 import Todo from '../Todo/Todo';
 import Notifications from '../Notifications/Notifications';
 import Error from '../Error/Error';
+import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/documents" element={<Documents />} />
+        <Route path="/documentsDetail" element={<DocumentsDetail />} />
         <Route path="/interventions" element={<Interventions />} />
         <Route path="/interventionsDetail" element={<InterventionsDetail />} />
         <Route path="/interventionsReport" element={<InterventionsReport />} />

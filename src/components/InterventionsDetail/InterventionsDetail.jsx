@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import InterventionsDetailHeader from './InterventionsDetailHeader';
 import './interventionsDetail.scss';
