@@ -1,14 +1,14 @@
 @import '../../styles/vars';
 .clients {
     height: 100%;
-    background-color: $colorSecondary;
+    background-color: $colorSecondaryDark;
     overflow: hidden;
     &-searchBar {
 
     }
 
     &-list {
-        height: 100%;
+        height: calc(100vh - (62px + 150px));
         padding: 0.9rem;
         overflow-y: scroll;
         li {
@@ -21,9 +21,11 @@
     }
 
     &-addClient {
-        position: relative;
-        height: 150px;
+        position: absolute;
+        right: 1rem;
+        bottom: 120px;
     }
+
 }
    
 

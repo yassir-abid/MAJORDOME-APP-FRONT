@@ -4,12 +4,21 @@ import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import Avatar from '../Avatar/Avatar';
 
 import './homeAppHeader.scss';
 
 function HomeAppHeader() {
   return (
     <header className="homeApp-header">
+      <div className="homeApp-header_avatar">
+        <Link to="/Profile">
+          <Avatar />
+        </Link>
+      </div>
+      <div className="homeApp-header_title">
+        <h1>Majordome</h1>
+      </div>
       <div className="homeApp-header_notify">
         <Link to="Foo">
           <Icon
@@ -18,19 +27,6 @@ function HomeAppHeader() {
           // color="red"
             width="30"
             height="30"
-          />
-        </Link>
-      </div>
-      <div className="homeApp-header_title">
-        <h1>Majordome</h1>
-      </div>
-      <div className="homeApp-header_avatar">
-        <Link to="/Profile">
-          <Icon
-            icon="carbon:user-avatar-filled-alt"
-            color="black"
-            width="40"
-            height="40"
           />
         </Link>
       </div>

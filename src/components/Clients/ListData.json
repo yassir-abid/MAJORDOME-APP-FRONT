@@ -1,50 +1,66 @@
 [{
     "id": 1,
-    "text": "Henri Launay"
+    "firstName": "Henri",
+    "lastName": "Launay"
 }, {
     "id": 2,
-    "text": "Théodore Renault"
+    "firstName": "Théodore",
+    "lastName": "Renault"
 }, {
     "id": 3,
-    "text": "Marie du Fernandez"
+    "firstName": "Marie",
+    "lastName": "du Fernandez"
 }, {
     "id": 4,
-    "text": "Antoinette Guillon"
+    "firstName": "Antoinette",
+    "lastName": "Guillon"
 }, {
     "id": 5,
-    "text": "Paul Mercier"
+    "firstName": "Paul",
+    "lastName": "Mercier"
 }, {
     "id": 6,
-    "text": "Bernard Julien"
+    "firstName": "Bernard",
+    "lastName": "Julien"
 }, {
     "id": 7,
-    "text": "Édith Mallet"
+    "firstName": "Édith",
+    "lastName": "Mallet"
 }, {
     "id": 8,
-    "text": "Zacharie Barbier"
+    "firstName": "Zacharie",
+    "lastName": "Barbier"
 }, {
     "id": 9,
-    "text": "Alexandre Morin"
+    "firstName": "Alexandre",
+    "lastName": "Morin"
 }, {
     "id": 10,
-    "text": "Édouard Gillet"
+    "firstName": "Édouard",
+    "lastName": "Gillet"
 },{
     "id": 12,
-    "text": "Daniel Gillet"
+    "firstName": "Daniel",
+    "lastName": "Gillet"
 },{
     "id": 13,
-    "text": "Franck Robert"
+    "firstName": "Franck",
+    "lastName": "Robert"
 },{
     "id": 14,
-    "text": "Corinne Boutin"
+    "firstName": "Corinne",
+    "lastName": "Boutin"
 },{
     "id": 15,
-    "text": "Marthe Dupuis"
+    "firstName": "Marthe",
+    "lastName": "Dupuis"
 },{
     "id": 16,
-    "text": "Denis Duhamel"
+    "firstName": "Denis",
+    "lastName": "Duhamel"
 },{
     "id": 17,
-    "text": "Antoinette Labbe"
+    "firstName": "Antoinette",
+    "lastName": "Labbe"
 }
 ] 

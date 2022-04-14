@@ -1,0 +1,37 @@
+@import '../../styles/vars';
+
+.client {
+    height: 100%;
+    background-color: $colorSecondaryDark;
+    overflow: hidden;
+
+    &-detail {
+        width: 100%;
+        display:flex;
+        flex-direction:column;
+        height: calc(100vh - (62px + 100px));
+        padding-right: 1rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+
+        &_btn {
+            display: flex;
+            justify-content: center;
+            padding-left: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        &_adresse {
+            margin-top: 1rem;
+        }
+
+        &_com {
+            margin-top: 1rem;
+        }
+    }
+
+    &-ListProjets {
+        display: flex;
+    }
+}

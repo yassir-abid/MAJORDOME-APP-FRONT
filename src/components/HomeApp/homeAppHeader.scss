@@ -5,20 +5,20 @@
     justify-content: space-between;
     align-items: center;
     height: 55px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     padding:0.5rem;
     background-color: $colorPrimary;
     border-radius: 0 0 20px 20px;
 
     &_notify {
         order: 0;
-        flex: 1 1 auto;
+        flex: 1 1 flex-end;
         align-self: auto;
     }
 
     &_avatar {
         order: 0;
-        flex: 1 1 flex-end;
+        flex: 1 1 auto;
         align-self: auto;
     }
 
