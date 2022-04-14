@@ -25,7 +25,7 @@ function ClientsHeader() {
       </div>
       <div className="clients-header_avatar">
         <Link to="/Profile">
-          <Avatar />
+          <Avatar avatar={false} />
         </Link>
       </div>
     </header>

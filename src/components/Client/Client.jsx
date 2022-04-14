@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -15,6 +15,11 @@ import './style.scss';
 function Client() {
   const [value, setValue] = React.useState('');
   const { id } = useParams();
+
+  useEffect(() => {
+    // dispatch du fetch du client avec l'id ${id}
+  }, []);
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -40,10 +45,36 @@ function Client() {
           }}
           noValidate
           autoComplete="off"
-        >
+        ><FormControlLabel
+          control={(
+            <Switch
+              checked={editMode}
+              onChange={switchChange}
+              inputProps={{ 'aria-label': 'controlled' }}
+            />
+            )}
+          label="Edit"
+        />
           {/* <a href="tel:0606060606">clic pour tel</a> //<==rendre le num dynamique ? */}
           <TextField
-            className="client-detail_tel"
+            id="firstName"
+            label="Prénom"
+            placeholder="Prénom"
+            // defaultValue=""
+            InputProps={{
+              readOnly: !editMode,
+            }}
+          />
+          <TextField
+            id="lastName"
+            label="Nom"
+            placeholder="Nom"
+            // defaultValue=""
+            InputProps={{
+              readOnly: !editMode,
+            }}
+          />
+          <TextField
             id="phone"
             label="Téléphone"
             placeholder="Numéro"
@@ -52,21 +83,9 @@ function Client() {
               readOnly: !editMode,
             }}
           />
-          <FormControlLabel
-            control={(
-              <Switch
-                checked={editMode}
-                onChange={switchChange}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
-            )}
-            label="Edit"
-            // labelPlacement="bottom"
-          />
 
           {/* <a href="mailto:">mailto</a> */}
           <TextField
-            className="client-detail_email"
             id="email"
             label="Email"
             placeholder="Email"

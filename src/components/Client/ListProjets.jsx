@@ -15,8 +15,8 @@ function ListProjets() {
   return (
     <ul className="client-listProjets">
       {data.map((item) => (
-        <Link to={`/projets/${item.id}`}>
-          <li key={item.id}>{item.title}-{item.description}-{item.status} <Chip size="small" label={item.status} color="primary" /></li>
+        <Link to={`/projets/${item.id}`} key={item.id}>
+          <li>{item.title}-{item.description}-{item.status} <Chip size="small" label={item.status} color="primary" /></li>
         </Link>
       ))}
     </ul>
