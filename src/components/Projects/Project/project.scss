@@ -3,4 +3,9 @@
 .project {
     display:flex;
     justify-content: space-between;
+
+    &__status {
+        font-weight: bold;
+        color: $colorPrimary;
+    }
 }

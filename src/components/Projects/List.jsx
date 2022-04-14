@@ -3,7 +3,6 @@
 import axios from 'axios';
 import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import data from './ListData.json';
 import Project from './Project/Project';
 
 function List({ input }) {
@@ -16,7 +15,7 @@ function List({ input }) {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log(response);
+      // console.log(response);
       setData(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
