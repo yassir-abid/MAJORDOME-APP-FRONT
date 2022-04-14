@@ -15,7 +15,8 @@ function List({ input }) {
           Authorization: `bearer ${token}`,
         },
       });
-      // console.log(response);
+      console.log('#projects#');
+      console.log(response);
       setData(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
