@@ -11,6 +11,8 @@ import Profile from '../Profile/Profile';
 import './style.scss';
 import Clients from '../Clients/clients';
 import Interventions from '../Interventions/Intervention';
+import InterventionsDetail from '../InterventionsDetail/InterventionsDetail';
+import InterventionsReport from '../InterventionsReport/InterventionsReport';
 import Projects from '../Projects/Projects';
 import Schedule from '../Schedule/Schedule';
 import Suppliers from '../Suppliers/Suppliers';
@@ -41,6 +43,8 @@ function App() {
         <Route path="/clients" element={<Clients />} />
         <Route path="/documents" element={<Documents />} />
         <Route path="/interventions" element={<Interventions />} />
+        <Route path="/interventionsDetail" element={<InterventionsDetail />} />
+        <Route path="/interventionsReport" element={<InterventionsReport />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/suppliers" element={<Suppliers />} />

@@ -29,7 +29,7 @@ function Interventions() {
           />
         </div>
         <List input={inputText} />
-        <div className="interventions-addSupplier">
+        <div className="interventions-addintervention">
           <Icon icon="carbon:add-filled" width="30" height="30" />
         </div>
       </div>

@@ -1,6 +1,6 @@
 @import '../../styles/vars';
 
-.interventions {
+.documents {
     height: 100%;
     background-color: $colorSecondary;
     overflow: hidden;
@@ -21,14 +21,14 @@
         }
     }
 
-    &-addIntervention {
+    &-addDocument {
         position: relative;
         height: 150px;
     }
 }
 
 // Header
-.interventions-header {
+.documents-header {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -63,7 +63,8 @@
     }
 }
 
-interventions-main {
+
+.documents-main {
     background-color: $colorSecondaryDark;
     height: calc(100vh - (62px + 100px));
 }

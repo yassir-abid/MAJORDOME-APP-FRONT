@@ -1,12 +1,13 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
-import './interventionsDetail.scss';
 
-function InterventionsDetailHeader() {
+import './documents.scss';
+
+function DocumentsHeader() {
   return (
-    <header className="interventionsDetail-header">
-      <div className="interventionsDetail-header_notify">
+    <header className="documents-header">
+      <div className="documents-header_notify">
         <Icon
           icon="charm:search"
           color="black"
@@ -14,11 +15,11 @@ function InterventionsDetailHeader() {
           height="30"
         />
       </div>
-      <div className="interventions-header_title">
-        <h1>Nom intervention </h1>
+      <div className="documents-header_title">
+        <h1>Documents</h1>
       </div>
 
-      <div className="interventionsDetail-header_avatar">
+      <div className="documents-header_avatar">
         <Icon
           icon="carbon:user-avatar-filled-alt"
           color="black"
@@ -30,4 +31,4 @@ function InterventionsDetailHeader() {
   );
 }
 
-export default InterventionsDetailHeader;
+export default DocumentsHeader;
