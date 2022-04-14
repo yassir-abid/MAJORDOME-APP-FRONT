@@ -2,14 +2,12 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 import ProfileHeader from './ProfileHeader';
-import Avatar from './Avatar';
 import './profilStyle.scss';
 
 function Profile() {
@@ -59,7 +57,7 @@ function Profile() {
               className="style"
             >
               <form
-                className="detailClient"
+                className="detailProfil"
               >
                 <label>
                   <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom" type="text" name="firstName" defaultValue="toto" />

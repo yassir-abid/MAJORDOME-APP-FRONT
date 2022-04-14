@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import Avatar from '../Avatar/Avatar';
 
 import './clients.scss';
 
@@ -24,12 +25,7 @@ function ClientsHeader() {
       </div>
       <div className="clients-header_avatar">
         <Link to="/Profile">
-          <Icon
-            icon="carbon:user-avatar-filled-alt"
-            color="black"
-            width="40"
-            height="40"
-          />
+          <Avatar avatar={false} />
         </Link>
       </div>
     </header>

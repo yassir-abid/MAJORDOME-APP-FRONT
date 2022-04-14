@@ -1,26 +1,30 @@
 /* eslint-disable react/react-in-jsx-scope */
 
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Field from './Field';
 
 import './style.scss';
 
 function SignUpForm({
-  lastName,
-  firstName,
+  firstname,
+  lastname,
   email,
   password,
+  passwordConfirm,
   changeField,
   handleLogin,
-  handleLogout,
   isLogged,
   loggedMessage,
 }) {
+  // redirect after signup
+  const navigate = useNavigate();
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
+    navigate('/home-app');
   };
 
   return (
@@ -30,35 +34,30 @@ function SignUpForm({
           <p className="login-form-message">
             {loggedMessage}
           </p>
-          <button
-            type="button"
-            className="login-form-button"
-            onClick={handleLogout}
-          >
-            Déconnexion
-          </button>
-          <button
-            type="button"
-            className="login-form-button login-form-button--accueil"
-          >
-            Mon Accueil
-          </button>
+          <Link to="/home-app">
+            <button
+              type="button"
+              className="login-form-button login-form-button--accueil"
+            >
+              Mon Accueil
+            </button>
+          </Link>
         </div>
       )}
       {!isLogged && (
         <div>
           <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
             <Field
-              name="lastName"
-              placeholder="Nom"
-              onChange={changeField}
-              value={lastName}
-            />
-            <Field
-              name="firstName"
+              name="firstname"
               placeholder="Prénom"
               onChange={changeField}
-              value={firstName}
+              value={firstname}
+            />
+            <Field
+              name="lastname"
+              placeholder="Nom"
+              onChange={changeField}
+              value={lastname}
             />
             <Field
               name="email"
@@ -73,6 +72,13 @@ function SignUpForm({
               placeholder="Mot de passe"
               onChange={changeField}
               value={password}
+            />
+            <Field
+              name="passwordConfirm"
+              type="password"
+              placeholder="Confirmation mot de passe"
+              onChange={changeField}
+              value={passwordConfirm}
             />
             <button
               type="submit"
@@ -99,13 +105,13 @@ function SignUpForm({
 }
 
 SignUpForm.propTypes = {
-  firstName: PropTypes.string.isRequired,
-  lastName: PropTypes.string.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
+  passwordConfirm: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
   isLogged: PropTypes.bool,
   loggedMessage: PropTypes.string,
 };

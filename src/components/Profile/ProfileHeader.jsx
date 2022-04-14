@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 // import { Icon } from '@iconify/react';
-import Avatar from './Avatar';
+import Avatar from '../Avatar/Avatar';
 import './profilStyle.scss';
 
 function HomeAppHeader() {

@@ -9,7 +9,7 @@ const auth = (store) => (next) => (action) => {
 
       const login = async () => {
         try {
-          const response = await axios.post('http://localhost:3001/login', {
+          const response = await axios.post('https://majordome-api.herokuapp.com/api/login', {
             email: state.user.email,
             password: state.user.password,
           });
@@ -31,7 +31,7 @@ const auth = (store) => (next) => (action) => {
       const check = async () => {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get('http://localhost:3001/checkUser', {
+        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
           headers: {
             authorization: `Bearer ${token}`,
           },

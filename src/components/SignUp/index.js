@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import SignUpForm from '../SignUpForm';
 import './style.scss';
 import { changeUserLoginField, signUp, logout } from '../../actions/signUp';
@@ -9,10 +10,12 @@ import logo from '../../assets/butler.png';
 function Signup() {
   // dispatch actions
   const dispatch = useDispatch();
+  // redirect after signUp
+  const navigate = useNavigate();
 
   // access to my state
   const {
-    lastName, firstName, email, password, logged, pseudo,
+    lastname, firstname, email, password, passwordConfirm, logged, pseudo,
   } = useSelector((state) => state.signUp);
 
   const handleChangeField = (value, name) => {
@@ -21,6 +24,7 @@ function Signup() {
 
   const handleLogin = () => {
     dispatch(signUp());
+    navigate('/login');
   };
 
   const handleLogout = () => {
@@ -32,10 +36,11 @@ function Signup() {
       <div className="signup__container">
         <img className="signup_logo" src={logo} alt="logo" />
         <SignUpForm
-          lastName={lastName}
-          firstName={firstName}
+          lastname={lastname}
+          firstname={firstname}
           email={email}
           password={password}
+          passwordConfirm={passwordConfirm}
           isLogged={logged}
           changeField={handleChangeField}
           handleLogin={handleLogin}
