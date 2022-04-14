@@ -10,7 +10,7 @@ import axios from 'axios';
 // const axios = require('axios').default;
 
 function List(props) {
-  const [data, setData] = useState([]);
+  const [clients, setClients] = useState([]);
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
@@ -19,8 +19,9 @@ function List(props) {
           Authorization: `bearer ${token}`,
         },
       });
+      console.log('#clients#');
       console.log(response);
-      setData(response.data);
+      setClients(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -31,7 +32,7 @@ function List(props) {
   }, []);
 
   // create a new array by filtering the original array
-  const filteredData = data.filter((el) => {
+  const filteredClients = clients.filter((el) => {
     // if no input the return the original
     if (props.input === '') {
       return el;
@@ -44,9 +45,9 @@ function List(props) {
 
   return (
     <ul className="clients-list">
-      {filteredData.map((item) => (
-        <Link to={`/clients/${item.id}`}>
-          <li key={item.id}>{item.firstname} {item.lastname}</li>
+      {filteredClients.map((client) => (
+        <Link to={`/clients/${client.id}`}>
+          <li key={client.id}>{client.firstname} {client.lastname}</li>
         </Link>
       ))}
     </ul>
