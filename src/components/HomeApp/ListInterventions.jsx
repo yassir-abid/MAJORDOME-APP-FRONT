@@ -37,7 +37,17 @@ function ListInterventions() {
     <ul className="client-listIntervention">
       {data.map((item) => (
         <Link to={`/interventions/${item.id}`}>
-          <li key={item.id}>{item.title}-{item.description}-{new Date(item.date).toLocaleDateString()}-{new Date(item.date).toLocaleTimeString()}<Chip size="small" label={item.status} color="primary" /></li>
+          <li key={item.id}>
+            <ul>
+              <li>{item.title}</li>
+              <li>{item.description}</li>
+              <li>
+                {new Date(item.date).toLocaleDateString()}
+                --{new Date(item.date).toLocaleTimeString()}
+              </li>
+            </ul>
+            <Chip size="small" label={item.status} color="primary" />
+          </li>
         </Link>
       ))}
     </ul>
