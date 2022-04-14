@@ -15,7 +15,7 @@ function ClientHeader() {
         </Link>
       </div>
       <div className="client-header_title">
-        <h1>*Name du client*</h1>
+        <h1>Fiche client</h1>
       </div>
       <div className="client-header_notify">
         {/* lien vers modal */}

@@ -1,6 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect } from 'react';
+
+// import dependencies
+import { React, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+
+// import MUI
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,33 +13,60 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+// import projet
 import ClientHeader from './ClientHeader';
 import ListProjets from './ListProjets';
 import './style.scss';
 
 function Client() {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState('');
+
+  // récupère l'id de la route
   const { id } = useParams();
 
+  // params axios route GET
+  const [infos, setInfos] = useState('');
+  const token = localStorage.getItem('token');
+  const infoClient = async () => {
+    try {
+      const response = await axios.get(`https://majordome-api.herokuapp.com/api/clients/${id}`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      setInfos(response.data);
+      console.log(infos);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
   useEffect(() => {
-    // dispatch du fetch du client avec l'id ${id}
+    infoClient();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
-  const [comValue, setComValue] = React.useState('');
+  const [comValue, setComValue] = useState('');
   const comHandleChange = (event) => {
     setComValue(event.target.value);
   };
 
-  const [editMode, setEditMode] = React.useState(false);
+  // gestion du switch : readonly false or true
+  const [editMode, setEditMode] = useState(false);
   const switchChange = (event) => {
     setEditMode(event.target.checked);
   };
 
+  if (!infos) {
+    return null;
+  }
+
   return (
+
     <div className="client">
       <ClientHeader />
       <div className="client-detail">
@@ -45,20 +77,22 @@ function Client() {
           }}
           noValidate
           autoComplete="off"
-        ><FormControlLabel
-          control={(
-            <Switch
-              checked={editMode}
-              onChange={switchChange}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
+        >
+
+          <FormControlLabel
+            control={(
+              <Switch
+                checked={editMode}
+                onChange={switchChange}
+                inputProps={{ 'aria-label': 'controlled' }}
+              />
             )}
-          label="Edit"
-        />
-          {/* <a href="tel:0606060606">clic pour tel</a> //<==rendre le num dynamique ? */}
+            label="Edit"
+          />
           <TextField
             id="firstName"
-            label="Prénom"
+            // label="Prénom"
+            value={infos.firstname}
             placeholder="Prénom"
             // defaultValue=""
             InputProps={{
@@ -67,7 +101,8 @@ function Client() {
           />
           <TextField
             id="lastName"
-            label="Nom"
+            // label="Nom"
+            value={infos.lastname}
             placeholder="Nom"
             // defaultValue=""
             InputProps={{
@@ -76,76 +111,87 @@ function Client() {
           />
           <TextField
             id="phone"
-            label="Téléphone"
+            // label="tel"
+            value={infos.phone}
             placeholder="Numéro"
             // defaultValue=""
             InputProps={{
               readOnly: !editMode,
             }}
           />
-
-          {/* <a href="mailto:">mailto</a> */}
           <TextField
             id="email"
-            label="Email"
+            // label="email"
+            value={infos.email}
             placeholder="Email"
-            // defaultValue="dédé@gmail.com"
+            fullWidth
             InputProps={{
               readOnly: !editMode,
             }}
           />
-          <p className="client-detail_adresse">Adresse</p>
-          <div className="client-detail_adresse-div">
-            <TextField
-              sx={{ width: '10ch' }}
-              id="number"
-              label=""
-              placeholder="Numéro"
-              size=""
-              InputProps={{
-                readOnly: !editMode,
-              }}
-            />
-            <TextField
-              id="street"
-              multiline
-              maxRows={4}
-              label=""
-              placeholder="Rue"
-              InputProps={{
-                readOnly: !editMode,
-              }}
-            />
-            <TextField
-              fullWidth
-              id="comments"
-              placeholder="Complément d'adresse"
-              // fullWidth
-              multiline
-              maxRows={4}
-              value={value}
-              onChange={handleChange}
-              InputProps={{
-                readOnly: !editMode,
-              }}
-            />
-            <TextField
-              id="postal_code"
-              label=""
-              placeholder="Code postal"
-              InputProps={{
-                readOnly: !editMode,
-              }}
-            />
-            <TextField
-              id="city"
-              label=""
-              placeholder="Ville"
-              InputProps={{
-                readOnly: !editMode,
-              }}
-            />
-          </div>
+
+          {infos.addresses.map((info, index) => (
+            <ul>
+              <li key={infos.id}>
+                <p className="client-detail_adresse">Adresse {index + 1}</p>
+                <div className="client-detail_adresse-div">
+                  <TextField
+                    sx={{ width: '10ch' }}
+                    id="number"
+                    // label="infos.number"
+                    value={info.number}
+                    placeholder="Numéro"
+                    size=""
+                    InputProps={{
+                      readOnly: !editMode,
+                    }}
+                  />
+                  <TextField
+                    id="street"
+                    multiline
+                    maxRows={4}
+                    value={info.street}
+                    placeholder="Rue"
+                    InputProps={{
+                      readOnly: !editMode,
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    id="comments"
+                    placeholder="Complément d'adresse"
+                    // fullWidth
+                    multiline
+                    maxRows={4}
+                    value={info.comments}
+                    onChange={handleChange}
+                    InputProps={{
+                      readOnly: !editMode,
+                    }}
+                  />
+                  <TextField
+                    id="postal_code"
+                    label=""
+                    value={info.postal_code}
+                    placeholder="Code postal"
+                    InputProps={{
+                      readOnly: !editMode,
+                    }}
+                  />
+                  <TextField
+                    id="city"
+                    label=""
+                    // value={infos.addresses[0].city}
+                    placeholder="Ville"
+                    InputProps={{
+                      readOnly: !editMode,
+                    }}
+                  />
+                </div>
+              </li>
+            </ul>
+          ))}
+
           <p className="client-detail_com">Commentaire</p>
           <TextField
             fullWidth
@@ -181,7 +227,7 @@ function Client() {
 
         <div className="client-list">
           <p>Listes des projets du client</p>
-          <ListProjets />
+          <ListProjets projects={infos.projects} />
         </div>
 
       </div>
