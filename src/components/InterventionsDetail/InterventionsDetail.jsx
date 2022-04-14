@@ -1,10 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import TextField from '@mui/material/TextField';
 import InterventionsDetailHeader from './InterventionsDetailHeader';
 import './interventionsDetail.scss';
 
 function InterventionsDetail() {
+  // récupère l'id de la route
+  const { id } = useParams();
   return (
     <div className="interventionsDetail">
       <InterventionsDetailHeader />
@@ -35,7 +39,10 @@ function InterventionsDetail() {
               <p>Documents</p>
             </li>
             <li className="interventionsDetail-main_li">
-              <p>Rapport d intervention</p>
+              <Link to={`/interventions/${id}/report`}>
+                {/* FIXME: insérer un button à la place de p */}
+                <p>Rapport d intervention</p>
+              </Link>
             </li>
             <li className="interventionsDetail-main_li">
               <div>
