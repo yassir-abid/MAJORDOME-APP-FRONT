@@ -9,6 +9,7 @@ import { checkUser } from '../../actions/user';
 import SignUp from '../SignUp';
 import Login from '../Login';
 import Profile from '../Profile/Profile';
+import 'devextreme/dist/css/dx.greenmist.compact.css';
 import './style.scss';
 import Clients from '../Clients/clients';
 import Client from '../Client/Client';

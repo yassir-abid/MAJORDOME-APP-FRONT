@@ -1,0 +1,21 @@
+[
+  {
+    "text": "Website Re-Design Plan",
+    "startDate": "2021-03-29T16:30:00.000Z",
+    "endDate": "2021-03-29T18:30:00.000Z",
+    "projectsId":[1]
+  }, 
+  {
+    "text": "Book Flights to San Fran for Sales Trip",
+    "startDate": "2021-03-29T19:00:00.000Z",
+    "endDate": "2021-03-29T20:00:00.000Z",
+    "allDay": true,
+    "projectsId":[2]
+  }, 
+  {
+    "text": "Install New Router in Dev Room",
+    "startDate": "2021-03-29T21:30:00.000Z",
+    "endDate": "2021-03-29T22:30:00.000Z",
+    "projectsId":[3]
+  }
+]
