@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+// import { useDispatch } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
@@ -17,6 +18,7 @@ function ProjectDetails() {
   const [data, setData] = useState({});
 
   const token = localStorage.getItem('token');
+
   const loadData = async () => {
     try {
       const response = await axios.get(`https://majordome-api.herokuapp.com/api/projects/${id}`, {
@@ -36,6 +38,28 @@ function ProjectDetails() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const navigate = useNavigate();
+
+  function projectDelete() {
+    alert('Etes vous sur de vouloir supprimer ce projet ?');
+    navigate('/projects');
+    const projectToDelete = async () => {
+      try {
+        const response = await axios.delete(`https://majordome-api.herokuapp.com/api/projects/${id}`, {
+          headers: {
+            Authorization: `bearer ${token}`,
+          },
+        });
+        console.log(response);
+        setData(response.data);
+      } catch (error) {
+        console.log('Erreur de chargement', error);
+      }
+    };
+
+    projectToDelete();
+  }
+
   if (!data || !data.client) {
     return null;
   }
@@ -43,25 +67,13 @@ function ProjectDetails() {
     <div className="projectDetails">
       <div className="projects__details__header">
         <div className="projects__details__notify">
-          <Link to="Foo">
-            <Icon icon="fe:search" width="30" />
-          </Link>
+          <Icon icon="ri:delete-bin-2-fill" width="40" height="40" onClick={() => projectDelete(data.id)} />
         </div>
         <div className="projects__details__header_title">
           <h1>{data.title}</h1>
         </div>
-        <div className="projects__details__header_notifications">
-          <Icon icon="emojione-v1:red-circle" width="13" />
-        </div>
         <div className="projects__details__header_avatar">
-          <Link to="/Profile">
-            <Icon
-              icon="carbon:user-avatar-filled-alt"
-              color="black"
-              width="40"
-              height="40"
-            />
-          </Link>
+          <Icon icon="bxs:edit-alt" width="40" height="40" />
         </div>
       </div>
       <h2 className="projectDetails__client__name">Projet lié à {data.client.firstname} {data.client.lastname}</h2>
