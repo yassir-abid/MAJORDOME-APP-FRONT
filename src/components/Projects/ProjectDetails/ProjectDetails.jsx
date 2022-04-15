@@ -78,7 +78,7 @@ function ProjectDetails() {
       <h3>Détails intervention(s)</h3>
       <ul className="projectDetails__interventions__container">
         {data.interventions.map((inter) => (
-          <Link to={`/interventions/${data.id}/report`}>
+          <Link to={`/interventions/${inter.id}/report`}>
             <li key={inter.id}>
               {inter.title}
               <span className="projectDetails__interventions__status">
