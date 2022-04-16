@@ -9,8 +9,6 @@ import { checkUser } from '../../actions/user';
 import SignUp from '../SignUp';
 import Login from '../Login';
 import Profile from '../Profile/Profile';
-import 'devextreme/dist/css/dx.greenmist.compact.css';
-import './style.scss';
 import Clients from '../Clients/clients';
 import Client from '../Client/Client';
 import Equipments from '../Client/Equipments/Equipments';
@@ -19,7 +17,8 @@ import InterventionsDetail from '../InterventionsDetail/InterventionsDetail';
 import InterventionsReport from '../InterventionsReport/InterventionsReport';
 import Projects from '../Projects/Projects';
 import ProjectDetails from '../Projects/ProjectDetails/ProjectDetails';
-import Schedule from '../Schedule/Schedule';
+// import Schedule from '../Schedule/Schedule';
+import Schedule from '../ScheduleTest/ScheduleTest';
 import Suppliers from '../Suppliers/Suppliers';
 import SuppliersDetail from '../SuppliersDetail/SuppliersDetail';
 import Documents from '../Documents/Documents';
@@ -27,6 +26,9 @@ import Todo from '../Todo/Todo';
 import Notifications from '../Notifications/Notifications';
 import Error from '../Error/Error';
 import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
+
+import 'devextreme/dist/css/dx.greenmist.compact.css';
+import './style.scss';
 
 function App() {
   const dispatch = useDispatch();
