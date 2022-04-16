@@ -1,21 +1,80 @@
 [
   {
-    "text": "Website Re-Design Plan",
-    "startDate": "2021-03-29T16:30:00.000Z",
-    "endDate": "2021-03-29T18:30:00.000Z",
-    "projectsId":[1]
-  }, 
+    "id": 1,
+    "title": "Website Re-Design Plan",
+    "description": "Enim cupiditate vel aut dicta ",
+    "startDate": "2022-04-16T16:30:00.000Z",
+    "endDate": "2022-04-16T18:30:00.000Z",
+    "status": "Programmée",
+    "comments": "Enim cupiditate vel aut dicta magni dicta",
+    "client": {
+      "id": 1,
+      "firstname": "Michel",
+      "lastname": "Dupont"
+    },
+    "project": {
+      "id": 1,
+      "title": "Projet chaudière"
+    },
+    "address": {
+      "id": 1,
+      "number": "28",
+      "street": "rue de la Paix",
+      "postal_code": "56000",
+      "city": "Vannes"
+    }
+  },
   {
-    "text": "Book Flights to San Fran for Sales Trip",
-    "startDate": "2021-03-29T19:00:00.000Z",
-    "endDate": "2021-03-29T20:00:00.000Z",
+    "id": 2,
+    "title": "Book Flights to San Fran for Sales Trip",
+    "description": "Enim cupiditate vel aut dicta",
+    "startDate": "2022-04-17T19:00:00.000Z",
+    "endDate": "2022-04-17T20:00:00.000Z",
     "allDay": true,
-    "projectsId":[2]
-  }, 
+    "status": "Programmée",
+    "comments": "Enim cupiditate vel aut dicta magni dicta",
+    "client": {
+      "id": 2,
+      "firstname": "Jean",
+      "lastname": "Travolta"
+    },
+    "project": {
+      "id": 2,
+      "title": "Projet Piscine"
+    },
+    "address": {
+      "id": 2,
+      "number": "29",
+      "street": "rue de la Paix",
+      "postal_code": "56000",
+      "city": "Vannes"
+    }
+  },
   {
-    "text": "Install New Router in Dev Room",
-    "startDate": "2021-03-29T21:30:00.000Z",
-    "endDate": "2021-03-29T22:30:00.000Z",
-    "projectsId":[3]
+    "id": 3,
+    "title": "Book Flights to San Fran for Sales Trip",
+    "description": "Enim cupiditate vel aut dicta",
+    "startDate": "2022-04-17T19:00:00.000Z",
+    "endDate": "2022-04-17T20:00:00.000Z",
+    "allDay": true,
+    "status": "Programmée",
+    "comments": "Enim cupiditate vel aut dicta magni dicta",
+    "client": {
+      "id": 3,
+      "firstname": "Leo",
+      "lastname": "Dicaprio"
+    },
+    "project": {
+      "id": 3,
+      "title": "Projet Fuite"
+    },
+    "address": {
+      "id": 3,
+      "number": "30",
+      "street": "rue de la Paix",
+      "postal_code": "56000",
+      "city": "Vannes"
+    }
   }
 ]
+
