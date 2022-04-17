@@ -20,6 +20,7 @@ const auth = (store) => (next) => (action) => {
 
           store.dispatch(saveUser(response.data));
         } catch (error) {
+          // eslint-disable-next-line max-len
           store.dispatch(userErrorMessage(error.response.data.message || 'connexion impossible'));
           console.error(error.response.data.message
              || error.response.data || error.response || error);
