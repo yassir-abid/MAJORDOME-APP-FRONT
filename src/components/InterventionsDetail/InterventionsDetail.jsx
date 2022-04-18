@@ -1,64 +1,117 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-
+import axios from 'axios';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Chip from '@mui/material/Chip';
 import InterventionsDetailHeader from './InterventionsDetailHeader';
 import './interventionsDetail.scss';
 
 function InterventionsDetail() {
+  const [value, setValue] = useState('');
+
   // récupère l'id de la route
   const { id } = useParams();
+
+  // params axios route GET
+  const [infos, setInfos] = useState('');
+  const token = localStorage.getItem('token');
+  const infoIntervention = async () => {
+    try {
+      const response = await axios.get(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      setInfos(response.data);
+      console.log(infos);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
+  useEffect(() => {
+    infoIntervention();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const [comValue, setComValue] = useState('');
+  const comHandleChange = (event) => {
+    setComValue(event.target.value);
+  };
+
+  // gestion du switch : readonly false or true
+  const [editMode, setEditMode] = useState(false);
+  const switchChange = (event) => {
+    setEditMode(event.target.checked);
+  };
+
+  if (!infos) {
+    return null;
+  }
+
   return (
     <div className="interventionsDetail">
-      <InterventionsDetailHeader />
+      <InterventionsDetailHeader nameIntervention={infos.title} />
       <main className="interventionsDetail-main">
         <div className="interventionsDetail-container_list">
+          <div> <Chip label={infos.status} color="success" />
+          </div>
           <ul>
             <li className="interventionsDetail-main_li">
-              <p>Nom du projet</p>
+              <p>Nom du projet: {infos.project.title} </p>
             </li>
             <li className="interventionsDetail-main_li">
-              <p>Nom du client</p>
+              <p>Nom du client: {infos.client.firstname} {infos.client.lastname}</p>
             </li>
             <li className="interventionsDetail-main_li">
 
               <div>
+                <p>Description</p>
                 <TextField
-                  id="standard-multiline-flexible"
-                  label="Description"
+                  id="description"
+                  // label="Description"
                   multiline
                   maxRows={4}
-                  // value={value}
+                  value={infos.description}
                   // onChange={handleChange}
                   variant="standard"
                 />
               </div>
             </li>
             <li className="interventionsDetail-main_li">
-              <p>Documents</p>
+              <Link to={`/interventions/${id}/documents_list`}>
+                <Button>Documents</Button>
+              </Link>
             </li>
             <li className="interventionsDetail-main_li">
               <Link to={`/interventions/${id}/report`}>
-                {/* FIXME: insérer un button à la place de p */}
-                <p>Rapport d intervention</p>
+                <Button>Rapport d intervention</Button>
+              </Link>
+            </li>
+            <li className="interventionsDetail-main_li">
+              <Link to={`/interventions/${id}/notifications_list`}>
+                <Button>Notifs</Button>
               </Link>
             </li>
             <li className="interventionsDetail-main_li">
               <div>
+                <p>Commentaire</p>
                 <TextField
-                  id="standard-multiline-flexible"
-                  label="Notification"
+                  id="comments"
+                  // label="commentaire"
                   multiline
-                  maxRows={2}
-                  // value={value}
+                  maxRows={4}
+                  value={infos.comments}
                   // onChange={handleChange}
                   variant="standard"
                 />
               </div>
-            </li>
-            <li className="interventionsDetail-main_li">
-              <p>Commentaire</p>
             </li>
           </ul>
         </div>

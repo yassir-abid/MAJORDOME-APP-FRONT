@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -60,6 +61,8 @@ function App() {
         <Route path="/interventions" element={<Interventions />} />
         <Route path="/interventions/:id" element={<InterventionsDetail />} />
         <Route path="/interventions/:id/report" element={<InterventionsReport />} />
+        {/* <Route path="/interventions/:id/documents_list" element={<Documents_list />} /> */}
+        {/* <Route path="/interventions/:id/notifications_list" element={<Notifications_list />} /> */}
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/schedule" element={<Schedule />} />

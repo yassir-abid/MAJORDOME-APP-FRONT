@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 import './interventionsDetail.scss';
 
-function InterventionsDetailHeader() {
+function InterventionsDetailHeader({ nameIntervention }) {
   return (
     <header className="interventionsDetail-header">
       <div className="interventionsDetail-header_notify">
@@ -15,7 +16,7 @@ function InterventionsDetailHeader() {
         />
       </div>
       <div className="interventions-header_title">
-        <h1>Nom intervention </h1>
+        <h1> {nameIntervention}</h1>
       </div>
 
       <div className="interventionsDetail-header_avatar">
@@ -29,5 +30,9 @@ function InterventionsDetailHeader() {
     </header>
   );
 }
+
+InterventionsDetailHeader.propTypes = {
+  nameIntervention: PropTypes.string.isRequired,
+};
 
 export default InterventionsDetailHeader;
