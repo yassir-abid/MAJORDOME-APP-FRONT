@@ -23,7 +23,7 @@ import 'devextreme/dist/css/dx.greenmist.compact.css';
 // Read more at https://js.devexpress.com/Documentation/Guide/Widgets/Common/Advanced/3rd-Party_Frameworks_Integration_API/#Create_and_Configure_a_Widget.
 
 const currentDate = Date.now();
-const views = ['day', 'week', 'month', 'agenda'];
+const views = ['day', 'week', 'month'];
 
 const onAppointmentFormOpening = function onAppointmentFormOpening(e) {
   const { form } = e;
@@ -183,6 +183,9 @@ function Schedule() {
       >
         <Editing
           allowDragging={false}
+        />
+        <Editing
+          allowAdding={false}
         />
 
         {/* <Resource
