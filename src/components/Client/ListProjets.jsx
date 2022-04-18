@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 // import Client from './Client';
 
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { createTheme } from '@mui/material/styles';
 // import data from './data.json';
 
 import './style.scss';
