@@ -34,4 +34,59 @@
     &-ListProjets {
         display: flex;
     }
+
+    &__modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: $colorSecondaryDark;
+        padding: 1rem;
+    }
+
+    &__modal__title {
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
 }
+
+// Header
+.client-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    height: 55px;
+    margin-bottom: 7px;
+    padding:0.6rem;
+    background-color: $colorPrimary;
+    margin-top: 0rem;
+    border-radius: 0 0 20px 20px;
+
+    &_notify {
+        order: 0;
+        flex: 1 1 flex-end;
+        align-self: auto;
+    }
+
+    &_avatar {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+    }
+
+    &_title {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+        font-size: 1.5em;
+        font-style: italic;
+        color: #e5d200;
+    }
+
+}
+
