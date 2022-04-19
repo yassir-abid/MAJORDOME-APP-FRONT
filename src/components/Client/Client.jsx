@@ -39,6 +39,7 @@ function Client() {
   const [postalCode, setPostalCode] = useState('');
   const [city, setCity] = useState('');
   const [clientComments, setClientComments] = useState('');
+  const [addressId, setAddressId] = useState('');
 
   // params axios route GET
   const [infos, setInfos] = useState('');
@@ -63,6 +64,7 @@ function Client() {
       setComments(response.data.addresses[0].comments);
       setPostalCode(response.data.addresses[0].postal_code);
       setCity(response.data.addresses[0].city);
+      setAddressId(response.data.addresses[0].id);
       setClientComments(response.data.comments);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -100,16 +102,21 @@ function Client() {
     event.preventDefault();
     try {
       await axios.patch(`https://majordome-api.herokuapp.com/api/clients/${id}`, {
-        firstname,
-        lastname,
-        phone,
-        email,
-        number,
-        street,
-        comments,
-        postalCode,
-        city,
-        clientComments,
+        client: {
+          firstname,
+          lastname,
+          email,
+          phone,
+          comments: clientComments,
+        },
+        addresses: [{
+          id: addressId,
+          number,
+          street,
+          postal_code: postalCode,
+          city,
+          comments,
+        }],
       }, {
         headers: {
           Authorization: `bearer ${token}`,
@@ -321,7 +328,7 @@ function Client() {
             <TextField
               id="phone"
               name="phone"
-            // label="tel"
+              label="tel"
               value={phone}
               placeholder="Numéro"
               onChange={(event) => setPhone(event.target.value)}
@@ -329,7 +336,7 @@ function Client() {
             <TextField
               id="email"
               name="email"
-            // label="email"
+              label="email"
               value={email}
               placeholder="Email"
               fullWidth
@@ -342,7 +349,7 @@ function Client() {
                 sx={{ width: '10ch' }}
                 id="number"
                 name="number"
-                    // label="infos.number"
+                label="numéro"
                 value={number}
                 placeholder="Numéro"
                 size=""
@@ -351,6 +358,7 @@ function Client() {
               <TextField
                 id="street"
                 name="street"
+                label="rue"
                 multiline
                 maxRows={4}
                 value={street}
@@ -363,6 +371,7 @@ function Client() {
                 name="comments"
                 placeholder="Complément d'adresse"
                     // fullWidth
+                label="complément d'adresse"
                 multiline
                 maxRows={4}
                 value={comments}
@@ -371,7 +380,8 @@ function Client() {
               <TextField
                 id="postal_code"
                 name="postal_code"
-                label=""
+                label="cp"
+                // eslint-disable-next-line camelcase
                 value={postalCode}
                 placeholder="Code postal"
                 onChange={(event) => setPostalCode(event.target.value)}
@@ -379,11 +389,18 @@ function Client() {
               <TextField
                 id="city"
                 name="city"
-                label=""
+                label="ville"
                 value={city}
                 placeholder="Ville"
                 onChange={(event) => setCity(event.target.value)}
               />
+              {/* <TextField
+                name="id"
+                label="addresses_id"
+                value={addressId}
+                placeholder="Ville"
+                onChange={(event) => setAddressId(event.target.value)}
+              /> */}
             </div>
 
             <p className="client-detail_com">Commentaire</p>
@@ -391,7 +408,7 @@ function Client() {
               fullWidth
               id="comments"
               name="comments"
-              label=""
+              label="détails client"
               placeholder="Notes"
               multiline
               maxRows={4}
