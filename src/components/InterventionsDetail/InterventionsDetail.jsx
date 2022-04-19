@@ -70,7 +70,6 @@ function InterventionsDetail() {
               <p>Nom du client: {infos.client.firstname} {infos.client.lastname}</p>
             </li>
             <li className="interventionsDetail-main_li">
-
               <div>
                 <p>Description</p>
                 <TextField
@@ -85,19 +84,38 @@ function InterventionsDetail() {
               </div>
             </li>
             <li className="interventionsDetail-main_li">
-              <Link to={`/interventions/${id}/documents_list`}>
-                <Button>Documents</Button>
-              </Link>
+              <div>
+                <p>Date de début</p>
+                <TextField
+                  id="date"
+                  value={new Date(infos.date).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })}
+                  // onChange={handleChange}
+                  variant="standard"
+                />
+              </div>
             </li>
             <li className="interventionsDetail-main_li">
-              <Link to={`/interventions/${id}/report`}>
-                <Button>Rapport d intervention</Button>
-              </Link>
-            </li>
-            <li className="interventionsDetail-main_li">
-              <Link to={`/interventions/${id}/notifications_list`}>
-                <Button>Notifs</Button>
-              </Link>
+              <div>
+                <p>Date de fin</p>
+                <TextField
+                  id="end_date"
+                  value={new Date(infos.end_date).toLocaleDateString('fr-FR', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                  })}
+                  // onChange={handleChange}
+                  variant="standard"
+                />
+              </div>
             </li>
             <li className="interventionsDetail-main_li">
               <div>
@@ -113,6 +131,22 @@ function InterventionsDetail() {
                 />
               </div>
             </li>
+            <li className="interventionsDetail-main_li">
+              <Link to={`/interventions/${id}/report`}>
+                <Button>Rapport d intervention</Button>
+              </Link>
+            </li>
+            <li className="interventionsDetail-main_li">
+              <Link to={`/interventions/${id}/documents_list`}>
+                <Button>Documents</Button>
+              </Link>
+            </li>
+            <li className="interventionsDetail-main_li">
+              <Link to={`/interventions/${id}/notifications_list`}>
+                <Button>Notifs</Button>
+              </Link>
+            </li>
+
           </ul>
         </div>
       </main>
