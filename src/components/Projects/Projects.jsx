@@ -141,6 +141,7 @@ function Projects() {
               name="client_id"
               className="projects__clients"
             >
+              <option value="" disabled selected>Choisir un client</option>
               {data.map((client) => (
                 <option
                   key={client.id}
