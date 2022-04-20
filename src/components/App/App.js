@@ -28,7 +28,7 @@ import Notifications from '../Notifications/Notifications';
 import Error from '../Error/Error';
 import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
 
-import 'devextreme/dist/css/dx.greenmist.compact.css';
+// import 'devextreme/dist/css/dx.greenmist.compact.css';
 import './style.scss';
 
 function App() {
