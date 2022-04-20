@@ -16,8 +16,7 @@ function List(props) {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('#interventions#');
-      console.log(response);
+      console.log('get interventions', response.data);
       setInters(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);

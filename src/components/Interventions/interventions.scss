@@ -21,9 +21,33 @@
         }
     }
 
+    &__add {
+        position: absolute;
+        height: 150px;
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+
     &-addIntervention {
         position: relative;
         height: 150px;
+    }
+
+    &-modal {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        // width: 100%;
+        height: 100%;
+        background: $colorSecondaryDark;
+        padding-right: 1rem;
+    }
+
+    &__select {
+        width: 100%;
+        margin-left: 0.5rem; 
+        height: 3rem;
+        border-radius: 4px;
     }
 }
 
