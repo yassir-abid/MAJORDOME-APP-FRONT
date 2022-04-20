@@ -27,6 +27,8 @@ import Todo from '../Todo/Todo';
 import Notifications from '../Notifications/Notifications';
 import Error from '../Error/Error';
 import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
+import DocumentByclient from '../DocumentByClient/DocumentByClient';
+import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
 
 import 'devextreme/dist/css/dx.greenmist.compact.css';
 import './style.scss';
@@ -61,6 +63,8 @@ function App() {
         {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
         <Route path="/documents" element={<Documents />} />
         <Route path="/documents/:id" element={<DocumentsDetail />} />
+        <Route path="/documents/clients/:id" element={<DocumentByclient />} />
+        <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
         <Route path="/interventions" element={<Interventions />} />
         <Route path="/interventions/:id" element={<InterventionsDetail />} />
         <Route path="/interventions/:id/report" element={<InterventionsReport />} />
