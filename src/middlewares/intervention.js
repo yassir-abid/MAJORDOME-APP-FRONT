@@ -25,9 +25,6 @@ const addIntervention = (store) => (next) => (action) => {
             },
           });
 
-          // stock token to localStorage
-          // localStorage.setItem('token', response.data.token);
-
           store.dispatch(saveUser(response.data));
         } catch (error) {
           console.log(error);

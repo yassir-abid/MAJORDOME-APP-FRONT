@@ -12,6 +12,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Icon } from '@iconify/react';
+// import Stack from '@mui/material/Stack';
+// import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { MobileDateTimePicker } from '@mui/x-date-pickers';
 
 // import du components de l'intervention
 import { changeValue, addIntervention } from '../../actions/intervention';
@@ -26,6 +30,9 @@ function Interventions() {
   const [clients, setClients] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [selectedClient, setselectedClient] = useState({});
+
+  // const [selectedStartDate, handleStartDateChange] = useState(new Date());
+  // const [selectedEndDate, handleEndDateChange] = useState(new Date());
 
   const token = localStorage.getItem('token');
 
@@ -177,6 +184,24 @@ function Interventions() {
                   onChange={handleChange}
                 />
               </label>
+              {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
+                <Stack spacing={3} sx={{ m: 1 }}>
+                  <MobileDateTimePicker
+                    label="Date de début"
+                    name="end_date"
+                    value={selectedStartDate}
+                    onChange={handleStartDateChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                  <MobileDateTimePicker
+                    label="Date de fin"
+                    name="date"
+                    value={selectedEndDate}
+                    onChange={handleEndDateChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider> */}
               <label>
                 <TextField
                   required
@@ -248,6 +273,7 @@ function Interventions() {
                 />
               </label>
               <select
+                sx={{ m: 1 }}
                 required
                 // eslint-disable-next-line camelcase
                 value={client_id}
@@ -266,6 +292,7 @@ function Interventions() {
                 ))}
               </select>
               <select
+                sx={{ m: 1 }}
                 required
               // eslint-disable-next-line camelcase
                 value={project_id}
@@ -288,6 +315,7 @@ function Interventions() {
                 }
               </select>
               <select
+                sx={{ m: 1 }}
                 required
               // eslint-disable-next-line camelcase
                 value={address_id}
