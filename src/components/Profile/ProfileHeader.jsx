@@ -1,12 +1,28 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-// import { Icon } from '@iconify/react';
+import axios from 'axios';
 import Avatar from '../Avatar/Avatar';
+
 import './profilStyle.scss';
 
 function HomeAppHeader() {
   const [avatar, setAvatar] = useState('/static/images/avatar/1.jpg');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('avatar', avatar);
+    try {
+      const response = await axios({
+        method: 'post',
+        url: 'https://majordome-api.herokuapp.com/api/profile/avatar',
+        data: formData,
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleChangeAvatar = ({ currentTarget }) => {
     const tempAvatar = currentTarget.files[0];
@@ -20,6 +36,7 @@ function HomeAppHeader() {
       <div className="profile-header_avatar">
         <div>
           <label htmlFor="image_up">
+            <form onSubmit={handleSubmit} />
             <input
               className="input-avatar"
               id="image_up"
@@ -27,9 +44,11 @@ function HomeAppHeader() {
               accept=".jpg, .jpeg, .png"
               name="image_up"
               onChange={handleChangeAvatar}
-              // TODO : bloquer la taille de l'import de l'avatar ex :50*50px
-              // TODO : passer par gestionnaire de taille ?
-              // exemple : https://www.npmjs.com/package/react-avatar-editor
+            />
+            <input
+              // className="input-avatar"
+              type="submit"
+              value="file"
             />
             <Avatar avatar={avatar} />
           </label>
@@ -39,6 +58,7 @@ function HomeAppHeader() {
         <h1>*Your name*</h1>
       </div>
     </header>
+
   );
 }
 
