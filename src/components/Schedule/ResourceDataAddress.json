@@ -1,0 +1,14 @@
+[
+    {
+      "text": "28 rue de la Paix, bla bla bla",
+      "address_id": 1
+    }, 
+    {
+      "text": "30 rue de la Paix, bla bla bla",
+      "address_id": 2
+    }, 
+    {
+      "text": "35 rue de la Paix, bla bla bla",
+      "address_id": 3
+    }
+  ]

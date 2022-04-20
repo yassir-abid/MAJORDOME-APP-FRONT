@@ -51,6 +51,7 @@ function Client() {
           Authorization: `bearer ${token}`,
         },
       });
+      console.log('#client#');
       console.log(response.data);
       setInfos(response.data);
       console.log(infos);

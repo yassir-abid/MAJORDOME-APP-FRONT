@@ -1,0 +1,14 @@
+[
+    {
+      "text": "Projet chaudière",
+      "project_id": 1
+    }, 
+    {
+      "text": "Projet Piscine",
+      "project_id": 2
+    }, 
+    {
+      "text": "Projet Fuite",
+      "project_id": 3
+    }
+  ]
