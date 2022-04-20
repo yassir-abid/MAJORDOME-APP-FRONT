@@ -12,10 +12,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Icon } from '@iconify/react';
-// import Stack from '@mui/material/Stack';
-// import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { MobileDateTimePicker } from '@mui/x-date-pickers';
+import Stack from '@mui/material/Stack';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDateTimePicker } from '@mui/x-date-pickers';
 
 // import du components de l'intervention
 import { changeValue, addIntervention } from '../../actions/intervention';
@@ -31,8 +31,10 @@ function Interventions() {
   const [addresses, setAddresses] = useState([]);
   const [selectedClient, setselectedClient] = useState({});
 
-  // const [selectedStartDate, handleStartDateChange] = useState(new Date());
-  // const [selectedEndDate, handleEndDateChange] = useState(new Date());
+  const [selectedStartDate, handleStartDateChange] = useState(new Date());
+  console.log(selectedStartDate);
+  const [selectedEndDate, handleEndDateChange] = useState(new Date());
+  console.log(selectedEndDate);
 
   const token = localStorage.getItem('token');
 
@@ -184,7 +186,7 @@ function Interventions() {
                   onChange={handleChange}
                 />
               </label>
-              {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
+              <LocalizationProvider dateAdapter={AdapterLuxon}>
                 <Stack spacing={3} sx={{ m: 1 }}>
                   <MobileDateTimePicker
                     label="Date de début"
@@ -201,8 +203,8 @@ function Interventions() {
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
-              </LocalizationProvider> */}
-              <label>
+              </LocalizationProvider>
+              {/* <label>
                 <TextField
                   required
                   sx={{ m: 1 }}
@@ -232,7 +234,7 @@ function Interventions() {
                   value={end_date}
                   onChange={handleChange}
                 />
-              </label>
+              </label> */}
               <select
                 required
               // eslint-disable-next-line camelcase
