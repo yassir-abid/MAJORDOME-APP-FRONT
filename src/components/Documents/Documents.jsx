@@ -208,7 +208,7 @@ function Documents() {
               <option value="" disabled selected>Choisir un projet</option>
               {
                     projects
-                      .filter((project) => Number(project.client.id) === Number(selectedClient))
+                      .filter((project) => Number(project.client_id) === Number(selectedClient))
                       .map((project) => (
                         <option
                           key={project.id}
@@ -231,7 +231,7 @@ function Documents() {
               <option value="" disabled selected>Choisir une intervention</option>
               {
                     inters
-                      .filter((inter) => Number(inter.client_id) === Number(selectedClient))
+                      .filter((inter) => Number(inter.client.id) === Number(selectedClient))
                       .map((inter) => (
                         <option
                           key={inter.id}
