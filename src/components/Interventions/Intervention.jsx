@@ -209,8 +209,6 @@ function Interventions() {
                   id="outlined-multiline-static"
                   label="Date de début"
                   fullWidth
-                  multiline
-                  rows={4}
                   name="date"
                   placeholder="Date de début"
                   value={date}
@@ -224,8 +222,6 @@ function Interventions() {
                   id="outlined-multiline-static"
                   label="Date de fin"
                   fullWidth
-                  multiline
-                  rows={4}
                   name="end_date"
                   placeholder="Date de fin"
                   // eslint-disable-next-line camelcase
