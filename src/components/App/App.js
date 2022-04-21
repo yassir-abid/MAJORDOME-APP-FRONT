@@ -3,6 +3,11 @@ import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import Loading from './Loading';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+// import { ThemeProvider, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import Home from '../Home/Home';
 import HomeApp from '../HomeApp/HomeApp';
 import NavBar from '../NavBar/NavBar';
@@ -32,7 +37,7 @@ import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
 import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
 
 // import 'devextreme/dist/css/dx.greenmist.compact.css';
-import './style.scss';
+// import './style.scss';
 
 function App() {
   const dispatch = useDispatch();
@@ -50,40 +55,108 @@ function App() {
   //     return <Loading />;
   //   }
   const token = localStorage.getItem('token');
+
+  const ThemeOptions = createTheme({
+    // palette: {
+    //   primary: {
+    //     light: '#33a3a3',
+    //     main: '#008c8c',
+    //     dark: '#006262',
+    //     contrastText: '#fff',
+    //   },
+    //   secondary: {
+    //     light: '#834bff',
+    //     main: '#651fff',
+    //     dark: '#4615b2',
+    //     contrastText: '#000',
+    //   },
+    // },
+    palette: {
+      type: 'light',
+      primary: {
+        main: '#008c8c',
+      },
+      secondary: {
+        main: '#A33333',
+      },
+      background: {
+        default: '#eeeeee',
+      },
+    },
+    overrides: {
+      MuiSwitch: {
+        root: {
+          width: 42,
+          height: 26,
+          padding: 0,
+          margin: 8,
+        },
+        switchBase: {
+          padding: 1,
+          '&$checked, &$colorPrimary$checked, &$colorSecondary$checked': {
+            transform: 'translateX(16px)',
+            color: '#fff',
+            '& + $track': {
+              opacity: 1,
+              border: 'none',
+            },
+          },
+        },
+        thumb: {
+          width: 24,
+          height: 24,
+        },
+        track: {
+          borderRadius: 13,
+          border: '1px solid #bdbdbd',
+          backgroundColor: '#fafafa',
+          opacity: 1,
+          transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        },
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home-app" element={<HomeApp />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/clients" element={<Clients />} />
-        <Route path="/clients/:id" element={<Client />} />
-        <Route path="/clients/:id/equipments" element={<Equipments />} />
-        {/* <Route path="/clients/:id/notifications_list" element={<Notifications_list />} /> */}
-        {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
-        <Route path="/documents" element={<Documents />} />
-        <Route path="/documents/:id" element={<DocumentsDetail />} />
-        <Route path="/documents/clients/:id" element={<DocumentByclient />} />
-        <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
-        <Route path="/documents/interventions/:id" element={<DocumentByInterventions />} />
-        <Route path="/interventions" element={<Interventions />} />
-        <Route path="/interventions/:id" element={<InterventionsDetail />} />
-        <Route path="/interventions/:id/report" element={<InterventionsReport />} />
-        {/* <Route path="/interventions/:id/documents_list" element={<Documents_list />} /> */}
-        {/* <Route path="/interventions/:id/notifications_list" element={<Notifications_list />} /> */}
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:id" element={<ProjectDetails />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/suppliers" element={<Suppliers />} />
-        <Route path="/suppliers/:id" element={<SuppliersDetail />} />
-        <Route path="/todolist" element={<Todo />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      {token && <NavBar />}
-    </div>
+
+    <Container disableGutters="false" maxWidth="md" className="App">
+      <Box sx={{ bgcolor: 'background.default', height: '100vh' }}>
+        {/* <CssBaseline enableColorScheme /> */}
+        <ThemeProvider theme={ThemeOptions}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/home-app" element={<HomeApp />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/clients" element={<Clients />} />
+            <Route path="/clients/:id" element={<Client />} />
+            <Route path="/clients/:id/equipments" element={<Equipments />} />
+            {/* <Route path="/clients/:id/notifications_list" element={<Notifications_list />} /> */}
+            {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
+            <Route path="/documents" element={<Documents />} />
+            <Route path="/documents/:id" element={<DocumentsDetail />} />
+            <Route path="/documents/clients/:id" element={<DocumentByclient />} />
+            <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
+            <Route path="/documents/interventions/:id" element={<DocumentByInterventions />} />
+            <Route path="/interventions" element={<Interventions />} />
+            <Route path="/interventions/:id" element={<InterventionsDetail />} />
+            <Route path="/interventions/:id/report" element={<InterventionsReport />} />
+            {/* <Route path="/interventions/:id/documents_list" element={<Documents_list />} /> */}
+            {/* <Route path="/interventions/:id/notifications_list" element={<Notifications_list />} /> */}
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/suppliers/:id" element={<SuppliersDetail />} />
+            <Route path="/todolist" element={<Todo />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+          {token && <NavBar />}
+        </ThemeProvider>
+      </Box>
+    </Container>
   );
 }
 
