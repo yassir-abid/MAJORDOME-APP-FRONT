@@ -183,8 +183,6 @@ function Schedule() {
       >
         <Editing
           allowDragging={false}
-        />
-        <Editing
           allowAdding={false}
         />
 
