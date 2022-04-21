@@ -31,7 +31,7 @@ import DocumentByclient from '../DocumentByClient/DocumentByClient';
 import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
 import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
 
-import 'devextreme/dist/css/dx.greenmist.compact.css';
+// import 'devextreme/dist/css/dx.greenmist.compact.css';
 import './style.scss';
 
 function App() {
