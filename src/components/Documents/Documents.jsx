@@ -10,7 +10,7 @@ import Modal from '@mui/material/Modal';
 import DocumentsHeader from './DocumentsHeader';
 import './documents.scss';
 import List from './List';
-import { changeValue } from '../../actions/document';
+import { addDocument, changeValue } from '../../actions/document';
 
 function Documents() {
   const [inters, setInters] = useState([]);
@@ -102,7 +102,7 @@ function Documents() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(addIntervention());
+    dispatch(addDocument());
   };
 
   return (
@@ -132,7 +132,7 @@ function Documents() {
         <Box
           className="projects-modal"
         >
-          <form className="project__add">
+          <form className="project__add" onSubmit={handleSubmit}>
             <TextField
               required
               sx={{ m: 1 }}
@@ -183,7 +183,7 @@ function Documents() {
             </select>
             <select
               sx={{ m: 1 }}
-              required
+              // required
               // eslint-disable-next-line camelcase
               value={project_id}
               onChange={handleChange}
@@ -206,7 +206,7 @@ function Documents() {
             </select>
             <select
               sx={{ m: 1 }}
-              required
+              // required
               // eslint-disable-next-line camelcase
               value={intervention_id}
               onChange={handleChange}

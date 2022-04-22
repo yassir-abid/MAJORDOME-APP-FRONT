@@ -6,7 +6,7 @@ const initialState = {
   path: '',
   client_id: '',
   project_id: '',
-  address_id: '',
+  intervention_id: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
