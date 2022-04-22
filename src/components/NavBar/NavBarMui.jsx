@@ -45,32 +45,32 @@ export default function BottomAppBar() {
           >
             <NavLink to="/home-app">
               <IconButton color="inherit" aria-label="open drawer">
-                <HomeIcon />
+                <HomeIcon fontSize="large" />
               </IconButton>
             </NavLink>
             <NavLink to="/clients">
               <IconButton color="inherit" aria-label="open drawer">
-                <GroupAddIcon />
+                <GroupAddIcon fontSize="large" />
               </IconButton>
             </NavLink>
             <NavLink to="/schedule">
               <IconButton color="inherit">
-                <CalendarTodayIcon />
+                <CalendarTodayIcon fontSize="large" />
               </IconButton>
             </NavLink>
             <NavLink to="/documents">
               <IconButton color="inherit">
-                <NoteAddIcon />
+                <NoteAddIcon fontSize="large" />
               </IconButton>
             </NavLink>
             <NavLink to="/projects">
               <IconButton color="inherit">
-                <EngineeringIcon />
+                <EngineeringIcon fontSize="large" />
               </IconButton>
             </NavLink>
             <NavLink to="/interventions">
               <IconButton color="inherit">
-                <HandymanIcon />
+                <HandymanIcon fontSize="large" />
               </IconButton>
             </NavLink>
           </Toolbar>
