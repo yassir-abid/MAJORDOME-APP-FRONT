@@ -8,6 +8,9 @@ import Box from '@mui/material/Box';
 import Avatar from '../Avatar/Avatar';
 
 function HomeAppHeader() {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <Box sx={{
       bgcolor: 'primary.main',
@@ -22,7 +25,7 @@ function HomeAppHeader() {
     >
       <Box>
         <Link to="/Profile">
-          <Avatar />
+          <Avatar avatar={avatar} firstname={firstname} />
         </Link>
       </Box>
       <Box>

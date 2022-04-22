@@ -7,11 +7,14 @@ import Avatar from '../Avatar/Avatar';
 import './clientHeader.scss';
 
 function ClientHeader() {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <header className="client-header">
       <div className="client-header_avatar">
         <Link to="/Profile">
-          <Avatar />
+          <Avatar avatar={avatar} firstname={firstname} />
         </Link>
       </div>
       <div className="client-header_title">

@@ -8,6 +8,9 @@ import Box from '@mui/material/Box';
 import Avatar from '../Avatar/Avatar';
 
 function DocumentsHeader() {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <Box sx={{
       bgcolor: 'primary.main',
