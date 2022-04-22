@@ -54,7 +54,7 @@ function ListClients(props) {
     <Box
       sx={{
         display: 'flex',
-        justifyContent: 'center',
+        flexDirection: 'column',
         mr: 1,
         ml: 1,
       }}
@@ -66,7 +66,6 @@ function ListClients(props) {
             flexWrap: 'wrap',
             '& > :not(style)': {
               mb: 1,
-              width: '100%',
               height: '100%',
             },
           }}

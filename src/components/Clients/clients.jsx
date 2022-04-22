@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
@@ -100,13 +101,18 @@ function Clients() {
         aria-describedby="modal-modal-description"
       >
         <Box
-          className="style"
+          sx={{
+            p: 1,
+            bgcolor: 'background.default',
+          }}
         >
           <form
             onSubmit={handleSubmit}
             className="detailClients"
           >
-            <h1>formulaire ajout d'un client</h1>
+            <Typography variant="h5">
+              formulaire ajout d'un client
+            </Typography>
             <label>
               <TextField
                 sx={{ mt: 1, mb: 1 }}
