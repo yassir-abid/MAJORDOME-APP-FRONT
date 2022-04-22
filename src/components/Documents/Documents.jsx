@@ -10,17 +10,17 @@ import Modal from '@mui/material/Modal';
 import DocumentsHeader from './DocumentsHeader';
 import './documents.scss';
 import List from './List';
+import { changeValue } from '../../actions/document';
 
 function Documents() {
   const [inters, setInters] = useState([]);
 
   const {
     // eslint-disable-next-line camelcase
-    title, description, date, end_date, status, comments, client_id, project_id, inter_id,
-  } = useSelector((state) => state.intervention);
+    title, description, path, client_id, project_id, intervention_id,
+  } = useSelector((state) => state.document);
 
   const [clients, setClients] = useState([]);
-  const [addresses, setAddresses] = useState([]);
   const [selectedClient, setselectedClient] = useState({});
 
   const token = localStorage.getItem('token');
@@ -48,27 +48,12 @@ function Documents() {
       });
       console.log('get clients response', response.data);
       setClients(response.data);
-
-      // j'initialise un tableau à vide pour récupérer toutes les adresses des clients
-      // afin de les afficher dans le formulaire en liste déroulante
-      const allAddresses = [];
-      // je boucle sur la liste de mes clients
-      response.data.forEach((client) => {
-        // pour chaque client, je boucle sur ses addresses
-        // rappel: depuis la BDD, on récupère dans chaque objet client, un tableau d'objets adresses
-        client.addresses.forEach((address) => {
-          // je push l'adresse dans le tableau vide allAddresses
-          allAddresses.push(address);
-        });
-      });
-      setAddresses(allAddresses);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
 
   console.log('clients', clients);
-  console.log('addresses', addresses);
   console.log('selectedClient', selectedClient);
   console.log('intervention', inters);
 
@@ -112,7 +97,7 @@ function Documents() {
     if (e.target.name === 'client_id') {
       setselectedClient(e.target.value);
     }
-    // dispatch(changeValue(e.target.value, e.target.name));
+    dispatch(changeValue(e.target.value, e.target.name));
   };
 
   const handleSubmit = (e) => {
@@ -156,8 +141,8 @@ function Documents() {
               type="text"
               name="title"
               placeholder="Titre du document"
-            //   value={title}
-            //   onChange={handleChange}
+              value={title}
+              onChange={handleChange}
             />
             <TextField
               sx={{ m: 1 }}
@@ -168,14 +153,14 @@ function Documents() {
               rows={4}
               name="description"
               placeholder="Description"
-            //   value={description}
-            //   onChange={handleChange}
+              value={description}
+              onChange={handleChange}
             />
             <TextField
               type="file"
-              name="upload document"
-            //   value={comments}
-            //   onChange={handleChange}
+              name="path"
+              value={path}
+              onChange={handleChange}
             />
             <select
               sx={{ m: 1 }}
@@ -223,7 +208,7 @@ function Documents() {
               sx={{ m: 1 }}
               required
               // eslint-disable-next-line camelcase
-              value={inter_id}
+              value={intervention_id}
               onChange={handleChange}
               name="inter_id"
               className="interventions__select"
@@ -231,7 +216,7 @@ function Documents() {
               <option value="" disabled selected>Choisir une intervention</option>
               {
                     inters
-                      .filter((inter) => Number(inter.client.id) === Number(selectedClient))
+                      .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
                       .map((inter) => (
                         <option
                           key={inter.id}
