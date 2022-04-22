@@ -101,10 +101,16 @@ function HomeAppHeader() {
               name="file"
               onChange={(event) => setSelectedFile(event.target.files[0])}
             />
+            {/* {
+                avatar !== '/static/images/avatar/1.jpg'
+                ? <CardMedia component="img" src={avatar} sx={{ borderRadius: 50 }} />
+                : <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" sx={{ borderRadius: 50 }} />
+            } */}
             {
-                selectedFile !== ''
-                  ? <CardMedia component="img" src={URL.createObjectURL(selectedFile)} sx={{ borderRadius: 50 }} />
-                  : <CardMedia component="img" src={avatar} sx={{ borderRadius: 50 }} />
+                // eslint-disable-next-line no-nested-ternary
+                selectedFile !== '' ? <CardMedia component="img" src={URL.createObjectURL(selectedFile)} sx={{ borderRadius: 50 }} />
+                  : selectedFile === '' && avatar !== '/static/images/avatar/1.jpg' ? <CardMedia component="img" src={avatar} sx={{ borderRadius: 50 }} />
+                    : <CardMedia component="img" src="https://www.handiclubnimois.fr/wp-content/uploads/2020/10/blank-profile-picture-973460_1280.png" sx={{ borderRadius: 50 }} />
             }
             <form className="avatar__add" onSubmit={handleSubmit}>
               <input
