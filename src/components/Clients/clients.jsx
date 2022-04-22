@@ -6,14 +6,17 @@ import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
+import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
 
 import { changeValue, addClient } from '../../actions/addClient';
 import ClientsHeader from './ClientsHeader';
-import List from './List';
+import List from './ListClients';
 // import './clients.scss';
 
 function Clients() {
@@ -49,23 +52,44 @@ function Clients() {
     dispatch(addClient());
   };
 
+  const StyledFab = styled(Fab)({
+    position: 'fixed',
+    zIndex: 1,
+    bottom: 70,
+    right: 25,
+    margin: '0 auto',
+  });
+
   return (
-    <div className="clients">
+    <Box
+      sx={{
+        // FIXME: régler la taille
+        height: '100vh',
+      }}
+      className="clients"
+    >
       <ClientsHeader />
       <div className="clients-main">
-        <div>
+        <Box
+          sx={{
+            mt: 2,
+            ml: 1,
+            mr: 1,
+
+          }}
+        >
           <TextField
-            className="clients-searchBar"
-            id="outlined-basic"
             onChange={inputHandler}
             variant="outlined"
             fullWidth
             label="Search"
           />
-        </div>
+        </Box>
         <List input={inputText} />
         <div className="clients-addClient">
-          <Icon onClick={handleOpen} icon="ph:user-circle-plus" width="40" />
+          <StyledFab size="medium" color="primary" aria-label="add">
+            <AddIcon onClick={handleOpen} />
+          </StyledFab>
         </div>
       </div>
       <Modal
@@ -197,7 +221,7 @@ function Clients() {
           <Button className="modal-close1" onClick={handleClose}>close</Button>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }
 

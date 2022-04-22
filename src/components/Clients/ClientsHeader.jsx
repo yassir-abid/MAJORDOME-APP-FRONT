@@ -26,7 +26,7 @@ function ClientsHeader() {
         </Link>
       </Box>
       <Box>
-        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'secondary.main' }}>
+        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
           Contacts Clients
         </Typography>
       </Box>

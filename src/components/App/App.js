@@ -77,7 +77,7 @@ function App() {
         main: '#008c8c',
       },
       secondary: {
-        main: '#A33333',
+        main: '#673ab7',
       },
       background: {
         default: '#eeeeee',
