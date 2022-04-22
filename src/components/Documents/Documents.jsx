@@ -10,15 +10,15 @@ import Modal from '@mui/material/Modal';
 import DocumentsHeader from './DocumentsHeader';
 import './documents.scss';
 import List from './List';
-import { addDocument, changeValue } from '../../actions/document';
+// import { addDocument, changeValue } from '../../actions/document';
 
 function Documents() {
   const [inters, setInters] = useState([]);
 
-  const {
-    // eslint-disable-next-line camelcase
-    title, description, path, client_id, project_id, intervention_id,
-  } = useSelector((state) => state.document);
+  //   const {
+  //     // eslint-disable-next-line camelcase
+  //     title, description, path, client_id, project_id, intervention_id,
+  //   } = useSelector((state) => state.document);
 
   const [clients, setClients] = useState([]);
   const [selectedClient, setselectedClient] = useState({});
@@ -53,9 +53,9 @@ function Documents() {
     }
   };
 
-  console.log('clients', clients);
-  console.log('selectedClient', selectedClient);
-  console.log('intervention', inters);
+  //   console.log('clients', clients);
+  //   console.log('selectedClient', selectedClient);
+  //   console.log('intervention', inters);
 
   const [projects, setProjects] = useState([]);
   const loadProjects = async () => {
@@ -71,7 +71,7 @@ function Documents() {
       console.log('Erreur de chargement', error);
     }
   };
-  console.log('projects', projects);
+  // console.log('projects', projects);
 
   useEffect(() => {
     loadData();
@@ -91,19 +91,49 @@ function Documents() {
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    if (e.target.name === 'client_id') {
-      setselectedClient(e.target.value);
+  //   const handleChange = (e) => {
+  //     if (e.target.name === 'client_id') {
+  //       setselectedClient(e.target.value);
+  //     }
+  //     dispatch(changeValue(e.target.value, e.target.name));
+  //   };
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [file, setPictureFile] = useState('');
+  const [client, setClient] = useState('');
+  const [project, setProject] = useState('');
+  const [intervention, setIntervention] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // dispatch(addDocument());
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('file', file);
+    formData.append('client_id', client);
+    formData.append('project_id', project);
+    formData.append('intervention_id', intervention);
+    try {
+      const response = await axios({
+        method: 'post',
+        url: 'https://majordome-api.herokuapp.com/api/documents',
+        data: formData,
+        headers: {
+          authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
     }
-    dispatch(changeValue(e.target.value, e.target.name));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addDocument());
-  };
+  console.log(client);
 
   return (
     <div className="documents">
@@ -142,7 +172,8 @@ function Documents() {
               name="title"
               placeholder="Titre du document"
               value={title}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={(event) => setTitle(event.target.value)}
             />
             <TextField
               sx={{ m: 1 }}
@@ -154,30 +185,35 @@ function Documents() {
               name="description"
               placeholder="Description"
               value={description}
-              onChange={handleChange}
+              // onChange={handleChange}
+              onChange={(event) => setDescription(event.target.value)}
             />
             <TextField
+              id="file"
               type="file"
-              name="path"
-              value={path}
-              onChange={handleChange}
+              name="file"
+              accept=".jpg, .jpeg, .png"
+              // value={file}
+              // onChange={handleChange}
+              onChange={(event) => setPictureFile(event.target.files[0])}
             />
             <select
               sx={{ m: 1 }}
-              required
+              // required
                 // eslint-disable-next-line camelcase
-              value={client_id}
-              onChange={handleChange}
+              value={clients.id}
+              // onChange={handleChange}
+              onChange={(event) => setClient(event.target.value)}
               name="client_id"
               className="interventions__select"
             >
               <option value="" disabled selected>Choisir un client</option>
-              {clients.map((client) => (
+              {clients.map((clientt) => (
                 <option
-                  key={client.id}
-                  value={client.id}
+                  key={clientt.id}
+                  value={clientt.id}
                 >
-                  {client.firstname} {client.lastname}
+                  {clientt.firstname} {clientt.lastname}
                 </option>
               ))}
             </select>
@@ -185,21 +221,22 @@ function Documents() {
               sx={{ m: 1 }}
               // required
               // eslint-disable-next-line camelcase
-              value={project_id}
-              onChange={handleChange}
+              value={project.id}
+              // onChange={handleChange}
+              onChange={(event) => setProject(event.target.value)}
               name="project_id"
               className="interventions__select"
             >
               <option value="" disabled selected>Choisir un projet</option>
               {
                     projects
-                      .filter((project) => Number(project.client_id) === Number(selectedClient))
-                      .map((project) => (
+                      .filter((projectt) => Number(projectt.client.id) === Number(selectedClient))
+                      .map((projectt) => (
                         <option
-                          key={project.id}
-                          value={project.id}
+                          key={projectt.id}
+                          value={projectt.id}
                         >
-                          {project.title}
+                          {projectt.title}
                         </option>
                       ))
                 }
@@ -208,15 +245,16 @@ function Documents() {
               sx={{ m: 1 }}
               // required
               // eslint-disable-next-line camelcase
-              value={intervention_id}
-              onChange={handleChange}
-              name="inter_id"
+              value={inters.id}
+              // onChange={handleChange}
+              onChange={(event) => setIntervention(event.target.value)}
+              name="intervention_id"
               className="interventions__select"
             >
               <option value="" disabled selected>Choisir une intervention</option>
               {
                     inters
-                      .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
+                      .filter((inter) => Number(inter.client.id) === Number(selectedClient))
                       .map((inter) => (
                         <option
                           key={inter.id}
