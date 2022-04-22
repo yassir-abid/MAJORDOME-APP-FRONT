@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+// eslint-disable-next-line import/no-unresolved
+// import RalewayWoff2 from './fonts/Raleway-Regular.woff2';
 // import { ThemeProvider, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import Home from '../Home/Home';
 import HomeApp from '../HomeApp/HomeApp';
@@ -71,21 +73,7 @@ function App() {
     //     contrastText: '#000',
     //   },
     // },
-    typography: {
-      fontFamily: [
-        'Raleway, Arial',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-    },
+
     palette: {
       type: 'light',
       primary: {

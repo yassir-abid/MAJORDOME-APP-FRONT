@@ -6,8 +6,10 @@ import axios from 'axios';
 import Scheduler, { Resource, Editing } from 'devextreme-react/scheduler';
 import frMessages from 'devextreme/localization/messages/fr.json';
 import { locale, loadMessages } from 'devextreme/localization';
+import Box from '@mui/material/Box';
 import Appointment from './Appointment';
 import AppointmentTooltip from './AppointmentTooltip';
+import ScheduleHeader from './ScheduleHeader';
 
 import 'devextreme/dist/css/dx.greenmist.compact.css';
 
@@ -168,25 +170,32 @@ function Schedule() {
   locale(navigator.language);
 
   return (
-    <div>
-      <Scheduler
-        timeZone="Europe/Paris"
-        dataSource={infos}
-        views={views}
-        defaultCurrentView="month"
-        defaultCurrentDate={currentDate}
-        height={650}
-        startDayHour={8}
-        appointmentComponent={Appointment}
-        appointmentTooltipComponent={AppointmentTooltip}
-        onAppointmentFormOpening={onAppointmentFormOpening}
-      >
-        <Editing
-          allowDragging={false}
-          allowAdding={false}
-        />
+    <Box
+      sx={{
+        // FIXME: régler la taille
+        height: '100vh',
+      }}
+    >
+      <ScheduleHeader />
+      <div>
+        <Scheduler
+          timeZone="Europe/Paris"
+          dataSource={infos}
+          views={views}
+          defaultCurrentView="month"
+          defaultCurrentDate={currentDate}
+          height={650}
+          startDayHour={8}
+          appointmentComponent={Appointment}
+          appointmentTooltipComponent={AppointmentTooltip}
+          onAppointmentFormOpening={onAppointmentFormOpening}
+        >
+          <Editing
+            allowDragging={false}
+            allowAdding={false}
+          />
 
-        {/* <Resource
+          {/* <Resource
           dataSource={infos.clients}
           fieldExpr="client_id"
           label="Client"
@@ -202,9 +211,9 @@ function Schedule() {
           fieldExpr="address_id"
           label="Adresse"
         /> */}
-      </Scheduler>
-    </div>
-
+        </Scheduler>
+      </div>
+    </Box>
   );
 }
 
