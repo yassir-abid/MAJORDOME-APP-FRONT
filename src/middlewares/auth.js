@@ -17,7 +17,10 @@ const auth = (store) => (next) => (action) => {
           });
           // stock token to localStorage
           localStorage.setItem('token', response.data.token);
-
+          localStorage.setItem('pseudo', response.data.pseudo);
+          if (response.data.picture) {
+            localStorage.setItem('avatar', response.data.picture);
+          }
           store.dispatch(saveUser(response.data));
         } catch (error) {
           // eslint-disable-next-line max-len

@@ -1,10 +1,15 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
+import Avatar from '../Avatar/Avatar';
 
 import './documents.scss';
 
 function DocumentsHeader() {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <header className="documents-header">
       <div className="documents-header_notify">
@@ -20,12 +25,9 @@ function DocumentsHeader() {
       </div>
 
       <div className="documents-header_avatar">
-        <Icon
-          icon="carbon:user-avatar-filled-alt"
-          color="black"
-          width="40"
-          height="40"
-        />
+        <Link to="/Profile">
+          <Avatar avatar={avatar} firstname={firstname} />
+        </Link>
       </div>
     </header>
   );

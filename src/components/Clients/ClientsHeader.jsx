@@ -7,6 +7,9 @@ import Avatar from '../Avatar/Avatar';
 import './clients.scss';
 
 function ClientsHeader() {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <header className="clients-header">
       <div className="clients-header_notify">
@@ -25,7 +28,8 @@ function ClientsHeader() {
       </div>
       <div className="clients-header_avatar">
         <Link to="/Profile">
-          <Avatar avatar={false} />
+          {/* <Avatar avatar={false} /> */}
+          <Avatar avatar={avatar} firstname={firstname} />
         </Link>
       </div>
     </header>
