@@ -1,34 +1,36 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Icon } from '@iconify/react';
-import Avatar from '../Avatar/Avatar';
 
-import './clients.scss';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+
+import Avatar from '../Avatar/Avatar';
 
 function ClientsHeader() {
   return (
-    <header className="clients-header">
-      <div className="clients-header_notify">
-        <Link to="Foo">
-          <Icon
-            icon="charm:search"
-            color="black"
-          // color="red"
-            width="30"
-            height="30"
-          />
-        </Link>
-      </div>
-      <div className="clients-header_title">
-        <h1>Clients</h1>
-      </div>
-      <div className="clients-header_avatar">
+    <Box sx={{
+      bgcolor: 'primary.main',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      borderBottomLeftRadius: '17px',
+      borderBottomRightRadius: '17px',
+      p: 1,
+      // FIXME: gérer le titre en center et l'avatar en start (left)
+    }}
+    >
+      <Box>
         <Link to="/Profile">
-          <Avatar avatar={false} />
+          <Avatar />
         </Link>
-      </div>
-    </header>
+      </Box>
+      <Box>
+        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'secondary.main' }}>
+          Contacts Clients
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

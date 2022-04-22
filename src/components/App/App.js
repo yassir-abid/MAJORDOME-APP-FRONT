@@ -1,16 +1,16 @@
+/* eslint-disable react/jsx-fragments */
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import Loading from './Loading';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 // import { ThemeProvider, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import Home from '../Home/Home';
 import HomeApp from '../HomeApp/HomeApp';
-import NavBar from '../NavBar/NavBar';
+import NavBar from '../NavBar/NavBarMui';
 import { checkUser } from '../../actions/user';
 import SignUp from '../SignUp';
 import Login from '../Login';
@@ -118,45 +118,54 @@ function App() {
   });
 
   return (
-
-    <Container disableGutters="false" maxWidth="md" className="App">
-      <Box sx={{ bgcolor: 'background.default', height: '100vh' }}>
-        {/* <CssBaseline enableColorScheme /> */}
-        <ThemeProvider theme={ThemeOptions}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/home-app" element={<HomeApp />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/clients" element={<Clients />} />
-            <Route path="/clients/:id" element={<Client />} />
-            <Route path="/clients/:id/equipments" element={<Equipments />} />
-            {/* <Route path="/clients/:id/notifications_list" element={<Notifications_list />} /> */}
-            {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
-            <Route path="/documents" element={<Documents />} />
-            <Route path="/documents/:id" element={<DocumentsDetail />} />
-            <Route path="/documents/clients/:id" element={<DocumentByclient />} />
-            <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
-            <Route path="/documents/interventions/:id" element={<DocumentByInterventions />} />
-            <Route path="/interventions" element={<Interventions />} />
-            <Route path="/interventions/:id" element={<InterventionsDetail />} />
-            <Route path="/interventions/:id/report" element={<InterventionsReport />} />
-            {/* <Route path="/interventions/:id/documents_list" element={<Documents_list />} /> */}
-            {/* <Route path="/interventions/:id/notifications_list" element={<Notifications_list />} /> */}
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:id" element={<ProjectDetails />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/suppliers" element={<Suppliers />} />
-            <Route path="/suppliers/:id" element={<SuppliersDetail />} />
-            <Route path="/todolist" element={<Todo />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="*" element={<Error />} />
-          </Routes>
-          {token && <NavBar />}
-        </ThemeProvider>
-      </Box>
-    </Container>
+    <div>
+      <ThemeProvider theme={ThemeOptions}>
+        <Container
+          disableGutters="false"
+          maxWidth="md"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            height: '100vh',
+          }}
+        >
+          <Box sx={{ bgcolor: 'background.default' }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/home-app" element={<HomeApp />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/clients" element={<Clients />} />
+              <Route path="/clients/:id" element={<Client />} />
+              <Route path="/clients/:id/equipments" element={<Equipments />} />
+              {/* <Route path="/clients/:id/notifications_list" element={<Notifications_list />} /> */}
+              {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
+              <Route path="/documents" element={<Documents />} />
+              <Route path="/documents/:id" element={<DocumentsDetail />} />
+              <Route path="/documents/clients/:id" element={<DocumentByclient />} />
+              <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
+              <Route path="/documents/interventions/:id" element={<DocumentByInterventions />} />
+              <Route path="/interventions" element={<Interventions />} />
+              <Route path="/interventions/:id" element={<InterventionsDetail />} />
+              <Route path="/interventions/:id/report" element={<InterventionsReport />} />
+              {/* <Route path="/interventions/:id/documents_list" element={<Documents_list />} /> */}
+              {/* <Route path="/interventions/:id/notifications_list" element={<Notifications_list />} /> */}
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/projects/:id" element={<ProjectDetails />} />
+              <Route path="/schedule" element={<Schedule />} />
+              <Route path="/suppliers" element={<Suppliers />} />
+              <Route path="/suppliers/:id" element={<SuppliersDetail />} />
+              <Route path="/todolist" element={<Todo />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="*" element={<Error />} />
+            </Routes>
+            <NavBar />
+          </Box>
+        </Container>
+      </ThemeProvider>
+    </div>
   );
 }
 

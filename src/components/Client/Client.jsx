@@ -156,7 +156,7 @@ function Client() {
   }
 
   return (
-
+    // Header
     <div className="client">
       <header className="client-header">
         <div className="client-header_avatar">

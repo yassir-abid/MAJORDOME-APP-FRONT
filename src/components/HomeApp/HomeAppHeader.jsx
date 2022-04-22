@@ -2,35 +2,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Icon } from '@iconify/react';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
 
 import Avatar from '../Avatar/Avatar';
 
-import './homeAppHeader.scss';
-
 function HomeAppHeader() {
   return (
-    <header className="homeApp-header">
-      <div className="homeApp-header_avatar">
+    <Box sx={{
+      bgcolor: 'primary.main',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      borderBottomLeftRadius: '17px',
+      borderBottomRightRadius: '17px',
+      p: 1,
+      // FIXME: gérer le titre en center et l'avatar en start (left)
+    }}
+    >
+      <Box>
         <Link to="/Profile">
           <Avatar />
         </Link>
-      </div>
-      <div className="homeApp-header_title">
-        <h1>Majordome</h1>
-      </div>
-      <div className="homeApp-header_notify">
-        <Link to="Foo">
-          <Icon
-            icon="clarity:notification-outline-badged"
-            color="black"
-          // color="red"
-            width="30"
-            height="30"
-          />
-        </Link>
-      </div>
-    </header>
+      </Box>
+      <Box>
+        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'secondary.main' }}>
+          Majordome
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

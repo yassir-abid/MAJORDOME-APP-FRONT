@@ -14,7 +14,7 @@ import Modal from '@mui/material/Modal';
 import { changeValue, addClient } from '../../actions/addClient';
 import ClientsHeader from './ClientsHeader';
 import List from './List';
-import './clients.scss';
+// import './clients.scss';
 
 function Clients() {
   const [inputText, setInputText] = useState('');
