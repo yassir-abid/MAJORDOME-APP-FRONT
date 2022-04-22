@@ -119,7 +119,7 @@ function ProjectDetails() {
         {data.description}
         {!data.description && <p>Aucune déscription pour ce projet</p>}
       </div>
-      <Link to={`/projects/${data.id}/documents_list`}>
+      <Link to={`/documents/projects/${data.id}`}>
         <button type="button" className="projectDetails__documents">Documents</button>
       </Link>
       <Link to={`/projects/${data.id}/notifications`}>

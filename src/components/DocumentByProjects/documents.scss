@@ -23,11 +23,9 @@
         }
     }
 
-    &__add__document {
-        position: absolute;
+    &-addDocument {
+        position: relative;
         height: 150px;
-        bottom: 1.5rem;
-        right: 1.5rem;
     }
 }
 

@@ -1,17 +1,19 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import { React, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 // import data from './ListData.json';
 
 function List(props) {
+  const { id } = useParams();
+
   const [docs, setDocs] = useState([]);
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/documents', {
+      const response = await axios.get(`https://majordome-api.herokuapp.com/api/documents/interventions/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

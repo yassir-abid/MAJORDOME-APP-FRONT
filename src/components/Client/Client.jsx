@@ -273,7 +273,7 @@ function Client() {
             <ButtonGroup variant="text" size="small">
               {/* TODO: styliser les boutons et les centrer */}
               {/* créer ou vérifier les liens de chaque boutons */}
-              <Link to={`/clients/${id}/documents_list`}>
+              <Link to={`/documents/clients/${id}`}>
                 <Button>Documents</Button>
               </Link>
               <Link to={`/clients/${id}/notifications_list`}>
