@@ -2,7 +2,12 @@
 /* eslint-disable camelcase */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 
@@ -17,6 +22,8 @@ import './resetPassword.scss';
 function ResetPassword() {
   const [infos, setInfos] = useState('');
   const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
+  const [id, setId] = useState('');
   const [message, setMessage] = useState(false);
 
   const checkEmail = async (event) => {
@@ -33,6 +40,22 @@ function ResetPassword() {
     } catch (error) {
       console.log('Erreur de chargement', error);
     //   store.dispatch(userErrorMessage(error.response.data.message || 'connexion impossible'));
+    }
+  };
+
+  const VerifyToken = async () => {
+    try {
+      const [searchParams] = useSearchParams();
+      const response = await axios.post(`https://majordome-api.herokuapp.com/api/resetpassword?token=${token}&id=${id}`, {
+        token,
+        id,
+      });
+      console.log(searchParams.entries());
+
+      setInfos(response.data);
+      setMessage(true);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
     }
   };
 
