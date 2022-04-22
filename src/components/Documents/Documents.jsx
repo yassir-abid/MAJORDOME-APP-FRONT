@@ -115,8 +115,8 @@ function Documents() {
     formData.append('description', description);
     formData.append('file', file);
     formData.append('client_id', client);
-    formData.append('project_id', project);
-    formData.append('intervention_id', intervention);
+    formData.append('project', project);
+    formData.append('intervention', intervention);
     try {
       const response = await axios({
         method: 'post',
@@ -230,7 +230,7 @@ function Documents() {
               <option value="" disabled selected>Choisir un projet</option>
               {
                     projects
-                      .filter((projectt) => Number(projectt.client.id) === Number(selectedClient))
+                      .filter((projectt) => Number(projectt.client_id) === Number(selectedClient))
                       .map((projectt) => (
                         <option
                           key={projectt.id}
@@ -254,7 +254,7 @@ function Documents() {
               <option value="" disabled selected>Choisir une intervention</option>
               {
                     inters
-                      .filter((inter) => Number(inter.client.id) === Number(selectedClient))
+                      .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
                       .map((inter) => (
                         <option
                           key={inter.id}
