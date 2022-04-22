@@ -42,7 +42,12 @@ function List(props) {
     <ul className="interventions-list">
       {filteredInters.map((intervention) => (
         <Link to={`/interventions/${intervention.id}`} key={intervention.id}>
-          <li key={intervention.id}>{intervention.title}</li>
+          <li
+            key={intervention.id}
+          >
+            {intervention.title}
+            {/* <span className="interventions__status">{intervention.status}</span> */}
+          </li>
         </Link>
       ))}
     </ul>

@@ -1,42 +1,145 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 import ProfileHeader from './ProfileHeader';
 import './profilStyle.scss';
 
 function Profile() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // modal to update client
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
+
+  // params axios route GET
+  const [data, setData] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const token = localStorage.getItem('token');
+  const loadProfil = async () => {
+    try {
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/profile', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log(response.data);
+      setData(response.data);
+      setFirstname(response.data.firstname);
+      setLastname(response.data.lastname);
+      setEmail(response.data.email);
+      setPhone(response.data.phone);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  // function to delete one project with his id
+  function avatarProfileDelete() {
+    if (window.confirm('Etes vous sur de vouloir supprimer ce projet ?')) {
+      const interventionToDelete = async () => {
+        try {
+          const response = await axios.delete('https://majordome-api.herokuapp.com/api/profile', {
+            headers: {
+              Authorization: `bearer ${token}`,
+            },
+          });
+          navigate('/profile');
+        } catch (error) {
+          console.log('Erreur de chargement', error);
+        }
+      };
+
+      interventionToDelete();
+    }
+  }
+
+  const editProfile = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.patch('https://majordome-api.herokuapp.com/api/profile', {
+        firstname,
+        lastname,
+        email,
+        phone,
+      }, {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      navigate('/profile');
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
+
+  const deleteProfile = async () => {
+    if (window.confirm('Etês-vous sûr de vouloir supprimer ce compte ? Toutes les informations liées à ce compte seront perdues !')) {
+      const profileToDelete = async () => {
+        try {
+          const response = await axios.delete('https://majordome-api.herokuapp.com/api/profile', {
+            headers: {
+              Authorization: `bearer ${token}`,
+            },
+          });
+          navigate('/');
+        } catch (error) {
+          console.log('Erreur de chargement', error);
+        }
+      };
+
+      profileToDelete();
+    }
+  };
+
+  useEffect(() => {
+    loadProfil();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="profile">
       <ProfileHeader />
       <main className="profile-main">
-        <button
-          type="button"
-          className="profile-params"
-          // onClick={() => setModalVisibility(!modalVisibility)}
-          onClick={handleOpen}
+        <Box
+          component="form"
+          // noValidate
+          // autoComplete="off"
         >
-          <div className="profile-Params_icon">
-            <Icon
-              icon="uiw:setting-o"
-              color="black"
-              width="40"
-              height="40"
+          <form>
+            <TextField
+              sx={{ mt: 1, mb: 1 }}
+              fullWidth
+              id="firstName"
+              name="firstname"
+              label="Prénom"
+              value={firstname}
             />
-          </div>
-          <div className="profile-params_text">
-            <p>Paramètres du profil</p>
-          </div>
-        </button>
+
+            <TextField sx={{ mb: 1 }} fullWidth label="Nom" type="text" name="lastName" value={lastname} />
+
+            <TextField sx={{ mb: 1 }} fullWidth label="Email" type="email" name="email" value={email} />
+
+            <TextField sx={{ mb: 1 }} fullWidth label="Téléphone" type="tel" name="phone" value={phone} />
+          </form>
+        </Box>
+        <div>
+          <Button variant="contained" onClick={handleOpenModal}>Modifier</Button>
+        </div>
+
         <div className="profile-deconnexion">
           {/* TODO: modifier la route du lien de déconnexion, pour le moment il renvoie sur "/" */}
           <Link to="/">
@@ -46,49 +149,61 @@ function Profile() {
           </Link>
         </div>
         <div>
+          <Link to="#">réinitialiser le mot de passe</Link>
+        </div>
+        <div>
+          <Button onClick={deleteProfile}>supprimer le compte ?</Button>
+        </div>
+        <div>
+          {/* modal to edit client */}
           <Modal
-            className="modal"
+            className=""
             open={open}
-            onClose={handleClose}
+            onClose={handleCloseModal}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
             <Box
-              className="style"
+              className="profile__modal"
             >
-              <form
-                className="detailProfil"
-              >
-                <label>
-                  <TextField sx={{ mt: 1, mb: 1 }} fullWidth label="Nom" type="text" name="firstName" defaultValue="toto" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Prénom" type="text" name="lastName" defaultValue="replace *defaultValue* for dynamique info" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Email" type="email" name="email" defaultValue="toto@gmail.com" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Mot de passe" type="password" name="password" defaultValue="" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Téléphone" type="tel" name="phone" defaultValue="" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Numéro" type="text" name="adresse" defaultValue="" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Rue" type="text" name="adresse" defaultValue="" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Code postal" type="text" name="adresse" defaultValue="" />
-                </label>
-                <label>
-                  <TextField sx={{ mb: 1 }} fullWidth label="Ville" type="text" name="adresse" defaultValue="" />
-                </label>
-                <TextField sx={{ mb: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+              <h1 className="profile__modal__title">Modification du profil </h1>
+              <form className="profile__edit" onSubmit={editProfile}>
+                <TextField
+                  id="firstName"
+                  name="firstname"
+                  label="Prénom"
+                  value={firstname}
+                  placeholder="Prénom"
+                  onChange={(event) => setFirstname(event.target.value)}
+                />
+                <TextField
+                  id="lastName"
+                  name="lastname"
+                  label="Nom"
+                  value={lastname}
+                  placeholder="Nom"
+                  onChange={(event) => setLastname(event.target.value)}
+                />
+                <TextField
+                  id="phone"
+                  name="phone"
+                  label="tel"
+                  value={phone}
+                  placeholder="Numéro"
+                  onChange={(event) => setPhone(event.target.value)}
+                />
+                <TextField
+                  id="email"
+                  name="email"
+                  label="email"
+                  value={email}
+                  placeholder="Email"
+                  fullWidth
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth onClick={handleCloseModal} type="submit" defaultValue="Envoyer" />
               </form>
-              <Button className="modal-close" onClick={handleClose}>close</Button>
+              <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
             </Box>
           </Modal>
         </div>

@@ -58,3 +58,142 @@
     background-color: $colorSecondaryDark;
     height: calc(100vh - (62px + 100px));
 }
+
+
+.documentDetails {
+
+    background-color: $colorSecondary;
+    height: 100vh;
+
+    &__client__name {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    &__description {
+        width: 95%;
+        height: 5rem;
+        margin: 0 auto;
+        background-color: $colorPrimaryLight;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        padding:1rem;
+    }
+
+    &__documents{
+        width: 95%;
+        border-radius: 10px;
+        height: 3rem;
+        background-color: $colorPrimaryLight;
+        margin-left: 0.6rem;
+        border: none;
+        margin-bottom: 1rem;
+    }
+
+    &__notifications{
+        width: 95%;
+        border-radius: 10px;
+        height: 3rem;
+        background-color: $colorPrimaryLight;
+        margin-left: 0.6rem;
+        border: none;
+        font-weight: bold;
+    }
+
+    &__interventions__container {
+        overflow-y: scroll;
+        height: 60%;
+        padding-bottom: 5rem;
+    }
+
+    &__interventions {
+            border: 1.5px solid #00756a;
+            border-radius: 10px;
+            margin: 0.5rem;
+            padding: 0.5rem;
+            width: 96%;
+            height: 10%;
+            background-color: $colorSecondaryLight;
+    }
+
+    &__interventions__container {
+        height: 40rem;
+        padding: 0.9rem;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        
+        li {
+            padding: 0.5rem;
+            border: 1px solid $colorPrimary;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__interventions__status {
+        font-weight: bold;
+        color: $colorPrimary;
+    }
+
+    h3{
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    &__add {
+        position: absolute;
+        height: 150px;
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+}
+
+.projects__details__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    margin-bottom: 1rem;
+    padding:0.5rem;
+    background-color: $colorPrimary;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+
+    &_notify {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+    }
+
+    &_avatar {
+        order: 0;
+        flex: 1 1 flex-end;
+        align-self: auto;
+    }
+
+    &_title {
+        order: 0;
+        flex: 1 1 auto;
+        align-self: auto;
+        font-size: 2em;
+        font-style: italic;
+    }
+
+    &_notifications {
+        margin-bottom: 1.2rem;
+    }
+}
+
+// edit project modal
+
+.projects__modal__title {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}

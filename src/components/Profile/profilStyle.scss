@@ -74,7 +74,21 @@
     
     }
 
-    
+    &__modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: $colorSecondaryDark;
+        padding: 1rem;
+    }
+
+    &__modal__title {
+        text-align: center;
+        padding: 1rem;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
 }
 
 .input-avatar {

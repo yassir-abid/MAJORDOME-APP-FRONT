@@ -30,7 +30,7 @@ function Client() {
 
   // edit client
   const [firstname, setFirstname] = useState('');
-  const [lastname, setLastame] = useState('');
+  const [lastname, setLastname] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [number, setNumber] = useState('');
@@ -57,7 +57,7 @@ function Client() {
       console.log(infos);
       // edit client
       setFirstname(response.data.firstname);
-      setLastame(response.data.lastname);
+      setLastname(response.data.lastname);
       setPhone(response.data.phone);
       setEmail(response.data.email);
       setNumber(response.data.addresses[0].number);
@@ -172,7 +172,6 @@ function Client() {
           {/* lien vers modal */}
           <Icon icon="bxs:edit-alt" width="30" height="30" onClick={handleOpenModal} />
         </div>
-
       </header>
       <div className="client-detail">
         <Box
@@ -274,7 +273,7 @@ function Client() {
             <ButtonGroup variant="text" size="small">
               {/* TODO: styliser les boutons et les centrer */}
               {/* créer ou vérifier les liens de chaque boutons */}
-              <Link to={`/clients/${id}/documents_list`}>
+              <Link to={`/documents/clients/${id}`}>
                 <Button>Documents</Button>
               </Link>
               <Link to={`/clients/${id}/notifications_list`}>
@@ -324,7 +323,7 @@ function Client() {
               label="Nom"
               value={lastname}
               placeholder="Nom"
-              onChange={(event) => setLastame(event.target.value)}
+              onChange={(event) => setLastname(event.target.value)}
             />
             <TextField
               id="phone"
