@@ -67,10 +67,9 @@ function Clients() {
         // FIXME: régler la taille
         height: '100vh',
       }}
-      className="clients"
     >
       <ClientsHeader />
-      <div className="clients-main">
+      <div>
         <Box
           sx={{
             mt: 2,
@@ -87,14 +86,13 @@ function Clients() {
           />
         </Box>
         <List input={inputText} />
-        <div className="clients-addClient">
+        <div>
           <StyledFab size="medium" color="primary" aria-label="add">
             <AddIcon onClick={handleOpen} />
           </StyledFab>
         </div>
       </div>
       <Modal
-        className="modal-clients"
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
@@ -108,7 +106,6 @@ function Clients() {
         >
           <form
             onSubmit={handleSubmit}
-            className="detailClients"
           >
             <Typography variant="h5">
               formulaire ajout d'un client
@@ -224,7 +221,7 @@ function Clients() {
             </label>
             <TextField sx={{ mb: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
           </form>
-          <Button className="modal-close1" onClick={handleClose}>close</Button>
+          <Button onClick={handleClose}>close</Button>
         </Box>
       </Modal>
     </Box>

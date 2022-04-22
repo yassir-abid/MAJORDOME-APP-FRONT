@@ -1,20 +1,15 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
+// FIXME: valider les props en enlever la règle ci-dessous
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-
-// import data from './ListData.json';
-
-// const axios = require('axios').default;
 
 function ListClients(props) {
   const [clients, setClients] = useState([]);
@@ -63,6 +58,7 @@ function ListClients(props) {
         {filteredClients.map((client) => (
           <Box sx={{
             display: 'flex',
+            flexDirection: 'column',
             flexWrap: 'wrap',
             '& > :not(style)': {
               mb: 1,
@@ -71,20 +67,22 @@ function ListClients(props) {
           }}
           >
             {/* <Paper elevation={3}> */}
-            <ListItem
-              sx={{
-                borderRadius: '10px',
-                border: 2,
-                boxShadow: 3,
-                borderColor: 'primary.light',
-              }}
-            >
-              <Link to={`/clients/${client.id}`} key={client.id}>
+            <Link to={`/clients/${client.id}`} key={client.id}>
+              <ListItem
+                sx={{
+                  borderRadius: '5px',
+                  border: 1,
+                  boxShadow: 3,
+                  borderColor: 'primary.light',
+                  bgcolor: 'white',
+                }}
+              >
                 <ListItemText
                   primary={`${client.firstname} ${client.lastname}`}
                 />
-              </Link>
-            </ListItem>
+
+              </ListItem>
+            </Link>
             {/* </Paper> */}
           </Box>
         ))}
