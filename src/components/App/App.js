@@ -30,6 +30,7 @@ import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
 import DocumentByclient from '../DocumentByClient/DocumentByClient';
 import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
 import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
+import ResetPassword from '../ResetPassword/resetPassword';
 
 // import 'devextreme/dist/css/dx.greenmist.compact.css';
 import './style.scss';
@@ -54,6 +55,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home-app" element={<HomeApp />} />
