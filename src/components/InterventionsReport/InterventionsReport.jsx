@@ -137,13 +137,6 @@ function InterventionsReport() {
     }
   };
 
-  //   const handleUploadPicture = ({ currentTarget }) => {
-  //     const picture = currentTarget.files[0];
-  //     if (picture) {
-  //       setSelectedFile(picture);
-  //     }
-  //   };
-
   useEffect(() => {
     infoReport();
     // eslint-disable-next-line react-hooks/exhaustive-deps
