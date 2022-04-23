@@ -17,12 +17,14 @@ import { styled } from '@mui/material/styles';
 import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { Dialog } from '@material-ui/core';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 
 import { logout } from '../../actions/signUp';
 import ProfileHeader from './ProfileHeader';
+
 // import './profilStyle.scss';
 
 function Profile() {
@@ -255,95 +257,102 @@ function Profile() {
         <div>
 
           {/* modal to edit client */}
-          <Modal
-            className=""
-            open={open}
-            onClose={handleCloseModal}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+          <Box
+            sx={{
+              // maxHeight: '100%',
+            }}
           >
-            <Box
-              sx={{
-                position: 'absolute',
-                top: '0%',
-                left: '50%',
-                transform: 'translate(-50%, 0%)',
-                // minWidth: 1,
-                width: 700,
-                maxWidth: '100%',
-                p: 1,
-                bgcolor: 'background.default',
-              }}
+            <Dialog
+              fullScreen
+              className=""
+              open={open}
+              onClose={handleCloseModal}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
             >
-              <Box sx={{ mb: 3 }}>
-                <Typography variant="h5">
-                  Modification du profil
-                </Typography>
-              </Box>
-              <form className="profile__edit" onSubmit={editProfile}>
-                <TextField
-                  sx={{ mt: 1, mb: 1, mr: 1 }}
-                  id="firstName"
-                  name="firstname"
-                  label="Prénom"
-                  value={firstname}
-                  placeholder="Prénom"
-                  onChange={(event) => setFirstname(event.target.value)}
-                />
-                <TextField
-                  sx={{ mt: 1, mb: 1, mr: 1 }}
-                  id="lastName"
-                  name="lastname"
-                  label="Nom"
-                  value={lastname}
-                  placeholder="Nom"
-                  onChange={(event) => setLastname(event.target.value)}
-                />
-                <TextField
-                  sx={{ mt: 1, mb: 1, mr: 1 }}
-                  id="phone"
-                  name="phone"
-                  label="tel"
-                  value={phone}
-                  placeholder="Numéro"
-                  onChange={(event) => setPhone(event.target.value)}
-                />
-                <TextField
-                  sx={{ mt: 1, mb: 1 }}
-                  id="email"
-                  name="email"
-                  label="email"
-                  value={email}
-                  placeholder="Email"
-                  fullWidth
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-                <TextField
-                  sx={{
-                    mt: 1,
-                    mb: 1,
-                    bgcolor: 'primary.light',
-                    borderRadius: '5px',
-                  }}
-                  fullWidth
-                  type="submit"
-                  value="Valider"
-                  defaultValue="Envoyer"
-                />
-              </form>
               <Box
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
+                  position: 'absolute',
+                  top: '0%',
+                  left: '50%',
+                  transform: 'translate(-50%, 0%)',
+                  // minWidth: 1,
+                  width: 700,
+                  maxWidth: '100%',
+                  p: 1,
+                  bgcolor: 'background.default',
                 }}
               >
-                <IconButton>
-                  <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
-                </IconButton>
+                <Box sx={{ mb: 3 }}>
+                  <Typography variant="h5">
+                    Modification du profil
+                  </Typography>
+                </Box>
+                <form className="profile__edit" onSubmit={editProfile}>
+                  <TextField
+                    sx={{ mt: 1, mb: 1, mr: 1 }}
+                    id="firstName"
+                    name="firstname"
+                    label="Prénom"
+                    value={firstname}
+                    placeholder="Prénom"
+                    onChange={(event) => setFirstname(event.target.value)}
+                  />
+                  <TextField
+                    sx={{ mt: 1, mb: 1, mr: 1 }}
+                    id="lastName"
+                    name="lastname"
+                    label="Nom"
+                    value={lastname}
+                    placeholder="Nom"
+                    onChange={(event) => setLastname(event.target.value)}
+                  />
+                  <TextField
+                    sx={{ mt: 1, mb: 1, mr: 1 }}
+                    id="phone"
+                    name="phone"
+                    label="tel"
+                    value={phone}
+                    placeholder="Numéro"
+                    onChange={(event) => setPhone(event.target.value)}
+                  />
+                  <TextField
+                    sx={{ mt: 1, mb: 1 }}
+                    id="email"
+                    name="email"
+                    label="email"
+                    value={email}
+                    placeholder="Email"
+                    fullWidth
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                  <TextField
+                    sx={{
+                      mt: 1,
+                      mb: 1,
+                      bgcolor: 'primary.light',
+                      borderRadius: '5px',
+                    }}
+                    fullWidth
+                    type="submit"
+                    value="Valider"
+                    defaultValue="Envoyer"
+                  />
+                </form>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <IconButton>
+                    <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+                  </IconButton>
+                </Box>
               </Box>
-            </Box>
-          </Modal>
+            </Dialog>
+          </Box>
         </div>
       </main>
     </Box>

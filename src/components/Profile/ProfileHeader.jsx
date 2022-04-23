@@ -3,10 +3,12 @@ import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
-import { CardMedia, Typography } from '@mui/material';
+import { Dialog, CardMedia, Typography } from '@mui/material';
 
 import Avatar from '../Avatar/Avatar';
 
@@ -89,7 +91,8 @@ function HomeAppHeader() {
         </Box>
       </Box>
       <div>
-        <Modal
+        <Dialog
+          fullScreen
           open={open}
           onClose={handleCloseModal}
           aria-labelledby="modal-modal-title"
@@ -111,7 +114,7 @@ function HomeAppHeader() {
             <Typography variant="h3" component="h1" gutterBottom sx={{ textAlign: 'center' }}> Photo de profil </Typography>
             <TextField
               required
-              sx={{ m: 1 }}
+              sx={{ p: 1 }}
               fullWidth
               id="file"
               type="file"
@@ -127,7 +130,7 @@ function HomeAppHeader() {
                 }
             <form onSubmit={handleSubmit}>
               <input
-                className="input-avatar"
+                hidden
                 id="image_up"
                 type="file"
                 accept=".jpg, .jpeg, .png"
@@ -136,11 +139,32 @@ function HomeAppHeader() {
                   setSelectedFile(event.target.files[0]);
                 }}
               />
-              <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+              <TextField
+                sx={{
+                  mt: 2,
+                  mb: 1,
+                  bgcolor: 'primary.light',
+                  borderRadius: '5px',
+                }}
+                fullWidth
+                type="submit"
+                value="Valider"
+                defaultValue="Envoyer"
+              />
             </form>
-            <Button onClick={handleCloseModal}>Fermer</Button>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton>
+                <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+              </IconButton>
+            </Box>
           </Box>
-        </Modal>
+        </Dialog>
       </div>
     </Box>
 
