@@ -16,18 +16,18 @@ function ClientsHeader() {
       bgcolor: 'primary.main',
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       borderBottomLeftRadius: '17px',
       borderBottomRightRadius: '17px',
       p: 1,
       // FIXME: gérer le titre en center et l'avatar en start (left)
     }}
     >
-      <Box>
+      {/* <Box>
         <Link to="/Profile">
           <Avatar />
         </Link>
-      </Box>
+      </Box> */}
       <Box>
         <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
           Contacts Clients
