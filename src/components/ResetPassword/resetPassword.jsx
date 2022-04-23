@@ -24,22 +24,22 @@ function ResetPassword() {
   const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
   const [id, setId] = useState('');
-  const [message, setMessage] = useState(false);
+  const [sentRequest, setSentRequest] = useState(false);
+  const [message, setMessage] = useState('');
 
   const checkEmail = async (event) => {
+    setSentRequest(true);
     try {
       event.preventDefault();
-      console.log(email);
       const response = await axios.post('https://majordome-api.herokuapp.com/api/resetpassword', {
         email,
       });
-
-      console.log(response.data);
       setInfos(response.data);
-      setMessage(true);
+      setMessage('Un email pour réinitialiser votre mot de passe vous a été envoyé !');
     } catch (error) {
-      console.log('Erreur de chargement', error);
-    //   store.dispatch(userErrorMessage(error.response.data.message || 'connexion impossible'));
+      if (error.response.data.message) {
+        setMessage(error.response.data.message);
+      }
     }
   };
 
@@ -83,26 +83,15 @@ function ResetPassword() {
           </div>
           <TextField className="resetPassword-form-button" sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
         </form>
-        {/* {
-            // eslint-disable-next-line no-nested-ternary
-            infos.success
+        {
+            sentRequest
               ? (
-                <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                  Votre demande de réinitialisation de mot de passe a bien été prise en compte. Un email de réinitialisation de mot de passe vous a été envoyé !
+                <Typography variant="h9" component="div" gutterBottom sx={{ mb: 0 }}>
+                  {message}
                 </Typography>
               )
-              : !infos.success && message
-                ? (
-                  <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                    Email invalide !
-                  </Typography>
-                )
-                : (
-                  <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                    Une erreur est survenue ! Veuillez réessayer plus tard !
-                  </Typography>
-                )
-        } */}
+              : null
+        }
       </div>
     </div>
   );
