@@ -207,7 +207,7 @@ function Client() {
         </Box>
       </Box>
       <div>
-        <div>
+        <Box>
           <Box
             component="form"
             sx={{
@@ -398,11 +398,17 @@ function Client() {
             </Box>
           </Box>
 
-          <div>
-            <p>Listes des projets du client</p>
+          <Box>
+            <Typography
+              sx={{ m: 1 }}
+              variant="h6"
+              gutterBottom
+              component="div"
+            >Listes des projets du client
+            </Typography>
             <ListProjets projects={infos.projects} />
-          </div>
-        </div>
+          </Box>
+        </Box>
         {/* modal to edit client */}
         <Modal
           open={open}
