@@ -365,35 +365,21 @@ function Client() {
             sx={{
               display: 'flex',
               flexDirection: 'row',
-              alignItems: 'center',
+              justifyContent: 'center',
               '& > *': {
                 m: 1,
               },
             }}
           >
             <ButtonGroup variant="text" size="small">
-              {/* TODO: styliser les boutons et les centrer */}
               {/* créer ou vérifier les liens de chaque boutons */}
-              <Link to={`/documents/clients/${id}`}>
-                <Button>Documents</Button>
-              </Link>
-            </ButtonGroup>
-
-            {/* <Link to={`/clients/${id}/notifications_list`}>
-                  <Button>Notifs</Button>
-                </Link> */}
-
-            <ButtonGroup variant="text" size="small">
-              <Link to={`/clients/${id}/equipments`}>
-                <Button>équipements <br />
-                  & besoins
-                </Button>
-              </Link>
-            </ButtonGroup>
-            <ButtonGroup variant="text" size="small">
-              {/* add modal sur btn "ajout projets" */}
-              <Button color="success">Ajout <br />Projets
+              {/* <Link to={`/documents/clients/${id}`}> */}
+              <Button href={`/documents/clients/${id}`} color="secondary" variant="contained">Documents</Button>
+              {/* </Link> */}
+              <Button href={`/clients/${id}/equipments`} color="secondary" variant="contained">
+                équipements <br />& besoins
               </Button>
+              <Button href="/#" color="secondary" variant="contained">Ajout <br />Projets</Button>
             </ButtonGroup>
 
           </Box>
