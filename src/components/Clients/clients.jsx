@@ -59,7 +59,7 @@ function Clients() {
   const StyledFab = styled(Fab)({
     position: 'fixed',
     zIndex: 1,
-    bottom: 70,
+    bottom: 80,
     right: 25,
     margin: '0 auto',
   });
