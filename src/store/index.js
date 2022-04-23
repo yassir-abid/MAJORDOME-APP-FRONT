@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createStore, applyMiddleware, compose } from 'redux';
 import authMW from '../middlewares/auth';
 import signUpMW from '../middlewares/signUp';

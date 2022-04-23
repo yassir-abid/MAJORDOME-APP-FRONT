@@ -23,6 +23,8 @@ import './newPassword.scss';
 
 function NewPassword() {
   const [infos, setInfos] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const id = useSelector((state) => state.password);
 
@@ -30,13 +32,14 @@ function NewPassword() {
 
   const navigate = useNavigate();
 
-  const checkEmail = async (event) => {
+  const changePassword = async (event) => {
     try {
       event.preventDefault();
-    //   await axios.post('https://majordome-api.herokuapp.com/api/resetpassword', {
-    //     email,
-    //   });
-    //   setMessage('Un email pour réinitialiser votre mot de passe vous a été envoyé !');
+      await axios.patch('https://majordome-api.herokuapp.com/api/resetpassword', {
+        id,
+        password,
+        passwordConfirm,
+      });
     } catch (error) {
       if (error.response.data.message) {
         // setMessage(error.response.data.message);
@@ -52,25 +55,25 @@ function NewPassword() {
   //   }, []);
 
   return (
-    <div className="resetPassword">
-      <div className="resetPassword__container">
+    <div className="newPassword">
+      <div className="newPassword__container">
         <img className="login__logo" src={logo} alt="logo" />
         <Typography variant="h5" component="h1" gutterBottom sx={{ mb: 0 }}>Réinitialisation du mot de passe</Typography>
-        <form className="resetPassword-form-element" onSubmit={checkEmail}>
+        <form className="newPassword-form-element" onSubmit={changePassword}>
           <div>
             <TextField
-              className="resetPassword__input"
+              className="newPassword__input"
               required
               sx={{ m: 1 }}
               fullWidth
-              label="email"
-              name="email"
-              type="email"
-              placeholder="Adresse Email"
+              label="password"
+              name="password"
+              type="password"
+              placeholder="Votre nouveau mot de passe"
             //   onChange={(event) => setEmail(event.target.value)}
             />
           </div>
-          <TextField className="resetPassword-form-button" sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+          <TextField className="newPassword-form-button" sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
         </form>
         {/* {
             sentRequest
