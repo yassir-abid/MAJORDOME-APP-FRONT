@@ -7,7 +7,7 @@ export default function ImgAvatar({ avatar, firstname }) {
   return (
     <Stack direction="row" spacing={2}>
       <Avatar
-        alt={firstname} // todo remplacer dynamiquement le nom
+        alt={firstname}
         src={avatar || '/static/images/avatar/1.jpg'}
         sx={{
           // m: 1,
