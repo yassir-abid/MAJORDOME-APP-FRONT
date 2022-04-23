@@ -60,7 +60,7 @@ function Documents() {
         <List input={inputText} />
       </div>
       <div>
-        <StyledFab size="medium" color="primary" aria-label="add">
+        <StyledFab size="medium" color="secondary" aria-label="add">
           <AddIcon onClick={handleOpenModal} />
         </StyledFab>
       </div>
