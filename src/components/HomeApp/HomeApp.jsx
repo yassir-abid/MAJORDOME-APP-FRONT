@@ -23,16 +23,16 @@ function HomeApp() {
         sx={{
           overflow: 'hidden',
           bgcolor: 'background.default',
-          height: '100vh',
-          pb: '145px',
+          // height: '100vh',
+          // pb: '145px',
         }}
       >
         <HomeAppHeader />
         <Box sx={{
           textAlign: 'center',
           overflowY: 'hidden',
-          height: 'inherit',
-          pb: '145px',
+          // height: 'inherit',
+          // pb: '145px',
         }}
         >
           <Box>
@@ -52,7 +52,7 @@ function HomeApp() {
               })}
             </Typography>
           </Box>
-          <Typography color="secondary" sx={{ textAlign: 'center' }} variant="h5" gutterBottom component="div">
+          <Typography color="secondary.light" sx={{ textAlign: 'center' }} variant="h5" gutterBottom component="div">
             Interventions du jour
           </Typography>
           <Box sx={{ textAlign: 'center', height: '80%', overflowY: 'auto' }}>

@@ -12,24 +12,32 @@ function HomeAppHeader() {
   const firstname = localStorage.getItem('pseudo');
 
   return (
-    <Box sx={{
-      bgcolor: 'primary.main',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      borderBottomLeftRadius: '17px',
-      borderBottomRightRadius: '17px',
-      p: 1,
-      // FIXME: gérer le titre en center et l'avatar en start (left)
-    }}
-    >
-      <Box>
+    <Box>
+      <Box
+        sx={{
+          zIndex: 1,
+          position: 'absolute',
+          top: '0%',
+          left: '10',
+          p: 0.8,
+        }}
+      >
         <Link to="/Profile">
           <Avatar avatar={avatar} firstname={firstname} />
         </Link>
       </Box>
-      <Box>
-        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'secondary.main' }}>
+      <Box sx={{
+        bgcolor: 'primary.main',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        borderBottomLeftRadius: '17px',
+        borderBottomRightRadius: '17px',
+        pt: 1,
+        // p: 1,
+      }}
+      >
+        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
           Majordome
         </Typography>
       </Box>
