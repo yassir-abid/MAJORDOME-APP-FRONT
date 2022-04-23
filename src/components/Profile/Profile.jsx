@@ -162,7 +162,7 @@ function Profile() {
           </Link>
         </div>
         <div>
-          <Button onClick={handleChangePassword}>Modifier le mot de passe</Button>
+          <Button onClick={handleChangePassword}> Réinitialiser le mot de passe</Button>
         </div>
         <div>
           <Button onClick={deleteProfile}>supprimer le compte ?</Button>
