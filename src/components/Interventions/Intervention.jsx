@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
@@ -12,10 +13,11 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Icon } from '@iconify/react';
-// import Stack from '@mui/material/Stack';
-// import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { MobileDateTimePicker } from '@mui/x-date-pickers';
+// import { DateTimePicker } from '@mui/x-date-pickers';
+import Stack from '@mui/material/Stack';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDateTimePicker } from '@mui/x-date-pickers';
 
 // import du components de l'intervention
 import { changeValue, addIntervention } from '../../actions/intervention';
@@ -31,9 +33,6 @@ function Interventions() {
   const [addresses, setAddresses] = useState([]);
   const [selectedClient, setselectedClient] = useState({});
 
-  // const [selectedStartDate, handleStartDateChange] = useState(new Date());
-  // const [selectedEndDate, handleEndDateChange] = useState(new Date());
-
   const token = localStorage.getItem('token');
 
   const loadClients = async () => {
@@ -43,7 +42,6 @@ function Interventions() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('get clients response', response.data);
       setClients(response.data);
 
       // j'initialise un tableau à vide pour récupérer toutes les adresses des clients
@@ -64,10 +62,6 @@ function Interventions() {
     }
   };
 
-  console.log('clients', clients);
-  console.log('addresses', addresses);
-  console.log('selectedClient', selectedClient);
-
   const [projects, setProjects] = useState([]);
   const loadProjects = async () => {
     try {
@@ -76,13 +70,11 @@ function Interventions() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('get projects response', response.data);
       setProjects(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
-  console.log('projects', projects);
 
   useEffect(() => {
     loadClients();
@@ -103,8 +95,11 @@ function Interventions() {
 
   const {
     // eslint-disable-next-line camelcase
-    title, description, date, end_date, status, comments, client_id, project_id, address_id,
+    title, description, status, comments, client_id, project_id, address_id,
   } = useSelector((state) => state.intervention);
+
+  const [selectedStartDate, setStartDateChange] = useState(new Date());
+  const [selectedEndDate, setEndDateChange] = useState(new Date());
 
   const dispatch = useDispatch();
 
@@ -113,6 +108,18 @@ function Interventions() {
       setselectedClient(e.target.value);
     }
     dispatch(changeValue(e.target.value, e.target.name));
+  };
+
+  const handleChangeStartDate = (StartDate) => {
+    const newStartDate = new Date(StartDate).toISOString();
+    setStartDateChange(newStartDate);
+    dispatch(changeValue(selectedStartDate, 'date'));
+  };
+
+  const handleChangeEndDate = (EndDate) => {
+    const newEndDate = new Date(EndDate).toISOString();
+    setEndDateChange(newEndDate);
+    dispatch(changeValue(selectedEndDate, 'end_date'));
   };
 
   const handleSubmit = (e) => {
@@ -184,25 +191,45 @@ function Interventions() {
                   onChange={handleChange}
                 />
               </label>
-              {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
+              <LocalizationProvider dateAdapter={AdapterLuxon}>
                 <Stack spacing={3} sx={{ m: 1 }}>
                   <MobileDateTimePicker
                     label="Date de début"
-                    name="end_date"
+                    name="date"
                     value={selectedStartDate}
-                    onChange={handleStartDateChange}
+                    onChange={handleChangeStartDate}
+                    inputFormat="dd/MM/yyyy hh:mm a"
                     renderInput={(params) => <TextField {...params} />}
                   />
                   <MobileDateTimePicker
                     label="Date de fin"
-                    name="date"
+                    name="end_date"
                     value={selectedEndDate}
-                    onChange={handleEndDateChange}
+                    onChange={handleChangeEndDate}
+                    inputFormat="dd/MM/yyyy hh:mm a"
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </Stack>
+              </LocalizationProvider>
+              {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
+                <Stack spacing={3} sx={{ m: 1 }}>
+                  <DateTimePicker
+                    label="Date de début"
+                    name="end_date"
+                    value={date}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                  <DateTimePicker
+                    label="Date de fin"
+                    name="date"
+                    value={end_date}
+                    onChange={handleChange}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Stack>
               </LocalizationProvider> */}
-              <label>
+              {/* <label>
                 <TextField
                   required
                   sx={{ m: 1 }}
@@ -232,7 +259,7 @@ function Interventions() {
                   value={end_date}
                   onChange={handleChange}
                 />
-              </label>
+              </label> */}
               <select
                 required
               // eslint-disable-next-line camelcase
