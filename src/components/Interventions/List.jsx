@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import data from './ListData.json';
 
-function List(props) {
+function List({ input }) {
   const [inters, setInters] = useState([]);
   const token = localStorage.getItem('token');
   const loadData = async () => {
@@ -31,12 +31,13 @@ function List(props) {
   // create a new array by filtering the original array
   const filteredInters = inters.filter((el) => {
     // if no input the return the original
-    if (props.input === '') {
+    if (input === '') {
       return el;
     }
     // return the item which contains the user input
 
-    return el.text.toLowerCase().includes(props.input);
+    return el.title.toLowerCase().includes(input)
+    || el.status.toLowerCase().includes(input);
   });
   return (
     <ul className="interventions-list">

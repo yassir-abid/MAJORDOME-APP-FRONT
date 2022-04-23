@@ -118,73 +118,70 @@ function Interventions() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addIntervention());
+    handleCloseModal();
+    List('');
   };
 
   return (
     <div className="interventions">
       <InterventionsHeader />
-      <div className="interventions-main">
-        <div>
-          <TextField
-            className="interventions-searchBar"
-            id="outlined-basic"
-            onChange={inputHandler}
-            variant="outlined"
-            fullWidth
-            label="Search"
-          />
-        </div>
+      <div className="interventions__container__list">
+        <TextField
+          className="interventions-searchBar"
+          id="outlined-basic"
+          onChange={inputHandler}
+          variant="outlined"
+          fullWidth
+          label="Search"
+        />
         <List input={inputText} />
-        {/* <div className="interventions-addintervention">
-          <Icon icon="carbon:add-filled" width="30" height="30" />
-        </div> */}
+      </div>
+      <div className="interventions__add">
+        <Icon onClick={handleOpenModal} icon="carbon:add-filled" width="50" height="50" />
+      </div>
 
-        <div className="interventions__add">
-          <Icon onClick={handleOpenModal} icon="carbon:add-filled" width="50" height="50" />
-        </div>
-
-        <Modal
-          className=""
-          open={open}
-          onClose={handleCloseModal}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
+      <Modal
+        className=""
+        open={open}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          className="interventions-modal"
         >
-          <Box
-            className="interventions-modal"
+          <form
+            className="intervention__add"
+            onSubmit={handleSubmit}
           >
-            <form
-              className="intervention__add"
-              onSubmit={handleSubmit}
-            >
-              <label>
-                <TextField
-                  required
-                  sx={{ m: 1 }}
-                  fullWidth
-                  label="Nom de l'intervention"
-                  type="text"
-                  name="title"
-                  placeholder="Nom de l'intervention"
-                  value={title}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                <TextField
-                  sx={{ m: 1 }}
-                  id="outlined-multiline-static"
-                  label="Description"
-                  fullWidth
-                  multiline
-                  rows={4}
-                  name="description"
-                  placeholder="Description"
-                  value={description}
-                  onChange={handleChange}
-                />
-              </label>
-              {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
+            <label>
+              <TextField
+                required
+                sx={{ m: 1 }}
+                fullWidth
+                label="Nom de l'intervention"
+                type="text"
+                name="title"
+                placeholder="Nom de l'intervention"
+                value={title}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              <TextField
+                sx={{ m: 1 }}
+                id="outlined-multiline-static"
+                label="Description"
+                fullWidth
+                multiline
+                rows={4}
+                name="description"
+                placeholder="Description"
+                value={description}
+                onChange={handleChange}
+              />
+            </label>
+            {/* <LocalizationProvider dateAdapter={AdapterLuxon}>
                 <Stack spacing={3} sx={{ m: 1 }}>
                   <MobileDateTimePicker
                     label="Date de début"
@@ -202,102 +199,102 @@ function Interventions() {
                   />
                 </Stack>
               </LocalizationProvider> */}
-              <label>
-                <TextField
-                  required
-                  sx={{ m: 1 }}
-                  id="outlined-multiline-static"
-                  label="Date de début"
-                  fullWidth
-                  name="date"
-                  placeholder="Date de début"
-                  value={date}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                <TextField
-                  required
-                  sx={{ m: 1 }}
-                  id="outlined-multiline-static"
-                  label="Date de fin"
-                  fullWidth
-                  name="end_date"
-                  placeholder="Date de fin"
+            <label>
+              <TextField
+                required
+                sx={{ m: 1 }}
+                id="outlined-multiline-static"
+                label="Date de début"
+                fullWidth
+                name="date"
+                placeholder="Date de début"
+                value={date}
+                onChange={handleChange}
+              />
+            </label>
+            <label>
+              <TextField
+                required
+                sx={{ m: 1 }}
+                id="outlined-multiline-static"
+                label="Date de fin"
+                fullWidth
+                name="end_date"
+                placeholder="Date de fin"
                   // eslint-disable-next-line camelcase
-                  value={end_date}
-                  onChange={handleChange}
-                />
-              </label>
-              <select
-                required
-              // eslint-disable-next-line camelcase
-                value={status}
+                value={end_date}
                 onChange={handleChange}
-                name="status"
-                className="interventions__select"
+              />
+            </label>
+            <select
+              required
+              // eslint-disable-next-line camelcase
+              value={status}
+              onChange={handleChange}
+              name="status"
+              className="interventions__select"
+            >
+              <option value="" disabled selected>Choisir un statut</option>
+              <option
+                value="Programmée"
               >
-                <option value="" disabled selected>Choisir un statut</option>
-                <option
-                  value="Programmée"
-                >
-                  Programmée
-                </option>
-                <option
-                  value="Terminée"
-                >
-                  Terminée
-                </option>
-                <option
-                  value="Annulée"
-                >
-                  Annulée
-                </option>
-              </select>
-              <label>
-                <TextField
-                  sx={{ m: 1 }}
-                  id="outlined-multiline-static"
-                  label="Commentaires"
-                  fullWidth
-                  multiline
-                  maxRows={4}
-                  name="comments"
-                  placeholder="Commentaires"
-                  value={comments}
-                  onChange={handleChange}
-                />
-              </label>
-              <select
+                Programmée
+              </option>
+              <option
+                value="Terminée"
+              >
+                Terminée
+              </option>
+              <option
+                value="Annulée"
+              >
+                Annulée
+              </option>
+            </select>
+            <label>
+              <TextField
                 sx={{ m: 1 }}
-                required
+                id="outlined-multiline-static"
+                label="Commentaires"
+                fullWidth
+                multiline
+                maxRows={4}
+                name="comments"
+                placeholder="Commentaires"
+                value={comments}
+                onChange={handleChange}
+              />
+            </label>
+            <select
+              sx={{ m: 1 }}
+              required
                 // eslint-disable-next-line camelcase
-                value={client_id}
-                onChange={handleChange}
-                name="client_id"
-                className="interventions__select"
-              >
-                <option value="" disabled selected>Choisir un client</option>
-                {clients.map((client) => (
-                  <option
-                    key={client.id}
-                    value={client.id}
-                  >
-                    {client.firstname} {client.lastname}
-                  </option>
-                ))}
-              </select>
-              <select
-                sx={{ m: 1 }}
-                required
+              value={client_id}
+              onChange={handleChange}
+              name="client_id"
+              className="interventions__select"
+            >
+              <option value="" disabled selected>Choisir un client</option>
+              {clients.map((client) => (
+                <option
+                  key={client.id}
+                  value={client.id}
+                >
+                  {client.firstname} {client.lastname}
+                </option>
+              ))}
+            </select>
+            <select
+              sx={{ m: 1 }}
+              required
               // eslint-disable-next-line camelcase
-                value={project_id}
-                onChange={handleChange}
-                name="project_id"
-                className="interventions__select"
-              >
-                <option value="" disabled selected>Choisir un projet</option>
-                {
+              value={project_id}
+              onChange={handleChange}
+              name="project_id"
+              className="interventions__select"
+            >
+              <option value="" disabled selected>Choisir un projet</option>
+              {
                     projects
                       .filter((project) => Number(project.client_id) === Number(selectedClient))
                       .map((project) => (
@@ -309,18 +306,18 @@ function Interventions() {
                         </option>
                       ))
                 }
-              </select>
-              <select
-                sx={{ m: 1 }}
-                required
+            </select>
+            <select
+              sx={{ m: 1 }}
+              required
               // eslint-disable-next-line camelcase
-                value={address_id}
-                onChange={handleChange}
-                name="address_id"
-                className="interventions__select"
-              >
-                <option value="" disabled selected>Choisir une addresse</option>
-                {
+              value={address_id}
+              onChange={handleChange}
+              name="address_id"
+              className="interventions__select"
+            >
+              <option value="" disabled selected>Choisir une addresse</option>
+              {
                     addresses
                       .filter((address) => Number(address.client_id) === Number(selectedClient))
                       .map((address) => (
@@ -332,13 +329,12 @@ function Interventions() {
                         </option>
                       ))
                 }
-              </select>
-              <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
-            </form>
-            <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
-          </Box>
-        </Modal>
-      </div>
+            </select>
+            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+          </form>
+          <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
+        </Box>
+      </Modal>
     </div>
   );
 }
