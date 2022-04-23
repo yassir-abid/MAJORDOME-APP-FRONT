@@ -10,7 +10,7 @@ import { CardMedia, Typography } from '@mui/material';
 
 import Avatar from '../Avatar/Avatar';
 
-import './profilStyle.scss';
+// import './profilStyle.scss';
 
 function HomeAppHeader() {
   const [avatar, setAvatar] = useState('/static/images/avatar/1.jpg');
@@ -67,29 +67,46 @@ function HomeAppHeader() {
   }, []);
 
   return (
-    <div>
-      <header className="profile-header">
-        <div className="profile-header_avatar">
-          <div>
-            <Stack htmlFor="image_up" onClick={handleOpenModal}>
-              <Avatar avatar={avatar} firstname={data.firstname} />
-            </Stack>
-          </div>
-        </div>
-        <div className="profile-header_title">
-          <h1>{data.firstname} {data.lastname}</h1>
-        </div>
-      </header>
+    <Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Box>
+          <Stack htmlFor="image_up" onClick={handleOpenModal}>
+            <Avatar avatar={avatar} firstname={data.firstname} />
+          </Stack>
+        </Box>
+        <Box
+          sx={{
+            m: 1,
+          }}
+        >
+          <Typography>{data.firstname} {data.lastname}</Typography>
+        </Box>
+      </Box>
       <div>
         <Modal
-          className=""
           open={open}
           onClose={handleCloseModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
           <Box
-            className="profile__modal"
+            sx={{
+              position: 'absolute',
+              top: '0%',
+              left: '50%',
+              transform: 'translate(-50%, 0%)',
+              // minWidth: 1,
+              width: 500,
+              maxWidth: '100%',
+              p: 1,
+              bgcolor: 'background.default',
+            }}
           >
             <Typography variant="h3" component="h1" gutterBottom sx={{ textAlign: 'center' }}> Photo de profil </Typography>
             <TextField
@@ -108,7 +125,7 @@ function HomeAppHeader() {
                       : selectedFile === '' && avatar !== '/static/images/avatar/1.jpg' ? <CardMedia component="img" src={avatar} sx={{ borderRadius: '50%' }} />
                         : <CardMedia component="img" src="https://www.handiclubnimois.fr/wp-content/uploads/2020/10/blank-profile-picture-973460_1280.png" sx={{ borderRadius: '50%' }} />
                 }
-            <form className="avatar__add" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <input
                 className="input-avatar"
                 id="image_up"
@@ -121,11 +138,11 @@ function HomeAppHeader() {
               />
               <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
             </form>
-            <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
+            <Button onClick={handleCloseModal}>Fermer</Button>
           </Box>
         </Modal>
       </div>
-    </div>
+    </Box>
 
   );
 }

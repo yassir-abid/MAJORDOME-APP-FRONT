@@ -8,10 +8,19 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { styled } from '@mui/material/styles';
+import Fab from '@mui/material/Fab';
+import Typography from '@mui/material/Typography';
+import CancelIcon from '@mui/icons-material/Cancel';
+
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 import ProfileHeader from './ProfileHeader';
-import './profilStyle.scss';
+// import './profilStyle.scss';
 
 function Profile() {
   // modal to update client
@@ -111,50 +120,131 @@ function Profile() {
   }, []);
 
   return (
-    <div className="profile">
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItem: 'center',
+        mt: 3,
+        ml: 1,
+        mr: 1,
+        height: '100vh',
+      }}
+    >
       <ProfileHeader />
-      <main className="profile-main">
+      <main>
         <Box
-          component="form"
-          // noValidate
-          // autoComplete="off"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              mb: 1,
+              height: '100%',
+            },
+          }}
         >
-          <form>
-            <TextField
-              sx={{ mt: 1, mb: 1 }}
-              fullWidth
-              id="firstName"
-              name="firstname"
-              label="Prénom"
-              value={firstname}
+          <ListItem
+            sx={{
+              mt: 4,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={firstname}
             />
-
-            <TextField sx={{ mb: 1 }} fullWidth label="Nom" type="text" name="lastName" value={lastname} />
-
-            <TextField sx={{ mb: 1 }} fullWidth label="Email" type="email" name="email" value={email} />
-
-            <TextField sx={{ mb: 1 }} fullWidth label="Téléphone" type="tel" name="phone" value={phone} />
-          </form>
+          </ListItem>
+          <ListItem
+            sx={{
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={lastname}
+            />
+          </ListItem>
+          <ListItem
+            sx={{
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={email}
+            />
+          </ListItem>
+          <ListItem
+            sx={{
+              mb: 3,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={phone}
+            />
+          </ListItem>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Box
+              sx={{
+                mt: 2,
+              }}
+            >
+              <Button variant="contained" onClick={handleOpenModal}>Modifier</Button>
+            </Box>
+            <Box
+              sx={{
+                // position: 'fixed',
+                // bottom: 100,
+                mt: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
+              <Box sx={{ mb: 2 }}>
+                <Link to="/">
+                  <Button type="button" color="secondary" variant="outlined">
+                    Déconnexion
+                  </Button>
+                </Link>
+              </Box>
+              <Box>
+                {/* FIXME: lien ci-dessous à remplir */}
+                <Link to="#">
+                  <Typography variant="subtitle2" gutterBottom component="div">
+                    réinitialiser le mot de passe
+                  </Typography>
+                </Link>
+              </Box>
+              <Box>
+                <Button onClick={deleteProfile}>supprimer le compte ?</Button>
+              </Box>
+            </Box>
+          </Box>
         </Box>
         <div>
-          <Button variant="contained" onClick={handleOpenModal}>Modifier</Button>
-        </div>
 
-        <div className="profile-deconnexion">
-          {/* TODO: modifier la route du lien de déconnexion, pour le moment il renvoie sur "/" */}
-          <Link to="/">
-            <button type="button" className="btn">
-              Déconnexion
-            </button>
-          </Link>
-        </div>
-        <div>
-          <Link to="#">réinitialiser le mot de passe</Link>
-        </div>
-        <div>
-          <Button onClick={deleteProfile}>supprimer le compte ?</Button>
-        </div>
-        <div>
           {/* modal to edit client */}
           <Modal
             className=""
@@ -164,11 +254,26 @@ function Profile() {
             aria-describedby="modal-modal-description"
           >
             <Box
-              className="profile__modal"
+              sx={{
+                position: 'absolute',
+                top: '0%',
+                left: '50%',
+                transform: 'translate(-50%, 0%)',
+                // minWidth: 1,
+                width: 700,
+                maxWidth: '100%',
+                p: 1,
+                bgcolor: 'background.default',
+              }}
             >
-              <h1 className="profile__modal__title">Modification du profil </h1>
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="h5">
+                  Modification du profil
+                </Typography>
+              </Box>
               <form className="profile__edit" onSubmit={editProfile}>
                 <TextField
+                  sx={{ mt: 1, mb: 1, mr: 1 }}
                   id="firstName"
                   name="firstname"
                   label="Prénom"
@@ -177,6 +282,7 @@ function Profile() {
                   onChange={(event) => setFirstname(event.target.value)}
                 />
                 <TextField
+                  sx={{ mt: 1, mb: 1, mr: 1 }}
                   id="lastName"
                   name="lastname"
                   label="Nom"
@@ -185,6 +291,7 @@ function Profile() {
                   onChange={(event) => setLastname(event.target.value)}
                 />
                 <TextField
+                  sx={{ mt: 1, mb: 1, mr: 1 }}
                   id="phone"
                   name="phone"
                   label="tel"
@@ -193,6 +300,7 @@ function Profile() {
                   onChange={(event) => setPhone(event.target.value)}
                 />
                 <TextField
+                  sx={{ mt: 1, mb: 1 }}
                   id="email"
                   name="email"
                   label="email"
@@ -201,14 +309,35 @@ function Profile() {
                   fullWidth
                   onChange={(event) => setEmail(event.target.value)}
                 />
-                <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth onClick={handleCloseModal} type="submit" defaultValue="Envoyer" />
+                <TextField
+                  sx={{
+                    mt: 1,
+                    mb: 1,
+                    bgcolor: 'primary.light',
+                    borderRadius: '5px',
+                  }}
+                  fullWidth
+                  type="submit"
+                  value="Valider"
+                  defaultValue="Envoyer"
+                />
               </form>
-              <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}
+              >
+                <IconButton>
+                  <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+                </IconButton>
+              </Box>
             </Box>
           </Modal>
         </div>
       </main>
-    </div>
+    </Box>
   );
 }
 
