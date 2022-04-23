@@ -19,19 +19,44 @@ function ListProjets({ projects }) {
   // définir nom des status
 
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        mr: 1,
+        ml: 1,
+      }}
+    >
       <List>
         {projects.map((project) => (
-          <ListItem>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              mb: 1,
+              height: '100%',
+            },
+          }}
+          >
             <Link to={`/projects/${project.id}`} key={project.id}>
-              <ListItemText
-                primary={project.title}
-                secondary={project.description}
-              />
-              <Chip size="small" label={project.status} color="primary" />
-
+              <ListItem
+                sx={{
+                  borderRadius: '5px',
+                  border: 1,
+                  boxShadow: 3,
+                  borderColor: 'primary.light',
+                  bgcolor: 'white',
+                }}
+              >
+                <ListItemText
+                  primary={project.title}
+                  secondary={project.description}
+                />
+                <Chip size="small" label={project.status} color="primary" />
+              </ListItem>
             </Link>
-          </ListItem>
+          </Box>
         ))}
       </List>
     </Box>
