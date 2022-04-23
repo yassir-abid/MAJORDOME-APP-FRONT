@@ -8,7 +8,7 @@ import axios from 'axios';
 import { Icon } from '@iconify/react';
 
 // import MUI
-import { Typography } from '@mui/material';
+import { Dialog, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -17,6 +17,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -164,15 +165,15 @@ function Client() {
   }
 
   return (
-    <div>
+    <Box>
       <Box>
         <Box
           sx={{
-            zIndex: 1,
-            position: 'absolute',
-            top: '0%',
-            left: '10',
-            p: 0.8,
+            // zIndex: 1,
+            // position: 'absolute',
+            // top: '0%',
+            // left: '10',
+            // p: 0.8,
           }}
         >
           {/* <Link to="/Profile">
@@ -206,103 +207,103 @@ function Client() {
 
         </Box>
       </Box>
-      <div>
-        <Box>
-          <Box
-            component="form"
-            sx={{
-              m: 1,
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <ListItem
-              sx={{
-                mb: 1,
-                borderRadius: '5px',
-                border: 1,
-                boxShadow: 3,
-                borderColor: 'primary.light',
-                bgcolor: 'white',
-              }}
-            >
-              <ListItemText
-                primary={infos.firstname}
-              />
-            </ListItem>
-            <ListItem
-              sx={{
-                mb: 1,
-                borderRadius: '5px',
-                border: 1,
-                boxShadow: 3,
-                borderColor: 'primary.light',
-                bgcolor: 'white',
-              }}
-            >
-              <ListItemText
-                primary={infos.lastname}
-              />
-            </ListItem>
-            <ListItem
-              sx={{
-                mb: 1,
-                borderRadius: '5px',
-                border: 1,
-                boxShadow: 3,
-                borderColor: 'primary.light',
-                bgcolor: 'white',
-              }}
-            >
-              <ListItemText
-                primary={infos.phone}
-              />
-            </ListItem>
-            <ListItem
-              sx={{
-                mb: 2,
-                borderRadius: '5px',
-                border: 1,
-                boxShadow: 3,
-                borderColor: 'primary.light',
-                bgcolor: 'white',
-              }}
-            >
-              <ListItemText
-                primary={infos.email}
-              />
-            </ListItem>
 
-            {/* récupération des adresses */}
-            <List>
-              {infos.addresses.map((info, index) => (
-                <Box sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flexWrap: 'wrap',
-                  '& > :not(style)': {
-                    height: '100%',
-                  },
-                }}
+      <Box>
+        <Box
+          component="form"
+          sx={{
+            m: 1,
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <ListItem
+            sx={{
+              mb: 1,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={infos.firstname}
+            />
+          </ListItem>
+          <ListItem
+            sx={{
+              mb: 1,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={infos.lastname}
+            />
+          </ListItem>
+          <ListItem
+            sx={{
+              mb: 1,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={infos.phone}
+            />
+          </ListItem>
+          <ListItem
+            sx={{
+              mb: 2,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={infos.email}
+            />
+          </ListItem>
+
+          {/* récupération des adresses */}
+          <List>
+            {infos.addresses.map((info, index) => (
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexWrap: 'wrap',
+                '& > :not(style)': {
+                  height: '100%',
+                },
+              }}
+              >
+                <Typography>Adresse {index + 1} :</Typography>
+                <ListItem
+                  key={info.id}
+                  sx={{
+                    mb: 1,
+                    borderRadius: '5px',
+                    border: 1,
+                    boxShadow: 3,
+                    borderColor: 'primary.light',
+                    bgcolor: 'white',
+                  }}
                 >
-                  <Typography>Adresse {index + 1} :</Typography>
-                  <ListItem
-                    key={info.id}
-                    sx={{
-                      mb: 1,
-                      borderRadius: '5px',
-                      border: 1,
-                      boxShadow: 3,
-                      borderColor: 'primary.light',
-                      bgcolor: 'white',
-                    }}
-                  >
-                    <ListItemText
-                      primary={`${info.number} ${info.street}`}
-                      secondary={info.comments}
-                    />
-                  </ListItem>
-                  {/* <TextField
+                  <ListItemText
+                    primary={`${info.number} ${info.street}`}
+                    secondary={info.comments}
+                  />
+                </ListItem>
+                {/* <TextField
                       fullWidth
                       id="comments"
                       placeholder="Complément d'adresse"
@@ -312,114 +313,140 @@ function Client() {
                       value={info.comments}
                       onChange={handleChange}
                     /> */}
-                  <ListItem
-                    key={info.id}
-                    sx={{
-                      mb: 1,
-                      borderRadius: '5px',
-                      border: 1,
-                      boxShadow: 3,
-                      borderColor: 'primary.light',
-                      bgcolor: 'white',
-                    }}
-                  >
-                    <ListItemText
-                      primary={info.postal_code}
-                    />
-                  </ListItem>
-                  <ListItem
-                    key={info.id}
-                    sx={{
-                      mb: 2,
-                      borderRadius: '5px',
-                      border: 1,
-                      boxShadow: 3,
-                      borderColor: 'primary.light',
-                      bgcolor: 'white',
-                    }}
-                  >
-                    <ListItemText
-                      primary={infos.addresses[0].city}
-                    />
-                  </ListItem>
+                <ListItem
+                  key={info.id}
+                  sx={{
+                    mb: 1,
+                    borderRadius: '5px',
+                    border: 1,
+                    boxShadow: 3,
+                    borderColor: 'primary.light',
+                    bgcolor: 'white',
+                  }}
+                >
+                  <ListItemText
+                    primary={info.postal_code}
+                  />
+                </ListItem>
+                <ListItem
+                  key={info.id}
+                  sx={{
+                    mb: 2,
+                    borderRadius: '5px',
+                    border: 1,
+                    boxShadow: 3,
+                    borderColor: 'primary.light',
+                    bgcolor: 'white',
+                  }}
+                >
+                  <ListItemText
+                    primary={infos.addresses[0].city}
+                  />
+                </ListItem>
 
-                  <Box>
-                    <Typography>Commentaire :</Typography>
-                    <TextField
-                      sx={{ mb: 2 }}
-                      fullWidth
-                      id="comments"
-                      label=""
-                      placeholder="Notes"
-                      multiline
-                      maxRows={4}
-                      value={infos.comments}
-                    />
-                  </Box>
+                <Box>
+                  <Typography>Commentaire :</Typography>
+                  <TextField
+                    sx={{ mb: 2 }}
+                    fullWidth
+                    id="comments"
+                    label=""
+                    placeholder="Notes"
+                    multiline
+                    maxRows={4}
+                    value={infos.comments}
+                  />
                 </Box>
-              ))}
-            </List>
+              </Box>
+            ))}
+          </List>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                '& > *': {
-                  m: 1,
-                },
-              }}
-            >
-              <ButtonGroup variant="text" size="small">
-                {/* TODO: styliser les boutons et les centrer */}
-                {/* créer ou vérifier les liens de chaque boutons */}
-                <Link to={`/documents/clients/${id}`}>
-                  <Button>Documents</Button>
-                </Link>
-              </ButtonGroup>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              '& > *': {
+                m: 1,
+              },
+            }}
+          >
+            <ButtonGroup variant="text" size="small">
+              {/* TODO: styliser les boutons et les centrer */}
+              {/* créer ou vérifier les liens de chaque boutons */}
+              <Link to={`/documents/clients/${id}`}>
+                <Button>Documents</Button>
+              </Link>
+            </ButtonGroup>
 
-              {/* <Link to={`/clients/${id}/notifications_list`}>
+            {/* <Link to={`/clients/${id}/notifications_list`}>
                   <Button>Notifs</Button>
                 </Link> */}
 
-              <ButtonGroup variant="text" size="small">
-                <Link to={`/clients/${id}/equipments`}>
-                  <Button>équipements <br />
-                    & besoins
-                  </Button>
-                </Link>
-              </ButtonGroup>
-              <ButtonGroup variant="text" size="small">
-                {/* add modal sur btn "ajout projets" */}
-                <Button color="success">Ajout <br />Projets
+            <ButtonGroup variant="text" size="small">
+              <Link to={`/clients/${id}/equipments`}>
+                <Button>équipements <br />
+                  & besoins
                 </Button>
-              </ButtonGroup>
+              </Link>
+            </ButtonGroup>
+            <ButtonGroup variant="text" size="small">
+              {/* add modal sur btn "ajout projets" */}
+              <Button color="success">Ajout <br />Projets
+              </Button>
+            </ButtonGroup>
 
-            </Box>
-          </Box>
-
-          <Box>
-            <Typography
-              sx={{ m: 1 }}
-              variant="h6"
-              gutterBottom
-              component="div"
-            >Listes des projets du client
-            </Typography>
-            <ListProjets projects={infos.projects} />
           </Box>
         </Box>
-        {/* modal to edit client */}
-        <Modal
+
+        <Box>
+          <Typography
+            sx={{ m: 1 }}
+            variant="h6"
+            gutterBottom
+            component="div"
+          >Listes des projets du client
+          </Typography>
+          <ListProjets projects={infos.projects} />
+        </Box>
+      </Box>
+      {/* modal to edit client */}
+      <Box
+        sx={{
+          // maxHeight: '100%',
+        }}
+      >
+        <Dialog
+          fullScreen
           open={open}
           onClose={handleCloseModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
+          sx={{
+            // height: `calc(100vh - ${64}px)`,
+            width: '100%',
+            // m: 32,
+          }}
         >
-          <Box>
-            <h1>Modification du client {infos.firstname} </h1>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '0%',
+              left: '50%',
+              // m: 0,
+              transform: 'translate(-50%, 0%)',
+              // // // minWidth: 1,
+              width: 500,
+              maxWidth: '100%',
+              // // height: '100vh',
+              p: 1,
+              bgcolor: 'background.default',
+            }}
+          >
+            <Typography>Modification du client {infos.firstname} </Typography>
             <form onSubmit={editClient}>
               <TextField
+                sx={{ mt: 1, mb: 1 }}
                 id="firstName"
                 name="firstname"
                 label="Prénom"
@@ -428,6 +455,7 @@ function Client() {
                 onChange={(event) => setFirstname(event.target.value)}
               />
               <TextField
+                sx={{ mb: 1 }}
                 id="lastName"
                 name="lastname"
                 label="Nom"
@@ -436,6 +464,7 @@ function Client() {
                 onChange={(event) => setLastname(event.target.value)}
               />
               <TextField
+                sx={{ mb: 1 }}
                 id="phone"
                 name="phone"
                 label="tel"
@@ -444,6 +473,7 @@ function Client() {
                 onChange={(event) => setPhone(event.target.value)}
               />
               <TextField
+                sx={{ mb: 1 }}
                 id="email"
                 name="email"
                 label="email"
@@ -456,7 +486,7 @@ function Client() {
               {/* <p className="client-detail_adresse">Adresse {index + 1}</p> */}
               <div>
                 <TextField
-                  sx={{ width: '10ch' }}
+                  sx={{ mb: 1 }}
                   id="number"
                   name="number"
                   label="numéro"
@@ -466,6 +496,7 @@ function Client() {
                   onChange={(event) => setNumber(event.target.value)}
                 />
                 <TextField
+                  sx={{ mb: 1 }}
                   id="street"
                   name="street"
                   label="rue"
@@ -476,6 +507,7 @@ function Client() {
                   onChange={(event) => setStreet(event.target.value)}
                 />
                 <TextField
+                  sx={{ mb: 1 }}
                   fullWidth
                   id="comments"
                   name="comments"
@@ -488,6 +520,7 @@ function Client() {
                   onChange={(event) => setComments(event.target.value)}
                 />
                 <TextField
+                  sx={{ mb: 1 }}
                   id="postal_code"
                   name="postal_code"
                   label="cp"
@@ -497,6 +530,7 @@ function Client() {
                   onChange={(event) => setPostalCode(event.target.value)}
                 />
                 <TextField
+                  sx={{ mb: 2 }}
                   id="city"
                   name="city"
                   label="ville"
@@ -513,8 +547,9 @@ function Client() {
               /> */}
               </div>
 
-              <p>Commentaire</p>
+              {/* <p>Commentaire</p> */}
               <TextField
+                sx={{ mb: 1 }}
                 fullWidth
                 id="comments"
                 name="comments"
@@ -525,13 +560,34 @@ function Client() {
                 value={clientComments}
                 onChange={(event) => setClientComments(event.target.value)}
               />
-              <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+              <TextField
+                sx={{
+                  mb: 1,
+                  bgcolor: 'primary.light',
+                  borderRadius: '5px',
+                }}
+                fullWidth
+                type="submit"
+                value="Valider"
+                defaultValue="Envoyer"
+              />
             </form>
-            <Button onClick={handleCloseModal}>Fermer</Button>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton>
+                <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+              </IconButton>
+            </Box>
           </Box>
-        </Modal>
-      </div>
-    </div>
+        </Dialog>
+      </Box>
+
+    </Box>
   );
 }
 
