@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import Box from '@mui/material/Box';
@@ -19,6 +20,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+
+import { logout } from '../../actions/signUp';
 import ProfileHeader from './ProfileHeader';
 // import './profilStyle.scss';
 
@@ -112,6 +115,12 @@ function Profile() {
 
       profileToDelete();
     }
+  };
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   useEffect(() => {
@@ -224,7 +233,7 @@ function Profile() {
             >
               <Box sx={{ mb: 2 }}>
                 <Link to="/">
-                  <Button type="button" color="secondary" variant="outlined">
+                  <Button type="button" color="secondary" variant="outlined" onClick={handleLogout}>
                     Déconnexion
                   </Button>
                 </Link>
