@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import Box from '@mui/material/Box';
@@ -10,6 +11,8 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+
+import { changeValue } from '../../actions/password';
 import ProfileHeader from './ProfileHeader';
 import './profilStyle.scss';
 
@@ -21,12 +24,14 @@ function Profile() {
 
   // params axios route GET
   const [data, setData] = useState('');
+  const [id, setId] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
   const token = localStorage.getItem('token');
+
   const loadProfil = async () => {
     try {
       const response = await axios.get('https://majordome-api.herokuapp.com/api/profile', {
@@ -40,6 +45,7 @@ function Profile() {
       setLastname(response.data.lastname);
       setEmail(response.data.email);
       setPhone(response.data.phone);
+      setId(response.data.id);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -105,6 +111,13 @@ function Profile() {
     }
   };
 
+  const dispatch = useDispatch();
+
+  const handleChangePassword = () => {
+    dispatch(changeValue(id, 'id'));
+    navigate('/newpassword');
+  }
+
   useEffect(() => {
     loadProfil();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -149,7 +162,7 @@ function Profile() {
           </Link>
         </div>
         <div>
-          <Link to="#">réinitialiser le mot de passe</Link>
+          <Button onClick={handleChangePassword}>Modifier le mot de passe</Button>
         </div>
         <div>
           <Button onClick={deleteProfile}>supprimer le compte ?</Button>
