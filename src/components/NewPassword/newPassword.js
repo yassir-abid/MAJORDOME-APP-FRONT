@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Link,
   useNavigate,
@@ -17,62 +17,39 @@ import TextField from '@mui/material/TextField';
 import { Icon } from '@iconify/react';
 import Box from '@mui/material/Box';
 
-import { changeValue } from '../../actions/password';
 import Avatar from '../Avatar/Avatar';
 import logo from '../../assets/butler.png';
-import './resetPassword.scss';
+import './newPassword.scss';
 
-function ResetPassword() {
+function NewPassword() {
   const [infos, setInfos] = useState('');
-  const [email, setEmail] = useState('');
-  const [sentRequest, setSentRequest] = useState(false);
-  const [message, setMessage] = useState('');
 
-  //   const [searchParams] = useSearchParams();
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
-  const id = searchParams.get('id');
-  //   const [token, setToken] = useState('');
-  //   const [id, setId] = useState('');
+  const id = useSelector((state) => state.password);
 
-  const checkEmail = async (event) => {
-    setSentRequest(true);
-    try {
-      event.preventDefault();
-      await axios.post('https://majordome-api.herokuapp.com/api/resetpassword', {
-        email,
-      });
-      setMessage('Un email pour réinitialiser votre mot de passe vous a été envoyé !');
-    } catch (error) {
-      if (error.response.data.message) {
-        setMessage(error.response.data.message);
-      }
-    }
-  };
+  console.log('id new password', id);
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const VerifyToken = async () => {
-    setSentRequest(true);
+  const checkEmail = async (event) => {
     try {
-      await axios.get(`https://majordome-api.herokuapp.com/api/resetpassword?token=${token}&id=${id}`);
-      dispatch(changeValue(id, 'id'));
-      navigate('/newpassword');
+      event.preventDefault();
+    //   await axios.post('https://majordome-api.herokuapp.com/api/resetpassword', {
+    //     email,
+    //   });
+    //   setMessage('Un email pour réinitialiser votre mot de passe vous a été envoyé !');
     } catch (error) {
       if (error.response.data.message) {
-        setMessage(error.response.data.message);
+        // setMessage(error.response.data.message);
       }
     }
   };
 
-  useEffect(() => {
-    if (token && id) {
-      VerifyToken();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   useEffect(() => {
+  //     if (token && id) {
+  //       VerifyToken();
+  //     }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, []);
 
   return (
     <div className="resetPassword">
@@ -90,12 +67,12 @@ function ResetPassword() {
               name="email"
               type="email"
               placeholder="Adresse Email"
-              onChange={(event) => setEmail(event.target.value)}
+            //   onChange={(event) => setEmail(event.target.value)}
             />
           </div>
           <TextField className="resetPassword-form-button" sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
         </form>
-        {
+        {/* {
             sentRequest
               ? (
                 <Typography variant="h9" component="div" gutterBottom sx={{ mb: 0 }}>
@@ -103,10 +80,10 @@ function ResetPassword() {
                 </Typography>
               )
               : null
-        }
+        } */}
       </div>
     </div>
   );
 }
 
-export default ResetPassword;
+export default NewPassword;

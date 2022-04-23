@@ -82,7 +82,7 @@ function LoginForm({
                 Inscription
               </button>
             </Link>
-            <a className="login-form-signup" href="forgotPassword">Mot de passe oublié ?</a>
+            <a className="login-form-signup" href="resetpassword">Mot de passe oublié ?</a>
           </div>
         </div>
       )}
