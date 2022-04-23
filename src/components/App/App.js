@@ -80,7 +80,7 @@ function App() {
         main: '#008c8c',
       },
       secondary: {
-        main: '#673ab7',
+        main: '#651fff',
       },
       background: {
         default: '#eeeeee',
@@ -129,11 +129,12 @@ function App() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            overflow: 'hidden',
-            height: '100vh',
+            overflow: 'auto',
+            height: `calc(100vh - ${65}px)`,
+            bgcolor: 'background.default',
           }}
         >
-          <Box sx={{ bgcolor: 'background.default' }}>
+          <Box>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/signup" element={<SignUp />} />
