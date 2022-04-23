@@ -33,6 +33,7 @@ function HomeAppHeader() {
         justifyContent: 'center',
         borderBottomLeftRadius: '17px',
         borderBottomRightRadius: '17px',
+        height: 60,
         pt: 1,
         // p: 1,
       }}

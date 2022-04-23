@@ -80,7 +80,6 @@ function ListClients(props) {
                 <ListItemText
                   primary={`${client.firstname} ${client.lastname}`}
                 />
-
               </ListItem>
             </Link>
             {/* </Paper> */}

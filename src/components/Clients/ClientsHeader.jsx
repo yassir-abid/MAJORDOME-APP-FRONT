@@ -19,6 +19,7 @@ function ClientsHeader() {
       justifyContent: 'center',
       borderBottomLeftRadius: '17px',
       borderBottomRightRadius: '17px',
+      height: 60,
       p: 1,
       // FIXME: gérer le titre en center et l'avatar en start (left)
     }}
