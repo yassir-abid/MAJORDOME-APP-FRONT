@@ -115,8 +115,8 @@ function Documents() {
     formData.append('description', description);
     formData.append('file', file);
     formData.append('client_id', client);
-    formData.append('project', project);
-    formData.append('intervention', intervention);
+    formData.append('project_id', project);
+    formData.append('intervention_id', intervention);
     try {
       const response = await axios({
         method: 'post',
@@ -221,7 +221,7 @@ function Documents() {
               sx={{ m: 1 }}
               // required
               // eslint-disable-next-line camelcase
-              value={project.id}
+              value={projects.id}
               // onChange={handleChange}
               onChange={(event) => setProject(event.target.value)}
               name="project_id"
@@ -229,9 +229,9 @@ function Documents() {
             >
               <option value="" disabled selected>Choisir un projet</option>
               {
-                    projects
-                      .filter((projectt) => Number(projectt.client_id) === Number(selectedClient))
-                      .map((projectt) => (
+                    // projects
+                      // .filter((projectt) => Number(projectt.client_id) === Number(setClient))
+                      projects.map((projectt) => (
                         <option
                           key={projectt.id}
                           value={projectt.id}
@@ -253,9 +253,10 @@ function Documents() {
             >
               <option value="" disabled selected>Choisir une intervention</option>
               {
-                    inters
-                      .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
-                      .map((inter) => (
+                    // inters
+                      // eslint-disable-next-line max-len
+                      // .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
+                      inters.map((inter) => (
                         <option
                           key={inter.id}
                           value={inter.id}
