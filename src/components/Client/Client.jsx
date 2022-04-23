@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Icon } from '@iconify/react';
 
 // import MUI
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -20,7 +21,7 @@ import Modal from '@mui/material/Modal';
 // import projet
 import ListProjets from './ListProjets';
 // import Avatar from '../Avatar/Avatar';
-import './style.scss';
+// import './style.scss';
 
 function Client() {
   const [value, setValue] = useState('');
@@ -156,270 +157,284 @@ function Client() {
   }
 
   return (
-    // Header
-    <div className="client">
-      <header className="client-header">
-        <div className="client-header_avatar">
-          {/* <Link to="/Profile"> */}
-          {/* <Avatar /> */}
-          <Icon icon="ri:delete-bin-2-fill" width="30" height="30" onClick={() => clientDelete(infos.id)} />
-          {/* </Link> */}
-        </div>
-        <div className="client-header_title">
-          <h1>{infos.firstname} {infos.lastname}</h1>
-        </div>
-        <div className="client-header_notify">
-          {/* lien vers modal */}
-          <Icon icon="bxs:edit-alt" width="30" height="30" onClick={handleOpenModal} />
-        </div>
-      </header>
-      <div className="client-detail">
+    <div>
+      <Box>
         <Box
-          component="form"
           sx={{
-            '& .MuiTextField-root': { m: 1 },
+            zIndex: 1,
+            position: 'absolute',
+            top: '0%',
+            left: '10',
+            p: 0.8,
           }}
-          noValidate
-          autoComplete="off"
         >
-          <TextField
-            id="firstName"
-            // label="Prénom"
-            value={infos.firstname}
-            placeholder="Prénom"
-            // defaultValue=""
-          />
-          <TextField
-            id="lastName"
-            // label="Nom"
-            value={infos.lastname}
-            placeholder="Nom"
-            // defaultValue=""
-          />
-          <TextField
-            id="phone"
-            // label="tel"
-            value={infos.phone}
-            placeholder="Numéro"
-            // defaultValue=""
-          />
-          <TextField
-            id="email"
-            // label="email"
-            value={infos.email}
-            placeholder="Email"
-            fullWidth
-          />
-
-          {infos.addresses.map((info, index) => (
-            <ul>
-              <li key={info.id}>
-                <p className="client-detail_adresse">Adresse {index + 1}</p>
-                <div className="client-detail_adresse-div">
-                  <TextField
-                    sx={{ width: '10ch' }}
-                    id="number"
-                    // label="infos.number"
-                    value={info.number}
-                    placeholder="Numéro"
-                    size=""
-                  />
-                  <TextField
-                    id="street"
-                    multiline
-                    maxRows={4}
-                    value={info.street}
-                    placeholder="Rue"
-                  />
-                  <TextField
-                    fullWidth
-                    id="comments"
-                    placeholder="Complément d'adresse"
-                    // fullWidth
-                    multiline
-                    maxRows={4}
-                    value={info.comments}
-                    onChange={handleChange}
-                  />
-                  <TextField
-                    id="postal_code"
-                    label=""
-                    value={info.postal_code}
-                    placeholder="Code postal"
-                  />
-                  <TextField
-                    id="city"
-                    label=""
-                    value={infos.addresses[0].city}
-                    placeholder="Ville"
-                  />
-                </div>
-
-                <h2 className="client-detail_com">Commentaire</h2>
-                <TextField
-                  fullWidth
-                  id="comments"
-                  label=""
-                  placeholder="Notes"
-                  multiline
-                  maxRows={4}
-                  value={infos.comments}
-
-                />
-              </li>
-            </ul>
-          ))}
-          <div className="client-detail_btn">
-            <ButtonGroup variant="text" size="small">
-              {/* TODO: styliser les boutons et les centrer */}
-              {/* créer ou vérifier les liens de chaque boutons */}
-              <Link to={`/documents/clients/${id}`}>
-                <Button>Documents</Button>
-              </Link>
-              <Link to={`/clients/${id}/notifications_list`}>
-                <Button>Notifs</Button>
-              </Link>
-              <Link to={`/clients/${id}/equipments`}>
-                <Button>équipements <br />
-                  & besoins
-                </Button>
-              </Link>
-              {/* add modal sur btn "ajout projets" */}
-              <Button color="success">Ajout <br />Projets
-              </Button>
-            </ButtonGroup>
-          </div>
+          {/* <Link to="/Profile">
+          <Avatar avatar={avatar} firstname={firstname} />
+        </Link> */}
         </Box>
-
-        <div className="client-list">
-          <p>Listes des projets du client</p>
-          <ListProjets projects={infos.projects} />
-        </div>
-      </div>
-      {/* modal to edit client */}
-      <Modal
-        className=""
-        open={open}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          className="client__modal"
+        <Box sx={{
+          bgcolor: 'primary.main',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          borderBottomLeftRadius: '17px',
+          borderBottomRightRadius: '17px',
+          pt: 1,
+          // p: 1,
+        }}
         >
-          <h1 className="client__modal__title">Modification du client {infos.firstname} </h1>
-          <form className="client__edit" onSubmit={editClient}>
+          <Icon icon="ri:delete-bin-2-fill" width="30" height="30" onClick={() => clientDelete(infos.id)} />
+
+          <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
+            {infos.firstname} {infos.lastname}
+          </Typography>
+
+          <Icon icon="bxs:edit-alt" width="30" height="30" onClick={handleOpenModal} />
+
+        </Box>
+      </Box>
+      <div>
+        <div>
+          <Box
+            component="form"
+            sx={{
+              '& .MuiTextField-root': { m: 1 },
+            }}
+            noValidate
+            autoComplete="off"
+          >
             <TextField
               id="firstName"
-              name="firstname"
-              label="Prénom"
-              value={firstname}
+            // label="Prénom"
+              value={infos.firstname}
               placeholder="Prénom"
-              onChange={(event) => setFirstname(event.target.value)}
             />
             <TextField
               id="lastName"
-              name="lastname"
-              label="Nom"
-              value={lastname}
+            // label="Nom"
+              value={infos.lastname}
               placeholder="Nom"
-              onChange={(event) => setLastname(event.target.value)}
             />
             <TextField
               id="phone"
-              name="phone"
-              label="tel"
-              value={phone}
+            // label="tel"
+              value={infos.phone}
               placeholder="Numéro"
-              onChange={(event) => setPhone(event.target.value)}
             />
             <TextField
               id="email"
-              name="email"
-              label="email"
-              value={email}
+            // label="email"
+              value={infos.email}
               placeholder="Email"
               fullWidth
-              onChange={(event) => setEmail(event.target.value)}
             />
 
-            {/* <p className="client-detail_adresse">Adresse {index + 1}</p> */}
-            <div className="client-detail_adresse-div">
-              <TextField
-                sx={{ width: '10ch' }}
-                id="number"
-                name="number"
-                label="numéro"
-                value={number}
-                placeholder="Numéro"
-                size=""
-                onChange={(event) => setNumber(event.target.value)}
-              />
-              <TextField
-                id="street"
-                name="street"
-                label="rue"
-                multiline
-                maxRows={4}
-                value={street}
-                placeholder="Rue"
-                onChange={(event) => setStreet(event.target.value)}
-              />
-              <TextField
-                fullWidth
-                id="comments"
-                name="comments"
-                placeholder="Complément d'adresse"
+            {infos.addresses.map((info, index) => (
+              <ul>
+                <li key={info.id}>
+                  <p>Adresse {index + 1}</p>
+                  <div>
+                    <TextField
+                      sx={{ width: '10ch' }}
+                      id="number"
+                    // label="infos.number"
+                      value={info.number}
+                      placeholder="Numéro"
+                      size=""
+                    />
+                    <TextField
+                      id="street"
+                      multiline
+                      maxRows={4}
+                      value={info.street}
+                      placeholder="Rue"
+                    />
+                    <TextField
+                      fullWidth
+                      id="comments"
+                      placeholder="Complément d'adresse"
                     // fullWidth
-                label="complément d'adresse"
-                multiline
-                maxRows={4}
-                value={comments}
-                onChange={(event) => setComments(event.target.value)}
+                      multiline
+                      maxRows={4}
+                      value={info.comments}
+                      onChange={handleChange}
+                    />
+                    <TextField
+                      id="postal_code"
+                      label=""
+                      value={info.postal_code}
+                      placeholder="Code postal"
+                    />
+                    <TextField
+                      id="city"
+                      label=""
+                      value={infos.addresses[0].city}
+                      placeholder="Ville"
+                    />
+                  </div>
+
+                  <h2>Commentaire</h2>
+                  <TextField
+                    fullWidth
+                    id="comments"
+                    label=""
+                    placeholder="Notes"
+                    multiline
+                    maxRows={4}
+                    value={infos.comments}
+                  />
+                </li>
+              </ul>
+            ))}
+            <div>
+              <ButtonGroup variant="text" size="small">
+                {/* TODO: styliser les boutons et les centrer */}
+                {/* créer ou vérifier les liens de chaque boutons */}
+                <Link to={`/documents/clients/${id}`}>
+                  <Button>Documents</Button>
+                </Link>
+                <Link to={`/clients/${id}/notifications_list`}>
+                  <Button>Notifs</Button>
+                </Link>
+                <Link to={`/clients/${id}/equipments`}>
+                  <Button>équipements <br />
+                    & besoins
+                  </Button>
+                </Link>
+                {/* add modal sur btn "ajout projets" */}
+                <Button color="success">Ajout <br />Projets
+                </Button>
+              </ButtonGroup>
+            </div>
+          </Box>
+
+          <div>
+            <p>Listes des projets du client</p>
+            <ListProjets projects={infos.projects} />
+          </div>
+        </div>
+        {/* modal to edit client */}
+        <Modal
+          open={open}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box>
+            <h1>Modification du client {infos.firstname} </h1>
+            <form onSubmit={editClient}>
+              <TextField
+                id="firstName"
+                name="firstname"
+                label="Prénom"
+                value={firstname}
+                placeholder="Prénom"
+                onChange={(event) => setFirstname(event.target.value)}
               />
               <TextField
-                id="postal_code"
-                name="postal_code"
-                label="cp"
+                id="lastName"
+                name="lastname"
+                label="Nom"
+                value={lastname}
+                placeholder="Nom"
+                onChange={(event) => setLastname(event.target.value)}
+              />
+              <TextField
+                id="phone"
+                name="phone"
+                label="tel"
+                value={phone}
+                placeholder="Numéro"
+                onChange={(event) => setPhone(event.target.value)}
+              />
+              <TextField
+                id="email"
+                name="email"
+                label="email"
+                value={email}
+                placeholder="Email"
+                fullWidth
+                onChange={(event) => setEmail(event.target.value)}
+              />
+
+              {/* <p className="client-detail_adresse">Adresse {index + 1}</p> */}
+              <div>
+                <TextField
+                  sx={{ width: '10ch' }}
+                  id="number"
+                  name="number"
+                  label="numéro"
+                  value={number}
+                  placeholder="Numéro"
+                  size=""
+                  onChange={(event) => setNumber(event.target.value)}
+                />
+                <TextField
+                  id="street"
+                  name="street"
+                  label="rue"
+                  multiline
+                  maxRows={4}
+                  value={street}
+                  placeholder="Rue"
+                  onChange={(event) => setStreet(event.target.value)}
+                />
+                <TextField
+                  fullWidth
+                  id="comments"
+                  name="comments"
+                  placeholder="Complément d'adresse"
+                    // fullWidth
+                  label="complément d'adresse"
+                  multiline
+                  maxRows={4}
+                  value={comments}
+                  onChange={(event) => setComments(event.target.value)}
+                />
+                <TextField
+                  id="postal_code"
+                  name="postal_code"
+                  label="cp"
                 // eslint-disable-next-line camelcase
-                value={postalCode}
-                placeholder="Code postal"
-                onChange={(event) => setPostalCode(event.target.value)}
-              />
-              <TextField
-                id="city"
-                name="city"
-                label="ville"
-                value={city}
-                placeholder="Ville"
-                onChange={(event) => setCity(event.target.value)}
-              />
-              {/* <TextField
+                  value={postalCode}
+                  placeholder="Code postal"
+                  onChange={(event) => setPostalCode(event.target.value)}
+                />
+                <TextField
+                  id="city"
+                  name="city"
+                  label="ville"
+                  value={city}
+                  placeholder="Ville"
+                  onChange={(event) => setCity(event.target.value)}
+                />
+                {/* <TextField
                 name="id"
                 label="addresses_id"
                 value={addressId}
                 placeholder="Ville"
                 onChange={(event) => setAddressId(event.target.value)}
               /> */}
-            </div>
+              </div>
 
-            <p className="client-detail_com">Commentaire</p>
-            <TextField
-              fullWidth
-              id="comments"
-              name="comments"
-              label="détails client"
-              placeholder="Notes"
-              multiline
-              maxRows={4}
-              value={clientComments}
-              onChange={(event) => setClientComments(event.target.value)}
-            />
-            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
-          </form>
-          <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
-        </Box>
-      </Modal>
+              <p>Commentaire</p>
+              <TextField
+                fullWidth
+                id="comments"
+                name="comments"
+                label="détails client"
+                placeholder="Notes"
+                multiline
+                maxRows={4}
+                value={clientComments}
+                onChange={(event) => setClientComments(event.target.value)}
+              />
+              <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+            </form>
+            <Button onClick={handleCloseModal}>Fermer</Button>
+          </Box>
+        </Modal>
+      </div>
     </div>
   );
 }
