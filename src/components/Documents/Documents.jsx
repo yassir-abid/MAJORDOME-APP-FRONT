@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -8,8 +9,15 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { Dialog } from '@material-ui/core';
 import { styled } from '@mui/material/styles';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Fab from '@mui/material/Fab';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import DocumentsHeader from './DocumentsHeader';
 // import './documents.scss';
 import List from './ListDocuments';
@@ -96,7 +104,7 @@ function Documents() {
   const StyledFab = styled(Fab)({
     position: 'fixed',
     zIndex: 1,
-    bottom: 70,
+    bottom: 80,
     right: 25,
     margin: '0 auto',
   });
@@ -144,6 +152,10 @@ function Documents() {
 
   console.log(client);
 
+  const Input = styled('input')({
+    display: 'none',
+  });
+
   return (
     <Box
       sx={{
@@ -176,17 +188,20 @@ function Documents() {
           <AddIcon onClick={handleOpenModal} />
         </StyledFab>
       </div>
-      <Modal
+      <Dialog
+        fullScreen
         open={open}
         onClose={handleCloseModal}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
+        <Box
+          sx={{ p: 1 }}
+        >
           <form onSubmit={handleSubmit}>
             <TextField
               required
-              sx={{ m: 1 }}
+              sx={{ mb: 1 }}
               fullWidth
               label="Titre du document"
               type="text"
@@ -197,7 +212,7 @@ function Documents() {
               onChange={(event) => setTitle(event.target.value)}
             />
             <TextField
-              sx={{ m: 1 }}
+              sx={{ mb: 1 }}
               id="outlined-multiline-static"
               label="Description"
               fullWidth
@@ -209,7 +224,21 @@ function Documents() {
               // onChange={handleChange}
               onChange={(event) => setDescription(event.target.value)}
             />
+            {/* <label htmlFor="contained-button-file">
+              <Input
+                accept="image/*"
+                id="contained-button-file"
+                multiple
+                type="file"
+                onChange={(event) => setPictureFile(event.target.files[0])}
+              />
+              <Button variant="contained" component="span">
+                Upload
+              </Button>
+            </label> */}
             <TextField
+              fullWidth
+              sx={{ mb: 1 }}
               id="file"
               type="file"
               name="file"
@@ -218,35 +247,33 @@ function Documents() {
               // onChange={handleChange}
               onChange={(event) => setPictureFile(event.target.files[0])}
             />
-            <select
-              sx={{ m: 1 }}
-              // required
-                // eslint-disable-next-line camelcase
-              value={clients.id}
-              // onChange={handleChange}
-              onChange={(event) => setClient(event.target.value)}
-              name="client_id"
-              className="interventions__select"
-            >
-              <option value="" disabled selected>Choisir un client</option>
-              {clients.map((clientt) => (
-                <option
-                  key={clientt.id}
-                  value={clientt.id}
+            <Box sx={{ mt: 1, mb: 1, minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Choisir un client</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={clients.id}
+                  label="Choisir un client"
                 >
-                  {clientt.firstname} {clientt.lastname}
-                </option>
-              ))}
-            </select>
-            <select
-              sx={{ m: 1 }}
+                  {clients.map((clientt) => (
+                    <MenuItem key={clientt.id} value={`${clientt.firstname} ${clientt.lastname}`}>{`${clientt.firstname} ${clientt.lastname}`}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+
+            <Select
+              fullWidth
+              sx={{
+                mb: 1,
+              }}
               // required
               // eslint-disable-next-line camelcase
               value={projects.id}
               // onChange={handleChange}
               onChange={(event) => setProject(event.target.value)}
               name="project_id"
-              className="interventions__select"
             >
               <option value="" disabled selected>Choisir un projet</option>
               {
@@ -261,16 +288,18 @@ function Documents() {
                         </option>
                       ))
                 }
-            </select>
-            <select
-              sx={{ m: 1 }}
+            </Select>
+            <Select
+              fullWidth
+              sx={{
+                mb: 1,
+              }}
               // required
               // eslint-disable-next-line camelcase
               value={inters.id}
               // onChange={handleChange}
               onChange={(event) => setIntervention(event.target.value)}
               name="intervention_id"
-              className="interventions__select"
             >
               <option value="" disabled selected>Choisir une intervention</option>
               {
@@ -286,12 +315,32 @@ function Documents() {
                         </option>
                       ))
                 }
-            </select>
-            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+            </Select>
+            <TextField
+              sx={{
+                mb: 1,
+                bgcolor: 'primary.light',
+                borderRadius: '5px',
+              }}
+              fullWidth
+              type="submit"
+              value="Valider"
+              defaultValue="Envoyer"
+            />
           </form>
-          <Button onClick={handleCloseModal}>Fermer</Button>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}
+          >
+            <IconButton>
+              <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+            </IconButton>
+          </Box>
         </Box>
-      </Modal>
+      </Dialog>
     </Box>
   );
 }
