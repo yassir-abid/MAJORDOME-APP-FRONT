@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import ClientHeader from '../ClientHeader';
+// import ClientHeader from '../ClientHeader';
 import '../style.scss';
 
 function Equipments() {
@@ -20,7 +20,7 @@ function Equipments() {
 
   return (
     <div>
-      <ClientHeader />
+      {/* <ClientHeader /> */}
       <div>
         <Box
           component="form"
