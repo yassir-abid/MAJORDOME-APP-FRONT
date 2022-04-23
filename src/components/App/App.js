@@ -10,7 +10,6 @@ import { checkUser } from '../../actions/user';
 import SignUp from '../SignUp';
 import Login from '../Login';
 import Profile from '../Profile/Profile';
-import './style.scss';
 import Clients from '../Clients/clients';
 import Client from '../Client/Client';
 import Equipments from '../Client/Equipments/Equipments';
@@ -20,6 +19,7 @@ import InterventionsReport from '../InterventionsReport/InterventionsReport';
 import Projects from '../Projects/Projects';
 import ProjectDetails from '../Projects/ProjectDetails/ProjectDetails';
 import Schedule from '../Schedule/Schedule';
+// import Schedule from '../ScheduleTest/ScheduleTest';
 import Suppliers from '../Suppliers/Suppliers';
 import SuppliersDetail from '../SuppliersDetail/SuppliersDetail';
 import Documents from '../Documents/Documents';
@@ -27,6 +27,12 @@ import Todo from '../Todo/Todo';
 import Notifications from '../Notifications/Notifications';
 import Error from '../Error/Error';
 import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
+import DocumentByclient from '../DocumentByClient/DocumentByClient';
+import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
+import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
+
+// import 'devextreme/dist/css/dx.greenmist.compact.css';
+import './style.scss';
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +49,7 @@ function App() {
   //   if (loading) {
   //     return <Loading />;
   //   }
+  const token = localStorage.getItem('token');
   return (
     <div className="App">
       <Routes>
@@ -58,6 +65,9 @@ function App() {
         {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
         <Route path="/documents" element={<Documents />} />
         <Route path="/documents/:id" element={<DocumentsDetail />} />
+        <Route path="/documents/clients/:id" element={<DocumentByclient />} />
+        <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
+        <Route path="/documents/interventions/:id" element={<DocumentByInterventions />} />
         <Route path="/interventions" element={<Interventions />} />
         <Route path="/interventions/:id" element={<InterventionsDetail />} />
         <Route path="/interventions/:id/report" element={<InterventionsReport />} />
@@ -72,7 +82,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      <NavBar />
+      {token && <NavBar />}
     </div>
   );
 }

@@ -2,9 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
+import Avatar from '../Avatar/Avatar';
+
 import './interventionsDetail.scss';
 
 function InterventionsDetailHeader({ nameIntervention }) {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <header className="interventionsDetail-header">
       <div className="interventionsDetail-header_notify">
@@ -20,12 +26,9 @@ function InterventionsDetailHeader({ nameIntervention }) {
       </div>
 
       <div className="interventionsDetail-header_avatar">
-        <Icon
-          icon="carbon:user-avatar-filled-alt"
-          color="black"
-          width="40"
-          height="40"
-        />
+        <Link to="/Profile">
+          <Avatar avatar={avatar} firstname={firstname} />
+        </Link>
       </div>
     </header>
   );

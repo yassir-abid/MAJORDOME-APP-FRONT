@@ -13,7 +13,6 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { Icon } from '@iconify/react';
-// import { DateTimePicker } from '@mui/x-date-pickers';
 import Stack from '@mui/material/Stack';
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -142,9 +141,6 @@ function Interventions() {
           />
         </div>
         <List input={inputText} />
-        {/* <div className="interventions-addintervention">
-          <Icon icon="carbon:add-filled" width="30" height="30" />
-        </div> */}
 
         <div className="interventions__add">
           <Icon onClick={handleOpenModal} icon="carbon:add-filled" width="50" height="50" />
@@ -236,8 +232,6 @@ function Interventions() {
                   id="outlined-multiline-static"
                   label="Date de début"
                   fullWidth
-                  multiline
-                  rows={4}
                   name="date"
                   placeholder="Date de début"
                   value={date}
@@ -251,8 +245,6 @@ function Interventions() {
                   id="outlined-multiline-static"
                   label="Date de fin"
                   fullWidth
-                  multiline
-                  rows={4}
                   name="end_date"
                   placeholder="Date de fin"
                   // eslint-disable-next-line camelcase

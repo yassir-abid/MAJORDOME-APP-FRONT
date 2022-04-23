@@ -254,7 +254,7 @@ function InterventionsDetail() {
               </Link>
             </li>
             <li className="interventionsDetail-main_li">
-              <Link to={`/interventions/${id}/documents_list`}>
+              <Link to={`/documents/interventions/${id}`}>
                 <Button>Documents</Button>
               </Link>
             </li>

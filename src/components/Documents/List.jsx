@@ -37,7 +37,7 @@ function List(props) {
     }
     // return the item which contains the user input
 
-    return el.text.toLowerCase().includes(props.input);
+    return el.title.toLowerCase().includes(props.input);
   });
   return (
     <ul className="documents-list">

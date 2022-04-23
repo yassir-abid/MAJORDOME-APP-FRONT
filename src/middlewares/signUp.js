@@ -21,6 +21,7 @@ const signUp = (store) => (next) => (action) => {
 
           // stock token to localStorage
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('pseudo', `${response.data.firstname} ${response.data.lastname}`);
 
           store.dispatch(saveUser(response.data));
         } catch (error) {
