@@ -3,8 +3,10 @@ import './style.scss';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
-import Serveur from '../../assets/serveur.jpg';
+import Button from '@mui/material/Button';
+import Serveur from '../../assets/serveur3.png';
 
 function Error() {
   return (
@@ -20,6 +22,11 @@ function Error() {
           Il semblerait que la page demandée ne soit pas présente ou accessible quel dommage...
         </Typography>
       </CardContent>
+      <CardActions>
+        <Button size="small" color="primary">
+          Home
+        </Button>
+      </CardActions>
     </Card>
   );
 }
