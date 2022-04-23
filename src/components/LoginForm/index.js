@@ -72,8 +72,8 @@ function LoginForm({
               Me connecter
             </button>
           </form>
+          <a className="login-form-signup" href="resetpassword">Mot de passe oublié ?</a>
           <div className="login-form-signup">
-            <span>Pas encore de compte ? </span>
             <Link to="/signup">
               <button
                 type="submit"
@@ -82,7 +82,6 @@ function LoginForm({
                 Inscription
               </button>
             </Link>
-            <a className="login-form-signup" href="resetpassword">Mot de passe oublié ?</a>
           </div>
         </div>
       )}
