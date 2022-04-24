@@ -1,41 +1,37 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { Icon } from '@iconify/react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import { Dialog } from '@material-ui/core';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DocumentsHeader from './DocumentsHeader';
+
 // import './documents.scss';
 import List from './ListDocuments';
 
 function Documents() {
-  const [inters, setInters] = useState([]);
-
-  //   const {
-  //     // eslint-disable-next-line camelcase
-  //     title, description, path, client_id, project_id, intervention_id,
-  //   } = useSelector((state) => state.document);
-
   const [clients, setClients] = useState([]);
-  const [selectedClient, setselectedClient] = useState({});
+  const [projects, setProjects] = useState([]);
+  const [inters, setInters] = useState([]);
+  const [selectedClient, setselectedClient] = useState('');
+
+  console.log('selectedClient', selectedClient);
 
   const token = localStorage.getItem('token');
 
-  const loadData = async () => {
+  const loadInterventions = async () => {
     try {
       const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions', {
         headers: {
@@ -66,8 +62,6 @@ function Documents() {
   //   console.log('clients', clients);
   //   console.log('selectedClient', selectedClient);
   //   console.log('intervention', inters);
-
-  const [projects, setProjects] = useState([]);
   const loadProjects = async () => {
     try {
       const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
@@ -84,7 +78,7 @@ function Documents() {
   // console.log('projects', projects);
 
   useEffect(() => {
-    loadData();
+    loadInterventions();
     loadClients();
     loadProjects();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,25 +102,16 @@ function Documents() {
     right: 25,
     margin: '0 auto',
   });
-  // const dispatch = useDispatch();
-
-  //   const handleChange = (e) => {
-  //     if (e.target.name === 'client_id') {
-  //       setselectedClient(e.target.value);
-  //     }
-  //     dispatch(changeValue(e.target.value, e.target.name));
-  //   };
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [file, setPictureFile] = useState('');
+  const [file, setFile] = useState('');
   const [client, setClient] = useState('');
   const [project, setProject] = useState('');
   const [intervention, setIntervention] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // dispatch(addDocument());
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -145,12 +130,11 @@ function Documents() {
         },
       });
       console.log(response.data);
+      handleCloseModal();
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
-
-  console.log(client);
 
   const Input = styled('input')({
     display: 'none',
@@ -160,7 +144,7 @@ function Documents() {
     <Box
       sx={{
       // FIXME: régler la hauteur
-        height: '100vh',
+        // height: '100vh',
       }}
     >
       <DocumentsHeader />
@@ -188,7 +172,10 @@ function Documents() {
           <AddIcon onClick={handleOpenModal} />
         </StyledFab>
       </div>
+
+      {/* TODO: ici on rentre dans la modal */}
       <Dialog
+        disableEnforceFocus
         fullScreen
         open={open}
         onClose={handleCloseModal}
@@ -221,21 +208,10 @@ function Documents() {
               name="description"
               placeholder="Description"
               value={description}
-              // onChange={handleChange}
               onChange={(event) => setDescription(event.target.value)}
             />
-            {/* <label htmlFor="contained-button-file">
-              <Input
-                accept="image/*"
-                id="contained-button-file"
-                multiple
-                type="file"
-                onChange={(event) => setPictureFile(event.target.files[0])}
-              />
-              <Button variant="contained" component="span">
-                Upload
-              </Button>
-            </label> */}
+
+            {/* Choisir un fichier */}
             <TextField
               fullWidth
               sx={{ mb: 1 }}
@@ -243,79 +219,94 @@ function Documents() {
               type="file"
               name="file"
               accept=".jpg, .jpeg, .png"
-              // value={file}
-              // onChange={handleChange}
-              onChange={(event) => setPictureFile(event.target.files[0])}
+              onChange={(event) => setFile(event.target.files[0])}
             />
-            <Box sx={{ mt: 1, mb: 1, minWidth: 120 }}>
+
+            {/* Choisir un client */}
+            <Box sx={{ mt: 1, mb: 1 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Choisir un client</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={clients.id}
+                  value={client}
+                  onChange={(event) => {
+                    setClient(event.target.value);
+                    setselectedClient(event.target.value);
+                  }}
                   label="Choisir un client"
                 >
+                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {clients.map((clientt) => (
-                    <MenuItem key={clientt.id} value={`${clientt.firstname} ${clientt.lastname}`}>{`${clientt.firstname} ${clientt.lastname}`}</MenuItem>
+                    <MenuItem key={clientt.id} value={clientt.id}>{`${clientt.firstname} ${clientt.lastname}`}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Box>
 
-            <Select
-              fullWidth
-              sx={{
-                mb: 1,
-              }}
-              // required
-              // eslint-disable-next-line camelcase
-              value={projects.id}
-              // onChange={handleChange}
-              onChange={(event) => setProject(event.target.value)}
-              name="project_id"
-            >
-              <option value="" disabled selected>Choisir un projet</option>
-              {
-                    // projects
-                      // .filter((projectt) => Number(projectt.client_id) === Number(setClient))
-                      projects.map((projectt) => (
-                        <option
-                          key={projectt.id}
-                          value={projectt.id}
-                        >
-                          {projectt.title}
-                        </option>
-                      ))
-                }
-            </Select>
-            <Select
-              fullWidth
-              sx={{
-                mb: 1,
-              }}
-              // required
-              // eslint-disable-next-line camelcase
-              value={inters.id}
-              // onChange={handleChange}
-              onChange={(event) => setIntervention(event.target.value)}
-              name="intervention_id"
-            >
-              <option value="" disabled selected>Choisir une intervention</option>
-              {
-                    // inters
-                      // eslint-disable-next-line max-len
-                      // .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
-                      inters.map((inter) => (
-                        <option
-                          key={inter.id}
-                          value={inter.id}
-                        >
-                          {inter.title}
-                        </option>
-                      ))
-                }
-            </Select>
+            {/* Choisir un projet */}
+            <Box sx={{ mt: 1, mb: 1 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Choisir un projet</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={project}
+                  onChange={(event) => setProject(event.target.value)}
+                  label="Choisir un projet"
+                >
+                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
+                  {
+                    selectedClient
+                      ? (
+                        projects
+                          .filter((projectt) => Number(projectt.client_id) === Number(selectedClient))
+                          .map((projectt) => (
+                            <MenuItem key={projectt.id} value={projectt.id}>{projectt.title}</MenuItem>
+                          ))
+                      )
+                      : (projects
+                        .map((projectt) => (
+                          <MenuItem key={projectt.id} value={projectt.id}>{projectt.title}</MenuItem>
+                        ))
+                      )
+                  }
+                </Select>
+              </FormControl>
+            </Box>
+
+            {/* Choisir une intervention */}
+            <Box sx={{ mt: 1, mb: 1 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Choisir une intervention</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={intervention}
+                  label="Choisir une intervention"
+                  onChange={(event) => setIntervention(event.target.value)}
+                >
+                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucune</Typography></MenuItem>
+                  {
+                    selectedClient
+                      ? (
+                        inters
+                          .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
+                          .map((inter) => (
+                            <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
+                          ))
+                      )
+                      : (
+                        inters
+                          .map((inter) => (
+                            <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
+                          ))
+                      )
+                  }
+                </Select>
+              </FormControl>
+            </Box>
+
             <TextField
               sx={{
                 mb: 1,
