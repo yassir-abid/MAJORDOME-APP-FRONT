@@ -2,10 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
+import Avatar from '../Avatar/Avatar';
 
 import './projectsHeader.scss';
 
 function ProjectsHeader() {
+  const avatar = localStorage.getItem('avatar');
+  const firstname = localStorage.getItem('pseudo');
+
   return (
     <header className="projects-header">
       <div className="projects-header_notify">
@@ -21,12 +25,7 @@ function ProjectsHeader() {
       </div>
       <div className="projects-header_avatar">
         <Link to="/Profile">
-          <Icon
-            icon="carbon:user-avatar-filled-alt"
-            color="black"
-            width="40"
-            height="40"
-          />
+          <Avatar avatar={avatar} firstname={firstname} />
         </Link>
       </div>
     </header>

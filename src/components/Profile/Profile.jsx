@@ -13,6 +13,7 @@ import TextField from '@mui/material/TextField';
 import { Icon } from '@iconify/react';
 
 import { changeValue } from '../../actions/password';
+import { logout } from '../../actions/signUp';
 import ProfileHeader from './ProfileHeader';
 import './profilStyle.scss';
 
@@ -117,6 +118,9 @@ function Profile() {
     dispatch(changeValue(id, 'id'));
     navigate('/newpassword');
   }
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   useEffect(() => {
     loadProfil();
@@ -156,7 +160,7 @@ function Profile() {
         <div className="profile-deconnexion">
           {/* TODO: modifier la route du lien de déconnexion, pour le moment il renvoie sur "/" */}
           <Link to="/">
-            <button type="button" className="btn">
+            <button type="button" onClick={handleLogout} className="btn">
               Déconnexion
             </button>
           </Link>

@@ -9,6 +9,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { MobileDateTimePicker } from '@mui/x-date-pickers';
+
 // import InterventionsDetailHeader from './InterventionsDetailHeader';
 import './interventionsDetail.scss';
 
@@ -133,13 +138,22 @@ function InterventionsDetail() {
     }
   };
 
+  const handleChangeStartDate = (StartDate) => {
+    const newStartDate = new Date(StartDate).toISOString();
+    setDate(newStartDate);
+  };
+
+  const handleChangeEndDate = (EndDate) => {
+    const newEndDate = new Date(EndDate).toISOString();
+    setEndDate(newEndDate);
+  };
+
   useEffect(() => {
     infoIntervention();
     loadClients();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // modal to update project
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
@@ -291,30 +305,26 @@ function InterventionsDetail() {
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
-
-            <TextField
-              sx={{ m: 1 }}
-              id="outlined-multiline-static"
-              label="Date de début"
-              fullWidth
-              name="date"
-              placeholder="Date de début"
-              value={date}
-              onChange={(event) => setDate(event.target.value)}
-            />
-
-            <TextField
-              sx={{ m: 1 }}
-              id="outlined-multiline-static"
-              label="Date de fin"
-              fullWidth
-              name="end_date"
-              placeholder="Date de fin"
-                  // eslint-disable-next-line camelcase
-              value={end_date}
-              onChange={(event) => setEndDate(event.target.value)}
-            />
-
+            <LocalizationProvider dateAdapter={AdapterLuxon}>
+              <Stack spacing={3} sx={{ m: 1 }}>
+                <MobileDateTimePicker
+                  label="Date de début"
+                  name="date"
+                  value={date}
+                  onChange={handleChangeStartDate}
+                  inputFormat="dd/MM/yyyy hh:mm a"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <MobileDateTimePicker
+                  label="Date de fin"
+                  name="end_date"
+                  value={end_date}
+                  onChange={handleChangeEndDate}
+                  inputFormat="dd/MM/yyyy hh:mm a"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </Stack>
+            </LocalizationProvider>
             <select
               required
               // eslint-disable-next-line camelcase

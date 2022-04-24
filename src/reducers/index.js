@@ -7,6 +7,7 @@ import projectReducer from './project';
 import addClientReducer from './addClient';
 import interventionReducer from './intervention';
 import passwordReducer from './password';
+import documentReducer from './document';
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   addClient: addClientReducer,
   intervention: interventionReducer,
   password: passwordReducer,
+  document: documentReducer,
 });
 
 export default rootReducer;

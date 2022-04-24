@@ -12,6 +12,7 @@ export const initialState = {
   pseudo: '',
   token: null,
   errorMessage: '',
+  avatar: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
