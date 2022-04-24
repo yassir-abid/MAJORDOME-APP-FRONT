@@ -1,19 +1,21 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {
+  Link, useNavigate, useParams, NavLink,
+} from 'react-router-dom';
 
-import { Icon } from '@iconify/react';
 import TextField from '@mui/material/TextField';
 import { Dialog, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 
 // import './documentsDetail.scss';
 
@@ -22,11 +24,9 @@ import axios from 'axios';
 function DocumentsDetail() {
   const { id } = useParams();
   // console.log(id);
-
   const [data, setData] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [comments, setComments] = useState('');
 
   const token = localStorage.getItem('token');
 
@@ -42,7 +42,6 @@ function DocumentsDetail() {
       // edit the modal
       setTitle(response.data.title);
       setDescription(response.data.description);
-      setComments(response.data.comments);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -84,8 +83,6 @@ function DocumentsDetail() {
       await axios.patch(`https://majordome-api.herokuapp.com/api/documents/${id}`, {
         title,
         description,
-        comments,
-        client_id: data.client.id,
       }, {
         headers: {
           Authorization: `bearer ${token}`,
@@ -118,10 +115,12 @@ function DocumentsDetail() {
         bgcolor: 'primary.main',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         borderBottomLeftRadius: '17px',
         borderBottomRightRadius: '17px',
         height: 60,
+        pl: 1,
+        pr: 1,
         pt: 1,
         // p: 1,
       }}
@@ -141,79 +140,154 @@ function DocumentsDetail() {
 
       </Box>
 
-      <div>
-        {data.description}
-        {!data.description && <p>Aucune description pour ce document</p>}
-      </div>
-      {/* <Link to={`${data.path}`}> */}
-      <a href={`${data.path}`}>Afficher le document</a>
-      {/* </Link> */}
-      {/* modal to edit project */}
-      <Modal
-        open={open}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          className="projects-modal"
-        >
-          <h1>Modification du document {data.title} </h1>
-          <form onSubmit={editDocument}>
-            <TextField
-              required
-              sx={{ m: 1 }}
-              fullWidth
-              label="Nom du document"
-              type="text"
-              name="title"
-              placeholder="Nom du document"
-              value={title}
-                // onChange={handleChange}
-              onChange={(event) => setTitle(event.target.value)}
+      <Box sx={{ m: 1 }}>
+        <Box>
+          <ListItem
+            sx={{
+              mt: 4,
+              mb: 2,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
+            <ListItemText
+              primary={data.title}
             />
-            <TextField
-              sx={{ m: 1 }}
-              id="outlined-multiline-static"
-              label="Description"
-              fullWidth
-              multiline
-              rows={4}
-              name="description"
-              placeholder="Description"
-              value={description}
-                // onChange={handleChange}
-              onChange={(event) => setDescription(event.target.value)}
+            <ListItemText
+              primary={data.description}
             />
-            <TextField
-              sx={{ m: 1 }}
-              id="outlined-multiline-static"
-              label="Commentaires"
-              fullWidth
-              multiline
-              maxRows={4}
-              name="comments"
-              placeholder="Commentaires"
-              value={comments}
-                // onChange={handleChange}
-              onChange={(event) => setComments(event.target.value)}
-            />
-            <TextField
-              sx={{ m: 1 }}
-              id="outlined-multiline-static"
-              label="client_id"
-              fullWidth
-              multiline
-              maxRows={4}
-              name="client_id"
-              placeholder="client_id"
-              // value={data.id}
-            />
-            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
-          </form>
-          <Button onClick={handleCloseModal}>Fermer</Button>
+          </ListItem>
+          <Typography>
+            {data.description}
+          </Typography>
+          {/* <Typography>
+            {!data.description && <p>Aucune description pour ce document</p>}
+          </Typography> */}
         </Box>
-      </Modal>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <Link to={`${data.path}`}>
+            <Button variant="contained">Afficher le document</Button>
+            {/* <a href={`${data.path}`}>Afficher le document</a> */}
+          </Link>
+        </Box>
+      </Box>
+
+      {/* modal to edit project */}
+      <Box
+        sx={{
+          maxHeight: '100%',
+        }}
+      >
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{ height: '100vh' }}
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '0%',
+              left: '50%',
+              transform: 'translate(-50%, 0%)',
+              // minWidth: 1,
+              width: 500,
+              maxWidth: '100%',
+              height: '100vh',
+              p: 1,
+              bgcolor: 'background.default',
+            }}
+          >
+            <Box>
+              <Box>
+                <Typography>Modification du document </Typography>
+              </Box>
+              <form onSubmit={editDocument}>
+                <TextField
+                  required
+                  sx={{ mt: 4, mb: 1 }}
+                  fullWidth
+                  label="Nom du document"
+                  type="text"
+                  name="title"
+                  placeholder="Nom du document"
+                  value={title}
+                // onChange={handleChange}
+                  onChange={(event) => setTitle(event.target.value)}
+                />
+                <TextField
+                  sx={{ mt: 1, mb: 1 }}
+                  id="outlined-multiline-static"
+                  label="Description"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  name="description"
+                  placeholder="Description"
+                  value={description}
+                // onChange={handleChange}
+                  onChange={(event) => setDescription(event.target.value)}
+                />
+                {/* <TextField
+                sx={{ mb: 1 }}
+                id="outlined-multiline-static"
+                label="Commentaires"
+                fullWidth
+                multiline
+                maxRows={4}
+                name="comments"
+                placeholder="Commentaires"
+                value={comments}
+                // onChange={handleChange}
+                onChange={(event) => setComments(event.target.value)}
+              /> */}
+                {/* <TextField
+                  sx={{ mb: 1 }}
+                  id="outlined-multiline-static"
+                  label="client_id"
+                  fullWidth
+                  multiline
+                  maxRows={4}
+                  name="client_id"
+                  placeholder="client_id"
+                /> */}
+                <TextField
+                  sx={{
+                    mb: 1,
+                    bgcolor: 'primary.light',
+                    borderRadius: '5px',
+                  }}
+                  fullWidth
+                  type="submit"
+                  value="Valider"
+                  defaultValue="Envoyer"
+                />
+              </form>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}
+              >
+                <IconButton>
+                  <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+                </IconButton>
+              </Box>
+            </Box>
+          </Box>
+        </Dialog>
+      </Box>
     </Box>
   );
 }
