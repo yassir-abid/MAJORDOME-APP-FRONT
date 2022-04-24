@@ -17,7 +17,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DocumentsHeader from './DocumentsHeader';
-
 // import './documents.scss';
 import List from './ListDocuments';
 
@@ -116,9 +115,15 @@ function Documents() {
     formData.append('title', title);
     formData.append('description', description);
     formData.append('file', file);
-    formData.append('client_id', client);
-    formData.append('project_id', project);
-    formData.append('intervention_id', intervention);
+    if (client !== '') {
+      formData.append('client_id', client);
+    }
+    if (project !== '') {
+      formData.append('project_id', project);
+    }
+    if (intervention !== '') {
+      formData.append('intervention_id', intervention);
+    }
     try {
       const response = await axios({
         method: 'post',
@@ -130,15 +135,10 @@ function Documents() {
         },
       });
       console.log(response.data);
-      handleCloseModal();
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
-
-  const Input = styled('input')({
-    display: 'none',
-  });
 
   return (
     <Box
@@ -195,7 +195,6 @@ function Documents() {
               name="title"
               placeholder="Titre du document"
               value={title}
-              // onChange={handleChange}
               onChange={(event) => setTitle(event.target.value)}
             />
             <TextField
@@ -286,7 +285,7 @@ function Documents() {
                   label="Choisir une intervention"
                   onChange={(event) => setIntervention(event.target.value)}
                 >
-                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucune</Typography></MenuItem>
+                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {
                     selectedClient
                       ? (
