@@ -1,14 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
-// import { saveAs } from 'file-saver';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Icon } from '@iconify/react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import './documentsDetail.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+
+// import './documentsDetail.scss';
+
 import axios from 'axios';
 
 function DocumentsDetail() {
@@ -105,28 +106,27 @@ function DocumentsDetail() {
     return null;
   }
   return (
-    <div className="projectDetails">
-      <div className="projects__details__header">
-        <div className="projects__details__delete">
+    <div>
+      <div>
+        <div>
           <Icon icon="ri:delete-bin-2-fill" width="30" height="30" onClick={() => documentDelete(data.id)} />
         </div>
-        <div className="projects__details__header_title">
+        <div>
           <h1>{data.title}</h1>
         </div>
-        <div className="projects__details__header_avatar">
+        <div>
           <Icon icon="bxs:edit-alt" width="30" height="30" onClick={handleOpenModal} />
         </div>
       </div>
-      <div className="projectDetails__description">
+      <div>
         {data.description}
-        {!data.description && <p>Aucune déscription pour ce document</p>}
+        {!data.description && <p>Aucune description pour ce document</p>}
       </div>
       {/* <Link to={`${data.path}`}> */}
       <a href={`${data.path}`}>Afficher le document</a>
       {/* </Link> */}
       {/* modal to edit project */}
       <Modal
-        className=""
         open={open}
         onClose={handleCloseModal}
         aria-labelledby="modal-modal-title"
@@ -135,8 +135,8 @@ function DocumentsDetail() {
         <Box
           className="projects-modal"
         >
-          <h1 className="projects__modal__title">Modification du document {data.title} </h1>
-          <form className="project__add" onSubmit={editDocument}>
+          <h1>Modification du document {data.title} </h1>
+          <form onSubmit={editDocument}>
             <TextField
               required
               sx={{ m: 1 }}
@@ -188,7 +188,7 @@ function DocumentsDetail() {
             />
             <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
           </form>
-          <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
+          <Button onClick={handleCloseModal}>Fermer</Button>
         </Box>
       </Modal>
     </div>
