@@ -1,43 +1,82 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+
 import './style.scss';
 import logo from '../../assets/butler.png';
 
 function Home() {
   return (
-    <div className="home">
-      <header className="home-header">
-        <div className="home-header_logo">
+    <div>
+      <Box>
+        <Box
+          sx={{
+            mt: 2,
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <img className="home-header_logo-1" src={logo} alt="Logo" />
-        </div>
-        <h1>Hello !</h1>
-      </header>
-      <main className="home-main">
-        <p>
-          Majordome,<br />
-          C’est un outil de gestion d’activité,
-          un assistant personnel à destination des auto-entrepreneurs,
-          artisans où toutes personnes travaillant seules de manière itinérante.
-          Majordome va vous aider à organiser votre journée, ranger vos documents,
-          gérer vos clients, votre activité et vos interventions.
-        </p>
-      </main>
-      <footer className="home-footer">
-        <div>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            fontStyle: 'italic',
+          }}
+        >
+          <Typography variant="h3" component="div" gutterBottom>Hello !</Typography>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          mt: 2,
+          mr: 4,
+          mb: 6,
+          ml: 4,
+        }}
+      >
+        <Paper elevation={3}>
+          <Typography
+            sx={{
+              p: 2,
+            }}
+          >
+            <Typography fontSize="20px" fontStyle="italic" fontWeight="bold">
+              Majordome,
+            </Typography>
+            C’est un outil de gestion d’activité,
+            un assistant personnel à destination des auto-entrepreneurs,
+            artisans où toutes personnes travaillant seules de manière itinérante.
+            Majordome va vous aider à organiser votre journée, ranger vos documents,
+            gérer vos clients, votre activité et vos interventions.
+          </Typography>
+        </Paper>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Stack spacing={2} direction="row">
           <Link to="/login">
-            <button type="button" className="home-footer_login">
+            <Button type="button" color="primary" variant="contained">
               Connexion
-            </button>
+            </Button>
           </Link>
-        </div>
-        <div>
           <Link to="/signup">
-            <button type="button" className="home-footer_signUp">
+            <Button type="button" color="primary" variant="contained">
               Inscription
-            </button>
+            </Button>
           </Link>
-        </div>
-      </footer>
+        </Stack>
+      </Box>
     </div>
   );
 }
