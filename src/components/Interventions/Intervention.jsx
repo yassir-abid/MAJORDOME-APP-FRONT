@@ -329,6 +329,26 @@ function Interventions() {
                   </Select>
                 </FormControl>
               </Box>
+              <Box sx={{ mt: 1, mb: 1 }}>
+                <FormControl fullWidth required>
+                  <InputLabel id="demo-simple-select-label">Choisir une adresse</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={address_id}
+                    onChange={handleChange}
+                    name="address_id"
+                    label="Choisir une adresse"
+                  >
+                    <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucune</Typography></MenuItem>
+                    {addresses
+                      .filter((address) => Number(address.client_id) === Number(selectedClient))
+                      .map((address) => (
+                        <MenuItem key={address.id} value={address.id}>{address.number} {address.street} {address.postal_code} {address.city}</MenuItem>
+                      ))}
+                  </Select>
+                </FormControl>
+              </Box>
               <TextField
                 sx={{
                   mb: 1,

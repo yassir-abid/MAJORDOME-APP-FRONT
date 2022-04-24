@@ -173,10 +173,10 @@ function DocumentsDetail() {
             justifyContent: 'center',
           }}
         >
-          <Link to={`${data.path}`}>
+          <a target="_blank" href={`${data.path}`} rel="noreferrer">
             <Button variant="contained">Afficher le document</Button>
             {/* <a href={`${data.path}`}>Afficher le document</a> */}
-          </Link>
+          </a>
         </Box>
       </Box>
 
