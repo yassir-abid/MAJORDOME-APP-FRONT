@@ -5,22 +5,26 @@ import { React, useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Carousel from 'react-material-ui-carousel';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
-import Carousel from 'react-material-ui-carousel';
-import { Paper, Button } from '@mui/material';
+import { Dialog, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import { Icon } from '@iconify/react';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import './interventionsReport.scss';
+// import './interventionsReport.scss';
 
 function InterventionsReport() {
   // récupère l'id de la route
@@ -31,6 +35,7 @@ function InterventionsReport() {
   const [beforePictures, setBeforePictures] = useState([]);
   const [afterPictures, setAfterPictures] = useState([]);
   const [report, setReport] = useState('');
+  const [secondaryText, setSecondaryText] = useState(false);
 
   const token = localStorage.getItem('token');
   const infoReport = async () => {
@@ -45,6 +50,9 @@ function InterventionsReport() {
 
       setInfos(response.data);
       setReport(response.data.report);
+      if (!response.data.report) {
+        setSecondaryText(true);
+      }
       setBeforePictures(filtredBeforePictures);
       setAfterPictures(filtredAfterPictures);
     } catch (error) {
@@ -147,207 +155,335 @@ function InterventionsReport() {
   }
 
   return (
-    <div className="interventionsDetail">
-      <header className="interventionsReport-header">
-
-        <div className="interventionsReport-header_title">
-          <h1>{infos.title}</h1>
-        </div>
-
-        <div className="interventionsReport-header_avatar">
-          <Icon icon="bxs:edit-alt" width="30" height="30" onClick={handleOpenReportModal} />
-        </div>
-      </header>
-      <main className="interventionsReport-main">
-        <div className="interventionsReport-container_list">
-          {/* <ul>
-            <li className="interventionsReport-main_li">
-              <p>Nom du projet: {infos.project.title} </p>
-            </li>
-            <li className="interventionsReport-main_li">
-              <p>Nom du client: {infos.client.firstname} {infos.client.lastname}</p>
-            </li>
-            <li className="interventionsReport-main_li">
-              <p>Date de début : {new Date(infos.date).toLocaleDateString('fr-FR', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-              })}
-              </p>
-            </li>
-            <li className="interventionsReport-main_li">
-              <p>Date de fin : {new Date(infos.end_date).toLocaleDateString('fr-FR', {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-              })}
-              </p>
-            </li>
-          </ul> */}
-          <TextField
-            sx={{ mt: 1, mb: 1 }}
-            fullWidth
-            id="project"
-            name="project"
-            label="Nom du projet"
-            value={infos.project.title}
-          />
-          <TextField
-            sx={{ mt: 1, mb: 1 }}
-            fullWidth
-            id="client"
-            name="client"
-            label="Nom du client"
-            value={`${infos.client.firstname} ${infos.client.lastname}`}
-          />
-          <TextField
-            sx={{ mt: 1, mb: 1 }}
-            fullWidth
-            id="date"
-            label="Date de début"
-            value={new Date(infos.date).toLocaleDateString('fr-FR', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-            })}
-          />
-          <TextField
-            sx={{ mt: 1, mb: 1 }}
-            fullWidth
-            id="end_date"
-            label="Date de fin"
-            value={new Date(infos.end_date).toLocaleDateString('fr-FR', {
-              day: 'numeric',
-              month: 'short',
-              year: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-            })}
-          />
-          <TextField
-            sx={{ mt: 1, mb: 1 }}
-            fullWidth
-            multiline
-            minRows={4}
-            maxRows={6}
-            id="report"
-            name="report"
-            label="Rapport"
-            value={infos.report}
-          />
+    <Box>
+      <Box>
+        <Box
+          sx={{
+            // zIndex: 1,
+            // position: 'absolute',
+            // top: '0%',
+            // left: '10',
+            // p: 0.8,
+          }}
+        >
+          {/* <Link to="/Profile">
+          <Avatar avatar={avatar} firstname={firstname} />
+        </Link> */}
+        </Box>
+        <Box sx={{
+          bgcolor: 'primary.main',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          borderBottomLeftRadius: '17px',
+          borderBottomRightRadius: '17px',
+          height: 60,
+          pl: 1,
+          pr: 1,
+          pt: 1,
+          // p: 1,
+        }}
+        >
+          <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
+            {infos.title} - Rapport
+          </Typography>
+          <Fab size="small" color="secondary" aria-label="edit">
+            <EditIcon
+              onClick={handleOpenReportModal}
+            />
+          </Fab>
+          {/* <Icon icon="bxs:edit-alt" width="30" height="30"/> */}
+        </Box>
+      </Box>
+      <Box>
+        <Box
+          component="form"
+          sx={{
+            m: 1,
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              height: '100%',
+            },
+          }}
+          >
+            <Typography>Projet</Typography>
+            <ListItem
+              key={infos.project.id}
+              sx={{
+                mb: 1,
+                borderRadius: '5px',
+                border: 1,
+                boxShadow: 3,
+                borderColor: 'primary.light',
+                bgcolor: 'white',
+              }}
+            >
+              <ListItemText
+                primary={`${infos.project.title}`}
+              />
+            </ListItem>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              height: '100%',
+            },
+          }}
+          >
+            <Typography>Client</Typography>
+            <ListItem
+              key={infos.client.id}
+              sx={{
+                mb: 1,
+                borderRadius: '5px',
+                border: 1,
+                boxShadow: 3,
+                borderColor: 'primary.light',
+                bgcolor: 'white',
+              }}
+            >
+              <ListItemText
+                primary={`${infos.client.firstname} ${infos.client.lastname}`}
+              />
+            </ListItem>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              height: '100%',
+            },
+          }}
+          >
+            <Typography>Date de début</Typography>
+            <ListItem
+              key={infos.date}
+              sx={{
+                mb: 1,
+                borderRadius: '5px',
+                border: 1,
+                boxShadow: 3,
+                borderColor: 'primary.light',
+                bgcolor: 'white',
+              }}
+            >
+              <TextField
+                id="date"
+                value={new Date(infos.date).toLocaleDateString('fr-FR', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })}
+                variant="standard"
+              />
+            </ListItem>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              height: '100%',
+            },
+          }}
+          >
+            <Typography>Date de fin</Typography>
+            <ListItem
+              key={infos.end_date}
+              sx={{
+                mb: 1,
+                borderRadius: '5px',
+                border: 1,
+                boxShadow: 3,
+                borderColor: 'primary.light',
+                bgcolor: 'white',
+              }}
+            >
+              <TextField
+                id="end_date"
+                value={new Date(infos.end_date).toLocaleDateString('fr-FR', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric',
+                })}
+                  // onChange={handleChange}
+                variant="standard"
+              />
+            </ListItem>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              height: '100%',
+            },
+          }}
+          >
+            <Typography>Rapport</Typography>
+            <ListItem
+              key={infos.report}
+              sx={{
+                mb: 1,
+                borderRadius: '5px',
+                border: 1,
+                boxShadow: 3,
+                borderColor: 'primary.light',
+                bgcolor: 'white',
+              }}
+              multiline
+              minRows={4}
+              maxRows={6}
+            >
+              <ListItemText
+                primary={infos.report ? `${infos.report}` : null}
+                secondary={secondaryText ? 'Aucun rapport pour cette intervention' : null}
+              />
+            </ListItem>
+          </Box>
           <Box sx={{ width: '90%', m: 'auto' }}>
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1 }}>
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {before}
               </Typography>
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
-              <IconButton color="primary" aria-label="upload picture" component="span" sx={{ p: 0 }} onClick={() => handleOpenPictureModal(before)}>
+              <IconButton aria-label="upload picture" component="span" sx={{ p: 0 }} onClick={() => handleOpenPictureModal(before)}>
                 <PhotoCamera />
               </IconButton>
             </Stack>
-            <Carousel autoPlay={false} fullHeightHover={false} sx={{ minHeight: '50px' }}>
+            <Carousel
+              autoPlay={false}
+              fullHeightHover={false}
+              sx={{ minHeight: '300px' }}
+            >
               {
-                beforePictures.length > 0
-                  ? beforePictures.map((item) => (
-                    <div>
-                      <Card sx={{ minHeight: '50%' }}>
-                        <a href={item.path} target="_blank" rel="noopener noreferrer">
-                          <CardMedia key={item.id} component="img" src={item.path} sx={{ minHeight: 130 }} />
-                        </a>
-                        <CardActions sx={{
-                          display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
-                        }}
-                        >
-                          <a href={item.path} target="_blank" rel="noopener noreferrer">
-                            <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                              {item.title}
-                            </Typography>
-                          </a>
-                          <IconButton color="primary" aria-label="delete-before-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
-                            <DeleteIcon sx={{ fontSize: 30 }} />
-                          </IconButton>
-                        </CardActions>
-                      </Card>
-                    </div>
-                  ))
-                  : (
-                    <div>
-                      <Card>
-                        <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" />
-                      </Card>
-                    </div>
-                  )
-            }
+                    beforePictures.length > 0
+                      ? beforePictures.map((item) => (
+                        <Box>
+                          <Card>
+                            <a href={item.path} target="_blank" rel="noopener noreferrer">
+                              <CardMedia
+                                key={item.id}
+                                component="img"
+                                rc={item.path}
+                                sx={{ minHeight: 130 }}
+                              />
+                            </a>
+                            <CardActions sx={{
+                              display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
+                            }}
+                            >
+                              <a href={item.path} target="_blank" rel="noopener noreferrer">
+                                <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
+                                  {item.title}
+                                </Typography>
+                              </a>
+                              <IconButton aria-label="delete-before-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
+                                <DeleteIcon sx={{ fontSize: 30 }} />
+                              </IconButton>
+                            </CardActions>
+                          </Card>
+                        </Box>
+                      ))
+                      : (
+                        <Box>
+                          <Card>
+                            <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" />
+                          </Card>
+                        </Box>
+                      )
+                  }
             </Carousel>
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1 }}>
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {after}
               </Typography>
               {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
-              <IconButton color="primary" aria-label="upload picture" component="span" sx={{ p: 0 }} onClick={() => handleOpenPictureModal(after)}>
+              <IconButton aria-label="upload picture" component="span" sx={{ p: 0 }} onClick={() => handleOpenPictureModal(after)}>
                 <PhotoCamera />
               </IconButton>
             </Stack>
             <Carousel autoPlay={false} fullHeightHover={false}>
               {
-                afterPictures.length > 0
-                  ? afterPictures.map((item) => (
-                    <div>
-                      <Card>
-                        <a href={item.path} target="_blank" rel="noopener noreferrer">
-                          <CardMedia key={item.id} component="img" src={item.path} sx={{ minHeight: 130 }} />
-                        </a>
-                        <CardActions sx={{
-                          display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
-                        }}
-                        >
-                          <a href={item.path} target="_blank" rel="noopener noreferrer">
-                            <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                              {item.title}
-                            </Typography>
-                          </a>
-                          <IconButton color="primary" aria-label="delete-after-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
-                            <DeleteIcon sx={{ fontSize: 30 }} />
-                          </IconButton>
-                        </CardActions>
-                      </Card>
-                    </div>
-                  ))
-                  : (
-                    <div>
-                      <Card>
-                        <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" />
-                      </Card>
-                    </div>
-                  )
-            }
+                    afterPictures.length > 0
+                      ? afterPictures.map((item) => (
+                        <Box>
+                          <Card>
+                            <a href={item.path} target="_blank" rel="noopener noreferrer">
+                              <CardMedia key={item.id} component="img" src={item.path} sx={{ minHeight: 130 }} />
+                            </a>
+                            <CardActions sx={{
+                              display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
+                            }}
+                            >
+                              <a href={item.path} target="_blank" rel="noopener noreferrer">
+                                <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
+                                  {item.title}
+                                </Typography>
+                              </a>
+                              <IconButton aria-label="delete-after-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
+                                <DeleteIcon sx={{ fontSize: 30 }} />
+                              </IconButton>
+                            </CardActions>
+                          </Card>
+                        </Box>
+                      ))
+                      : (
+                        <Box>
+                          <Card>
+                            <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" />
+                          </Card>
+                        </Box>
+                      )
+                  }
             </Carousel>
           </Box>
-
-        </div>
-      </main>
-      <Modal
-        className=""
-        open={openReportModal}
-        onClose={handleCloseReportModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          maxHeight: '100%',
+        }}
       >
-        <Box
-          className="interventionsReport-modal"
+        <Dialog
+          fullScreen
+          open={openReportModal}
+          onClose={handleCloseReportModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
-          <h1 className="interventionsReport__modal__title"> Rapport d&apos;intervention {infos.title} </h1>
-          <form className="interventionsReport__add" onSubmit={editReport}>
-            <div>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '0%',
+              left: '50%',
+              transform: 'translate(-50%, 0%)',
+              width: 500,
+              maxWidth: '100%',
+              height: '100vh',
+              p: 1,
+              bgcolor: 'background.default',
+            }}
+          >
+            <Typography>{infos.title} - Rapport </Typography>
+            <form onSubmit={editReport}>
               <TextField
                 required
-                sx={{ m: 1 }}
+                sx={{ mt: 1, mb: 1 }}
                 fullWidth
                 multiline
                 minRows={12}
@@ -359,51 +495,108 @@ function InterventionsReport() {
                 value={report}
                 onChange={(event) => setReport(event.target.value)}
               />
-            </div>
-            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
-          </form>
-          <Button className="modal-close1" onClick={handleCloseReportModal}>Fermer</Button>
-        </Box>
-      </Modal>
-      <Modal
-        className=""
-        open={openPictureModal}
-        onClose={handleOpenPictureModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+              <TextField
+                sx={{
+                  mb: 1,
+                  bgcolor: 'primary.light',
+                  borderRadius: '5px',
+                }}
+                fullWidth
+                type="submit"
+                value="Valider"
+                defaultValue="Envoyer"
+              />
+            </form>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton>
+                <CancelIcon fontSize="large" color="secondary" onClick={handleCloseReportModal}> </CancelIcon>
+              </IconButton>
+            </Box>
+          </Box>
+        </Dialog>
+      </Box>
+
+      <Box
+        sx={{
+          maxHeight: '100%',
+        }}
       >
-        <Box
-          className="interventionsReport-modal"
+        <Dialog
+          fullScreen
+          open={openPictureModal}
+          onClose={handleClosePictureModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
-          <h1 className="interventionsReport__modal__title"> Rapport d&apos;intervention {infos.title} </h1>
-          <form className="interventionsReport__add" onSubmit={addPicture}>
-            <TextField
-              required
-              sx={{ m: 1 }}
-              fullWidth
-              label="Titre"
-              type="text"
-              name="title"
-              placeholder="Titre de l'image"
-              onChange={(event) => setPictureTitle(event.target.value)}
-            />
-            <TextField
-              required
-              sx={{ m: 1 }}
-              fullWidth
-              id="file"
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              name="file"
-            //   onChange={handleUploadPicture}
-              onChange={(event) => setPictureFile(event.target.files[0])}
-            />
-            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
-          </form>
-          <Button className="modal-close1" onClick={handleClosePictureModal}>Fermer</Button>
-        </Box>
-      </Modal>
-    </div>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '0%',
+              left: '50%',
+              transform: 'translate(-50%, 0%)',
+              width: 500,
+              maxWidth: '100%',
+              height: '100vh',
+              p: 1,
+              bgcolor: 'background.default',
+            }}
+          >
+            <Typography>{infos.title} - Rapport </Typography>
+            <form onSubmit={addPicture}>
+              <TextField
+                required
+                sx={{ mt: 1, mb: 1 }}
+                fullWidth
+                label="Titre"
+                type="text"
+                name="title"
+                placeholder="Titre de l'image"
+                onChange={(event) => setPictureTitle(event.target.value)}
+              />
+              <TextField
+                required
+                sx={{ m: 1 }}
+                fullWidth
+                id="file"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                name="file"
+                onChange={(event) => setPictureFile(event.target.files[0])}
+              />
+              <TextField
+                sx={{
+                  mb: 1,
+                  bgcolor: 'primary.light',
+                  borderRadius: '5px',
+                }}
+                fullWidth
+                type="submit"
+                value="Valider"
+                defaultValue="Envoyer"
+              />
+            </form>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton>
+                <CancelIcon fontSize="large" color="secondary" onClick={handleClosePictureModal}> </CancelIcon>
+              </IconButton>
+            </Box>
+          </Box>
+        </Dialog>
+      </Box>
+    </Box>
+
   );
 }
 

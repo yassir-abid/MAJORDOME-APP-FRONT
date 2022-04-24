@@ -131,7 +131,9 @@ function App() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
+            // alignItems: 'center',
             overflow: 'auto',
+            // height: '100vh',
             height: `calc(100vh - ${65}px)`,
             bgcolor: 'background.default',
           }}
@@ -167,7 +169,7 @@ function App() {
               <Route path="/notifications" element={<Notifications />} />
               <Route path="*" element={<Error />} />
             </Routes>
-            <NavBar />
+            {token && <NavBar />}
           </Box>
         </Container>
       </ThemeProvider>

@@ -413,7 +413,7 @@ function InterventionsDetail() {
                   onChange={(event) => setDescription(event.target.value)}
                 />
                 <LocalizationProvider dateAdapter={AdapterLuxon}>
-                  <Stack spacing={3} sx={{ m: 1 }}>
+                  <Stack sx={{ mb: 1 }}>
                     <MobileDateTimePicker
                       label="Date de début"
                       name="date"
@@ -422,6 +422,8 @@ function InterventionsDetail() {
                       inputFormat="dd/MM/yyyy hh:mm a"
                       renderInput={(params) => <TextField {...params} />}
                     />
+                  </Stack>
+                  <Stack sx={{ mb: 1 }}>
                     <MobileDateTimePicker
                       label="Date de fin"
                       name="end_date"
@@ -444,7 +446,7 @@ function InterventionsDetail() {
                   value={comments}
                   onChange={(event) => setComments(event.target.value)}
                 />
-                <Box sx={{ mt: 1, mb: 1 }}>
+                <Box sx={{ mb: 1 }}>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Choisir un statut</InputLabel>
                     <Select

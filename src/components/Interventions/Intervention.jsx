@@ -250,7 +250,7 @@ function Interventions() {
                 />
               </label>
               <LocalizationProvider dateAdapter={AdapterLuxon}>
-                <Stack spacing={1} sx={{ mt: 2, mb: 2 }}>
+                <Stack sx={{ mb: 1 }}>
                   <MobileDateTimePicker
                     label="Date de début"
                     name="date"
@@ -259,6 +259,8 @@ function Interventions() {
                     inputFormat="dd/MM/yyyy hh:mm a"
                     renderInput={(params) => <TextField {...params} />}
                   />
+                </Stack>
+                <Stack sx={{ mb: 1 }}>
                   <MobileDateTimePicker
                     label="Date de fin"
                     name="end_date"

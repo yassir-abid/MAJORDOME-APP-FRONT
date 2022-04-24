@@ -69,6 +69,7 @@ function Clients() {
     <Box
       sx={{
         // height: '100vh',
+        // width: '100%',
       }}
     >
       <ClientsHeader />

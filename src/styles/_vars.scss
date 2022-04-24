@@ -6,7 +6,7 @@ $colorPrimaryLight: color.scale($colorPrimary, $lightness: +10%);
 $colorPrimaryDark: color.scale($colorPrimary, $lightness: -20%);
  
 //grey
-$colorSecondary: #c1c1c1;
+$colorSecondary: #eeeeee;
 $colorSecondaryLight: color.scale($colorSecondary, $lightness: +20%);
 $colorSecondaryDark: color.scale($colorSecondary, $lightness: -20%);
 

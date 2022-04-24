@@ -1,40 +1,40 @@
-// @import '../../styles/vars';
+@import '../../styles/vars';
 
-// .login-form {
+.login-form {
   
-//     &-element {
-//       display: flex;
-//       flex-direction: column;
-//     }
+    &-element {
+      display: flex;
+      flex-direction: column;
+    }
   
-//     &-message {
-//       margin: .3em 1em;
-//     }
+    &-message {
+      margin: .3em 1em;
+    }
   
-//     &-logged {
-//       display: flex;
-//       flex-direction: column;
-//     }
+    &-logged {
+      display: flex;
+      flex-direction: column;
+    }
   
-//     &-button {
-//       font-size: 1em;
-//       font-weight: bold;
-//       color: #fff;
-//       background-color: $colorPrimary;
-//       border-radius: .3em;
-//       border: 0;
-//       padding: .7em;
-//       height: 2.5em;
-//       margin-top: 2rem;
+    &-button {
+      font-size: 1em;
+      font-weight: bold;
+      color: #fff;
+      background-color: $colorPrimary;
+      border-radius: .3em;
+      border: 0;
+      padding: .7em;
+      height: 2.5em;
+      margin-top: 2rem;
 
-//       &--accueil {
-//           background-color: $colorPrimaryDark;
-//       }
-//     }
+      &--accueil {
+          background-color: $colorPrimaryDark;
+      }
+    }
 
-//     &-signup {
-//         margin-top: 2rem;
-//         display: flex;
-//         flex-direction: column;
-//     }
-//   }
+    &-signup {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+    }
+  }
