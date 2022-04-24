@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 // import data from './data.json';
 
-import './style.scss';
+// import './style.scss';
 
 function ListProjets({ projects }) {
   // créer un thème personnalisé pour les status
@@ -53,7 +53,7 @@ function ListProjets({ projects }) {
                   primary={project.title}
                   secondary={project.description}
                 />
-                <Chip size="small" label={project.status} color="primary" />
+                <Chip size="small" sx={{ minWidth: 70 }} label={project.status} color="primary" />
               </ListItem>
             </Link>
           </Box>
