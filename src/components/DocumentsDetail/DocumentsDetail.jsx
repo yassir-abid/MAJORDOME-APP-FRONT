@@ -4,7 +4,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Icon } from '@iconify/react';
 import TextField from '@mui/material/TextField';
+import { Dialog, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
+import Fab from '@mui/material/Fab';
+import IconButton from '@mui/material/IconButton';
+import CancelIcon from '@mui/icons-material/Cancel';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
@@ -106,18 +113,34 @@ function DocumentsDetail() {
     return null;
   }
   return (
-    <div>
-      <div>
-        <div>
-          <Icon icon="ri:delete-bin-2-fill" width="30" height="30" onClick={() => documentDelete(data.id)} />
-        </div>
-        <div>
-          <h1>{data.title}</h1>
-        </div>
-        <div>
-          <Icon icon="bxs:edit-alt" width="30" height="30" onClick={handleOpenModal} />
-        </div>
-      </div>
+    <Box>
+      <Box sx={{
+        bgcolor: 'primary.main',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        borderBottomLeftRadius: '17px',
+        borderBottomRightRadius: '17px',
+        height: 60,
+        pt: 1,
+        // p: 1,
+      }}
+      >
+        <Fab size="small" color="secondary" aria-label="edit">
+          <DeleteIcon onClick={() => documentDelete(data.id)} />
+        </Fab>
+        {/* <Icon icon="ri:delete-bin-2-fill" width="30" height="30" /> */}
+
+        <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
+          {data.title}
+        </Typography>
+        <Fab size="small" color="secondary" aria-label="edit">
+          <EditIcon onClick={handleOpenModal} />
+        </Fab>
+        {/* <Icon icon="bxs:edit-alt" width="30" height="30"/> */}
+
+      </Box>
+
       <div>
         {data.description}
         {!data.description && <p>Aucune description pour ce document</p>}
@@ -191,7 +214,7 @@ function DocumentsDetail() {
           <Button onClick={handleCloseModal}>Fermer</Button>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }
 
