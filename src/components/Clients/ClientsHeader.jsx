@@ -1,15 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
-import Avatar from '../Avatar/Avatar';
+// import Avatar from '../Avatar/Avatar';
 
 function ClientsHeader() {
-  const avatar = localStorage.getItem('avatar');
-  const firstname = localStorage.getItem('pseudo');
+  // const avatar = localStorage.getItem('avatar');
+  // const firstname = localStorage.getItem('pseudo');
 
   return (
     <Box sx={{
