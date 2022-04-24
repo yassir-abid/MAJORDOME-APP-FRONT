@@ -49,6 +49,7 @@ function Client() {
   const [city, setCity] = useState('');
   const [clientComments, setClientComments] = useState('');
   const [addressId, setAddressId] = useState('');
+  const [secondaryText, setSecondaryText] = useState(false);
 
   // params axios route GET
   const [infos, setInfos] = useState('');
@@ -76,6 +77,9 @@ function Client() {
       setCity(response.data.addresses[0].city);
       setAddressId(response.data.addresses[0].id);
       setClientComments(response.data.comments);
+      if (!response.data.comments) {
+        setSecondaryText(true);
+      }
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -184,10 +188,12 @@ function Client() {
           bgcolor: 'primary.main',
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-around',
+          justifyContent: 'space-between',
           borderBottomLeftRadius: '17px',
           borderBottomRightRadius: '17px',
           height: 60,
+          pl: 1,
+          pr: 1,
           pt: 1,
           // p: 1,
         }}
@@ -346,7 +352,23 @@ function Client() {
 
                 <Box>
                   <Typography>Commentaire :</Typography>
-                  <TextField
+                  <ListItem
+                    key={infos.comments}
+                    sx={{
+                      mb: 1,
+                      borderRadius: '5px',
+                      border: 1,
+                      boxShadow: 3,
+                      borderColor: 'primary.light',
+                      bgcolor: 'white',
+                    }}
+                  >
+                    <ListItemText
+                      primary={infos.comments ? `${infos.comments}` : null}
+                      secondary={secondaryText ? 'Aucun commentaire pour ce client' : null}
+                    />
+                  </ListItem>
+                  {/* <TextField
                     sx={{ mb: 2 }}
                     fullWidth
                     id="comments"
@@ -355,7 +377,7 @@ function Client() {
                     multiline
                     maxRows={4}
                     value={infos.comments}
-                  />
+                  /> */}
                 </Box>
               </Box>
             ))}
@@ -379,7 +401,7 @@ function Client() {
               <Button href={`/clients/${id}/equipments`} color="secondary" variant="contained">
                 équipements <br />& besoins
               </Button>
-              <Button href="/#" color="secondary" variant="contained">Ajout <br />Projets</Button>
+              <Button href="/projects" color="secondary" variant="contained">Ajout <br />Projets</Button>
             </ButtonGroup>
 
           </Box>
@@ -391,9 +413,21 @@ function Client() {
             variant="h6"
             gutterBottom
             component="div"
-          >Listes des projets du client
+          >Listes des projets du client :
           </Typography>
-          <ListProjets projects={infos.projects} />
+          { infos.projects.length > 0
+            ? (
+              <ListProjets projects={infos.projects} />
+            )
+            : (
+              <Typography
+                sx={{ m: 1, fontStyle: 'italic' }}
+                variant="h8"
+                gutterBottom
+                component="div"
+              >Aucun projet lié à ce client
+              </Typography>
+            )}
         </Box>
       </Box>
       {/* modal to edit client */}
@@ -429,7 +463,7 @@ function Client() {
               bgcolor: 'background.default',
             }}
           >
-            <Typography>Modification du client {infos.firstname} </Typography>
+            <Typography>Modification du client {infos.firstname} {infos.lastname}</Typography>
             <form onSubmit={editClient}>
               <TextField
                 sx={{ mt: 1, mb: 1 }}
