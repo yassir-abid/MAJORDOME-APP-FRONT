@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
@@ -5,20 +7,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import { Icon } from '@iconify/react';
+import { styled } from '@mui/material/styles';
+import Fab from '@mui/material/Fab';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+
 import { changeValue, addProject } from '../../actions/project';
 import ProjectsHeader from './ProjectsHeader';
-import List from './List';
+import ListProjects from './ListProjects';
 import './style.scss';
 
 function Projects() {
-  // request to add clients
-  const [data, setData] = useState([]);
+  const [clients, setClients] = useState([]);
   const token = localStorage.getItem('token');
-  const loadData = async () => {
+  const loadClients = async () => {
     try {
       const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
         headers: {
@@ -26,14 +36,14 @@ function Projects() {
         },
       });
       console.log(response);
-      setData(response.data);
+      setClients(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
 
   useEffect(() => {
-    loadData();
+    loadClients();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,7 +59,6 @@ function Projects() {
   const handleCloseModal = () => setOpen(false);
 
   const {
-    // eslint-disable-next-line camelcase
     title, description, comments, client_id,
   } = useSelector((state) => state.project);
 
@@ -64,99 +73,166 @@ function Projects() {
     dispatch(addProject());
   };
 
+  // code pour le + violet
+  const StyledFab = styled(Fab)({
+    position: 'fixed',
+    zIndex: 1,
+    bottom: 80,
+    right: 25,
+    margin: '0 auto',
+  });
+
   return (
-    <div className="projects">
+    <Box
+      sx={{
+        // height: '100vh',
+      }}
+    >
       <ProjectsHeader />
-      <div className="projects__container__list">
-        <TextField
-          className="projects-searchBar"
-          id="outlined-basic"
-          onChange={inputHandler}
-          variant="outlined"
-          fullWidth
-          label="Search"
-        />
-        <List input={inputText} />
-      </div>
-      <div className="projects__add">
-        <Icon onClick={handleOpenModal} icon="carbon:add-filled" width="50" height="50" />
-      </div>
-      <Modal
-        className=""
-        open={open}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+      <div>
         <Box
-          className="projects-modal"
+          sx={{
+            mt: 2,
+            ml: 1,
+            mr: 1,
+
+          }}
         >
-          <form className="project__add" onSubmit={handleSubmit}>
-            <label>
-              <TextField
-                required
-                sx={{ m: 1 }}
-                fullWidth
-                label="Nom du projet"
-                type="text"
-                name="title"
-                placeholder="Nom du projet"
-                value={title}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              <TextField
-                sx={{ m: 1 }}
-                id="outlined-multiline-static"
-                label="Description"
-                fullWidth
-                multiline
-                rows={4}
-                name="description"
-                placeholder="Description"
-                value={description}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              <TextField
-                sx={{ m: 1 }}
-                id="outlined-multiline-static"
-                label="Commentaires"
-                fullWidth
-                multiline
-                maxRows={4}
-                name="comments"
-                placeholder="Commentaires"
-                value={comments}
-                onChange={handleChange}
-              />
-            </label>
-            <select
-              required
-              // eslint-disable-next-line camelcase
-              value={client_id}
-              onChange={handleChange}
-              name="client_id"
-              className="projects__clients"
-            >
-              <option value="" disabled selected>Choisir un client</option>
-              {data.map((client) => (
-                <option
-                  key={client.id}
-                  value={client.id}
-                >
-                  {client.firstname} {client.lastname}
-                </option>
-              ))}
-            </select>
-            <TextField sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
-          </form>
-          <Button className="modal-close1" onClick={handleCloseModal}>Fermer</Button>
+          <TextField
+            onChange={inputHandler}
+            variant="outlined"
+            fullWidth
+            label="Search"
+          />
         </Box>
-      </Modal>
-    </div>
+        <ListProjects input={inputText} />
+        <div>
+          <StyledFab size="medium" color="secondary" aria-label="add">
+            <AddIcon onClick={handleOpenModal} />
+          </StyledFab>
+        </div>
+      </div>
+
+      <Box
+        sx={{
+          maxHeight: '100%',
+        }}
+      >
+        <Dialog
+          fullScreen
+          open={open}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          sx={{ height: '100vh' }}
+        >
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '0%',
+              left: '50%',
+              transform: 'translate(-50%, 0%)',
+              // minWidth: 1,
+              width: 500,
+              maxWidth: '100%',
+              height: '100vh',
+              p: 1,
+              bgcolor: 'background.default',
+            }}
+          >
+            <form
+              onSubmit={handleSubmit}
+            >
+              <Typography variant="h5">
+                Nouveau projet
+              </Typography>
+              <label>
+                <TextField
+                  required
+                  sx={{ mt: 1, mb: 1 }}
+                  fullWidth
+                  label="Nom du projet"
+                  type="text"
+                  name="title"
+                  placeholder="Nom du projet"
+                  value={title}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                <TextField
+                  sx={{ mb: 1 }}
+                  id="outlined-multiline-static"
+                  label="Description"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  name="description"
+                  placeholder="Description"
+                  value={description}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                <TextField
+                  sx={{ mb: 1 }}
+                  id="outlined-multiline-static"
+                  label="Commentaires"
+                  fullWidth
+                  multiline
+                  maxRows={4}
+                  name="comments"
+                  placeholder="Commentaires"
+                  value={comments}
+                  onChange={handleChange}
+                />
+              </label>
+              {/* Choisir un client */}
+              <Box sx={{ mt: 1, mb: 1 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Choisir un client</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={client_id}
+                    onChange={handleChange}
+                    name="client_id"
+                    label="Choisir un client"
+                  >
+                    <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
+                    {clients.map((client) => (
+                      <MenuItem key={client.id} value={client.id}>{`${client.firstname} ${client.lastname}`}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <TextField
+                sx={{
+                  mb: 1,
+                  bgcolor: 'primary.light',
+                  borderRadius: '5px',
+                }}
+                fullWidth
+                type="submit"
+                value="Valider"
+                defaultValue="Envoyer"
+              />
+            </form>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton>
+                <CancelIcon fontSize="large" color="secondary" onClick={handleCloseModal}> </CancelIcon>
+              </IconButton>
+            </Box>
+          </Box>
+        </Dialog>
+      </Box>
+    </Box>
   );
 }
 
