@@ -20,7 +20,7 @@ import Fab from '@mui/material/Fab';
 
 import { changeValue, addClient } from '../../actions/addClient';
 import ClientsHeader from './ClientsHeader';
-import List from './ListClients';
+import ListClients from './ListClients';
 // import './clients.scss';
 
 function Clients() {
@@ -56,6 +56,7 @@ function Clients() {
     dispatch(addClient());
   };
 
+  // code pour le + violet
   const StyledFab = styled(Fab)({
     position: 'fixed',
     zIndex: 1,
@@ -87,7 +88,7 @@ function Clients() {
             label="Search"
           />
         </Box>
-        <List input={inputText} />
+        <ListClients input={inputText} />
         <div>
           <StyledFab size="medium" color="secondary" aria-label="add">
             <AddIcon onClick={handleOpen} />
