@@ -131,7 +131,7 @@ function DocumentsDetail() {
         {/* <Icon icon="ri:delete-bin-2-fill" width="30" height="30" /> */}
 
         <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
-          {data.title}
+          Document
         </Typography>
         <Fab size="small" color="secondary" aria-label="edit">
           <EditIcon onClick={handleOpenModal} />
@@ -142,9 +142,12 @@ function DocumentsDetail() {
 
       <Box sx={{ m: 1 }}>
         <Box>
+          <Typography sx={{ mt: 4 }}>
+            Titre :
+          </Typography>
           <ListItem
             sx={{
-              mt: 4,
+              mt: 1,
               mb: 2,
               borderRadius: '5px',
               border: 1,
@@ -156,13 +159,29 @@ function DocumentsDetail() {
             <ListItemText
               primary={data.title}
             />
+          </ListItem>
+          <Typography sx={{ mt: 1 }}>
+            Description :
+          </Typography>
+          <ListItem
+            sx={{
+              mt: 1,
+              mb: 2,
+              borderRadius: '5px',
+              border: 1,
+              boxShadow: 3,
+              borderColor: 'primary.light',
+              bgcolor: 'white',
+            }}
+          >
             <ListItemText
               primary={data.description}
             />
           </ListItem>
-          <Typography>
+
+          {/* <Typography>
             {data.description}
-          </Typography>
+          </Typography> */}
           {/* <Typography>
             {!data.description && <p>Aucune description pour ce document</p>}
           </Typography> */}
