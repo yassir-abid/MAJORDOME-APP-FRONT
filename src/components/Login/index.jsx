@@ -24,7 +24,7 @@ function Login() {
 
   const handleLogin = () => {
     dispatch(login());
-    // navigate('/home-app');
+    navigate('/home-app');
   };
 
   const handleLogout = () => {

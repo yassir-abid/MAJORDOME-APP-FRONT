@@ -37,6 +37,8 @@ import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
 import DocumentByclient from '../DocumentByClient/DocumentByClient';
 import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
 import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
+import ResetPassword from '../ResetPassword/resetPassword';
+import NewPassword from '../NewPassword/newPassword';
 
 // import 'devextreme/dist/css/dx.greenmist.compact.css';
 // import './style.scss';

@@ -22,6 +22,7 @@ import { Dialog } from '@material-ui/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Icon } from '@iconify/react';
 
+import { changeValue } from '../../actions/password';
 import { logout } from '../../actions/signUp';
 import ProfileHeader from './ProfileHeader';
 
@@ -35,12 +36,14 @@ function Profile() {
 
   // params axios route GET
   const [data, setData] = useState('');
+  const [id, setId] = useState('');
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
   const token = localStorage.getItem('token');
+
   const loadProfil = async () => {
     try {
       const response = await axios.get('https://majordome-api.herokuapp.com/api/profile', {
@@ -54,6 +57,7 @@ function Profile() {
       setLastname(response.data.lastname);
       setEmail(response.data.email);
       setPhone(response.data.phone);
+      setId(response.data.id);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -121,6 +125,10 @@ function Profile() {
 
   const dispatch = useDispatch();
 
+  const handleChangePassword = () => {
+    dispatch(changeValue(id, 'id'));
+    navigate('/newpassword');
+  }
   const handleLogout = () => {
     dispatch(logout());
   };
