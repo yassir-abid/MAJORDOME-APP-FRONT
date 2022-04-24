@@ -1,34 +1,39 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { Link } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Icon } from '@iconify/react';
-import Avatar from '../Avatar/Avatar';
 
-import './projectsHeader.scss';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+
+// import Avatar from '../Avatar/Avatar';
 
 function ProjectsHeader() {
-  const avatar = localStorage.getItem('avatar');
-  const firstname = localStorage.getItem('pseudo');
+  // const avatar = localStorage.getItem('avatar');
+  // const firstname = localStorage.getItem('pseudo');
 
   return (
-    <header className="projects-header">
-      <div className="projects-header_notify">
-        <Link to="Foo">
-          <Icon icon="fe:search" width="30" />
-        </Link>
-      </div>
-      <div className="projects-header_title">
-        <h1>Projets</h1>
-      </div>
-      <div className="projects-header_notifications">
-        <Icon icon="emojione-v1:red-circle" width="13" />
-      </div>
-      <div className="projects-header_avatar">
+    <Box sx={{
+      bgcolor: 'primary.main',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      borderBottomLeftRadius: '17px',
+      borderBottomRightRadius: '17px',
+      height: 60,
+      p: 1,
+      // FIXME: gérer le titre en center et l'avatar en start (left)
+    }}
+    >
+      {/* <Box>
         <Link to="/Profile">
-          <Avatar avatar={avatar} firstname={firstname} />
+          <Avatar />
         </Link>
-      </div>
-    </header>
+      </Box> */}
+      <Box>
+        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
+          Projets
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 
