@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Serveur from '../../assets/serveur4.jpg';
+import Serveur from '../../assets/serveur.jpg';
 
 function Error() {
   return (
