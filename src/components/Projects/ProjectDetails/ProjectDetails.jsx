@@ -195,7 +195,7 @@ function ProjectDetails() {
               }}
             >
               <ListItemText
-                primary={`${data.client.firstname} ${data.client.lastname}`}
+                primary={`${data.client.lastname} ${data.client.firstname}`}
               />
             </ListItem>
           </Box>
@@ -334,7 +334,7 @@ function ProjectDetails() {
               <form onSubmit={editProject}>
               <TextField
                 required
-                sx={{ mt: 1, mb: 1 }}
+                sx={{ mt: 3, mb: 1 }}
                 fullWidth
                 label="Nom du projet"
                 type="text"
@@ -370,13 +370,13 @@ function ProjectDetails() {
               <TextField
                 sx={{ mb: 1 }}
                 id="outlined-multiline-static"
-                label="client_id"
+                label="client"
                 fullWidth
                 multiline
                 maxRows={4}
                 name="client_id"
-                placeholder="client_id"
-                value={data.client.id}
+                placeholder="client"
+                value={`${data.client.lastname} ${data.client.firstname}`}
               />
               <TextField
                 sx={{

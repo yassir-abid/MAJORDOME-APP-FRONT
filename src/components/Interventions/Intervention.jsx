@@ -37,11 +37,25 @@ import ListInterventions from './ListInterventions';
 
 function Interventions() {
   // request to add clients
+  const [inters, setInters] = useState([]);
   const [clients, setClients] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [selectedClient, setselectedClient] = useState({});
 
   const token = localStorage.getItem('token');
+  const loadData = async () => {
+    try {
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log('get interventions', response.data);
+      setInters(response.data);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
 
   const loadClients = async () => {
     try {
@@ -87,6 +101,7 @@ function Interventions() {
   useEffect(() => {
     loadClients();
     loadProjects();
+    loadData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -100,6 +115,11 @@ function Interventions() {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
+
+  const addInterventionToState = (intervention) => {
+    setInters([...inters, intervention]);
+    handleCloseModal();
+  };
 
   const {
     // eslint-disable-next-line camelcase
@@ -132,7 +152,7 @@ function Interventions() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addIntervention());
+    dispatch(addIntervention(addInterventionToState));
   };
 
   // code pour le + violet
@@ -167,7 +187,7 @@ function Interventions() {
             label="Search"
           />
         </Box>
-        <ListInterventions input={inputText} />
+        <ListInterventions input={inputText} inters={inters} />
         <div>
           <StyledFab size="medium" color="secondary" aria-label="add">
             <AddIcon onClick={handleOpenModal} />
@@ -305,7 +325,7 @@ function Interventions() {
                   >
                     <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                     {clients.map((client) => (
-                      <MenuItem key={client.id} value={client.id}>{`${client.firstname} ${client.lastname}`}</MenuItem>
+                      <MenuItem key={client.id} value={client.id}>{`${client.lastname} ${client.firstname}`}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

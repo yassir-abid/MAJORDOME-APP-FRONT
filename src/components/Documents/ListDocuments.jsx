@@ -11,28 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 // import data from './ListData.json';
 
 function ListDocuments(props) {
-  const [docs, setDocs] = useState([]);
-  const token = localStorage.getItem('token');
-  const loadData = async () => {
-    try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/documents', {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      });
-      console.log('#documents#');
-      console.log(response);
-      setDocs(response.data);
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  const { docs } = props;
   // create a new array by filtering the original array
   const filteredDocs = docs.filter((el) => {
     // if no input the return the original

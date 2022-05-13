@@ -73,7 +73,9 @@ function NewPassword() {
               onChange={(event) => setPasswordConfirm(event.target.value)}
             />
           </div>
-          <TextField className="newPassword-form-button" sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+          <button className="newPassword-form-button" fullWidth type="submit" Value="Envoyer">
+            Envoyer
+          </button>
         </form>
         <Typography variant="h9" component="div" gutterBottom sx={{ mb: 0 }}>
           {message}

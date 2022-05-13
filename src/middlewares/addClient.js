@@ -7,7 +7,7 @@ const addClient = (store) => (next) => (action) => {
       // current state
       const state = store.getState();
 
-      const project = async () => {
+      const client = async () => {
         const token = localStorage.getItem('token');
         try {
           const response = await axios.post('https://majordome-api.herokuapp.com/api/clients', {
@@ -34,16 +34,14 @@ const addClient = (store) => (next) => (action) => {
             },
           });
 
-          // stock token to localStorage
-          // localStorage.setItem('token', response.data.token);
-
+          action.saveClientToState(response.data.client);
           store.dispatch(saveUser(response.data));
         } catch (error) {
           console.log(error);
         }
       };
 
-      project();
+      client();
 
       break;
     }

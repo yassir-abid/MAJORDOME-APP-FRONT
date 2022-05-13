@@ -93,7 +93,9 @@ function ResetPassword() {
               onChange={(event) => setEmail(event.target.value)}
             />
           </div>
-          <TextField className="resetPassword-form-button" sx={{ m: 1, bgcolor: 'text.disabled' }} fullWidth type="submit" defaultValue="Envoyer" />
+          <button className="resetPassword-form-button" type="submit" Value="Envoyer">
+            Envoyer
+          </button>
         </form>
         {
             sentRequest

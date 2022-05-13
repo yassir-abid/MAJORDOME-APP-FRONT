@@ -17,11 +17,9 @@ import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { styled } from '@mui/material/styles';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
-import { Icon } from '@iconify/react';
 import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 // import './interventionsReport.scss';
@@ -185,7 +183,7 @@ function InterventionsReport() {
         }}
         >
           <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
-            {infos.title} - Rapport
+            Rapport
           </Typography>
           <Fab size="small" color="secondary" aria-label="edit">
             <EditIcon
@@ -252,7 +250,7 @@ function InterventionsReport() {
               }}
             >
               <ListItemText
-                primary={`${infos.client.firstname} ${infos.client.lastname}`}
+                primary={`${infos.client.lastname} ${infos.client.firstname}`}
               />
             </ListItem>
           </Box>
@@ -366,9 +364,10 @@ function InterventionsReport() {
               </IconButton>
             </Stack>
             <Carousel
-              autoPlay={false}
+              animation="fade"
+              autoPlay
               fullHeightHover={false}
-              sx={{ minHeight: '300px' }}
+              sx={{ minHeight: '240px' }}
             >
               {
                     beforePictures.length > 0
@@ -417,7 +416,12 @@ function InterventionsReport() {
                 <PhotoCamera />
               </IconButton>
             </Stack>
-            <Carousel autoPlay={false} fullHeightHover={false}>
+            <Carousel
+              animation="fade"
+              autoPlay
+              fullHeightHover={false}
+              sx={{ minHeight: '240px' }}
+            >
               {
                     afterPictures.length > 0
                       ? afterPictures.map((item) => (
@@ -479,7 +483,7 @@ function InterventionsReport() {
               bgcolor: 'background.default',
             }}
           >
-            <Typography>{infos.title} - Rapport </Typography>
+            <Typography> Rapport </Typography>
             <form onSubmit={editReport}>
               <TextField
                 required

@@ -11,8 +11,9 @@ export const changeValue = (value, key) => ({
   key,
 });
 
-export const addProject = () => ({
+export const addProject = (saveProjectToState) => ({
   type: ADD_PROJECT,
+  saveProjectToState,
 });
 
 export const saveUser = (payload) => ({

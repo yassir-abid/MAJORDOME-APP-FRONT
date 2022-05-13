@@ -66,7 +66,7 @@ const onAppointmentFormOpening = function onAppointmentFormOpening(e) {
       name: 'client',
       editorType: 'dxTextBox',
       editorOptions: {
-        value: `${infos.client.firstname} ${infos.client.lastname}`,
+        value: `${infos.client.lastname} ${infos.client.firstname}`,
         readOnly: true,
       },
     },

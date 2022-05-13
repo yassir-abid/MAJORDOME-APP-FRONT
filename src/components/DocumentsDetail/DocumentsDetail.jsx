@@ -27,6 +27,7 @@ function DocumentsDetail() {
   const [data, setData] = useState({});
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [secondaryText, setSecondaryText] = useState(false);
 
   const token = localStorage.getItem('token');
 
@@ -42,6 +43,9 @@ function DocumentsDetail() {
       // edit the modal
       setTitle(response.data.title);
       setDescription(response.data.description);
+      if (!response.data.description) {
+        setSecondaryText(true);
+      }
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -175,16 +179,10 @@ function DocumentsDetail() {
             }}
           >
             <ListItemText
-              primary={data.description}
+              primary={data.description ? `${data.description}` : null}
+              secondary={secondaryText ? 'Aucune description pour ce document' : null}
             />
           </ListItem>
-
-          {/* <Typography>
-            {data.description}
-          </Typography> */}
-          {/* <Typography>
-            {!data.description && <p>Aucune description pour ce document</p>}
-          </Typography> */}
         </Box>
         <Box
           sx={{

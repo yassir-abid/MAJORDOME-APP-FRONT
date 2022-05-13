@@ -87,7 +87,7 @@ function HomeAppHeader() {
             m: 1,
           }}
         >
-          <Typography>{data.firstname} {data.lastname}</Typography>
+          <Typography>{data.lastname} {data.firstname}</Typography>
         </Box>
       </Box>
       <div>

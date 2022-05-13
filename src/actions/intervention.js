@@ -11,8 +11,9 @@ export const changeValue = (value, key) => ({
   key,
 });
 
-export const addIntervention = () => ({
+export const addIntervention = (saveInterventionToState) => ({
   type: ADD_INTERVENTION,
+  saveInterventionToState,
 });
 
 export const saveUser = (payload) => ({

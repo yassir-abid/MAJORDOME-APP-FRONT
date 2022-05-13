@@ -174,7 +174,7 @@ function Profile() {
             }}
           >
             <ListItemText
-              primary={firstname}
+              primary={lastname}
             />
           </ListItem>
           <ListItem
@@ -187,7 +187,7 @@ function Profile() {
             }}
           >
             <ListItemText
-              primary={lastname}
+              primary={firstname}
             />
           </ListItem>
           <ListItem
@@ -250,14 +250,15 @@ function Profile() {
               </Box>
               <Box>
                 {/* FIXME: lien ci-dessous à remplir */}
-                <Link to="#">
+                {/* <Link to="#">
                   <Typography variant="subtitle2" gutterBottom component="div">
                     réinitialiser le mot de passe
                   </Typography>
-                </Link>
+                </Link> */}
+                <Button onClick={handleChangePassword}>Réinitialiser le mot de passe</Button>
               </Box>
               <Box>
-                <Button onClick={deleteProfile}>supprimer le compte ?</Button>
+                <Button onClick={deleteProfile}>Supprimer le compte ?</Button>
               </Box>
             </Box>
           </Box>
@@ -287,6 +288,7 @@ function Profile() {
                   // minWidth: 1,
                   width: 700,
                   maxWidth: '100%',
+                  height: '100%',
                   p: 1,
                   bgcolor: 'background.default',
                 }}
@@ -299,21 +301,21 @@ function Profile() {
                 <form className="profile__edit" onSubmit={editProfile}>
                   <TextField
                     sx={{ mt: 1, mb: 1, mr: 1 }}
-                    id="firstName"
-                    name="firstname"
-                    label="Prénom"
-                    value={firstname}
-                    placeholder="Prénom"
-                    onChange={(event) => setFirstname(event.target.value)}
-                  />
-                  <TextField
-                    sx={{ mt: 1, mb: 1, mr: 1 }}
                     id="lastName"
                     name="lastname"
                     label="Nom"
                     value={lastname}
                     placeholder="Nom"
                     onChange={(event) => setLastname(event.target.value)}
+                  />
+                  <TextField
+                    sx={{ mt: 1, mb: 1, mr: 1 }}
+                    id="firstName"
+                    name="firstname"
+                    label="Prénom"
+                    value={firstname}
+                    placeholder="Prénom"
+                    onChange={(event) => setFirstname(event.target.value)}
                   />
                   <TextField
                     sx={{ mt: 1, mb: 1, mr: 1 }}

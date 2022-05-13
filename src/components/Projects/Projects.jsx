@@ -42,8 +42,34 @@ function Projects() {
     }
   };
 
+  const [projects, setProjects] = useState([]);
+  const loadData = async () => {
+    try {
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      console.log('#projects#');
+      console.log(response);
+      setProjects(response.data);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
+
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
+
+  const addProjectToState = (project) => {
+    setProjects([...projects, project]);
+    handleCloseModal();
+  };
+
   useEffect(() => {
     loadClients();
+    loadData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -53,10 +79,6 @@ function Projects() {
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
-
-  const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(true);
-  const handleCloseModal = () => setOpen(false);
 
   const {
     title, description, comments, client_id,
@@ -70,7 +92,7 @@ function Projects() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProject());
+    dispatch(addProject(addProjectToState));
   };
 
   // code pour le + violet
@@ -105,7 +127,7 @@ function Projects() {
             label="Search"
           />
         </Box>
-        <ListProjects input={inputText} />
+        <ListProjects input={inputText} projects={projects} />
         <div>
           <StyledFab size="medium" color="secondary" aria-label="add">
             <AddIcon onClick={handleOpenModal} />
@@ -201,7 +223,7 @@ function Projects() {
                   >
                     <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                     {clients.map((client) => (
-                      <MenuItem key={client.id} value={client.id}>{`${client.firstname} ${client.lastname}`}</MenuItem>
+                      <MenuItem key={client.id} value={client.id}>{`${client.lastname} ${client.firstname}`}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

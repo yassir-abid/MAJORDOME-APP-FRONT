@@ -49,16 +49,16 @@ function SignUpForm({
         <div>
           <form autoComplete="off" className="login-form-element" onSubmit={handleSignUpSubmit}>
             <Field
-              name="firstname"
-              placeholder="Prénom"
-              onChange={changeField}
-              value={firstname}
-            />
-            <Field
               name="lastname"
               placeholder="Nom"
               onChange={changeField}
               value={lastname}
+            />
+            <Field
+              name="firstname"
+              placeholder="Prénom"
+              onChange={changeField}
+              value={firstname}
             />
             <Field
               name="email"

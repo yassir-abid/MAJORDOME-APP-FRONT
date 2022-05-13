@@ -22,9 +22,7 @@ const addProject = (store) => (next) => (action) => {
             },
           });
 
-          // stock token to localStorage
-          // localStorage.setItem('token', response.data.token);
-
+          action.saveProjectToState(response.data);
           store.dispatch(saveUser(response.data));
         } catch (error) {
           console.log(error);

@@ -49,6 +49,7 @@ function InterventionsDetail() {
   const [end_date, setEndDate] = useState('');
   const [status, setStatus] = useState('');
   const [comments, setComments] = useState('');
+  const [selectedClient, setselectedClient] = useState('');
   const [project_id, setProjectId] = useState('');
   const [address_id, setAddressId] = useState('');
   const [secondaryText, setSecondaryText] = useState(false);
@@ -72,6 +73,7 @@ function InterventionsDetail() {
       if (!response.data.description) {
         setSecondaryText(true);
       }
+      setselectedClient(response.data.client.id);
       setProjectId(response.data.project_id);
       setAddressId(response.data.address_id);
       console.log(infos);
@@ -129,7 +131,6 @@ function InterventionsDetail() {
   const [clients, setClients] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [selectedClient, setselectedClient] = useState({});
 
   const loadClients = async () => {
     try {
@@ -260,7 +261,7 @@ function InterventionsDetail() {
               }}
             >
               <ListItemText
-                primary={`${infos.client.firstname} ${infos.client.lastname}`}
+                primary={`${infos.client.lastname} ${infos.client.firstname}`}
               />
             </ListItem>
           </Box>
@@ -481,7 +482,7 @@ function InterventionsDetail() {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={infos.client.id}
+                      value={selectedClient}
                       onChange={(event) => setselectedClient(event.target.value)}
                       name="client_id"
                       label="Choisir un client"

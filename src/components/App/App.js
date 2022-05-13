@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import Loading from './Loading';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
@@ -37,8 +37,8 @@ import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
 import DocumentByclient from '../DocumentByClient/DocumentByClient';
 import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
 import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
-import ResetPassword from '../ResetPassword/resetPassword';
-import NewPassword from '../NewPassword/newPassword';
+import ResetPassword from '../ResetPassword/ResetPassword';
+import NewPassword from '../NewPassword/NewPassword';
 
 // import 'devextreme/dist/css/dx.greenmist.compact.css';
 // import './style.scss';
@@ -59,6 +59,7 @@ function App() {
   //     return <Loading />;
   //   }
   const token = localStorage.getItem('token');
+  const { logged } = useSelector((state) => state.user);
 
   const ThemeOptions = createTheme({
     // palette: {
@@ -141,6 +142,8 @@ function App() {
           <Box>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/resetpassword" element={<ResetPassword />} />
+              <Route path="/newpassword" element={<NewPassword />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
               <Route path="/home-app" element={<HomeApp />} />
@@ -169,7 +172,7 @@ function App() {
               <Route path="/notifications" element={<Notifications />} />
               <Route path="*" element={<Error />} />
             </Routes>
-            {token && <NavBar />}
+            {logged && <NavBar />}
           </Box>
         </Container>
       </ThemeProvider>

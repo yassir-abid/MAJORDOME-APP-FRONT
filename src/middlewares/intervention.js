@@ -25,6 +25,8 @@ const addIntervention = (store) => (next) => (action) => {
             },
           });
 
+          console.log('action', action);
+          action.saveInterventionToState(response.data);
           store.dispatch(saveUser(response.data));
         } catch (error) {
           console.log(error);

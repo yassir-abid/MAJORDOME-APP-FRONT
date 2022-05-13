@@ -12,26 +12,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 function ListClients(props) {
-  const [clients, setClients] = useState([]);
-  const token = localStorage.getItem('token');
-  const loadData = async () => {
-    try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      });
-      console.log('#clients#');
-      console.log(response);
-      setClients(response.data);
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-  }, []);
+  const { clients } = props;
 
   // create a new array by filtering the original array
   const filteredClients = clients.filter((el) => {
@@ -78,7 +59,7 @@ function ListClients(props) {
                 }}
               >
                 <ListItemText
-                  primary={`${client.firstname} ${client.lastname}`}
+                  primary={`${client.lastname} ${client.firstname}`}
                 />
               </ListItem>
             </Link>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable camelcase */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -32,18 +33,38 @@ function Clients() {
     setInputText(lowerCase);
   };
 
+  const [clients, setClients] = useState([]);
+  const token = localStorage.getItem('token');
+  const loadData = async () => {
+    try {
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      setClients(response.data);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const addClientToState = (client) => {
+    setClients([...clients, client]);
+    handleClose();
+  };
 
   const {
     firstname, lastname, email, phone, number, street,
     postal_code, city, addressComments, clientComments,
   } = useSelector((state) => state.addClient);
-
-  // const {
-  //   firstname, lastname, email, phone, number, street, postal_code, city, comments,
-  // } = useSelector((state) => state.project);
 
   const dispatch = useDispatch();
 
@@ -53,7 +74,7 @@ function Clients() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addClient());
+    dispatch(addClient(addClientToState));
   };
 
   // code pour le + violet
@@ -89,7 +110,7 @@ function Clients() {
             label="Search"
           />
         </Box>
-        <ListClients input={inputText} />
+        <ListClients input={inputText} clients={clients} />
         <div>
           <StyledFab size="medium" color="secondary" aria-label="add">
             <AddIcon onClick={handleOpen} />
@@ -134,7 +155,7 @@ function Clients() {
                   sx={{ mt: 1, mb: 1 }}
                   id="a"
                   fullWidth
-                  label="Nom"
+                  label="Prénom"
                   type="text"
                   name="firstname"
                   value={firstname}
@@ -147,7 +168,7 @@ function Clients() {
                   sx={{ mb: 1 }}
                   id="b"
                   fullWidth
-                  label="Prénom"
+                  label="Nom"
                   type="text"
                   name="lastname"
                   value={lastname}

@@ -11,7 +11,7 @@ export default function AppointmentTooltip(model) {
           {data.title}
         </div>
         <div>
-          Client: {data.client.firstname} {data.client.lastname}
+          Client: {data.client.lastname} {data.client.firstname}
         </div>
         {/* <div>
           Duration: {data.duration.days} j {data.duration.hours} h

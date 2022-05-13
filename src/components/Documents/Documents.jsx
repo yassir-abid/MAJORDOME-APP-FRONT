@@ -18,17 +18,28 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DocumentsHeader from './DocumentsHeader';
 // import './documents.scss';
-import List from './ListDocuments';
+import ListDocuments from './ListDocuments';
 
 function Documents() {
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
   const [inters, setInters] = useState([]);
   const [selectedClient, setselectedClient] = useState('');
-
-  console.log('selectedClient', selectedClient);
+  const [docs, setDocs] = useState([]);
 
   const token = localStorage.getItem('token');
+  const loadData = async () => {
+    try {
+      const response = await axios.get('https://majordome-api.herokuapp.com/api/documents', {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      });
+      setDocs(response.data);
+    } catch (error) {
+      console.log('Erreur de chargement', error);
+    }
+  };
 
   const loadInterventions = async () => {
     try {
@@ -58,9 +69,6 @@ function Documents() {
     }
   };
 
-  //   console.log('clients', clients);
-  //   console.log('selectedClient', selectedClient);
-  //   console.log('intervention', inters);
   const loadProjects = async () => {
     try {
       const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
@@ -74,12 +82,12 @@ function Documents() {
       console.log('Erreur de chargement', error);
     }
   };
-  // console.log('projects', projects);
 
   useEffect(() => {
     loadInterventions();
     loadClients();
     loadProjects();
+    loadData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -135,6 +143,8 @@ function Documents() {
         },
       });
       console.log(response.data);
+      loadData();
+      handleCloseModal();
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -165,7 +175,7 @@ function Documents() {
             label="Search"
           />
         </Box>
-        <List input={inputText} />
+        <ListDocuments input={inputText} docs={docs} />
       </div>
       <div>
         <StyledFab size="medium" color="secondary" aria-label="add">
@@ -237,7 +247,7 @@ function Documents() {
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {clients.map((clientt) => (
-                    <MenuItem key={clientt.id} value={clientt.id}>{`${clientt.firstname} ${clientt.lastname}`}</MenuItem>
+                    <MenuItem key={clientt.id} value={clientt.id}>{`${clientt.lastname} ${clientt.firstname}`}</MenuItem>
                   ))}
                 </Select>
               </FormControl>

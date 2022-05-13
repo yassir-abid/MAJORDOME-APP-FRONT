@@ -42,7 +42,7 @@ function List(props) {
     <ul className="suppliers-list">
       {filteredSuppliers.map((supplier) => (
         <Link to={`/suppliers/${supplier.id}`} key={supplier.id}>
-          <li key={supplier.id}>{supplier.firstname}-{supplier.lastname}</li>
+          <li key={supplier.id}>{supplier.lastname} {supplier.firstname}</li>
         </Link>
       ))}
     </ul>

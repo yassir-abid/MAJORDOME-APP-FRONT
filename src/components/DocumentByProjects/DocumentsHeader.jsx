@@ -1,33 +1,40 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Icon } from '@iconify/react';
+// import { Link } from 'react-router-dom';
 
-import './documents.scss';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+
+// import Avatar from '../Avatar/Avatar';
 
 function DocumentsHeader() {
-  return (
-    <header className="documents-header">
-      <div className="documents-header_notify">
-        <Icon
-          icon="charm:search"
-          color="black"
-          width="30"
-          height="30"
-        />
-      </div>
-      <div className="documents-header_title">
-        <h1>Documents</h1>
-      </div>
+  // const avatar = localStorage.getItem('avatar');
+  // const firstname = localStorage.getItem('pseudo');
 
-      <div className="documents-header_avatar">
-        <Icon
-          icon="carbon:user-avatar-filled-alt"
-          color="black"
-          width="40"
-          height="40"
-        />
-      </div>
-    </header>
+  return (
+    <Box sx={{
+      bgcolor: 'primary.main',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      borderBottomLeftRadius: '17px',
+      borderBottomRightRadius: '17px',
+      height: 60,
+      p: 1,
+      // FIXME: gérer le titre en center et l'avatar en start (left)
+    }}
+    >
+      {/* <Box>
+        <Link to="/Profile">
+          <Avatar />
+        </Link>
+      </Box> */}
+      <Box>
+        <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
+          Documents
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

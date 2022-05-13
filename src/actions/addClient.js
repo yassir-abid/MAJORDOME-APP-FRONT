@@ -11,8 +11,9 @@ export const changeValue = (value, key) => ({
   key,
 });
 
-export const addClient = () => ({
+export const addClient = (saveClientToState) => ({
   type: ADD_CLIENT,
+  saveClientToState,
 });
 
 export const saveUser = (payload) => ({

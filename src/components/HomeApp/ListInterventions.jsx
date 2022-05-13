@@ -55,7 +55,7 @@ function ListInterventions() {
             flexWrap: 'wrap',
             '& > :not(style)': {
               mb: 2,
-              width: '100%',
+              // width: '100%',
               height: '100%',
             },
           }}

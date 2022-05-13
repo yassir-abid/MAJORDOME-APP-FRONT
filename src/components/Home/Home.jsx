@@ -12,11 +12,15 @@ import logo from '../../assets/butler.png';
 
 function Home() {
   return (
-    <div>
-      <Box>
+    <Box
+      sx={{ bgcolor: 'white', height: '100vh' }}
+    >
+      <Box
+        sx={{ }}
+      >
         <Box
           sx={{
-            mt: 2,
+            pt: 2,
             display: 'flex',
             justifyContent: 'center',
           }}
@@ -30,7 +34,7 @@ function Home() {
             fontStyle: 'italic',
           }}
         >
-          <Typography variant="h3" component="div" gutterBottom>Hello !</Typography>
+          <Typography variant="h4" component="div" gutterBottom>Majordome !</Typography>
         </Box>
       </Box>
       <Box
@@ -77,7 +81,7 @@ function Home() {
           </Link>
         </Stack>
       </Box>
-    </div>
+    </Box>
   );
 }
 

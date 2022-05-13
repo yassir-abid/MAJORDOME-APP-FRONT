@@ -204,7 +204,7 @@ function Client() {
           {/* <Icon icon="ri:delete-bin-2-fill" width="30" height="30" /> */}
 
           <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
-            {infos.firstname} {infos.lastname}
+            {infos.lastname} {infos.firstname}
           </Typography>
           <Fab size="small" color="secondary" aria-label="edit">
             <EditIcon onClick={handleOpenModal} />
@@ -234,7 +234,7 @@ function Client() {
             }}
           >
             <ListItemText
-              primary={infos.firstname}
+              primary={infos.lastname}
             />
           </ListItem>
           <ListItem
@@ -248,7 +248,7 @@ function Client() {
             }}
           >
             <ListItemText
-              primary={infos.lastname}
+              primary={infos.firstname}
             />
           </ListItem>
           <ListItem
@@ -466,15 +466,6 @@ function Client() {
             <Typography>Modification du client {infos.firstname} {infos.lastname}</Typography>
             <form onSubmit={editClient}>
               <TextField
-                sx={{ mt: 1, mb: 1 }}
-                id="firstName"
-                name="firstname"
-                label="Prénom"
-                value={firstname}
-                placeholder="Prénom"
-                onChange={(event) => setFirstname(event.target.value)}
-              />
-              <TextField
                 sx={{ mb: 1 }}
                 id="lastName"
                 name="lastname"
@@ -482,6 +473,15 @@ function Client() {
                 value={lastname}
                 placeholder="Nom"
                 onChange={(event) => setLastname(event.target.value)}
+              />
+              <TextField
+                sx={{ mt: 1, mb: 1 }}
+                id="firstName"
+                name="firstname"
+                label="Prénom"
+                value={firstname}
+                placeholder="Prénom"
+                onChange={(event) => setFirstname(event.target.value)}
               />
               <TextField
                 sx={{ mb: 1 }}
