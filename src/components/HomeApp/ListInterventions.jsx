@@ -12,13 +12,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-// import data from './data.json';
-
-// import './style.scss';
-
 function ListInterventions() {
-  // créer un thème personnalisé pour les status
-  // définir nom des status
   const [data, setData] = useState([]);
   const token = localStorage.getItem('token');
   const loadData = async () => {
@@ -28,7 +22,6 @@ function ListInterventions() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log(response);
       setData(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -55,7 +48,6 @@ function ListInterventions() {
             flexWrap: 'wrap',
             '& > :not(style)': {
               mb: 2,
-              // width: '100%',
               height: '100%',
             },
           }}

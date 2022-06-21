@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
 import axios from 'axios';
+
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -16,15 +18,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
 import DocumentsHeader from './DocumentsHeader';
-// import './documents.scss';
 import ListDocuments from './ListDocuments';
 
 function Documents() {
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
   const [inters, setInters] = useState([]);
-  const [selectedClient, setselectedClient] = useState('');
   const [docs, setDocs] = useState([]);
 
   const token = localStorage.getItem('token');
@@ -48,7 +49,6 @@ function Documents() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('get interventions', response.data);
       setInters(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -62,7 +62,6 @@ function Documents() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('get clients response', response.data);
       setClients(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -76,7 +75,6 @@ function Documents() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('get projects response', response.data);
       setProjects(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -93,7 +91,6 @@ function Documents() {
 
   const [inputText, setInputText] = useState('');
   const inputHandler = (e) => {
-    // convert input text to lower case
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
@@ -142,7 +139,6 @@ function Documents() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
       loadData();
       handleCloseModal();
     } catch (error) {
@@ -151,12 +147,7 @@ function Documents() {
   };
 
   return (
-    <Box
-      sx={{
-      // FIXME: régler la hauteur
-        // height: '100vh',
-      }}
-    >
+    <Box>
       <DocumentsHeader />
       <div>
         <Box
@@ -183,7 +174,6 @@ function Documents() {
         </StyledFab>
       </div>
 
-      {/* TODO: ici on rentre dans la modal */}
       <Dialog
         disableEnforceFocus
         fullScreen
@@ -220,7 +210,6 @@ function Documents() {
               onChange={(event) => setDescription(event.target.value)}
             />
 
-            {/* Choisir un fichier */}
             <TextField
               fullWidth
               sx={{ mb: 1 }}
@@ -231,7 +220,6 @@ function Documents() {
               onChange={(event) => setFile(event.target.files[0])}
             />
 
-            {/* Choisir un client */}
             <Box sx={{ mt: 1, mb: 1 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Choisir un client</InputLabel>
@@ -239,21 +227,17 @@ function Documents() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={client}
-                  onChange={(event) => {
-                    setClient(event.target.value);
-                    setselectedClient(event.target.value);
-                  }}
+                  onChange={(event) => setClient(event.target.value)}
                   label="Choisir un client"
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
-                  {clients.map((clientt) => (
-                    <MenuItem key={clientt.id} value={clientt.id}>{`${clientt.lastname} ${clientt.firstname}`}</MenuItem>
+                  {clients.map((element) => (
+                    <MenuItem key={element.id} value={element.id}>{`${element.lastname} ${element.firstname}`}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Box>
 
-            {/* Choisir un projet */}
             <Box sx={{ mt: 1, mb: 1 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Choisir un projet</InputLabel>
@@ -266,17 +250,17 @@ function Documents() {
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {
-                    selectedClient
+                    client
                       ? (
                         projects
-                          .filter((projectt) => Number(projectt.client_id) === Number(selectedClient))
-                          .map((projectt) => (
-                            <MenuItem key={projectt.id} value={projectt.id}>{projectt.title}</MenuItem>
+                          .filter((element) => Number(element.client_id) === Number(client))
+                          .map((element) => (
+                            <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
                           ))
                       )
                       : (projects
-                        .map((projectt) => (
-                          <MenuItem key={projectt.id} value={projectt.id}>{projectt.title}</MenuItem>
+                        .map((element) => (
+                          <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
                         ))
                       )
                   }
@@ -284,7 +268,6 @@ function Documents() {
               </FormControl>
             </Box>
 
-            {/* Choisir une intervention */}
             <Box sx={{ mt: 1, mb: 1 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Choisir une intervention</InputLabel>
@@ -297,19 +280,28 @@ function Documents() {
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {
-                    selectedClient
+                    project
                       ? (
                         inters
-                          .filter((inter) => Number(inter.project.client_id) === Number(selectedClient))
-                          .map((inter) => (
-                            <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
+                          .filter((element) => Number(element.project_id) === Number(project))
+                          .map((element) => (
+                            <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
                           ))
                       )
                       : (
-                        inters
-                          .map((inter) => (
-                            <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
-                          ))
+                        client
+                          ? (
+                            inters
+                              .filter((element) => Number(element.client.id) === Number(client))
+                              .map((element) => (
+                                <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
+                              ))
+                          )
+                          : (inters
+                            .map((element) => (
+                              <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
+                            ))
+                          )
                       )
                   }
                 </Select>

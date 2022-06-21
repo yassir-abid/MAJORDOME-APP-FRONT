@@ -1,7 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import axios from 'axios';
-import { React, useEffect, useState } from 'react';
+import { React } from 'react';
 import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -10,20 +9,16 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Chip from '@mui/material/Chip';
 
-// import Project from './Project/Project';
-
 function ListProjects(props) {
-  // create a new array by filtering the original array
   const { projects } = props;
   const filteredProjects = projects.filter((el) => {
     if (props.input === '') {
       return el;
     }
-    // return the item which contains the user input
-
     return el.title.toLowerCase().includes(props.input)
     || el.status.toLowerCase().includes(props.input);
   });
+
   return (
     <Box
       sx={{
@@ -45,7 +40,6 @@ function ListProjects(props) {
             },
           }}
           >
-            {/* <Paper elevation={3}> */}
             <Link to={`/projects/${project.id}`} key={project.id}>
               <ListItem
                 sx={{
@@ -62,7 +56,6 @@ function ListProjects(props) {
                 <Chip size="small" sx={{ minWidth: 70 }} label={project.status} color="primary" />
               </ListItem>
             </Link>
-            {/* </Paper> */}
           </Box>
         ))}
       </List>

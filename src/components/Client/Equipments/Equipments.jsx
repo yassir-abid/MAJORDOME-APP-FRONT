@@ -3,17 +3,14 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Typography } from '@mui/material';
 
-// import ClientHeader from '../ClientHeader';
-// import '../style.scss';
-
 function Equipments() {
-  // équipements
+  // equipments
   const [eqValue, setEqValue] = React.useState('');
   const handleEqChange = (event) => {
     setEqValue(event.target.value);
   };
 
-  // besoins
+  // needs
   const [bsnValue, setBsnValue] = React.useState('');
   const handleBsnChange = (event) => {
     setBsnValue(event.target.value);
@@ -31,7 +28,6 @@ function Equipments() {
         borderBottomRightRadius: '17px',
         height: 60,
         p: 1,
-      // FIXME: gérer le titre en center et l'avatar en start (left)
       }}
       >
         <Box>
@@ -41,7 +37,6 @@ function Equipments() {
         </Box>
       </Box>
 
-      {/* <ClientHeader /> */}
       <div>
         <Box
           sx={{ m: 1 }}

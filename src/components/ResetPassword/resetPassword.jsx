@@ -3,37 +3,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from 'react-router-dom';
-
-import Typography from '@mui/material/Typography';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Icon } from '@iconify/react';
-import Box from '@mui/material/Box';
 
 import { changeValue } from '../../actions/password';
-import Avatar from '../Avatar/Avatar';
 import logo from '../../assets/butler.png';
 import './resetPassword.scss';
 
 function ResetPassword() {
-  const [infos, setInfos] = useState('');
   const [email, setEmail] = useState('');
   const [sentRequest, setSentRequest] = useState(false);
   const [message, setMessage] = useState('');
 
-  //   const [searchParams] = useSearchParams();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
   const id = searchParams.get('id');
-  //   const [token, setToken] = useState('');
-  //   const [id, setId] = useState('');
 
   const checkEmail = async (event) => {
     setSentRequest(true);

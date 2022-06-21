@@ -1,18 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import { Dialog, CardMedia, Typography } from '@mui/material';
 
 import Avatar from '../Avatar/Avatar';
-
-// import './profilStyle.scss';
 
 function HomeAppHeader() {
   const [avatar, setAvatar] = useState('/static/images/avatar/1.jpg');
@@ -27,7 +24,6 @@ function HomeAppHeader() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('LoadData response', response.data);
       setData(response.data);
       if (response.data.picture) {
         setAvatar(response.data.picture);
@@ -40,6 +36,8 @@ function HomeAppHeader() {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,8 +53,11 @@ function HomeAppHeader() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      setAvatar(response.data.picture);
-      localStorage.setItem('avatar', response.data.picture);
+      if (response.data.picture) {
+        setAvatar(response.data.picture);
+        localStorage.setItem('avatar', response.data.picture);
+      }
+      loadData();
       handleCloseModal();
     } catch (error) {
       console.log(error);
@@ -104,7 +105,6 @@ function HomeAppHeader() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              // minWidth: 1,
               width: 500,
               maxWidth: '100%',
               p: 1,

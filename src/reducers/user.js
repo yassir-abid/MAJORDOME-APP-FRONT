@@ -26,16 +26,11 @@ const reducer = (state = initialState, action = {}) => {
     case SAVE_USER: {
       return {
         ...state,
-        // logged: action.payload.logged,
-        // pseudo: action.payload.pseudo,
-        // token: action.payload.token,
         ...action.payload,
       };
     }
     case LOGOUT: {
-      // clean localStorage to logout
       localStorage.clear();
-      // spread of initialState for logout
       return {
         ...initialState,
       };

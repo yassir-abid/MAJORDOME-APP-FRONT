@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import Carousel from 'react-material-ui-carousel';
@@ -21,14 +21,10 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
-// import './interventionsReport.scss';
 
 function InterventionsReport() {
-  // récupère l'id de la route
   const { id } = useParams();
 
-  // params axios route GET
   const [infos, setInfos] = useState('');
   const [beforePictures, setBeforePictures] = useState([]);
   const [afterPictures, setAfterPictures] = useState([]);
@@ -72,7 +68,6 @@ function InterventionsReport() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log(response.data);
       infoReport();
       handleCloseReportModal();
     } catch (error) {
@@ -135,7 +130,6 @@ function InterventionsReport() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
       infoReport();
       handleClosePictureModal();
     } catch (error) {
@@ -155,19 +149,6 @@ function InterventionsReport() {
   return (
     <Box>
       <Box>
-        <Box
-          sx={{
-            // zIndex: 1,
-            // position: 'absolute',
-            // top: '0%',
-            // left: '10',
-            // p: 0.8,
-          }}
-        >
-          {/* <Link to="/Profile">
-          <Avatar avatar={avatar} firstname={firstname} />
-        </Link> */}
-        </Box>
         <Box sx={{
           bgcolor: 'primary.main',
           display: 'flex',
@@ -179,7 +160,6 @@ function InterventionsReport() {
           pl: 1,
           pr: 1,
           pt: 1,
-          // p: 1,
         }}
         >
           <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
@@ -190,7 +170,6 @@ function InterventionsReport() {
               onClick={handleOpenReportModal}
             />
           </Fab>
-          {/* <Icon icon="bxs:edit-alt" width="30" height="30"/> */}
         </Box>
       </Box>
       <Box>
@@ -318,7 +297,6 @@ function InterventionsReport() {
                   hour: 'numeric',
                   minute: 'numeric',
                 })}
-                  // onChange={handleChange}
                 variant="standard"
               />
             </ListItem>
@@ -358,7 +336,6 @@ function InterventionsReport() {
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {before}
               </Typography>
-              {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton aria-label="upload picture" component="span" sx={{ p: 0 }} onClick={() => handleOpenPictureModal(before)}>
                 <PhotoCamera />
               </IconButton>
@@ -411,7 +388,6 @@ function InterventionsReport() {
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {after}
               </Typography>
-              {/* <Input accept="image/*" id="icon-button-file" type="file" /> */}
               <IconButton aria-label="upload picture" component="span" sx={{ p: 0 }} onClick={() => handleOpenPictureModal(after)}>
                 <PhotoCamera />
               </IconButton>

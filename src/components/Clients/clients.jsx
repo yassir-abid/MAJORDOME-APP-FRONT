@@ -5,15 +5,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Icon } from '@iconify/react';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -22,13 +19,11 @@ import Fab from '@mui/material/Fab';
 import { changeValue, addClient } from '../../actions/addClient';
 import ClientsHeader from './ClientsHeader';
 import ListClients from './ListClients';
-// import './clients.scss';
 
 function Clients() {
   const [inputText, setInputText] = useState('');
 
   const inputHandler = (e) => {
-    // convert input text to lower case
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
@@ -63,7 +58,7 @@ function Clients() {
 
   const {
     firstname, lastname, email, phone, number, street,
-    postal_code, city, addressComments, clientComments,
+    postal_code, city, addressComments,
   } = useSelector((state) => state.addClient);
 
   const dispatch = useDispatch();
@@ -77,7 +72,6 @@ function Clients() {
     dispatch(addClient(addClientToState));
   };
 
-  // code pour le + violet
   const StyledFab = styled(Fab)({
     position: 'fixed',
     zIndex: 1,
@@ -87,12 +81,7 @@ function Clients() {
   });
 
   return (
-    <Box
-      sx={{
-        // height: '100vh',
-        // width: '100%',
-      }}
-    >
+    <Box>
       <ClientsHeader />
       <div>
         <Box
@@ -136,7 +125,6 @@ function Clients() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              // minWidth: 1,
               width: 500,
               maxWidth: '100%',
               height: '100vh',

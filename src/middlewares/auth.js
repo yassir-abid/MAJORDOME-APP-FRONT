@@ -6,7 +6,6 @@ import {
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN: {
-      // current state
       const state = store.getState();
 
       const login = async () => {
@@ -15,7 +14,6 @@ const auth = (store) => (next) => (action) => {
             email: state.user.email,
             password: state.user.password,
           });
-          // stock token to localStorage
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('pseudo', response.data.pseudo);
           if (response.data.picture) {
@@ -23,7 +21,6 @@ const auth = (store) => (next) => (action) => {
           }
           store.dispatch(saveUser(response.data));
         } catch (error) {
-          // eslint-disable-next-line max-len
           store.dispatch(userErrorMessage(error.response.data.message || 'connexion impossible'));
           console.error(error.response.data.message
              || error.response.data || error.response || error);

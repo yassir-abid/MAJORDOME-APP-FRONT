@@ -6,7 +6,6 @@ import {
 const signUp = (store) => (next) => (action) => {
   switch (action.type) {
     case SIGNUP: {
-      // current state
       const state = store.getState();
 
       const signup = async () => {
@@ -19,7 +18,6 @@ const signUp = (store) => (next) => (action) => {
             passwordConfirm: state.signUp.passwordConfirm,
           });
 
-          // stock token to localStorage
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('pseudo', `${response.data.firstname} ${response.data.lastname}`);
 

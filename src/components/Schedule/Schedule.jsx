@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
 import {
-  React, useState, useEffect, useMemo,
+  React, useState, useEffect,
 } from 'react';
 import axios from 'axios';
-import Scheduler, { Resource, Editing } from 'devextreme-react/scheduler';
+import Scheduler, { Editing } from 'devextreme-react/scheduler';
 import frMessages from 'devextreme/localization/messages/fr.json';
 import { locale, loadMessages } from 'devextreme/localization';
 import Box from '@mui/material/Box';
@@ -12,17 +12,6 @@ import AppointmentTooltip from './AppointmentTooltip';
 import ScheduleHeader from './ScheduleHeader';
 
 import 'devextreme/dist/css/dx.greenmist.compact.css';
-
-// import data from './Data.json';
-// import ResourceDataAddress from './ResourceDataAddress.json';
-// import ResourceDataProject from './ResourceDataProject.json';
-// import ResourceDataClient from './ResourceDataClient.json';
-
-// You can create the Form widget using the following code.
-// Read more at https://js.devexpress.com/Documentation/Guide/Widgets/Common/Advanced/3rd-Party_Frameworks_Integration_API/#Create_and_Configure_a_Widget.
-
-// You can create the Form widget using the following code.
-// Read more at https://js.devexpress.com/Documentation/Guide/Widgets/Common/Advanced/3rd-Party_Frameworks_Integration_API/#Create_and_Configure_a_Widget.
 
 const currentDate = Date.now();
 const views = ['day', 'week', 'month'];
@@ -172,7 +161,6 @@ function Schedule() {
   return (
     <Box
       sx={{
-        // FIXME: régler la taille
         height: '100vh',
       }}
     >
@@ -195,22 +183,6 @@ function Schedule() {
             allowAdding={false}
           />
 
-          {/* <Resource
-          dataSource={infos.clients}
-          fieldExpr="client_id"
-          label="Client"
-        />
-
-        <Resource
-          dataSource={infos.project}
-          fieldExpr="project_id"
-          label="Projet"
-        />
-        <Resource
-          dataSource={infos.address}
-          fieldExpr="address_id"
-          label="Adresse"
-        /> */}
         </Scheduler>
       </div>
     </Box>

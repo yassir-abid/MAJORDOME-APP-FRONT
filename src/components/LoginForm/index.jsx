@@ -5,16 +5,11 @@ import { Link } from 'react-router-dom';
 
 import Field from './Field';
 
-// import './style.scss';
-
 function LoginForm({
   email,
   password,
   changeField,
   handleLogin,
-  handleLogout,
-  isLogged,
-  loggedMessage,
   errorMessage,
 }) {
   const handleSubmit = (evt) => {
@@ -24,67 +19,43 @@ function LoginForm({
 
   return (
     <div className="login-form">
-      {isLogged && (
-        <div className="login-form-logged">
-          <p className="login-form-message">
-            {loggedMessage}
-          </p>
+      <div>
+        <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
+          <Field
+            name="email"
+            type="email"
+            placeholder="Adresse Email"
+            onChange={changeField}
+            value={email}
+          />
+          <Field
+            name="password"
+            type="password"
+            placeholder="Mot de passe"
+            onChange={changeField}
+            value={password}
+          />
+
+          {errorMessage.length > 0 && (<p>{errorMessage}</p>)}
           <button
-            type="button"
+            type="submit"
             className="login-form-button"
-            onClick={handleLogout}
           >
-            Déconnexion
+            Me connecter
           </button>
-          <Link to="/home-app">
-            <button
-              type="button"
-              className="login-form-button login-form-button--accueil"
-            >
-              Mon Accueil
-            </button>
-          </Link>
-        </div>
-      )}
-      {!isLogged && (
-        <div>
-          <form autoComplete="off" className="login-form-element" onSubmit={handleSubmit}>
-            <Field
-              name="email"
-              type="email"
-              placeholder="Adresse Email"
-              onChange={changeField}
-              value={email}
-            />
-            <Field
-              name="password"
-              type="password"
-              placeholder="Mot de passe"
-              onChange={changeField}
-              value={password}
-            />
-            {/* error message if login or password invalid */}
-            {errorMessage.length > 0 && (<p>{errorMessage}</p>)}
+        </form>
+        <Link to="/resetpassword" className="login-form-signup">Mot de passe oublié ?</Link>
+        <div className="login-form-signup">
+          <Link to="/signup">
             <button
               type="submit"
               className="login-form-button"
             >
-              Me connecter
+              Inscription
             </button>
-          </form>
-          <Link to="/resetpassword" className="login-form-signup">Mot de passe oublié ?</Link>
-          <div className="login-form-signup">
-            <Link to="/signup">
-              <button
-                type="submit"
-                className="login-form-button"
-              >
-                Inscription
-              </button>
-            </Link>
-          </div>
+          </Link>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -94,15 +65,7 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  handleLogout: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool,
-  loggedMessage: PropTypes.string,
   errorMessage: PropTypes.string.isRequired,
-};
-
-LoginForm.defaultProps = {
-  isLogged: false,
-  loggedMessage: 'Connecté',
 };
 
 export default LoginForm;

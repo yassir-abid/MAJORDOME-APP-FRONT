@@ -1,10 +1,8 @@
 /* eslint-disable react/prop-types */
-// FIXME: valider les props en enlever la règle ci-dessous
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { React, useState, useEffect } from 'react';
+import { React } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -14,14 +12,11 @@ import ListItemText from '@mui/material/ListItemText';
 function ListClients(props) {
   const { clients } = props;
 
-  // create a new array by filtering the original array
   const filteredClients = clients.filter((el) => {
-    // if no input the return the original
     if (props.input === '') {
       return el;
     }
-    // return the item which contains the user input
-    // modifier pour avoir une multi recherche sur first et lastName
+
     return (el.firstname.toLowerCase().includes(props.input))
     || (el.lastname.toLowerCase().includes(props.input));
   });
@@ -47,7 +42,6 @@ function ListClients(props) {
             },
           }}
           >
-            {/* <Paper elevation={3}> */}
             <Link to={`/clients/${client.id}`} key={client.id}>
               <ListItem
                 sx={{
@@ -63,7 +57,6 @@ function ListClients(props) {
                 />
               </ListItem>
             </Link>
-            {/* </Paper> */}
           </Box>
         ))}
       </List>

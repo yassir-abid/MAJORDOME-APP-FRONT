@@ -1,13 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 
-// import dependencies
 import { React, useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Icon } from '@iconify/react';
 
-// import MUI
 import { Dialog, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -21,23 +17,12 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import Modal from '@mui/material/Modal';
 
-// import Switch from '@mui/material/Switch';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-
-// import projet
 import ListProjets from './ListProjets';
-// import Avatar from '../Avatar/Avatar';
-// import './style.scss';
 
 function Client() {
-  const [value, setValue] = useState('');
-
-  // récupère l'id de la route
   const { id } = useParams();
 
-  // edit client
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [phone, setPhone] = useState('');
@@ -51,7 +36,6 @@ function Client() {
   const [addressId, setAddressId] = useState('');
   const [secondaryText, setSecondaryText] = useState(false);
 
-  // params axios route GET
   const [infos, setInfos] = useState('');
   const token = localStorage.getItem('token');
   const infoClient = async () => {
@@ -61,11 +45,7 @@ function Client() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('#client#');
-      console.log(response.data);
       setInfos(response.data);
-      console.log(infos);
-      // edit client
       setFirstname(response.data.firstname);
       setLastname(response.data.lastname);
       setPhone(response.data.phone);
@@ -89,29 +69,12 @@ function Client() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const [comValue, setComValue] = useState('');
-  const comHandleChange = (event) => {
-    setComValue(event.target.value);
-  };
-
-  //   // gestion du switch : readonly false or true
-  //   const [editMode, setEditMode] = useState(false);
-  //   const switchChange = (event) => {
-  //     setEditMode(event.target.checked);
-  //   };
-
-  // modal to update client
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
   const navigate = useNavigate();
 
-  // function to edit one client witch his id
   const editClient = async (event) => {
     event.preventDefault();
     try {
@@ -142,7 +105,6 @@ function Client() {
     }
   };
 
-  // function to delete one client with his id
   function clientDelete() {
     if (window.confirm('Etes vous sur de vouloir supprimer ce client ?')) {
       navigate('/clients');
@@ -153,7 +115,6 @@ function Client() {
               Authorization: `bearer ${token}`,
             },
           });
-          // console.log(response);
           setInfos(response.data);
         } catch (error) {
           console.log('Erreur de chargement', error);
@@ -171,19 +132,6 @@ function Client() {
   return (
     <Box>
       <Box>
-        <Box
-          sx={{
-            // zIndex: 1,
-            // position: 'absolute',
-            // top: '0%',
-            // left: '10',
-            // p: 0.8,
-          }}
-        >
-          {/* <Link to="/Profile">
-          <Avatar avatar={avatar} firstname={firstname} />
-        </Link> */}
-        </Box>
         <Box sx={{
           bgcolor: 'primary.main',
           display: 'flex',
@@ -195,13 +143,11 @@ function Client() {
           pl: 1,
           pr: 1,
           pt: 1,
-          // p: 1,
         }}
         >
           <Fab size="small" color="secondary" aria-label="edit">
             <DeleteIcon onClick={() => clientDelete(infos.id)} />
           </Fab>
-          {/* <Icon icon="ri:delete-bin-2-fill" width="30" height="30" /> */}
 
           <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
             {infos.lastname} {infos.firstname}
@@ -209,7 +155,6 @@ function Client() {
           <Fab size="small" color="secondary" aria-label="edit">
             <EditIcon onClick={handleOpenModal} />
           </Fab>
-          {/* <Icon icon="bxs:edit-alt" width="30" height="30"/> */}
 
         </Box>
       </Box>
@@ -280,7 +225,6 @@ function Client() {
             />
           </ListItem>
 
-          {/* récupération des adresses */}
           <List>
             {infos.addresses.map((info, index) => (
               <Box sx={{
@@ -309,16 +253,6 @@ function Client() {
                     secondary={info.comments}
                   />
                 </ListItem>
-                {/* <TextField
-                      fullWidth
-                      id="comments"
-                      placeholder="Complément d'adresse"
-                    // fullWidth
-                      multiline
-                      maxRows={4}
-                      value={info.comments}
-                      onChange={handleChange}
-                    /> */}
                 <ListItem
                   key={info.id}
                   sx={{
@@ -368,16 +302,6 @@ function Client() {
                       secondary={secondaryText ? 'Aucun commentaire pour ce client' : null}
                     />
                   </ListItem>
-                  {/* <TextField
-                    sx={{ mb: 2 }}
-                    fullWidth
-                    id="comments"
-                    label=""
-                    placeholder="Notes"
-                    multiline
-                    maxRows={4}
-                    value={infos.comments}
-                  /> */}
                 </Box>
               </Box>
             ))}
@@ -394,12 +318,9 @@ function Client() {
             }}
           >
             <ButtonGroup variant="text" size="small">
-              {/* créer ou vérifier les liens de chaque boutons */}
-              {/* <Link to={`/documents/clients/${id}`}> */}
               <Button href={`/documents/clients/${id}`} color="secondary" variant="contained">Documents</Button>
-              {/* </Link> */}
               <Button href={`/clients/${id}/equipments`} color="secondary" variant="contained">
-                équipements <br />& besoins
+                Equipements <br />& besoins
               </Button>
               <Button href="/projects" color="secondary" variant="contained">Ajout <br />Projets</Button>
             </ButtonGroup>
@@ -430,12 +351,9 @@ function Client() {
             )}
         </Box>
       </Box>
+
       {/* modal to edit client */}
-      <Box
-        sx={{
-          // maxHeight: '100%',
-        }}
-      >
+      <Box>
         <Dialog
           fullScreen
           open={open}
@@ -443,9 +361,7 @@ function Client() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
           sx={{
-            // height: `calc(100vh - ${64}px)`,
             width: '100%',
-            // m: 32,
           }}
         >
           <Box
@@ -453,12 +369,9 @@ function Client() {
               position: 'absolute',
               top: '0%',
               left: '50%',
-              // m: 0,
               transform: 'translate(-50%, 0%)',
-              // // // minWidth: 1,
               width: 500,
               maxWidth: '100%',
-              // // height: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
@@ -503,7 +416,6 @@ function Client() {
                 onChange={(event) => setEmail(event.target.value)}
               />
 
-              {/* <p className="client-detail_adresse">Adresse {index + 1}</p> */}
               <div>
                 <TextField
                   sx={{ mb: 1 }}
@@ -532,7 +444,6 @@ function Client() {
                   id="comments"
                   name="comments"
                   placeholder="Complément d'adresse"
-                    // fullWidth
                   label="complément d'adresse"
                   multiline
                   maxRows={4}
@@ -544,7 +455,6 @@ function Client() {
                   id="postal_code"
                   name="postal_code"
                   label="cp"
-                // eslint-disable-next-line camelcase
                   value={postalCode}
                   placeholder="Code postal"
                   onChange={(event) => setPostalCode(event.target.value)}
@@ -558,16 +468,8 @@ function Client() {
                   placeholder="Ville"
                   onChange={(event) => setCity(event.target.value)}
                 />
-                {/* <TextField
-                name="id"
-                label="addresses_id"
-                value={addressId}
-                placeholder="Ville"
-                onChange={(event) => setAddressId(event.target.value)}
-              /> */}
               </div>
 
-              {/* <p>Commentaire</p> */}
               <TextField
                 sx={{ mb: 1 }}
                 fullWidth

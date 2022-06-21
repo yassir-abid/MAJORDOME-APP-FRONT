@@ -7,34 +7,23 @@ import axios from 'axios';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { styled } from '@mui/material/styles';
-import Fab from '@mui/material/Fab';
 import Typography from '@mui/material/Typography';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Dialog } from '@material-ui/core';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Icon } from '@iconify/react';
 
 import { changeValue } from '../../actions/password';
 import { logout } from '../../actions/signUp';
 import ProfileHeader from './ProfileHeader';
 
-// import './profilStyle.scss';
-
 function Profile() {
-  // modal to update client
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
-  // params axios route GET
   const [data, setData] = useState('');
   const [id, setId] = useState('');
   const [firstname, setFirstname] = useState('');
@@ -51,7 +40,6 @@ function Profile() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log(response.data);
       setData(response.data);
       setFirstname(response.data.firstname);
       setLastname(response.data.lastname);
@@ -64,26 +52,6 @@ function Profile() {
   };
 
   const navigate = useNavigate();
-
-  // function to delete one project with his id
-  function avatarProfileDelete() {
-    if (window.confirm('Etes vous sur de vouloir supprimer ce projet ?')) {
-      const interventionToDelete = async () => {
-        try {
-          const response = await axios.delete('https://majordome-api.herokuapp.com/api/profile', {
-            headers: {
-              Authorization: `bearer ${token}`,
-            },
-          });
-          navigate('/profile');
-        } catch (error) {
-          console.log('Erreur de chargement', error);
-        }
-      };
-
-      interventionToDelete();
-    }
-  }
 
   const editProfile = async (event) => {
     event.preventDefault();
@@ -99,6 +67,7 @@ function Profile() {
         },
       });
       navigate('/profile');
+      handleCloseModal();
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
@@ -108,7 +77,7 @@ function Profile() {
     if (window.confirm('Etês-vous sûr de vouloir supprimer ce compte ? Toutes les informations liées à ce compte seront perdues !')) {
       const profileToDelete = async () => {
         try {
-          const response = await axios.delete('https://majordome-api.herokuapp.com/api/profile', {
+          axios.delete('https://majordome-api.herokuapp.com/api/profile', {
             headers: {
               Authorization: `bearer ${token}`,
             },
@@ -128,7 +97,8 @@ function Profile() {
   const handleChangePassword = () => {
     dispatch(changeValue(id, 'id'));
     navigate('/newpassword');
-  }
+  };
+
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -213,9 +183,16 @@ function Profile() {
               bgcolor: 'white',
             }}
           >
+            {phone && (
+              <ListItemText
+                primary={phone}
+              />
+            )}
+            {!phone && (
             <ListItemText
-              primary={phone}
+              secondary="Tel"
             />
+            )}
           </ListItem>
           <Box
             sx={{
@@ -233,8 +210,6 @@ function Profile() {
             </Box>
             <Box
               sx={{
-                // position: 'fixed',
-                // bottom: 100,
                 mt: 8,
                 display: 'flex',
                 flexDirection: 'column',
@@ -249,12 +224,6 @@ function Profile() {
                 </Link>
               </Box>
               <Box>
-                {/* FIXME: lien ci-dessous à remplir */}
-                {/* <Link to="#">
-                  <Typography variant="subtitle2" gutterBottom component="div">
-                    réinitialiser le mot de passe
-                  </Typography>
-                </Link> */}
                 <Button onClick={handleChangePassword}>Réinitialiser le mot de passe</Button>
               </Box>
               <Box>
@@ -265,12 +234,7 @@ function Profile() {
         </Box>
         <div>
 
-          {/* modal to edit client */}
-          <Box
-            sx={{
-              // maxHeight: '100%',
-            }}
-          >
+          <Box>
             <Dialog
               fullScreen
               className=""
@@ -285,7 +249,6 @@ function Profile() {
                   top: '0%',
                   left: '50%',
                   transform: 'translate(-50%, 0%)',
-                  // minWidth: 1,
                   width: 700,
                   maxWidth: '100%',
                   height: '100%',
@@ -306,6 +269,7 @@ function Profile() {
                     label="Nom"
                     value={lastname}
                     placeholder="Nom"
+                    fullWidth
                     onChange={(event) => setLastname(event.target.value)}
                   />
                   <TextField
@@ -315,6 +279,7 @@ function Profile() {
                     label="Prénom"
                     value={firstname}
                     placeholder="Prénom"
+                    fullWidth
                     onChange={(event) => setFirstname(event.target.value)}
                   />
                   <TextField
@@ -324,6 +289,7 @@ function Profile() {
                     label="tel"
                     value={phone}
                     placeholder="Numéro"
+                    fullWidth
                     onChange={(event) => setPhone(event.target.value)}
                   />
                   <TextField

@@ -2,18 +2,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import SignUpForm from '../SignUpForm';
 import './style.scss';
 import { changeUserLoginField, signUp, logout } from '../../actions/signUp';
 import logo from '../../assets/butler.png';
 
 function Signup() {
-  // dispatch actions
   const dispatch = useDispatch();
-  // redirect after signUp
+
   const navigate = useNavigate();
 
-  // access to my state
   const {
     lastname, firstname, email, password, passwordConfirm, logged, pseudo, signUperrorMessage,
   } = useSelector((state) => state.signUp);
@@ -24,7 +23,7 @@ function Signup() {
 
   const handleSignup = () => {
     dispatch(signUp());
-    // navigate('/signup');
+    navigate('/login');
   };
 
   const handleLogout = () => {
@@ -44,7 +43,6 @@ function Signup() {
           isLogged={logged}
           changeField={handleChangeField}
           handleSignup={handleSignup}
-          loggedMessage={`Bonjour ${pseudo}`}
           handleLogout={handleLogout}
           signUperrorMessage={signUperrorMessage}
         />

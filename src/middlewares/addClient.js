@@ -4,7 +4,6 @@ import { ADD_CLIENT, CHECK_USER, saveUser } from '../actions/addClient';
 const addClient = (store) => (next) => (action) => {
   switch (action.type) {
     case ADD_CLIENT: {
-      // current state
       const state = store.getState();
 
       const client = async () => {

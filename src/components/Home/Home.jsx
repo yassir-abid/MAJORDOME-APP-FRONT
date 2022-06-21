@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -11,6 +12,8 @@ import './style.scss';
 import logo from '../../assets/butler.png';
 
 function Home() {
+  const { logged } = useSelector((state) => state.user);
+
   return (
     <Box
       sx={{ bgcolor: 'white', height: '100vh' }}
@@ -34,7 +37,7 @@ function Home() {
             fontStyle: 'italic',
           }}
         >
-          <Typography variant="h4" component="div" gutterBottom>Majordome !</Typography>
+          <Typography variant="h4" component="div" gutterBottom>Majordome</Typography>
         </Box>
       </Box>
       <Box
@@ -49,19 +52,18 @@ function Home() {
           <Typography
             sx={{
               p: 2,
+              textAlign: 'center',
             }}
           >
-            <Typography fontSize="20px" fontStyle="italic" fontWeight="bold">
-              Majordome,
-            </Typography>
-            C’est un outil de gestion d’activité,
-            un assistant personnel à destination des auto-entrepreneurs,
-            artisans où toutes personnes travaillant seules de manière itinérante.
-            Majordome va vous aider à organiser votre journée, ranger vos documents,
+            Assistant personnel des auto-entrepreneurs,
+            artisans ou toute personne travaillant seule de manière itinérante.
+            Majordome aide à organiser votre journée, ranger vos documents,
             gérer vos clients, votre activité et vos interventions.
           </Typography>
         </Paper>
       </Box>
+      {!logged
+      && (
       <Box
         sx={{
           display: 'flex',
@@ -81,6 +83,7 @@ function Home() {
           </Link>
         </Stack>
       </Box>
+      )}
     </Box>
   );
 }

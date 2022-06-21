@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -15,17 +15,16 @@ function Error() {
       <Card sx={{ width: '100%' }}>
         <CardMedia
           component="img"
-          // height="80%"
           src={Serveur}
           alt="page 404"
         />
         <CardContent>
           <Typography>
-            Il semblerait que la page demandée ne soit pas présente ou accessible quel dommage...
+            Il semblerait que la page demandée ne soit pas présente ou accessible, quel dommage...
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="outlined" size="small" color="primary" href="/login">
+          <Button variant="outlined" size="small" color="primary" href="/">
             Home
           </Button>
         </CardActions>

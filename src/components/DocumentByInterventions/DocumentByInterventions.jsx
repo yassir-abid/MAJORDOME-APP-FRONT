@@ -4,6 +4,7 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -11,14 +12,9 @@ import { Dialog } from '@material-ui/core';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
-import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 import DocumentsHeader from './DocumentsHeader';
-// import './documents.scss';
 import ListDocuments from './ListDocuments';
 
 function Documents() {
@@ -26,11 +22,9 @@ function Documents() {
 
   const token = localStorage.getItem('token');
 
-  const [clients, setClients] = useState([]);
-  const [projects, setProjects] = useState([]);
-  const [inters, setInters] = useState([]);
-  const [selectedClient, setselectedClient] = useState('');
   const [docs, setDocs] = useState([]);
+  const [client, setClient] = useState([]);
+  const [project, setProject] = useState([]);
 
   const loadData = async () => {
     try {
@@ -39,67 +33,34 @@ function Documents() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('#documents#');
-      console.log(response);
       setDocs(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
 
-  const loadInterventions = async () => {
+  const loadIntervention = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions', {
+      const response = await axios.get(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('get interventions', response.data);
-      setInters(response.data);
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
-  };
-
-  const loadClients = async () => {
-    try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      });
-      console.log('get clients response', response.data);
-      setClients(response.data);
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
-  };
-
-  const loadProjects = async () => {
-    try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      });
-      console.log('get projects response', response.data);
-      setProjects(response.data);
+      setProject(response.data.project);
+      setClient(response.data.client);
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
 
   useEffect(() => {
-    loadInterventions();
-    loadClients();
-    loadProjects();
+    loadIntervention();
     loadData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [inputText, setInputText] = useState('');
   const inputHandler = (e) => {
-    // convert input text to lower case
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
@@ -119,9 +80,6 @@ function Documents() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [file, setFile] = useState('');
-  const [client, setClient] = useState('');
-  const [project, setProject] = useState('');
-  const [intervention, setIntervention] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -129,12 +87,8 @@ function Documents() {
     formData.append('title', title);
     formData.append('description', description);
     formData.append('file', file);
-    if (client !== '') {
-      formData.append('client_id', id);
-    }
-    if (project !== '') {
-      formData.append('project_id', project);
-    }
+    formData.append('client_id', client.id);
+    formData.append('project_id', project.id);
     formData.append('intervention_id', id);
     try {
       const response = await axios({
@@ -146,7 +100,6 @@ function Documents() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response.data);
       loadData();
       handleCloseModal();
     } catch (error) {
@@ -155,12 +108,7 @@ function Documents() {
   };
 
   return (
-    <Box
-      sx={{
-      // FIXME: régler la hauteur
-        // height: '100vh',
-      }}
-    >
+    <Box>
       <DocumentsHeader />
       <div>
         <Box
@@ -187,7 +135,6 @@ function Documents() {
         </StyledFab>
       </div>
 
-      {/* TODO: ici on rentre dans la modal */}
       <Dialog
         disableEnforceFocus
         fullScreen
@@ -224,7 +171,6 @@ function Documents() {
               onChange={(event) => setDescription(event.target.value)}
             />
 
-            {/* Choisir un fichier */}
             <TextField
               fullWidth
               sx={{ mb: 1 }}
@@ -234,91 +180,6 @@ function Documents() {
               accept=".jpg, .jpeg, .png"
               onChange={(event) => setFile(event.target.files[0])}
             />
-
-            {/* Choisir un client */}
-            <Box sx={{ mt: 1, mb: 1 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Choisir un client</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={client}
-                  onChange={(event) => {
-                    setClient(event.target.value);
-                    setselectedClient(event.target.value);
-                  }}
-                  label="Choisir un client"
-                >
-                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
-                  {clients.map((clientt) => (
-                    <MenuItem key={clientt.id} value={clientt.id}>{`${clientt.firstname} ${clientt.lastname}`}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-
-            {/* Choisir un projet */}
-            <Box sx={{ mt: 1, mb: 1 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Choisir un projet</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={project}
-                  onChange={(event) => setProject(event.target.value)}
-                  label="Choisir un projet"
-                >
-                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
-                  {
-                    selectedClient
-                      ? (
-                        projects
-                          .filter((projectt) => Number(projectt.client_id) === Number(id))
-                          .map((projectt) => (
-                            <MenuItem key={projectt.id} value={projectt.id}>{projectt.title}</MenuItem>
-                          ))
-                      )
-                      : (projects
-                        .map((projectt) => (
-                          <MenuItem key={projectt.id} value={projectt.id}>{projectt.title}</MenuItem>
-                        ))
-                      )
-                  }
-                </Select>
-              </FormControl>
-            </Box>
-
-            {/* Choisir une intervention */}
-            {/* <Box sx={{ mt: 1, mb: 1 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Choisir une intervention</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={intervention}
-                  label="Choisir une intervention"
-                  onChange={(event) => setIntervention(event.target.value)}
-                >
-                  <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
-                  {
-                    selectedClient
-                      ? (
-                        inters
-                          .filter((inter) => Number(inter.project.client_id) === Number(id))
-                          .map((inter) => (
-                            <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
-                          ))
-                      )
-                      : (
-                        inters
-                          .map((inter) => (
-                            <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
-                          ))
-                      )
-                  }
-                </Select>
-              </FormControl>
-            </Box> */}
 
             <TextField
               sx={{

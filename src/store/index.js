@@ -12,7 +12,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   reducer,
-  // eslint-disable-next-line max-len
   composeEnhancers(applyMiddleware(authMW, signUpMW, projectMW, addClientMW, interventionMW, documentMW)),
 
 );

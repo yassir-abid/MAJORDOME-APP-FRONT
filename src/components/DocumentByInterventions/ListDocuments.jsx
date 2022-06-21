@@ -1,28 +1,22 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
-import { React, useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { React } from 'react';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
-// import data from './ListData.json';
-
 function ListDocuments(props) {
   const { docs } = props;
 
-  // create a new array by filtering the original array
   const filteredDocs = docs.filter((el) => {
-    // if no input the return the original
     if (props.input === '') {
       return el;
     }
-    // return the item which contains the user input
-
     return el.title.toLowerCase().includes(props.input);
   });
+
   return (
     <Box
       sx={{
@@ -44,7 +38,6 @@ function ListDocuments(props) {
             },
           }}
           >
-            {/* <Paper elevation={3}> */}
             <Link to={`/documents/${item.id}`} key={item.id}>
               <ListItem
                 sx={{
@@ -61,7 +54,6 @@ function ListDocuments(props) {
 
               </ListItem>
             </Link>
-            {/* </Paper> */}
           </Box>
         ))}
       </List>

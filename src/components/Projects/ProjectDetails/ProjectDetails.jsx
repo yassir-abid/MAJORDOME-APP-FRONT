@@ -2,11 +2,9 @@
 /* eslint-disable max-len */
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
-// import { useDispatch } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Icon } from '@iconify/react';
+
 import { Dialog, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -20,18 +18,13 @@ import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Modal from '@mui/material/Modal';
 
-import ListInterventions from '../../Interventions/ListInterventions';
-// import ProjectDetail from './ProjectDetail';
-// import './projectDetails.scss';
-
-// eslint-disable-next-line react/prop-types
 function ProjectDetails() {
-  // const params = useParams();
+  const [open, setOpen] = useState(false);
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
+
   const { id } = useParams();
-  // console.log(id);
 
   const [data, setData] = useState({});
   const [title, setTitle] = useState('');
@@ -48,9 +41,7 @@ function ProjectDetails() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log(response);
       setData(response.data);
-      // edit the modal
       setTitle(response.data.title);
       if (!response.data.description) {
         setSecondaryText(true);
@@ -69,7 +60,6 @@ function ProjectDetails() {
 
   const navigate = useNavigate();
 
-  // function to delete one project with his id
   function projectDelete() {
     if (window.confirm('Etes vous sur de vouloir supprimer ce projet ?')) {
       navigate('/projects');
@@ -80,7 +70,6 @@ function ProjectDetails() {
               Authorization: `bearer ${token}`,
             },
           });
-          // console.log(response);
           setData(response.data);
         } catch (error) {
           console.log('Erreur de chargement', error);
@@ -91,7 +80,6 @@ function ProjectDetails() {
     }
   }
 
-  // function to edit one project with his id
   const editProject = async (event) => {
     event.preventDefault();
     try {
@@ -105,16 +93,12 @@ function ProjectDetails() {
           Authorization: `bearer ${token}`,
         },
       });
-      navigate('/projects');
+      loadData();
+      handleCloseModal();
     } catch (error) {
       console.log('Erreur de chargement', error);
     }
   };
-
-  // modal to update project
-  const [open, setOpen] = useState(false);
-  const handleOpenModal = () => setOpen(true);
-  const handleCloseModal = () => setOpen(false);
 
   if (!data || !data.client) {
     return null;
@@ -122,19 +106,6 @@ function ProjectDetails() {
   return (
     <Box>
       <Box>
-        <Box
-          sx={{
-            // zIndex: 1,
-            // position: 'absolute',
-            // top: '0%',
-            // left: '10',
-            // p: 0.8,
-          }}
-        >
-          {/* <Link to="/Profile">
-          <Avatar avatar={avatar} firstname={firstname} />
-        </Link> */}
-        </Box>
         <Box sx={{
           bgcolor: 'primary.main',
           display: 'flex',
@@ -146,13 +117,11 @@ function ProjectDetails() {
           pl: 1,
           pr: 1,
           pt: 1,
-          // p: 1,
         }}
         >
           <Fab size="small" color="secondary" aria-label="edit">
             <DeleteIcon onClick={() => projectDelete(data.id)} />
           </Fab>
-          {/* <Icon icon="ri:delete-bin-2-fill" width="30" height="30" /> */}
 
           <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
             {data.title}
@@ -160,7 +129,6 @@ function ProjectDetails() {
           <Fab size="small" color="secondary" aria-label="edit">
             <EditIcon onClick={handleOpenModal} />
           </Fab>
-          {/* <Icon icon="bxs:edit-alt" width="30" height="30"/> */}
 
         </Box>
       </Box>
@@ -236,8 +204,6 @@ function ProjectDetails() {
               },
             }}
           >
-            {/* créer ou vérifier les liens de chaque boutons */}
-            {/* <Link to={`/documents/clients/${id}`}> */}
             <Button href={`/documents/projects/${id}`} sx={{ mt: 4, mb: 4 }} size="large" color="secondary" variant="contained">Documents</Button>
           </Box>
         </Box>
@@ -271,7 +237,6 @@ function ProjectDetails() {
                       },
                     }}
                     >
-                      {/* <Paper elevation={3}> */}
                       <Link to={`/interventions/${intervention.id}`} key={intervention.id}>
                         <ListItem
                           sx={{
@@ -288,7 +253,6 @@ function ProjectDetails() {
                           <Chip size="small" sx={{ minWidth: 90 }} label={intervention.status} color="primary" />
                         </ListItem>
                       </Link>
-                      {/* </Paper> */}
                     </Box>
                   ))}
                 </List>
@@ -304,7 +268,7 @@ function ProjectDetails() {
               )}
           </Box>
         </Box>
-        {/* modal to edit project */}
+
         <Box
           sx={{
             maxHeight: '100%',

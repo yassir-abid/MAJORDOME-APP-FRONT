@@ -13,9 +13,6 @@ export default function AppointmentTooltip(model) {
         <div>
           Client: {data.client.lastname} {data.client.firstname}
         </div>
-        {/* <div>
-          Duration: {data.duration.days} j {data.duration.hours} h
-        </div> */}
         <div>
           {formatDate(data.displayStartDate, 'shortDateShortTime')}
         </div>

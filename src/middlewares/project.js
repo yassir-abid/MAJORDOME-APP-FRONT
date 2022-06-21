@@ -4,7 +4,6 @@ import { ADD_PROJECT, CHECK_USER, saveUser } from '../actions/project';
 const addProject = (store) => (next) => (action) => {
   switch (action.type) {
     case ADD_PROJECT: {
-      // current state
       const state = store.getState();
 
       const project = async () => {

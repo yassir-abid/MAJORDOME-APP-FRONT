@@ -1,8 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-// == Import : npm
 import PropTypes from 'prop-types';
 
-// == Import : local
 import './style.scss';
 
 function Field({
@@ -49,11 +47,9 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-// Valeurs par défaut pour les props
 Field.defaultProps = {
   value: '',
   type: 'text',
 };
 
-// == Export
 export default Field;

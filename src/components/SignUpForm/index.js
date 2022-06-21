@@ -16,34 +16,19 @@ function SignUpForm({
   changeField,
   handleSignup,
   isLogged,
-  loggedMessage,
   signUperrorMessage,
 }) {
-  // redirect after signup
   const navigate = useNavigate();
 
   const handleSignUpSubmit = (evt) => {
     evt.preventDefault();
     handleSignup();
-    // navigate('/home-app');
   };
 
   return (
     <div className="login-form">
       {isLogged && (
-        <div className="login-form-logged">
-          <p className="login-form-message">
-            {loggedMessage}
-          </p>
-          <Link to="/home-app">
-            <button
-              type="button"
-              className="login-form-button login-form-button--accueil"
-            >
-              Mon Accueil
-            </button>
-          </Link>
-        </div>
+        navigate('/home-app')
       )}
       {!isLogged && (
         <div>
@@ -81,7 +66,6 @@ function SignUpForm({
               onChange={changeField}
               value={passwordConfirm}
             />
-            {/* error message if input signUp invalid */}
             {signUperrorMessage.length > 0 && (<p>{signUperrorMessage}</p>)}
             <button
               type="submit"
@@ -116,13 +100,11 @@ SignUpForm.propTypes = {
   changeField: PropTypes.func.isRequired,
   handleSignup: PropTypes.func.isRequired,
   isLogged: PropTypes.bool,
-  loggedMessage: PropTypes.string,
   signUperrorMessage: PropTypes.string.isRequired,
 };
 
 SignUpForm.defaultProps = {
   isLogged: false,
-  loggedMessage: 'Connecté',
 };
 
 export default SignUpForm;

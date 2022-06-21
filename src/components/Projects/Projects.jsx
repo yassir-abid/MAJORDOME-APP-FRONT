@@ -23,7 +23,6 @@ import InputLabel from '@mui/material/InputLabel';
 import { changeValue, addProject } from '../../actions/project';
 import ProjectsHeader from './ProjectsHeader';
 import ListProjects from './ListProjects';
-import './style.scss';
 
 function Projects() {
   const [clients, setClients] = useState([]);
@@ -35,7 +34,6 @@ function Projects() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log(response);
       setClients(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -50,8 +48,6 @@ function Projects() {
           Authorization: `bearer ${token}`,
         },
       });
-      console.log('#projects#');
-      console.log(response);
       setProjects(response.data);
     } catch (error) {
       console.log('Erreur de chargement', error);
@@ -75,7 +71,6 @@ function Projects() {
 
   const [inputText, setInputText] = useState('');
   const inputHandler = (e) => {
-    // convert input text to lower case
     const lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
   };
@@ -95,7 +90,6 @@ function Projects() {
     dispatch(addProject(addProjectToState));
   };
 
-  // code pour le + violet
   const StyledFab = styled(Fab)({
     position: 'fixed',
     zIndex: 1,
@@ -105,11 +99,7 @@ function Projects() {
   });
 
   return (
-    <Box
-      sx={{
-        // height: '100vh',
-      }}
-    >
+    <Box>
       <ProjectsHeader />
       <div>
         <Box
@@ -154,7 +144,6 @@ function Projects() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              // minWidth: 1,
               width: 500,
               maxWidth: '100%',
               height: '100vh',
@@ -209,7 +198,7 @@ function Projects() {
                   onChange={handleChange}
                 />
               </label>
-              {/* Choisir un client */}
+
               <Box sx={{ mt: 1, mb: 1 }}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Choisir un client</InputLabel>

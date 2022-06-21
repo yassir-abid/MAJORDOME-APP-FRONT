@@ -35,7 +35,6 @@ function HomeAppHeader() {
         borderBottomRightRadius: '17px',
         height: 60,
         pt: 1,
-        // p: 1,
       }}
       >
         <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>

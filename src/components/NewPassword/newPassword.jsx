@@ -53,7 +53,7 @@ function NewPassword() {
             <TextField
               className="newPassword__input"
               required
-              sx={{ m: 1 }}
+              sx={{ m: 1, mb: 2 }}
               fullWidth
               label="Nouveau mot de passe"
               name="password"
@@ -64,7 +64,7 @@ function NewPassword() {
             <TextField
               className="newPassword__input"
               required
-              sx={{ m: 1 }}
+              sx={{ m: 1, mb: 4 }}
               fullWidth
               label="Confirmation mot de passe"
               name="password"
@@ -80,15 +80,6 @@ function NewPassword() {
         <Typography variant="h9" component="div" gutterBottom sx={{ mb: 0 }}>
           {message}
         </Typography>
-        {/* {
-            sentRequest
-              ? (
-                <Typography variant="h9" component="div" gutterBottom sx={{ mb: 0 }}>
-                  {message}
-                </Typography>
-              )
-              : null
-        } */}
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import { ADD_INTERVENTION, CHECK_USER, saveUser } from '../actions/intervention'
 const addIntervention = (store) => (next) => (action) => {
   switch (action.type) {
     case ADD_INTERVENTION: {
-      // current state
       const state = store.getState();
 
       const intervention = async () => {
@@ -24,8 +23,6 @@ const addIntervention = (store) => (next) => (action) => {
               authorization: `Bearer ${token}`,
             },
           });
-
-          console.log('action', action);
           action.saveInterventionToState(response.data);
           store.dispatch(saveUser(response.data));
         } catch (error) {

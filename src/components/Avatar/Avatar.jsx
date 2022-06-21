@@ -10,10 +10,8 @@ export default function ImgAvatar({ avatar, firstname }) {
         alt={firstname}
         src={avatar || '/static/images/avatar/1.jpg'}
         sx={{
-          // m: 1,
           width: 45,
           height: 45,
-          // border: '1px solid black',
         }}
       />
     </Stack>

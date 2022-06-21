@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -12,15 +12,6 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import EngineeringIcon from '@mui/icons-material/Engineering';
-
-// const StyledFab = styled(Fab)({
-//   position: 'absolute',
-//   zIndex: 1,
-//   top: -30,
-//   left: 0,
-//   right: 0,
-//   margin: '0 auto',
-// });
 
 export default function BottomAppBar() {
   return (
@@ -102,7 +93,7 @@ export default function BottomAppBar() {
                 aria-label="open drawer"
               >
                 <HandymanIcon fontSize="large" />
-                <Typography sx={{ fontSize: 8 }}>Intervention</Typography>
+                <Typography sx={{ fontSize: 8 }}>Interventions</Typography>
               </IconButton>
             </NavLink>
           </Toolbar>

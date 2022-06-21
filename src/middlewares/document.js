@@ -4,7 +4,6 @@ import { ADD_DOCUMENT, CHECK_USER, saveUser } from '../actions/document';
 const addDocument = (store) => (next) => (action) => {
   switch (action.type) {
     case ADD_DOCUMENT: {
-      // current state
       const state = store.getState();
 
       const document = async () => {
