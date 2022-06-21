@@ -1,15 +1,14 @@
 /* eslint-disable react/jsx-fragments */
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import Loading from './Loading';
+import axios from 'axios';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-// eslint-disable-next-line import/no-unresolved
-// import RalewayWoff2 from './fonts/Raleway-Regular.woff2';
-// import { ThemeProvider, ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
+
 import Home from '../Home/Home';
 import HomeApp from '../HomeApp/HomeApp';
 import NavBar from '../NavBar/NavBarMui';
@@ -21,33 +20,43 @@ import Clients from '../Clients/clients';
 import Client from '../Client/Client';
 import Equipments from '../Client/Equipments/Equipments';
 import Interventions from '../Interventions/Intervention';
-import InterventionsDetail from '../InterventionsDetail/InterventionsDetail';
+import InterventionsDetails from '../InterventionsDetail/InterventionsDetail';
 import InterventionsReport from '../InterventionsReport/InterventionsReport';
 import Projects from '../Projects/Projects';
 import ProjectDetails from '../Projects/ProjectDetails/ProjectDetails';
 import Schedule from '../Schedule/Schedule';
-// import Schedule from '../ScheduleTest/ScheduleTest';
-import Suppliers from '../Suppliers/Suppliers';
-import SuppliersDetail from '../SuppliersDetail/SuppliersDetail';
 import Documents from '../Documents/Documents';
-import Todo from '../Todo/Todo';
-import Notifications from '../Notifications/Notifications';
 import Error from '../Error/Error';
-import DocumentsDetail from '../DocumentsDetail/DocumentsDetail';
+import DocumentsDetails from '../DocumentsDetail/DocumentsDetail';
 import DocumentByclient from '../DocumentByClient/DocumentByClient';
-import DocumentByProjects from '../DocumentByProjects/DocumentByProjects';
-import DocumentByInterventions from '../DocumentByInterventions/DocumentByInterventions';
-import ResetPassword from '../ResetPassword/ResetPassword';
-import NewPassword from '../NewPassword/NewPassword';
+import DocumentByProject from '../DocumentByProjects/DocumentByProjects';
+import DocumentByIntervention from '../DocumentByInterventions/DocumentByInterventions';
+import ResetPassword from '../ResetPassword/resetPassword';
+import NewPassword from '../NewPassword/newPassword';
 
-// import 'devextreme/dist/css/dx.greenmist.compact.css';
-// import './style.scss';
+// eslint-disable-next-line react/prop-types
+function RequireAuth({ children }) {
+  const token = localStorage.getItem('token');
+
+  const logged = async () => {
+    const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.logged;
+  };
+
+  if (!token || !logged) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
 
 function App() {
   const dispatch = useDispatch();
-  // const loading = useSelector((state) => state.user.loading);
+
   useEffect(() => {
-    // recup token in localStorage
     const token = localStorage.getItem('token');
     if (token) {
       dispatch(checkUser());
@@ -55,28 +64,9 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //   if (loading) {
-  //     return <Loading />;
-  //   }
-  const token = localStorage.getItem('token');
   const { logged } = useSelector((state) => state.user);
 
   const ThemeOptions = createTheme({
-    // palette: {
-    //   primary: {
-    //     light: '#33a3a3',
-    //     main: '#008c8c',
-    //     dark: '#006262',
-    //     contrastText: '#fff',
-    //   },
-    //   secondary: {
-    //     light: '#834bff',
-    //     main: '#651fff',
-    //     dark: '#4615b2',
-    //     contrastText: '#000',
-    //   },
-    // },
-
     palette: {
       type: 'light',
       primary: {
@@ -132,9 +122,7 @@ function App() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            // alignItems: 'center',
             overflow: 'auto',
-            // height: '100vh',
             height: `calc(100vh - ${65}px)`,
             bgcolor: 'background.default',
           }}
@@ -143,33 +131,144 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
-              <Route path="/newpassword" element={<NewPassword />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/home-app" element={<HomeApp />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/clients" element={<Clients />} />
-              <Route path="/clients/:id" element={<Client />} />
-              <Route path="/clients/:id/equipments" element={<Equipments />} />
-              {/* <Route path="/clients/:id/notifications_list" element={<Notifications_list />} /> */}
-              {/* <Route path="/clients/:id/documents_list" element={<Documents_list />} /> */}
-              <Route path="/documents" element={<Documents />} />
-              <Route path="/documents/:id" element={<DocumentsDetail />} />
-              <Route path="/documents/clients/:id" element={<DocumentByclient />} />
-              <Route path="/documents/projects/:id" element={<DocumentByProjects />} />
-              <Route path="/documents/interventions/:id" element={<DocumentByInterventions />} />
-              <Route path="/interventions" element={<Interventions />} />
-              <Route path="/interventions/:id" element={<InterventionsDetail />} />
-              <Route path="/interventions/:id/report" element={<InterventionsReport />} />
-              {/* <Route path="/interventions/:id/documents_list" element={<Documents_list />} /> */}
-              {/* <Route path="/interventions/:id/notifications_list" element={<Notifications_list />} /> */}
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:id" element={<ProjectDetails />} />
-              <Route path="/schedule" element={<Schedule />} />
-              <Route path="/suppliers" element={<Suppliers />} />
-              <Route path="/suppliers/:id" element={<SuppliersDetail />} />
-              <Route path="/todolist" element={<Todo />} />
-              <Route path="/notifications" element={<Notifications />} />
+              <Route
+                path="/newpassword"
+                element={(
+                  <RequireAuth>
+                    <NewPassword />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/home-app"
+                element={(
+                  <RequireAuth>
+                    <HomeApp />
+                  </RequireAuth>
+                )}
+              />
+              <Route
+                path="/profile"
+                element={(
+                  <RequireAuth>
+                    <Profile />
+                  </RequireAuth>
+                )}
+              />
+              <Route
+                path="/clients"
+                element={(
+                  <RequireAuth>
+                    <Clients />
+                  </RequireAuth>
+                )}
+              />
+              <Route
+                path="/clients/:id"
+                element={(
+                  <RequireAuth>
+                    <Client />
+                  </RequireAuth>
+                )}
+              />
+              <Route
+                path="/clients/:id/equipments"
+                element={(
+                  <RequireAuth>
+                    <Equipments />
+                  </RequireAuth>
+                )}
+              />
+              <Route
+                path="/documents"
+                element={(
+                  <RequireAuth>
+                    <Documents />
+                  </RequireAuth>
+                )}
+              />
+              <Route
+                path="/documents/:id"
+                element={(
+                  <RequireAuth>
+                    <DocumentsDetails />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/documents/clients/:id"
+                element={(
+                  <RequireAuth>
+                    <DocumentByclient />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/documents/projects/:id"
+                element={(
+                  <RequireAuth>
+                    <DocumentByProject />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/documents/interventions/:id"
+                element={(
+                  <RequireAuth>
+                    <DocumentByIntervention />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/interventions"
+                element={(
+                  <RequireAuth>
+                    <Interventions />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/interventions/:id"
+                element={(
+                  <RequireAuth>
+                    <InterventionsDetails />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/interventions/:id/report"
+                element={(
+                  <RequireAuth>
+                    <InterventionsReport />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/projects"
+                element={(
+                  <RequireAuth>
+                    <Projects />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/projects/:id"
+                element={(
+                  <RequireAuth>
+                    <ProjectDetails />
+                  </RequireAuth>
+                  )}
+              />
+              <Route
+                path="/schedule"
+                element={(
+                  <RequireAuth>
+                    <Schedule />
+                  </RequireAuth>
+                  )}
+              />
               <Route path="*" element={<Error />} />
             </Routes>
             {logged && <NavBar />}
