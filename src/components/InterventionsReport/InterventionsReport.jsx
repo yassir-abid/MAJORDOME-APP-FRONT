@@ -5,22 +5,24 @@ import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import Carousel from 'react-material-ui-carousel';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import { Dialog, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
-import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import CancelIcon from '@mui/icons-material/Cancel';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import DeleteIcon from '@mui/icons-material/Delete';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 function InterventionsReport() {
   const { id } = useParams();
@@ -61,7 +63,7 @@ function InterventionsReport() {
   const editReport = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.patch(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+      await axios.patch(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
         report,
       }, {
         headers: {
@@ -121,7 +123,7 @@ function InterventionsReport() {
     formData.append('file', file);
     formData.append('status', status);
     try {
-      const response = await axios({
+      await axios({
         method: 'post',
         url: `https://majordome-api.herokuapp.com/api/interventions/${id}/pictures`,
         data: formData,
@@ -332,7 +334,7 @@ function InterventionsReport() {
             </ListItem>
           </Box>
           <Box sx={{ width: '90%', m: 'auto' }}>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1, mt: 3, mb: 3 }}>
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {before}
               </Typography>
@@ -340,51 +342,38 @@ function InterventionsReport() {
                 <PhotoCamera />
               </IconButton>
             </Stack>
-            <Carousel
-              animation="fade"
-              autoPlay
-              fullHeightHover={false}
-              sx={{ minHeight: '240px' }}
-            >
+            <Carousel dynamicHeight autoPlay showStatus={false}>
               {
                     beforePictures.length > 0
                       ? beforePictures.map((item) => (
-                        <Box>
-                          <Card>
+                        <Card>
+                          <CardActions sx={{
+                            display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
+                          }}
+                          >
+                            <IconButton aria-label="delete-before-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
+                              <DeleteIcon sx={{ fontSize: 30 }} />
+                            </IconButton>
+                            <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
+                              {item.title}
+                            </Typography>
                             <a href={item.path} target="_blank" rel="noopener noreferrer">
-                              <CardMedia
-                                key={item.id}
-                                component="img"
-                                rc={item.path}
-                                sx={{ minHeight: 130 }}
-                              />
-                            </a>
-                            <CardActions sx={{
-                              display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
-                            }}
-                            >
-                              <a href={item.path} target="_blank" rel="noopener noreferrer">
-                                <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                                  {item.title}
-                                </Typography>
-                              </a>
-                              <IconButton aria-label="delete-before-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
-                                <DeleteIcon sx={{ fontSize: 30 }} />
+                              <IconButton aria-label="open-before-picture" component="span" sx={{ p: 0 }}>
+                                <OpenInNewIcon sx={{ fontSize: 30 }} />
                               </IconButton>
-                            </CardActions>
-                          </Card>
-                        </Box>
+                            </a>
+                          </CardActions>
+                          <Box component="img" src={item.path} sx={{ minHeight: '30vh' }} />
+                        </Card>
                       ))
                       : (
-                        <Box>
-                          <Card>
-                            <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" />
-                          </Card>
-                        </Box>
+                        <Card>
+                          <CardMedia sx={{ maxHeight: '30vh', m: 'auto', width: 'auto' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
+                        </Card>
                       )
                   }
             </Carousel>
-            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1 }}>
+            <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1, mt: 0, mb: 3 }}>
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {after}
               </Typography>
@@ -392,42 +381,34 @@ function InterventionsReport() {
                 <PhotoCamera />
               </IconButton>
             </Stack>
-            <Carousel
-              animation="fade"
-              autoPlay
-              fullHeightHover={false}
-              sx={{ minHeight: '240px' }}
-            >
+            <Carousel dynamicHeight autoPlay showStatus={false}>
               {
                     afterPictures.length > 0
                       ? afterPictures.map((item) => (
-                        <Box>
-                          <Card>
+                        <Card>
+                          <CardActions sx={{
+                            display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
+                          }}
+                          >
+                            <IconButton aria-label="delete-after-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
+                              <DeleteIcon sx={{ fontSize: 30 }} />
+                            </IconButton>
+                            <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
+                              {item.title}
+                            </Typography>
                             <a href={item.path} target="_blank" rel="noopener noreferrer">
-                              <CardMedia key={item.id} component="img" src={item.path} sx={{ minHeight: 130 }} />
-                            </a>
-                            <CardActions sx={{
-                              display: 'flex', justifyContent: 'space-between', pl: 2, pr: 2, pb: 0, pt: 0,
-                            }}
-                            >
-                              <a href={item.path} target="_blank" rel="noopener noreferrer">
-                                <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
-                                  {item.title}
-                                </Typography>
-                              </a>
-                              <IconButton aria-label="delete-after-picture" component="span" sx={{ p: 0 }} onClick={() => handleDeletePicture(item.id)}>
-                                <DeleteIcon sx={{ fontSize: 30 }} />
+                              <IconButton aria-label="open-before-picture" component="span" sx={{ p: 0 }}>
+                                <OpenInNewIcon sx={{ fontSize: 30 }} />
                               </IconButton>
-                            </CardActions>
-                          </Card>
-                        </Box>
+                            </a>
+                          </CardActions>
+                          <Box component="img" src={item.path} sx={{ minHeight: '30vh' }} />
+                        </Card>
                       ))
                       : (
-                        <Box>
-                          <Card>
-                            <CardMedia component="img" src="https://eficia.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png" />
-                          </Card>
-                        </Box>
+                        <Card>
+                          <CardMedia sx={{ maxHeight: '30vh', m: 'auto', width: 'auto' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
+                        </Card>
                       )
                   }
             </Carousel>
@@ -541,7 +522,7 @@ function InterventionsReport() {
               />
               <TextField
                 required
-                sx={{ m: 1 }}
+                sx={{ mb: 1 }}
                 fullWidth
                 id="file"
                 type="file"
