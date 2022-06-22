@@ -1,6 +1,10 @@
 {
   "name": "majordome",
   "version": "0.1.0",
+  "engines": {
+    "node": "16.14.0",
+    "npm": "8.3.1"
+  },
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.13.1",
@@ -33,6 +37,7 @@
     "react-scripts": "5.0.0",
     "redux": "^4.1.2",
     "sass": "^1.49.11",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.5",
     "web-vitals": "^0.2.4",
     "workbox-background-sync": "^5.1.4",
@@ -49,10 +54,12 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": [
