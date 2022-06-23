@@ -4,6 +4,7 @@
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -17,6 +18,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+
 import DocumentsHeader from './DocumentsHeader';
 import ListDocuments from './ListDocuments';
 
@@ -166,12 +168,26 @@ function Documents() {
         aria-describedby="modal-modal-description"
       >
         <Box
-          sx={{ p: 1 }}
+          sx={{
+            position: 'absolute',
+            top: '0%',
+            left: '50%',
+            transform: 'translate(-50%, 0%)',
+            width: 700,
+            maxWidth: '100%',
+            p: 1,
+            bgcolor: 'background.default',
+            height: 'auto',
+            minHeight: '100vh',
+          }}
         >
           <form onSubmit={handleSubmit}>
+            <Typography variant="h5">
+              Nouveau document
+            </Typography>
             <TextField
               required
-              sx={{ mb: 1 }}
+              sx={{ mt: 3, mb: 1 }}
               fullWidth
               label="Titre du document"
               type="text"
@@ -193,7 +209,6 @@ function Documents() {
               onChange={(event) => setDescription(event.target.value)}
             />
 
-            {/* Choisir un fichier */}
             <TextField
               fullWidth
               sx={{ mb: 1 }}

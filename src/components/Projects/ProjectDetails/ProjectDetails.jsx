@@ -287,14 +287,15 @@ function ProjectDetails() {
                 top: '0%',
                 left: '50%',
                 transform: 'translate(-50%, 0%)',
-                width: 500,
+                width: 700,
                 maxWidth: '100%',
-                height: '100vh',
+                height: 'auto',
+                minHeight: '100vh',
                 p: 1,
                 bgcolor: 'background.default',
               }}
             >
-              <Typography>Modification du projet {data.title} </Typography>
+              <Typography variant="h5">Modification du projet {data.title} </Typography>
               <form onSubmit={editProject}>
               <TextField
                 required

@@ -114,10 +114,9 @@ function Profile() {
         display: 'flex',
         flexDirection: 'column',
         alignItem: 'center',
-        mt: 3,
-        ml: 1,
-        mr: 1,
-        height: '100vh',
+        p: 1,
+        pt: 2,
+        height: '92vh',
       }}
     >
       <ProfileHeader />
@@ -251,7 +250,8 @@ function Profile() {
                   transform: 'translate(-50%, 0%)',
                   width: 700,
                   maxWidth: '100%',
-                  height: '100%',
+                  height: 'auto',
+                  minHeight: '100vh',
                   p: 1,
                   bgcolor: 'background.default',
                 }}

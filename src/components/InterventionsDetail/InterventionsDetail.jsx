@@ -343,18 +343,19 @@ function InterventionsDetail() {
                 top: '0%',
                 left: '50%',
                 transform: 'translate(-50%, 0%)',
-                width: 500,
+                width: 700,
                 maxWidth: '100%',
-                height: '100vh',
+                height: 'auto',
+                minHeight: '100vh',
                 p: 1,
                 bgcolor: 'background.default',
               }}
             >
-              <Typography>Modification de l&apos;intervention {infos.title} </Typography>
+              <Typography variant="h5">Modification de l&apos;intervention {infos.title} </Typography>
               <form onSubmit={editIntervention}>
                 <TextField
                   required
-                  sx={{ mt: 1, mb: 1 }}
+                  sx={{ mt: 3, mb: 1 }}
                   fullWidth
                   label="Nom de l'intervention"
                   type="text"

@@ -352,7 +352,6 @@ function Client() {
         </Box>
       </Box>
 
-      {/* modal to edit client */}
       <Box>
         <Dialog
           fullScreen
@@ -370,30 +369,34 @@ function Client() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 500,
+              width: 700,
               maxWidth: '100%',
+              height: 'auto',
+              minHeight: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
           >
-            <Typography>Modification du client {infos.firstname} {infos.lastname}</Typography>
             <form onSubmit={editClient}>
+              <Typography variant="h5">Modification du client {infos.firstname} {infos.lastname}</Typography>
               <TextField
-                sx={{ mb: 1 }}
+                sx={{ mt: 3, mb: 1 }}
                 id="lastName"
                 name="lastname"
                 label="Nom"
                 value={lastname}
                 placeholder="Nom"
+                fullWidth
                 onChange={(event) => setLastname(event.target.value)}
               />
               <TextField
-                sx={{ mt: 1, mb: 1 }}
+                sx={{ mb: 1 }}
                 id="firstName"
                 name="firstname"
                 label="Prénom"
                 value={firstname}
                 placeholder="Prénom"
+                fullWidth
                 onChange={(event) => setFirstname(event.target.value)}
               />
               <TextField
@@ -403,6 +406,7 @@ function Client() {
                 label="tel"
                 value={phone}
                 placeholder="Numéro"
+                fullWidth
                 onChange={(event) => setPhone(event.target.value)}
               />
               <TextField
@@ -416,68 +420,70 @@ function Client() {
                 onChange={(event) => setEmail(event.target.value)}
               />
 
-              <div>
-                <TextField
-                  sx={{ mb: 1 }}
-                  id="number"
-                  name="number"
-                  label="numéro"
-                  value={number}
-                  placeholder="Numéro"
-                  size=""
-                  onChange={(event) => setNumber(event.target.value)}
-                />
-                <TextField
-                  sx={{ mb: 1 }}
-                  id="street"
-                  name="street"
-                  label="rue"
-                  multiline
-                  maxRows={4}
-                  value={street}
-                  placeholder="Rue"
-                  onChange={(event) => setStreet(event.target.value)}
-                />
-                <TextField
-                  sx={{ mb: 1 }}
-                  fullWidth
-                  id="comments"
-                  name="comments"
-                  placeholder="Complément d'adresse"
-                  label="complément d'adresse"
-                  multiline
-                  maxRows={4}
-                  value={comments}
-                  onChange={(event) => setComments(event.target.value)}
-                />
-                <TextField
-                  sx={{ mb: 1 }}
-                  id="postal_code"
-                  name="postal_code"
-                  label="cp"
-                  value={postalCode}
-                  placeholder="Code postal"
-                  onChange={(event) => setPostalCode(event.target.value)}
-                />
-                <TextField
-                  sx={{ mb: 2 }}
-                  id="city"
-                  name="city"
-                  label="ville"
-                  value={city}
-                  placeholder="Ville"
-                  onChange={(event) => setCity(event.target.value)}
-                />
-              </div>
+              <TextField
+                sx={{ mb: 1 }}
+                id="number"
+                name="number"
+                label="numéro"
+                value={number}
+                placeholder="Numéro"
+                fullWidth
+                size=""
+                onChange={(event) => setNumber(event.target.value)}
+              />
+              <TextField
+                sx={{ mb: 1 }}
+                id="street"
+                name="street"
+                label="rue"
+                multiline
+                maxRows={4}
+                value={street}
+                placeholder="Rue"
+                fullWidth
+                onChange={(event) => setStreet(event.target.value)}
+              />
+              <TextField
+                sx={{ mb: 1 }}
+                id="comments"
+                name="comments"
+                placeholder="Complément d'adresse"
+                label="complément d'adresse"
+                multiline
+                fullWidth
+                maxRows={4}
+                value={comments}
+                onChange={(event) => setComments(event.target.value)}
+              />
+              <TextField
+                sx={{ mb: 1 }}
+                id="postal_code"
+                name="postal_code"
+                label="cp"
+                value={postalCode}
+                placeholder="Code postal"
+                fullWidth
+                onChange={(event) => setPostalCode(event.target.value)}
+              />
+              <TextField
+                sx={{ mb: 2 }}
+                id="city"
+                name="city"
+                label="ville"
+                value={city}
+                placeholder="Ville"
+                fullWidth
+                onChange={(event) => setCity(event.target.value)}
+              />
 
               <TextField
                 sx={{ mb: 1 }}
-                fullWidth
                 id="comments"
                 name="comments"
                 label="détails client"
                 placeholder="Notes"
                 multiline
+                fullWidth
                 maxRows={4}
                 value={clientComments}
                 onChange={(event) => setClientComments(event.target.value)}

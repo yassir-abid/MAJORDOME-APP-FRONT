@@ -125,9 +125,10 @@ function Clients() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 500,
+              width: 700,
               maxWidth: '100%',
-              height: '100vh',
+              height: 'auto',
+              minHeight: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
@@ -140,7 +141,7 @@ function Clients() {
               </Typography>
               <label>
                 <TextField
-                  sx={{ mt: 1, mb: 1 }}
+                  sx={{ mt: 3, mb: 1 }}
                   id="a"
                   fullWidth
                   label="Prénom"

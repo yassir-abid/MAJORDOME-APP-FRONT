@@ -118,13 +118,14 @@ function App() {
       <ThemeProvider theme={ThemeOptions}>
         <Container
           disableGutters="false"
-          maxWidth="md"
+          maxWidth="auto"
           sx={{
             display: 'flex',
             flexDirection: 'column',
             overflow: 'auto',
-            height: `calc(100vh - ${65}px)`,
+            height: '92vh',
             bgcolor: 'background.default',
+            p: 0,
           }}
         >
           <Box>

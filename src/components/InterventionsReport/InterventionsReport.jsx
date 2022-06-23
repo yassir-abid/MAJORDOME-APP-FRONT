@@ -86,14 +86,13 @@ function InterventionsReport() {
               Authorization: `bearer ${token}`,
             },
           });
-
-          infoReport();
         } catch (error) {
           console.log('Erreur de chargement', error);
         }
       };
 
       pictureToDelete();
+      infoReport();
     }
   };
 
@@ -333,7 +332,7 @@ function InterventionsReport() {
               />
             </ListItem>
           </Box>
-          <Box sx={{ width: '90%', m: 'auto' }}>
+          <Box sx={{ width: '90%', maxWidth: 700, m: 'auto' }}>
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ m: 1, mt: 3, mb: 3 }}>
               <Typography variant="h6" component="div" gutterBottom sx={{ mb: 0 }}>
                 {before}
@@ -363,12 +362,12 @@ function InterventionsReport() {
                               </IconButton>
                             </a>
                           </CardActions>
-                          <Box component="img" src={item.path} sx={{ minHeight: '30vh' }} />
+                          <Box component="img" src={item.path} sx={{ maxHeight: '50vh', width: 'auto !important', maxWidth: '100%' }} />
                         </Card>
                       ))
                       : (
                         <Card>
-                          <CardMedia sx={{ maxHeight: '30vh', m: 'auto', width: 'auto' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
+                          <CardMedia sx={{ maxHeight: '30vh', width: 'auto !important', maxWidth: '100%' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
                         </Card>
                       )
                   }
@@ -402,12 +401,12 @@ function InterventionsReport() {
                               </IconButton>
                             </a>
                           </CardActions>
-                          <Box component="img" src={item.path} sx={{ minHeight: '30vh' }} />
+                          <Box component="img" src={item.path} sx={{ maxHeight: '50vh', width: 'auto !important', maxWidth: '100%' }} />
                         </Card>
                       ))
                       : (
                         <Card>
-                          <CardMedia sx={{ maxHeight: '30vh', m: 'auto', width: 'auto' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
+                          <CardMedia sx={{ maxHeight: '30vh', width: 'auto !important', maxWidth: '100%' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
                         </Card>
                       )
                   }
@@ -433,18 +432,19 @@ function InterventionsReport() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 500,
+              width: 700,
               maxWidth: '100%',
-              height: '100vh',
+              height: 'auto',
+              minHeight: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
           >
-            <Typography> Rapport </Typography>
+            <Typography variant="h5"> Rapport </Typography>
             <form onSubmit={editReport}>
               <TextField
                 required
-                sx={{ mt: 1, mb: 1 }}
+                sx={{ mt: 3, mb: 1 }}
                 fullWidth
                 multiline
                 minRows={12}
@@ -501,18 +501,19 @@ function InterventionsReport() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 500,
+              width: 700,
               maxWidth: '100%',
-              height: '100vh',
+              height: 'auto',
+              minHeight: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
           >
-            <Typography>{infos.title} - Rapport </Typography>
+            <Typography variant="h5">{infos.title} - Rapport </Typography>
             <form onSubmit={addPicture}>
               <TextField
                 required
-                sx={{ mt: 1, mb: 1 }}
+                sx={{ mt: 3, mb: 1 }}
                 fullWidth
                 label="Titre"
                 type="text"

@@ -161,7 +161,7 @@ function Schedule() {
   return (
     <Box
       sx={{
-        height: '100vh',
+        height: '92vh',
       }}
     >
       <ScheduleHeader />

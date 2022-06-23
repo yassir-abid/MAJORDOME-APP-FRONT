@@ -16,19 +16,20 @@ import EngineeringIcon from '@mui/icons-material/Engineering';
 export default function BottomAppBar() {
   return (
 
-    <Container maxWidth="md">
+    <Container disableGutters="false" maxWidth="auto" sx={{ p: 0 }}>
       <AppBar
         position="fixed"
         color="primary"
         sx={{
-          borderTopLeftRadius: '17px',
-          borderTopRightRadius: '17px',
+          maxWidth: 'auto',
           top: 'auto',
           bottom: 0,
-          height: 65,
+          right: 'auto',
+          left: 'auto',
+          height: '8vh',
         }}
       >
-        <Container maxWidth="md">
+        <Container maxWidth="md" sx={{ p: 0 }}>
           <Toolbar
             sx={{
               display: 'flex',

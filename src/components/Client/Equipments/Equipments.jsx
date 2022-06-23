@@ -17,7 +17,7 @@ function Equipments() {
   };
 
   return (
-    <div>
+    <Box sx={{ height: '92vh' }}>
 
       <Box sx={{
         bgcolor: 'primary.main',
@@ -67,7 +67,7 @@ function Equipments() {
           </div>
         </Box>
       </div>
-    </div>
+    </Box>
 
   );
 }

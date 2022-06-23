@@ -16,7 +16,7 @@ function Home() {
 
   return (
     <Box
-      sx={{ bgcolor: 'white', height: '100vh' }}
+      sx={{ bgcolor: 'white', height: '92vh' }}
     >
       <Box
         sx={{ }}

@@ -185,7 +185,6 @@ function Interventions() {
           onClose={handleCloseModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          sx={{ height: '100vh' }}
         >
           <Box
             sx={{
@@ -193,9 +192,10 @@ function Interventions() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 500,
+              width: 700,
               maxWidth: '100%',
-              height: '100vh',
+              height: 'auto',
+              minHeight: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
@@ -209,7 +209,7 @@ function Interventions() {
               <label>
                 <TextField
                   required
-                  sx={{ mt: 1, mb: 1 }}
+                  sx={{ mt: 3, mb: 1 }}
                   fullWidth
                   label="Nom de l'intervention"
                   type="text"

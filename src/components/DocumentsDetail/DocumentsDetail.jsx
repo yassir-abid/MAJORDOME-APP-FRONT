@@ -186,7 +186,6 @@ function DocumentsDetail() {
           onClose={handleCloseModal}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          sx={{ height: '100vh' }}
         >
           <Box
             sx={{
@@ -194,21 +193,22 @@ function DocumentsDetail() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 500,
+              width: 700,
               maxWidth: '100%',
-              height: '100vh',
+              height: 'auto',
+              minHeight: '100vh',
               p: 1,
               bgcolor: 'background.default',
             }}
           >
             <Box>
               <Box>
-                <Typography>Modification du document </Typography>
+                <Typography variant="h5">Modification du document </Typography>
               </Box>
               <form onSubmit={editDocument}>
                 <TextField
                   required
-                  sx={{ mt: 4, mb: 1 }}
+                  sx={{ mt: 3, mb: 1 }}
                   fullWidth
                   label="Nom du document"
                   type="text"

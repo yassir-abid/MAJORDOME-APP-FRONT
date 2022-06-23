@@ -12,6 +12,7 @@ import { Dialog } from '@material-ui/core';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 
 import DocumentsHeader from './DocumentsHeader';
@@ -144,12 +145,26 @@ function Documents() {
         aria-describedby="modal-modal-description"
       >
         <Box
-          sx={{ p: 1 }}
+          sx={{
+            position: 'absolute',
+            top: '0%',
+            left: '50%',
+            transform: 'translate(-50%, 0%)',
+            width: 700,
+            maxWidth: '100%',
+            p: 1,
+            bgcolor: 'background.default',
+            height: 'auto',
+            minHeight: '100vh',
+          }}
         >
           <form onSubmit={handleSubmit}>
+            <Typography variant="h5">
+              Nouveau document
+            </Typography>
             <TextField
               required
-              sx={{ mb: 1 }}
+              sx={{ mt: 3, mb: 1 }}
               fullWidth
               label="Titre du document"
               type="text"
