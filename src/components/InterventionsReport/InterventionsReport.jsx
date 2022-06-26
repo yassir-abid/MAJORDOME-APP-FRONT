@@ -362,12 +362,24 @@ function InterventionsReport() {
                               </IconButton>
                             </a>
                           </CardActions>
-                          <Box component="img" src={item.path} sx={{ maxHeight: '50vh', width: 'auto !important', maxWidth: '100%' }} />
+                          <Box
+                            component="img"
+                            src={item.path}
+                            sx={{
+                              minHeight: '20vh', maxHeight: '50vh', width: 'auto !important', maxWidth: '100%',
+                            }}
+                          />
                         </Card>
                       ))
                       : (
                         <Card>
-                          <CardMedia sx={{ maxHeight: '30vh', width: 'auto !important', maxWidth: '100%' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
+                          <CardMedia
+                            sx={{
+                              minHeight: '20vh', maxHeight: '30vh', width: 'auto !important', maxWidth: '100%',
+                            }}
+                            component="img"
+                            src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png"
+                          />
                         </Card>
                       )
                   }
@@ -401,12 +413,24 @@ function InterventionsReport() {
                               </IconButton>
                             </a>
                           </CardActions>
-                          <Box component="img" src={item.path} sx={{ maxHeight: '50vh', width: 'auto !important', maxWidth: '100%' }} />
+                          <Box
+                            component="img"
+                            src={item.path}
+                            sx={{
+                              minHeight: '20vh', maxHeight: '50vh', width: 'auto !important', maxWidth: '100%',
+                            }}
+                          />
                         </Card>
                       ))
                       : (
                         <Card>
-                          <CardMedia sx={{ maxHeight: '30vh', width: 'auto !important', maxWidth: '100%' }} component="img" src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png" />
+                          <CardMedia
+                            sx={{
+                              minHeight: '20vh', maxHeight: '30vh', width: 'auto !important', maxWidth: '100%',
+                            }}
+                            component="img"
+                            src="https://cdn.pixabay.com/photo/2014/03/25/15/24/cinema-296751_960_720.png"
+                          />
                         </Card>
                       )
                   }
