@@ -20,7 +20,7 @@ The back part, which is a Rest API, is available [HERE](https://github.com/yassi
 
 ### Useful Links
 
-- [App presentation](https://youtu.be/MiFhbAqCyDI)
+- [App presentation](https://youtu.be/fIBe2SE69I0)
 
 - [App website](https://majordome-app.herokuapp.com/)
 
