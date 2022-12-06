@@ -105,8 +105,7 @@ function HomeAppHeader() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 700,
-              maxWidth: '100%',
+              width: '100%',
               p: 1,
               bgcolor: 'background.default',
               height: 'auto',
@@ -127,10 +126,44 @@ function HomeAppHeader() {
             {
                     // eslint-disable-next-line no-nested-ternary
                     selectedFile !== '' ? (
-                      <CardMedia component="img" src={URL.createObjectURL(selectedFile)} sx={{ borderRadius: '50%', maxWidth: '50%', m: 'auto' }} />
+                      <CardMedia
+                        component="img"
+                        src={URL.createObjectURL(selectedFile)}
+                        sx={{
+                          borderRadius: '50%',
+                          width: '50%',
+                          maxWidth: 300,
+                          m: 'auto',
+                          mb: 2,
+                        }}
+                      />
                     )
-                      : selectedFile === '' && avatar !== '/static/images/avatar/1.jpg' ? <CardMedia component="img" src={avatar} sx={{ borderRadius: '50%', maxWidth: '50%', m: 'auto' }} />
-                        : <CardMedia component="img" src="https://www.handiclubnimois.fr/wp-content/uploads/2020/10/blank-profile-picture-973460_1280.png" sx={{ borderRadius: '50%', maxWidth: '50%', m: 'auto' }} />
+                      : selectedFile === '' && avatar !== '/static/images/avatar/1.jpg' ? (
+                        <CardMedia
+                          component="img"
+                          src={avatar}
+                          sx={{
+                            borderRadius: '50%',
+                            width: '50%',
+                            maxWidth: 300,
+                            m: 'auto',
+                            mb: 2,
+                          }}
+                        />
+                      )
+                        : (
+                          <CardMedia
+                            component="img"
+                            src="https://www.handiclubnimois.fr/wp-content/uploads/2020/10/blank-profile-picture-973460_1280.png"
+                            sx={{
+                              borderRadius: '50%',
+                              width: '50%',
+                              maxWidth: 300,
+                              m: 'auto',
+                              mb: 2,
+                            }}
+                          />
+                        )
                 }
             <form onSubmit={handleSubmit}>
               <input
@@ -143,18 +176,28 @@ function HomeAppHeader() {
                   setSelectedFile(event.target.files[0]);
                 }}
               />
-              <TextField
+              <Box
                 sx={{
-                  mt: 2,
-                  mb: 1,
-                  bgcolor: 'primary.light',
-                  borderRadius: '5px',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
                 }}
-                fullWidth
-                type="submit"
-                value="Valider"
-                defaultValue="Envoyer"
-              />
+              >
+                <TextField
+                  sx={{
+                    mb: 1,
+                    mt: 1,
+                    bgcolor: 'primary.light',
+                    borderRadius: '5px',
+                    width: 500,
+                    maxWidth: '100%',
+                  }}
+                  fullWidth
+                  type="submit"
+                  value="Valider"
+                  defaultValue="Envoyer"
+                />
+              </Box>
             </form>
             <Box
               sx={{

@@ -125,8 +125,7 @@ function Clients() {
               top: '0%',
               left: '50%',
               transform: 'translate(-50%, 0%)',
-              width: 700,
-              maxWidth: '100%',
+              width: '100%',
               height: 'auto',
               minHeight: '100vh',
               p: 1,
@@ -248,17 +247,28 @@ function Clients() {
                   onChange={handleChange}
                 />
               </label>
-              <TextField
+              <Box
                 sx={{
-                  mb: 1,
-                  bgcolor: 'primary.light',
-                  borderRadius: '5px',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
                 }}
-                fullWidth
-                type="submit"
-                value="Valider"
-                defaultValue="Envoyer"
-              />
+              >
+                <TextField
+                  sx={{
+                    mb: 1,
+                    mt: 1,
+                    bgcolor: 'primary.light',
+                    borderRadius: '5px',
+                    width: 500,
+                    maxWidth: '100%',
+                  }}
+                  fullWidth
+                  type="submit"
+                  value="Valider"
+                  defaultValue="Envoyer"
+                />
+              </Box>
             </form>
             <Box
               sx={{
