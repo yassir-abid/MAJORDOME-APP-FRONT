@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import { changeValue } from '../../actions/password';
 import logo from '../../assets/butler.png';
 import './resetPassword.scss';
+import baseUrl from '../../utils';
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ function ResetPassword() {
     setSentRequest(true);
     try {
       event.preventDefault();
-      await axios.post('https://majordome-api.herokuapp.com/api/resetpassword', {
+      await axios.post(`${baseUrl}/resetpassword`, {
         email,
       });
       setMessage('Un email pour réinitialiser votre mot de passe vous a été envoyé !');
@@ -44,7 +45,7 @@ function ResetPassword() {
   const VerifyToken = async () => {
     setSentRequest(true);
     try {
-      await axios.get(`https://majordome-api.herokuapp.com/api/resetpassword?token=${token}&id=${id}`);
+      await axios.get(`${baseUrl}/resetpassword?token=${token}&id=${id}`);
       dispatch(changeValue(id, 'id'));
       navigate('/newpassword');
     } catch (error) {

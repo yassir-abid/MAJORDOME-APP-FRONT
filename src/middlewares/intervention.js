@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ADD_INTERVENTION, CHECK_USER, saveUser } from '../actions/intervention';
+import baseUrl from '../utils';
 
 const addIntervention = (store) => (next) => (action) => {
   switch (action.type) {
@@ -9,7 +10,7 @@ const addIntervention = (store) => (next) => (action) => {
       const intervention = async () => {
         const token = localStorage.getItem('token');
         try {
-          const response = await axios.post('https://majordome-api.herokuapp.com/api/interventions', {
+          const response = await axios.post(`${baseUrl}/interventions`, {
             title: state.intervention.title,
             description: state.intervention.description,
             date: state.intervention.date,
@@ -32,22 +33,6 @@ const addIntervention = (store) => (next) => (action) => {
 
       intervention();
 
-      break;
-    }
-    case CHECK_USER: {
-      const check = async () => {
-        const token = localStorage.getItem('token');
-
-        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-
-        store.dispatch(saveUser({ ...response.data, token }));
-      };
-
-      check();
       break;
     }
     default:

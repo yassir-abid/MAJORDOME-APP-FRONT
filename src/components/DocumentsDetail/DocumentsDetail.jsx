@@ -16,6 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
 
+import baseUrl from '../../utils';
+
 function DocumentsDetail() {
   const { id } = useParams();
 
@@ -28,7 +30,7 @@ function DocumentsDetail() {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/documents/${id}`, {
+      const response = await axios.get(`${baseUrl}/documents/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -56,7 +58,7 @@ function DocumentsDetail() {
       navigate('/documents');
       const documentToDelete = async () => {
         try {
-          const response = await axios.delete(`https://majordome-api.herokuapp.com/api/documents/${id}`, {
+          const response = await axios.delete(`${baseUrl}/documents/${id}`, {
             headers: {
               Authorization: `bearer ${token}`,
             },
@@ -74,7 +76,7 @@ function DocumentsDetail() {
   const editDocument = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`https://majordome-api.herokuapp.com/api/documents/${id}`, {
+      await axios.patch(`${baseUrl}/documents/${id}/details`, {
         title,
         description,
       }, {
@@ -82,7 +84,7 @@ function DocumentsDetail() {
           Authorization: `bearer ${token}`,
         },
       });
-      navigate('/projects');
+      navigate('/documents');
     } catch (error) {
       console.log('Erreur de chargement', error);
     }

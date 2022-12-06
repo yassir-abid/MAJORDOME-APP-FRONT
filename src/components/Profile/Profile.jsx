@@ -18,6 +18,7 @@ import { Dialog } from '@material-ui/core';
 import { changeValue } from '../../actions/password';
 import { logout } from '../../actions/signUp';
 import ProfileHeader from './ProfileHeader';
+import baseUrl from '../../utils';
 
 function Profile() {
   const [open, setOpen] = useState(false);
@@ -35,7 +36,7 @@ function Profile() {
 
   const loadProfil = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/profile', {
+      const response = await axios.get(`${baseUrl}/profile`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -56,7 +57,7 @@ function Profile() {
   const editProfile = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch('https://majordome-api.herokuapp.com/api/profile', {
+      await axios.patch(`${baseUrl}/profile`, {
         firstname,
         lastname,
         email,
@@ -77,7 +78,7 @@ function Profile() {
     if (window.confirm('Etês-vous sûr de vouloir supprimer ce compte ? Toutes les informations liées à ce compte seront perdues !')) {
       const profileToDelete = async () => {
         try {
-          axios.delete('https://majordome-api.herokuapp.com/api/profile', {
+          axios.delete(`${baseUrl}/profile`, {
             headers: {
               Authorization: `bearer ${token}`,
             },

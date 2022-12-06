@@ -12,12 +12,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+import baseUrl from '../../utils';
+
 function ListInterventions() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions/today', {
+      const response = await axios.get(`${baseUrl}/interventions/today`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

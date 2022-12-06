@@ -17,6 +17,7 @@ import Fab from '@mui/material/Fab';
 
 import DocumentsHeader from './DocumentsHeader';
 import ListDocuments from './ListDocuments';
+import baseUrl from '../../utils';
 
 function Documents() {
   const { id } = useParams();
@@ -29,7 +30,7 @@ function Documents() {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/documents/interventions/${id}`, {
+      const response = await axios.get(`${baseUrl}/documents/interventions/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -42,7 +43,7 @@ function Documents() {
 
   const loadIntervention = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+      const response = await axios.get(`${baseUrl}/interventions/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -94,7 +95,7 @@ function Documents() {
     try {
       const response = await axios({
         method: 'post',
-        url: 'https://majordome-api.herokuapp.com/api/documents',
+        url: `${baseUrl}/documents`,
         data: formData,
         headers: {
           authorization: `Bearer ${token}`,

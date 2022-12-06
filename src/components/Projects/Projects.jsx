@@ -23,13 +23,14 @@ import InputLabel from '@mui/material/InputLabel';
 import { changeValue, addProject } from '../../actions/project';
 import ProjectsHeader from './ProjectsHeader';
 import ListProjects from './ListProjects';
+import baseUrl from '../../utils';
 
 function Projects() {
   const [clients, setClients] = useState([]);
   const token = localStorage.getItem('token');
   const loadClients = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+      const response = await axios.get(`${baseUrl}/clients`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -43,7 +44,7 @@ function Projects() {
   const [projects, setProjects] = useState([]);
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
+      const response = await axios.get(`${baseUrl}/projects`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

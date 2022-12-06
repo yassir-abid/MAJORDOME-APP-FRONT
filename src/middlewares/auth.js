@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   LOGIN, saveUser, CHECK_USER, userErrorMessage,
 } from '../actions/user';
+import baseUrl from '../utils';
 
 const auth = (store) => (next) => (action) => {
   switch (action.type) {
@@ -10,7 +11,7 @@ const auth = (store) => (next) => (action) => {
 
       const login = async () => {
         try {
-          const response = await axios.post('https://majordome-api.herokuapp.com/api/login', {
+          const response = await axios.post(`${baseUrl}/login`, {
             email: state.user.email,
             password: state.user.password,
           });
@@ -35,7 +36,7 @@ const auth = (store) => (next) => (action) => {
       const check = async () => {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
+        const response = await axios.get(`${baseUrl}/login/checkuser`, {
           headers: {
             authorization: `Bearer ${token}`,
           },

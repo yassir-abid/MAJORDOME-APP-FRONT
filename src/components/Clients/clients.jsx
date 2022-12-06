@@ -19,6 +19,7 @@ import Fab from '@mui/material/Fab';
 import { changeValue, addClient } from '../../actions/addClient';
 import ClientsHeader from './ClientsHeader';
 import ListClients from './ListClients';
+import baseUrl from '../../utils';
 
 function Clients() {
   const [inputText, setInputText] = useState('');
@@ -32,7 +33,7 @@ function Clients() {
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+      const response = await axios.get(`${baseUrl}/clients`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

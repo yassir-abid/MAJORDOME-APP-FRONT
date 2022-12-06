@@ -19,6 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
 import ListProjets from './ListProjets';
+import baseUrl from '../../utils';
 
 function Client() {
   const { id } = useParams();
@@ -40,7 +41,7 @@ function Client() {
   const token = localStorage.getItem('token');
   const infoClient = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/clients/${id}`, {
+      const response = await axios.get(`${baseUrl}/clients/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -78,7 +79,7 @@ function Client() {
   const editClient = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`https://majordome-api.herokuapp.com/api/clients/${id}`, {
+      await axios.patch(`${baseUrl}/clients/${id}`, {
         client: {
           firstname,
           lastname,
@@ -110,7 +111,7 @@ function Client() {
       navigate('/clients');
       const clientToDelete = async () => {
         try {
-          const response = await axios.delete(`https://majordome-api.herokuapp.com/api/clients/${id}`, {
+          const response = await axios.delete(`${baseUrl}/clients/${id}`, {
             headers: {
               Authorization: `bearer ${token}`,
             },

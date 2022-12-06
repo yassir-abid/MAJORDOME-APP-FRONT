@@ -12,6 +12,7 @@ import AppointmentTooltip from './AppointmentTooltip';
 import ScheduleHeader from './ScheduleHeader';
 
 import 'devextreme/dist/css/dx.greenmist.compact.css';
+import baseUrl from '../../utils';
 
 const currentDate = Date.now();
 const views = ['day', 'week', 'month'];
@@ -131,7 +132,7 @@ function Schedule() {
   const token = localStorage.getItem('token');
   const infoSchedule = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions', {
+      const response = await axios.get(`${baseUrl}/interventions`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

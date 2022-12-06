@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import { Dialog, CardMedia, Typography } from '@mui/material';
 
 import Avatar from '../Avatar/Avatar';
+import baseUrl from '../../utils';
 
 function HomeAppHeader() {
   const [avatar, setAvatar] = useState('/static/images/avatar/1.jpg');
@@ -19,7 +20,7 @@ function HomeAppHeader() {
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/profile', {
+      const response = await axios.get(`${baseUrl}/profile`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -46,7 +47,7 @@ function HomeAppHeader() {
     try {
       const response = await axios({
         method: 'patch',
-        url: 'https://majordome-api.herokuapp.com/api/profile/avatar',
+        url: `${baseUrl}/profile/avatar`,
         data: formData,
         headers: {
           authorization: `Bearer ${token}`,

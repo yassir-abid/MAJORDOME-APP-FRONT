@@ -21,6 +21,7 @@ import Select from '@mui/material/Select';
 
 import DocumentsHeader from './DocumentsHeader';
 import ListDocuments from './ListDocuments';
+import baseUrl from '../../utils';
 
 function Documents() {
   const [clients, setClients] = useState([]);
@@ -31,7 +32,7 @@ function Documents() {
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/documents', {
+      const response = await axios.get(`${baseUrl}/documents`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -44,7 +45,7 @@ function Documents() {
 
   const loadInterventions = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions', {
+      const response = await axios.get(`${baseUrl}/interventions`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -57,7 +58,7 @@ function Documents() {
 
   const loadClients = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+      const response = await axios.get(`${baseUrl}/clients`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -70,7 +71,7 @@ function Documents() {
 
   const loadProjects = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
+      const response = await axios.get(`${baseUrl}/projects`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -132,7 +133,7 @@ function Documents() {
     try {
       const response = await axios({
         method: 'post',
-        url: 'https://majordome-api.herokuapp.com/api/documents',
+        url: `${baseUrl}/documents`,
         data: formData,
         headers: {
           authorization: `Bearer ${token}`,

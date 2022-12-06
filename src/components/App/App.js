@@ -34,12 +34,14 @@ import DocumentByIntervention from '../DocumentByInterventions/DocumentByInterve
 import ResetPassword from '../ResetPassword/resetPassword';
 import NewPassword from '../NewPassword/newPassword';
 
+import baseUrl from '../../utils';
+
 // eslint-disable-next-line react/prop-types
 function RequireAuth({ children }) {
   const token = localStorage.getItem('token');
 
   const logged = async () => {
-    const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
+    const response = await axios.get(`${baseUrl}/login/checkuser`, {
       headers: {
         authorization: `Bearer ${token}`,
       },

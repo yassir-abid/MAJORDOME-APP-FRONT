@@ -27,6 +27,8 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDateTimePicker } from '@mui/x-date-pickers';
 
+import baseUrl from '../../utils';
+
 function InterventionsDetail() {
   const { id } = useParams();
 
@@ -45,7 +47,7 @@ function InterventionsDetail() {
   const token = localStorage.getItem('token');
   const infoIntervention = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+      const response = await axios.get(`${baseUrl}/interventions/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -75,7 +77,7 @@ function InterventionsDetail() {
       navigate('/interventions');
       const interventionToDelete = async () => {
         try {
-          await axios.delete(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+          await axios.delete(`${baseUrl}/interventions/${id}`, {
             headers: {
               Authorization: `bearer ${token}`,
             },
@@ -92,7 +94,7 @@ function InterventionsDetail() {
   const editIntervention = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+      await axios.patch(`${baseUrl}/interventions/${id}`, {
         title,
         description,
         date,
@@ -118,7 +120,7 @@ function InterventionsDetail() {
 
   const loadClients = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+      const response = await axios.get(`${baseUrl}/clients`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

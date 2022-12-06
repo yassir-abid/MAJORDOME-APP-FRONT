@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   SIGNUP, saveUser, CHECK_USER, signUpErrorMessage,
 } from '../actions/signUp';
+import baseUrl from '../utils';
 
 const signUp = (store) => (next) => (action) => {
   switch (action.type) {
@@ -10,7 +11,7 @@ const signUp = (store) => (next) => (action) => {
 
       const signup = async () => {
         try {
-          const response = await axios.post('https://majordome-api.herokuapp.com/api/signup', {
+          const response = await axios.post(`${baseUrl}/signup`, {
             firstname: state.signUp.firstname,
             lastname: state.signUp.lastname,
             email: state.signUp.email,
@@ -37,7 +38,7 @@ const signUp = (store) => (next) => (action) => {
       const check = async () => {
         const token = localStorage.getItem('token');
 
-        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
+        const response = await axios.get(`${baseUrl}/login/checkuser`, {
           headers: {
             authorization: `Bearer ${token}`,
           },

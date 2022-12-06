@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ADD_PROJECT, CHECK_USER, saveUser } from '../actions/project';
+import baseUrl from '../utils';
 
 const addProject = (store) => (next) => (action) => {
   switch (action.type) {
@@ -9,7 +10,7 @@ const addProject = (store) => (next) => (action) => {
       const project = async () => {
         const token = localStorage.getItem('token');
         try {
-          const response = await axios.post('https://majordome-api.herokuapp.com/api/projects', {
+          const response = await axios.post(`${baseUrl}/projects`, {
 
             title: state.project.title,
             description: state.project.description,
@@ -30,22 +31,6 @@ const addProject = (store) => (next) => (action) => {
 
       project();
 
-      break;
-    }
-    case CHECK_USER: {
-      const check = async () => {
-        const token = localStorage.getItem('token');
-
-        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-
-        store.dispatch(saveUser({ ...response.data, token }));
-      };
-
-      check();
       break;
     }
     default:

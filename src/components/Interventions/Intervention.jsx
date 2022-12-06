@@ -29,6 +29,8 @@ import { changeValue, addIntervention } from '../../actions/intervention';
 import InterventionsHeader from './InterventionsHeader';
 import ListInterventions from './ListInterventions';
 
+import baseUrl from '../../utils';
+
 function Interventions() {
   const [inters, setInters] = useState([]);
   const [clients, setClients] = useState([]);
@@ -38,7 +40,7 @@ function Interventions() {
   const token = localStorage.getItem('token');
   const loadData = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/interventions', {
+      const response = await axios.get(`${baseUrl}/interventions`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -51,7 +53,7 @@ function Interventions() {
 
   const loadClients = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/clients', {
+      const response = await axios.get(`${baseUrl}/clients`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -73,7 +75,7 @@ function Interventions() {
   const [projects, setProjects] = useState([]);
   const loadProjects = async () => {
     try {
-      const response = await axios.get('https://majordome-api.herokuapp.com/api/projects', {
+      const response = await axios.get(`${baseUrl}/projects`, {
         headers: {
           Authorization: `bearer ${token}`,
         },

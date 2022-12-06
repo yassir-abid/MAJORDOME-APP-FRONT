@@ -13,6 +13,7 @@ import TextField from '@mui/material/TextField';
 import { logout } from '../../actions/signUp';
 import logo from '../../assets/butler.png';
 import './newPassword.scss';
+import baseUrl from '../../utils';
 
 function NewPassword() {
   const [message, setMessage] = useState('');
@@ -27,7 +28,7 @@ function NewPassword() {
   const changePassword = async (event) => {
     try {
       event.preventDefault();
-      await axios.patch('https://majordome-api.herokuapp.com/api/changepassword', {
+      await axios.patch(`${baseUrl}/changepassword`, {
         id,
         password,
         passwordConfirm,

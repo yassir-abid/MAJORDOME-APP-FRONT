@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ADD_CLIENT, CHECK_USER, saveUser } from '../actions/addClient';
+import baseUrl from '../utils';
 
 const addClient = (store) => (next) => (action) => {
   switch (action.type) {
@@ -9,7 +10,7 @@ const addClient = (store) => (next) => (action) => {
       const client = async () => {
         const token = localStorage.getItem('token');
         try {
-          const response = await axios.post('https://majordome-api.herokuapp.com/api/clients', {
+          const response = await axios.post(`${baseUrl}/clients`, {
             client: {
               firstname: state.addClient.firstname,
               lastname: state.addClient.lastname,
@@ -42,22 +43,6 @@ const addClient = (store) => (next) => (action) => {
 
       client();
 
-      break;
-    }
-    case CHECK_USER: {
-      const check = async () => {
-        const token = localStorage.getItem('token');
-
-        const response = await axios.get('https://majordome-api.herokuapp.com/api/login/checkuser', {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        });
-
-        store.dispatch(saveUser({ ...response.data, token }));
-      };
-
-      check();
       break;
     }
     default:

@@ -24,6 +24,8 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
+import baseUrl from '../../utils';
+
 function InterventionsReport() {
   const { id } = useParams();
 
@@ -36,7 +38,7 @@ function InterventionsReport() {
   const token = localStorage.getItem('token');
   const infoReport = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/interventions/${id}/report`, {
+      const response = await axios.get(`${baseUrl}/interventions/${id}/report`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -63,7 +65,7 @@ function InterventionsReport() {
   const editReport = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`https://majordome-api.herokuapp.com/api/interventions/${id}`, {
+      await axios.patch(`${baseUrl}/interventions/${id}`, {
         report,
       }, {
         headers: {
@@ -81,7 +83,7 @@ function InterventionsReport() {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cette photo ?')) {
       const pictureToDelete = async () => {
         try {
-          await axios.delete(`https://majordome-api.herokuapp.com/api/interventions/pictures/${pictureId}`, {
+          await axios.delete(`${baseUrl}/interventions/pictures/${pictureId}`, {
             headers: {
               Authorization: `bearer ${token}`,
             },
@@ -124,7 +126,7 @@ function InterventionsReport() {
     try {
       await axios({
         method: 'post',
-        url: `https://majordome-api.herokuapp.com/api/interventions/${id}/pictures`,
+        url: `${baseUrl}/interventions/${id}/pictures`,
         data: formData,
         headers: {
           authorization: `Bearer ${token}`,

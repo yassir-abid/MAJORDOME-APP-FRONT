@@ -19,6 +19,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+import baseUrl from '../../../utils';
+
 function ProjectDetails() {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
@@ -36,7 +38,7 @@ function ProjectDetails() {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`https://majordome-api.herokuapp.com/api/projects/${id}`, {
+      const response = await axios.get(`${baseUrl}/projects/${id}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -65,7 +67,7 @@ function ProjectDetails() {
       navigate('/projects');
       const projectToDelete = async () => {
         try {
-          const response = await axios.delete(`https://majordome-api.herokuapp.com/api/projects/${id}`, {
+          const response = await axios.delete(`${baseUrl}/projects/${id}`, {
             headers: {
               Authorization: `bearer ${token}`,
             },
@@ -83,7 +85,7 @@ function ProjectDetails() {
   const editProject = async (event) => {
     event.preventDefault();
     try {
-      await axios.patch(`https://majordome-api.herokuapp.com/api/projects/${id}`, {
+      await axios.patch(`${baseUrl}/projects/${id}`, {
         title,
         description,
         comments,
