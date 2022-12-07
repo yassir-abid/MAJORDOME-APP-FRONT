@@ -13,19 +13,6 @@ function HomeAppHeader() {
 
   return (
     <Box>
-      <Box
-        sx={{
-          zIndex: 1,
-          position: 'absolute',
-          top: '0%',
-          left: '10',
-          p: 0.8,
-        }}
-      >
-        <Link to="/Profile">
-          <Avatar avatar={avatar} firstname={firstname} />
-        </Link>
-      </Box>
       <Box sx={{
         bgcolor: 'primary.main',
         display: 'flex',
@@ -35,8 +22,22 @@ function HomeAppHeader() {
         borderBottomRightRadius: '17px',
         height: 60,
         pt: 1,
+        position: 'relative',
       }}
       >
+        <Box
+          sx={{
+            zIndex: 1,
+            position: 'absolute',
+            top: '0%',
+            left: '0%',
+            p: 0.8,
+          }}
+        >
+          <Link to="/Profile">
+            <Avatar avatar={avatar} firstname={firstname} />
+          </Link>
+        </Box>
         <Typography variant="h4" gutterBottom component="div" sx={{ color: 'white' }}>
           Majordome
         </Typography>
