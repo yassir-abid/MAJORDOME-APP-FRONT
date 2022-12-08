@@ -1,5 +1,5 @@
 import {
-  CHANGE_USER_LOGIN_FIELD,
+  CHANGE_USER_SIGNUP_FIELD,
   SAVE_USER,
   LOGOUT,
   SIGNUP_ERROR_MESSAGE,
@@ -19,7 +19,7 @@ export const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_USER_LOGIN_FIELD: {
+    case CHANGE_USER_SIGNUP_FIELD: {
       return {
         ...state,
         [action.name]: action.value,

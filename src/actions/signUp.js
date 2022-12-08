@@ -1,5 +1,5 @@
 // ACTION TYPE
-export const CHANGE_USER_LOGIN_FIELD = 'CHANGE_USER_LOGIN_FIELD';
+export const CHANGE_USER_SIGNUP_FIELD = 'CHANGE_USER_SIGNUP_FIELD';
 export const SIGNUP = 'SIGNUP';
 export const LOGOUT = 'LOGOUT';
 export const SAVE_USER = 'SAVE_USER';
@@ -7,8 +7,8 @@ export const CHECK_USER = 'CHECK_USER';
 export const SIGNUP_ERROR_MESSAGE = 'SIGNUP_ERROR_MESSAGE';
 
 // ACTION CREATOR
-export const changeUserLoginField = (value, name) => ({
-  type: CHANGE_USER_LOGIN_FIELD,
+export const changeUserSignupField = (value, name) => ({
+  type: CHANGE_USER_SIGNUP_FIELD,
   value,
   name,
 });

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import SignUpForm from '../SignUpForm';
 import './style.scss';
-import { changeUserLoginField, signUp, logout } from '../../actions/signUp';
+import { changeUserSignupField, signUp, logout } from '../../actions/signUp';
 import logo from '../../assets/butler.png';
 
 function Signup() {
@@ -18,7 +18,7 @@ function Signup() {
   } = useSelector((state) => state.signUp);
 
   const handleChangeField = (value, name) => {
-    dispatch(changeUserLoginField(value, name));
+    dispatch(changeUserSignupField(value, name));
   };
 
   const handleSignup = () => {
