@@ -150,7 +150,7 @@ function Interventions() {
   });
 
   return (
-    <Box>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <InterventionsHeader />
       <div>
         <Box

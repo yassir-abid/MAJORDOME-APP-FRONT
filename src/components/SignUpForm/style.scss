@@ -25,7 +25,6 @@
       border: 0;
       padding: .7em;
       height: 2.5em;
-      margin-top: 2rem;
 
       &--accueil {
           background-color: $colorPrimaryDark;
@@ -33,8 +32,9 @@
     }
 
     &-signup {
-        margin-top: 2rem;
+        margin: 2rem 0;
         display: flex;
         flex-direction: column;
+        row-gap: 1rem;
     }
   }

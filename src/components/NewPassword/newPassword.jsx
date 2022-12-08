@@ -54,7 +54,7 @@ function NewPassword() {
             <TextField
               className="newPassword__input"
               required
-              sx={{ m: 1, mb: 2 }}
+              sx={{ mt: 3, mb: 3 }}
               fullWidth
               label="Nouveau mot de passe"
               name="password"
@@ -65,7 +65,7 @@ function NewPassword() {
             <TextField
               className="newPassword__input"
               required
-              sx={{ m: 1, mb: 4 }}
+              sx={{ mb: 4 }}
               fullWidth
               label="Confirmation mot de passe"
               name="password"

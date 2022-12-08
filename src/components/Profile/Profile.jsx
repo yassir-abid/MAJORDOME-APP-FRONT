@@ -117,7 +117,8 @@ function Profile() {
         alignItem: 'center',
         p: 1,
         pt: 2,
-        height: '92vh',
+        minHeight: '90vh',
+        pb: '5rem',
       }}
     >
       <ProfileHeader />
@@ -227,7 +228,7 @@ function Profile() {
                 <Button onClick={handleChangePassword}>Réinitialiser le mot de passe</Button>
               </Box>
               <Box>
-                <Button onClick={deleteProfile}>Supprimer le compte ?</Button>
+                <Button onClick={deleteProfile}>Supprimer le compte</Button>
               </Box>
             </Box>
           </Box>

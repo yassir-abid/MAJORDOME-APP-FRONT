@@ -16,7 +16,12 @@ function Home() {
 
   return (
     <Box
-      sx={{ bgcolor: 'white', height: '92vh' }}
+      sx={{
+        bgcolor: 'white',
+        minHeight: '100vh',
+        pb: '3rem',
+        pt: '3rem',
+      }}
     >
       <Box
         sx={{ }}

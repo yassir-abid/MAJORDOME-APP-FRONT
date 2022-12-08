@@ -17,7 +17,7 @@ function Equipments() {
   };
 
   return (
-    <Box sx={{ height: '92vh' }}>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
 
       <Box sx={{
         bgcolor: 'primary.main',
@@ -31,7 +31,7 @@ function Equipments() {
       }}
       >
         <Box>
-          <Typography variant="h6" gutterBottom component="div" sx={{ color: 'white' }}>
+          <Typography variant="h5" gutterBottom component="div" sx={{ color: 'white' }}>
             Équipements & Besoins
           </Typography>
         </Box>

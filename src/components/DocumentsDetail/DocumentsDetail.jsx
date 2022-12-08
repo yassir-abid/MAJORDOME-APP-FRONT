@@ -98,7 +98,7 @@ function DocumentsDetail() {
     return null;
   }
   return (
-    <Box>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <Box sx={{
         bgcolor: 'primary.main',
         display: 'flex',

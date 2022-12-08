@@ -110,7 +110,7 @@ function Documents() {
   };
 
   return (
-    <Box>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <DocumentsHeader />
       <div>
         <Box

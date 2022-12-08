@@ -17,6 +17,8 @@ function HomeApp() {
       sx={{
         overflow: 'hidden',
         bgcolor: 'background.default',
+        minHeight: '90vh',
+        pb: '5rem',
       }}
     >
       <HomeAppHeader />

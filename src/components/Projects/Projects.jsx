@@ -100,7 +100,7 @@ function Projects() {
   });
 
   return (
-    <Box>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <ProjectsHeader />
       <div>
         <Box

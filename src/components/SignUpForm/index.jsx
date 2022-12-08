@@ -81,7 +81,7 @@ function SignUpForm({
                 type="submit"
                 className="login-form-button"
               >
-                Me connecter
+                Connexion
               </button>
             </Link>
           </div>

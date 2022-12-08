@@ -125,12 +125,12 @@ function App() {
             display: 'flex',
             flexDirection: 'column',
             overflow: 'auto',
-            height: '92vh',
+            minHeight: '100vh',
             bgcolor: 'background.default',
             p: 0,
           }}
         >
-          <Box>
+          <Box sx={{ minHeight: '100vh' }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/resetpassword" element={<ResetPassword />} />

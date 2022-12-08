@@ -41,20 +41,18 @@ function LoginForm({
             type="submit"
             className="login-form-button"
           >
-            Me connecter
+            Connexion
           </button>
         </form>
-        <Link to="/resetpassword" className="login-form-signup">Mot de passe oublié ?</Link>
-        <div className="login-form-signup">
-          <Link to="/signup">
-            <button
-              type="submit"
-              className="login-form-button"
-            >
-              Inscription
-            </button>
-          </Link>
-        </div>
+        <Link to="/resetpassword" className="login-form-signup">Mot de passe oublié</Link>
+        <Link to="/signup">
+          <button
+            type="submit"
+            className="login-form-button"
+          >
+            Inscription
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -2,21 +2,21 @@
 
 .login {
   background-color: white;
-  height: 92vh;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
 
     &__container {
         position: absolute;
-        top: 50%;
+        top: 0;
         left: 50%;
         text-align: center;
-        padding: 0 32px;
+        padding: 3rem 1rem;
         width: 370px;
-        transform: translate(-50%,-50%);
-        background: #eeeeee;;
-        height: 85%;
-        background-color: white;        
+        transform: translate(-50%, 0);
+        background-color: white;
+        display: flex;
+        flex-direction: column;       
     }
 
     &__form {

@@ -51,11 +51,12 @@ function ListInterventions() {
             '& > :not(style)': {
               mb: 2,
               height: '100%',
+              minWidth: '50vw',
             },
           }}
           >
             <Paper elevation={3}>
-              <ListItem>
+              <ListItem sx={{ justifyContent: 'center', textAlign: 'center' }}>
                 <Link to={`/interventions/${item.id}`} key={item.id}>
 
                   <ListItemText

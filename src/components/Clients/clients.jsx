@@ -82,7 +82,7 @@ function Clients() {
   });
 
   return (
-    <Box>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <ClientsHeader />
       <div>
         <Box

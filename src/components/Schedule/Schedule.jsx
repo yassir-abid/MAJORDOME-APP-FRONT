@@ -160,11 +160,7 @@ function Schedule() {
   locale(navigator.language);
 
   return (
-    <Box
-      sx={{
-        height: '92vh',
-      }}
-    >
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <ScheduleHeader />
       <div>
         <Scheduler

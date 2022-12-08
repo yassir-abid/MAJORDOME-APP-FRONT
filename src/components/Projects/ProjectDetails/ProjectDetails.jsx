@@ -106,7 +106,7 @@ function ProjectDetails() {
     return null;
   }
   return (
-    <Box>
+    <Box sx={{ minHeight: '90vh', pb: '5rem' }}>
       <Box>
         <Box sx={{
           bgcolor: 'primary.main',
