@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_CLIENT, CHECK_USER, saveUser } from '../actions/addClient';
+import { ADD_CLIENT, resetClientFieldValue } from '../actions/client';
 import baseUrl from '../utils';
 
 const addClient = (store) => (next) => (action) => {
@@ -12,19 +12,19 @@ const addClient = (store) => (next) => (action) => {
         try {
           const response = await axios.post(`${baseUrl}/clients`, {
             client: {
-              firstname: state.addClient.firstname,
-              lastname: state.addClient.lastname,
-              email: state.addClient.email,
-              phone: state.addClient.phone,
-              comments: state.addClient.comments,
+              firstname: state.client.firstname,
+              lastname: state.client.lastname,
+              email: state.client.email,
+              phone: state.client.phone,
+              comments: state.client.comments,
             },
             addresses: [
               {
-                number: state.addClient.number,
-                street: state.addClient.street,
-                postal_code: state.addClient.postal_code,
-                city: state.addClient.city,
-                comments: state.addClient.comments,
+                number: state.client.number,
+                street: state.client.street,
+                postal_code: state.client.postal_code,
+                city: state.client.city,
+                comments: state.client.comments,
               },
             ],
 
@@ -35,7 +35,7 @@ const addClient = (store) => (next) => (action) => {
           });
 
           action.saveClientToState(response.data.client);
-          store.dispatch(saveUser(response.data));
+          store.dispatch(resetClientFieldValue());
         } catch (error) {
           console.log(error);
         }

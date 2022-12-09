@@ -16,7 +16,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Fab from '@mui/material/Fab';
 
-import { changeValue, addClient } from '../../actions/addClient';
+import { changeClientFieldValue, addClient } from '../../actions/client';
 import ClientsHeader from './ClientsHeader';
 import ListClients from './ListClients';
 import baseUrl from '../../utils';
@@ -60,12 +60,12 @@ function Clients() {
   const {
     firstname, lastname, email, phone, number, street,
     postal_code, city, addressComments,
-  } = useSelector((state) => state.addClient);
+  } = useSelector((state) => state.client);
 
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    dispatch(changeValue(e.target.value, e.target.name));
+    dispatch(changeClientFieldValue(e.target.value, e.target.name));
   };
 
   const handleSubmit = (e) => {
