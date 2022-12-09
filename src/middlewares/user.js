@@ -4,7 +4,7 @@ import {
 } from '../actions/user';
 import baseUrl from '../utils';
 
-const auth = (store) => (next) => (action) => {
+const user = (store) => (next) => (action) => {
   switch (action.type) {
     case LOGIN: {
       const state = store.getState();
@@ -53,4 +53,4 @@ const auth = (store) => (next) => (action) => {
   }
 };
 
-export default auth;
+export default user;
