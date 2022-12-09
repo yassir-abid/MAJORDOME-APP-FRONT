@@ -1,12 +1,11 @@
 // ACTION TYPES
-export const CHANGE_VALUE = 'CHANGE_VALUE';
+export const CHANGE_INTERVENTION_FIELD_VALUE = 'CHANGE_INTERVENTION_FIELD_VALUE';
 export const ADD_INTERVENTION = 'ADD_INTERVENTION';
-export const SAVE_USER = 'SAVE_USER';
-export const CHECK_USER = 'CHECK_USER';
+export const RESET_INTERVENTION_FIELD_VALUE = 'RESET_INTERVENTION_FIELD_VALUE';
 
 // ACTION CREATORS
-export const changeValue = (value, key) => ({
-  type: CHANGE_VALUE,
+export const changeInterventionFieldValue = (value, key) => ({
+  type: CHANGE_INTERVENTION_FIELD_VALUE,
   value,
   key,
 });
@@ -16,11 +15,6 @@ export const addIntervention = (saveInterventionToState) => ({
   saveInterventionToState,
 });
 
-export const saveUser = (payload) => ({
-  type: SAVE_USER,
-  payload,
-});
-
-export const checkUser = () => ({
-  type: CHECK_USER,
+export const resetInterventionFieldValue = () => ({
+  type: RESET_INTERVENTION_FIELD_VALUE,
 });

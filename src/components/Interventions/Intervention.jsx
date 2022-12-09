@@ -25,7 +25,7 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDateTimePicker } from '@mui/x-date-pickers';
 
-import { changeValue, addIntervention } from '../../actions/intervention';
+import { changeInterventionFieldValue, addIntervention } from '../../actions/intervention';
 import InterventionsHeader from './InterventionsHeader';
 import ListInterventions from './ListInterventions';
 
@@ -121,19 +121,19 @@ function Interventions() {
     if (e.target.name === 'client_id') {
       setselectedClient(e.target.value);
     }
-    dispatch(changeValue(e.target.value, e.target.name));
+    dispatch(changeInterventionFieldValue(e.target.value, e.target.name));
   };
 
   const handleChangeStartDate = (StartDate) => {
     const newStartDate = new Date(StartDate).toISOString();
     setStartDateChange(newStartDate);
-    dispatch(changeValue(selectedStartDate, 'date'));
+    dispatch(changeInterventionFieldValue(selectedStartDate, 'date'));
   };
 
   const handleChangeEndDate = (EndDate) => {
     const newEndDate = new Date(EndDate).toISOString();
     setEndDateChange(newEndDate);
-    dispatch(changeValue(selectedEndDate, 'end_date'));
+    dispatch(changeInterventionFieldValue(selectedEndDate, 'end_date'));
   };
 
   const handleSubmit = (e) => {

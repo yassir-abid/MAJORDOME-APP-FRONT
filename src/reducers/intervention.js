@@ -1,4 +1,4 @@
-import { CHANGE_VALUE } from '../actions/intervention';
+import { CHANGE_INTERVENTION_FIELD_VALUE, RESET_INTERVENTION_FIELD_VALUE } from '../actions/intervention';
 
 const initialState = {
   title: '',
@@ -14,11 +14,14 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_VALUE: {
+    case CHANGE_INTERVENTION_FIELD_VALUE: {
       return {
         ...state,
         [action.key]: action.value,
       };
+    }
+    case RESET_INTERVENTION_FIELD_VALUE: {
+      return initialState;
     }
     default:
       return state;

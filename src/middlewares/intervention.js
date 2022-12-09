@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_INTERVENTION, CHECK_USER, saveUser } from '../actions/intervention';
+import { ADD_INTERVENTION, resetInterventionFieldValue } from '../actions/intervention';
 import baseUrl from '../utils';
 
 const addIntervention = (store) => (next) => (action) => {
@@ -25,7 +25,7 @@ const addIntervention = (store) => (next) => (action) => {
             },
           });
           action.saveInterventionToState(response.data);
-          store.dispatch(saveUser(response.data));
+          store.dispatch(resetInterventionFieldValue());
         } catch (error) {
           console.log(error);
         }
