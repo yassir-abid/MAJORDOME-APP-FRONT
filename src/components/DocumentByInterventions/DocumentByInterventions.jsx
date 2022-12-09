@@ -3,6 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
@@ -15,12 +16,13 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
 
+import { changeDocumentFieldValue, addDocument } from '../../actions/document';
 import DocumentsHeader from './DocumentsHeader';
 import ListDocuments from './ListDocuments';
 import baseUrl from '../../utils';
 
 function Documents() {
-  const { id } = useParams();
+  const { id: interventionID } = useParams();
 
   const token = localStorage.getItem('token');
 
@@ -30,7 +32,7 @@ function Documents() {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/documents/interventions/${id}`, {
+      const response = await axios.get(`${baseUrl}/documents/interventions/${interventionID}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -43,7 +45,7 @@ function Documents() {
 
   const loadIntervention = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/interventions/${id}`, {
+      const response = await axios.get(`${baseUrl}/interventions/${interventionID}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -79,34 +81,29 @@ function Documents() {
     margin: '0 auto',
   });
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const {
+    title, description,
+  } = useSelector((state) => state.document);
+
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(changeDocumentFieldValue(e.target.value, e.target.name));
+  };
+
   const [file, setFile] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('file', file);
-    formData.append('client_id', client.id);
-    formData.append('project_id', project.id);
-    formData.append('intervention_id', id);
-    try {
-      const response = await axios({
-        method: 'post',
-        url: `${baseUrl}/documents`,
-        data: formData,
-        headers: {
-          authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      loadData();
-      handleCloseModal();
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
+  const addDocumentToState = (document) => {
+    setDocs([...docs, document]);
+    handleCloseModal();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(changeDocumentFieldValue(client.id, 'clientID'));
+    dispatch(changeDocumentFieldValue(project.id, 'projectID'));
+    dispatch(changeDocumentFieldValue(interventionID, 'interventionID'));
+    dispatch(addDocument(addDocumentToState, file));
   };
 
   return (
@@ -171,7 +168,7 @@ function Documents() {
               name="title"
               placeholder="Titre du document"
               value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleChange}
             />
             <TextField
               sx={{ mb: 1 }}
@@ -183,7 +180,7 @@ function Documents() {
               name="description"
               placeholder="Description"
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={handleChange}
             />
 
             <TextField

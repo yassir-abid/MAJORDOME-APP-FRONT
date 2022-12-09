@@ -3,6 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
@@ -19,12 +20,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import { changeDocumentFieldValue, addDocument } from '../../actions/document';
 import DocumentsHeader from './DocumentsHeader';
 import ListDocuments from './ListDocuments';
 import baseUrl from '../../utils';
 
 function Documents() {
-  const { id } = useParams();
+  const { id: projectID } = useParams();
 
   const token = localStorage.getItem('token');
 
@@ -34,7 +36,7 @@ function Documents() {
 
   const loadData = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/documents/projects/${id}`, {
+      const response = await axios.get(`${baseUrl}/documents/projects/${projectID}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -47,7 +49,7 @@ function Documents() {
 
   const loadProject = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/projects/${id}`, {
+      const response = await axios.get(`${baseUrl}/projects/${projectID}`, {
         headers: {
           Authorization: `bearer ${token}`,
         },
@@ -96,37 +98,28 @@ function Documents() {
     margin: '0 auto',
   });
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [file, setFile] = useState('');
-  const [intervention, setIntervention] = useState('');
+  const {
+    title, description, interventionID,
+  } = useSelector((state) => state.document);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('file', file);
-    formData.append('client_id', client.id);
-    formData.append('project_id', id);
-    if (intervention !== '') {
-      formData.append('intervention_id', intervention);
-    }
-    try {
-      const response = await axios({
-        method: 'post',
-        url: `${baseUrl}/documents`,
-        data: formData,
-        headers: {
-          authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      loadData();
-      handleCloseModal();
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(changeDocumentFieldValue(e.target.value, e.target.name));
+  };
+
+  const [file, setFile] = useState('');
+
+  const addDocumentToState = (document) => {
+    setDocs([...docs, document]);
+    handleCloseModal();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(changeDocumentFieldValue(client.id, 'clientID'));
+    dispatch(changeDocumentFieldValue(projectID, 'projectID'));
+    dispatch(addDocument(addDocumentToState, file));
   };
 
   return (
@@ -191,7 +184,7 @@ function Documents() {
               name="title"
               placeholder="Titre du document"
               value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleChange}
             />
             <TextField
               sx={{ mb: 1 }}
@@ -203,7 +196,7 @@ function Documents() {
               name="description"
               placeholder="Description"
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={handleChange}
             />
 
             <TextField
@@ -222,14 +215,15 @@ function Documents() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={intervention}
+                  name="interventionID"
+                  value={interventionID}
                   label="Choisir une intervention"
-                  onChange={(event) => setIntervention(event.target.value)}
+                  onChange={handleChange}
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {
                     inters
-                      .filter((inter) => Number(inter.project_id) === Number(id))
+                      .filter((inter) => Number(inter.project_id) === Number(projectID))
                       .map((inter) => (
                         <MenuItem key={inter.id} value={inter.id}>{inter.title}</MenuItem>
                       ))
