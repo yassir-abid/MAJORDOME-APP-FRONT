@@ -1,7 +1,7 @@
 @use 'sass:color';
 
 //green
-$colorPrimary: #009285;
+$colorPrimary: #008c8c;
 $colorPrimaryLight: color.scale($colorPrimary, $lightness: +10%);
 $colorPrimaryDark: color.scale($colorPrimary, $lightness: -20%);
  
