@@ -1,21 +1,24 @@
-import { CHANGE_VALUE } from '../actions/document';
+import { CHANGE_DOCUMENT_FIELD_VALUE, RESET_DOCUMENT_FIELD_VALUE } from '../actions/document';
 
 const initialState = {
   title: '',
   description: '',
-  path: '',
-  client_id: '',
-  project_id: '',
-  intervention_id: '',
+  file: '',
+  clientID: '',
+  projectID: '',
+  interventionID: '',
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_VALUE: {
+    case CHANGE_DOCUMENT_FIELD_VALUE: {
       return {
         ...state,
         [action.key]: action.value,
       };
+    }
+    case RESET_DOCUMENT_FIELD_VALUE: {
+      return initialState;
     }
     default:
       return state;

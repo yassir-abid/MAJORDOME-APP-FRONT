@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_DOCUMENT, CHECK_USER, saveUser } from '../actions/document';
+import { ADD_DOCUMENT, resetDocumentFieldValue } from '../actions/document';
 import baseUrl from '../utils';
 
 const addDocument = (store) => (next) => (action) => {
@@ -9,21 +9,31 @@ const addDocument = (store) => (next) => (action) => {
 
       const document = async () => {
         const token = localStorage.getItem('token');
+        const formData = new FormData();
+        formData.append('title', state.document.title);
+        formData.append('description', state.document.description);
+        formData.append('file', action.file);
+        if (state.document.clientID !== '') {
+          formData.append('client_id', state.document.clientID);
+        }
+        if (state.document.projectID !== '') {
+          formData.append('project_id', state.document.projectID);
+        }
+        if (state.document.interventionID !== '') {
+          formData.append('intervention_id', state.document.interventionID);
+        }
         try {
-          const response = await axios.post(`${baseUrl}/documents`, {
-            title: state.document.title,
-            description: state.document.description,
-            path: state.document.path,
-            client: state.document.client,
-            project_id: state.document.project_id,
-            intervention_id: state.document.intervention_id,
-          }, {
+          const response = await axios({
+            method: 'post',
+            url: `${baseUrl}/documents`,
+            data: formData,
             headers: {
               authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data',
             },
           });
-
-          store.dispatch(saveUser(response.data));
+          action.saveDocumentToState(response.data);
+          store.dispatch(resetDocumentFieldValue());
         } catch (error) {
           console.log(error);
         }

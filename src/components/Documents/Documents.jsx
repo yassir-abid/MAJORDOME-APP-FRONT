@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable import/no-extraneous-dependencies */
 import { React, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
 import TextField from '@mui/material/TextField';
@@ -19,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import { changeDocumentFieldValue, addDocument } from '../../actions/document';
 import DocumentsHeader from './DocumentsHeader';
 import ListDocuments from './ListDocuments';
 import baseUrl from '../../utils';
@@ -108,43 +110,26 @@ function Documents() {
     margin: '0 auto',
   });
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [file, setFile] = useState('');
-  const [client, setClient] = useState('');
-  const [project, setProject] = useState('');
-  const [intervention, setIntervention] = useState('');
+  const {
+    title, description, clientID, projectID, interventionID,
+  } = useSelector((state) => state.document);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('file', file);
-    if (client !== '') {
-      formData.append('client_id', client);
-    }
-    if (project !== '') {
-      formData.append('project_id', project);
-    }
-    if (intervention !== '') {
-      formData.append('intervention_id', intervention);
-    }
-    try {
-      const response = await axios({
-        method: 'post',
-        url: `${baseUrl}/documents`,
-        data: formData,
-        headers: {
-          authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      loadData();
-      handleCloseModal();
-    } catch (error) {
-      console.log('Erreur de chargement', error);
-    }
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    dispatch(changeDocumentFieldValue(e.target.value, e.target.name));
+  };
+
+  const [file, setFile] = useState('');
+
+  const addDocumentToState = (document) => {
+    setDocs([...docs, document]);
+    handleCloseModal();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addDocument(addDocumentToState, file));
   };
 
   return (
@@ -209,7 +194,7 @@ function Documents() {
               name="title"
               placeholder="Titre du document"
               value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleChange}
             />
             <TextField
               sx={{ mb: 1 }}
@@ -221,7 +206,7 @@ function Documents() {
               name="description"
               placeholder="Description"
               value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              onChange={handleChange}
             />
 
             <TextField
@@ -240,8 +225,9 @@ function Documents() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={client}
-                  onChange={(event) => setClient(event.target.value)}
+                  name="clientID"
+                  value={clientID}
+                  onChange={handleChange}
                   label="Choisir un client"
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
@@ -258,16 +244,17 @@ function Documents() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={project}
-                  onChange={(event) => setProject(event.target.value)}
+                  name="projectID"
+                  value={projectID}
+                  onChange={handleChange}
                   label="Choisir un projet"
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {
-                    client
+                    clientID
                       ? (
                         projects
-                          .filter((element) => Number(element.client_id) === Number(client))
+                          .filter((element) => Number(element.client_id) === Number(clientID))
                           .map((element) => (
                             <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
                           ))
@@ -288,25 +275,26 @@ function Documents() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={intervention}
+                  name="interventionID"
+                  value={interventionID}
                   label="Choisir une intervention"
-                  onChange={(event) => setIntervention(event.target.value)}
+                  onChange={handleChange}
                 >
                   <MenuItem value=""><Typography sx={{ fontStyle: 'italic' }}>Aucun</Typography></MenuItem>
                   {
-                    project
+                    projectID
                       ? (
                         inters
-                          .filter((element) => Number(element.project_id) === Number(project))
+                          .filter((element) => Number(element.project_id) === Number(projectID))
                           .map((element) => (
                             <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
                           ))
                       )
                       : (
-                        client
+                        clientID
                           ? (
                             inters
-                              .filter((element) => Number(element.client.id) === Number(client))
+                              .filter((element) => Number(element.client.id) === Number(clientID))
                               .map((element) => (
                                 <MenuItem key={element.id} value={element.id}>{element.title}</MenuItem>
                               ))

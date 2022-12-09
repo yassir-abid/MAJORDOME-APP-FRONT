@@ -1,25 +1,21 @@
 // ACTION TYPES
-export const CHANGE_VALUE = 'CHANGE_VALUE';
+export const CHANGE_DOCUMENT_FIELD_VALUE = 'CHANGE_DOCUMENT_FIELD_VALUE';
 export const ADD_DOCUMENT = 'ADD_DOCUMENT';
-export const SAVE_USER = 'SAVE_USER';
-export const CHECK_USER = 'CHECK_USER';
+export const RESET_DOCUMENT_FIELD_VALUE = 'RESET_DOCUMENT_FIELD_VALUE';
 
 // ACTION CREATORS
-export const changeValue = (value, key) => ({
-  type: CHANGE_VALUE,
+export const changeDocumentFieldValue = (value, key) => ({
+  type: CHANGE_DOCUMENT_FIELD_VALUE,
   value,
   key,
 });
 
-export const addDocument = () => ({
+export const addDocument = (saveDocumentToState, file) => ({
   type: ADD_DOCUMENT,
+  saveDocumentToState,
+  file,
 });
 
-export const saveUser = (payload) => ({
-  type: SAVE_USER,
-  payload,
-});
-
-export const checkUser = () => ({
-  type: CHECK_USER,
+export const resetDocumentFieldValue = () => ({
+  type: RESET_DOCUMENT_FIELD_VALUE,
 });
