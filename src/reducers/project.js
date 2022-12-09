@@ -1,4 +1,4 @@
-import { CHANGE_VALUE } from '../actions/project';
+import { CHANGE_PROJECT_FIELD_VALUE, RESET_PROJECT_FIELD_VALUE } from '../actions/project';
 
 const initialState = {
   title: '',
@@ -9,11 +9,14 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case CHANGE_VALUE: {
+    case CHANGE_PROJECT_FIELD_VALUE: {
       return {
         ...state,
         [action.key]: action.value,
       };
+    }
+    case RESET_PROJECT_FIELD_VALUE: {
+      return initialState;
     }
     default:
       return state;

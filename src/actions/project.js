@@ -1,12 +1,11 @@
 // ACTION TYPES
-export const CHANGE_VALUE = 'CHANGE_VALUE';
+export const CHANGE_PROJECT_FIELD_VALUE = 'CHANGE_PROJECT_FIELD_VALUE';
 export const ADD_PROJECT = 'ADD_PROJECT';
-export const SAVE_USER = 'SAVE_USER';
-export const CHECK_USER = 'CHECK_USER';
+export const RESET_PROJECT_FIELD_VALUE = 'RESET_PROJECT_FIELD_VALUE';
 
 // ACTION CREATORS
-export const changeValue = (value, key) => ({
-  type: CHANGE_VALUE,
+export const changeProjectFieldValue = (value, key) => ({
+  type: CHANGE_PROJECT_FIELD_VALUE,
   value,
   key,
 });
@@ -16,11 +15,6 @@ export const addProject = (saveProjectToState) => ({
   saveProjectToState,
 });
 
-export const saveUser = (payload) => ({
-  type: SAVE_USER,
-  payload,
-});
-
-export const checkUser = () => ({
-  type: CHECK_USER,
+export const resetProjectFieldValue = () => ({
+  type: RESET_PROJECT_FIELD_VALUE,
 });

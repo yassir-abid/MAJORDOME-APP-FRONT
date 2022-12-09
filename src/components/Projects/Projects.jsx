@@ -20,7 +20,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 
-import { changeValue, addProject } from '../../actions/project';
+import { changeProjectFieldValue, addProject } from '../../actions/project';
 import ProjectsHeader from './ProjectsHeader';
 import ListProjects from './ListProjects';
 import baseUrl from '../../utils';
@@ -83,7 +83,7 @@ function Projects() {
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    dispatch(changeValue(e.target.value, e.target.name));
+    dispatch(changeProjectFieldValue(e.target.value, e.target.name));
   };
 
   const handleSubmit = (e) => {
